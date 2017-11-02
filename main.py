@@ -15,7 +15,8 @@ LOCATIONS = [
         "longitude": -74.0059413,
         "population": "8405837",
         "rank": "1",
-        "state": "New York"
+        "state": "New York",
+        "engine": "google",
     },
     {
         "city": "Los Angeles",
@@ -23,14 +24,15 @@ LOCATIONS = [
         "longitude": -118.2436849,
         "population": "3884307",
         "rank": "2",
-        "state": "California"
+        "state": "California",
+        "engine": "google",
     },
 ]
 
 
 def main():
     """main driver"""
-    keywords = ['trump']
+    keywords = ['coffee near me']
     config = serpscrap.Config()
     config.set('do_caching', False)
 
@@ -49,8 +51,7 @@ def main():
     config.set('num_results_per_page', 30)
     config.set('dir_screenshot', './tmp/screenshots')
     config.set('database_name', './tmp/serpscrap')
-    config.set('locations', LOCATIONS)
-    # config.set('search_engines', ['bing',])
+    config.set('search_instances', LOCATIONS)
 
     scrap = serpscrap.SerpScrap()
     scrap.init(config=config.get(), keywords=keywords)
