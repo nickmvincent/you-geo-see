@@ -10,29 +10,47 @@ VERSION = 'chrome'  # chrome
 
 LOCATIONS = [
     {
-        "city": "New York",
-        "latitude": 40.7127837,
-        "longitude": -74.0059413,
-        "population": "8405837",
-        "rank": "1",
-        "state": "New York",
-        "engine": "google",
-    },
+        "city": "New York", 
+        "growth_from_2000_to_2013": "4.8%", 
+        "latitude": 40.7127837, 
+        "longitude": -74.0059413, 
+        "population": "8405837", 
+        "rank": "1", 
+        "state": "New York"
+    }, 
     {
-        "city": "Los Angeles",
-        "latitude": 34.0522342,
-        "longitude": -118.2436849,
-        "population": "3884307",
-        "rank": "2",
-        "state": "California",
-        "engine": "google",
+        "city": "Los Angeles", 
+        "growth_from_2000_to_2013": "4.8%", 
+        "latitude": 34.0522342, 
+        "longitude": -118.2436849, 
+        "population": "3884307", 
+        "rank": "2", 
+        "state": "California"
     },
+    # {
+    #     "city": "Jacksonville", 
+    #     "growth_from_2000_to_2013": "14.3%", 
+    #     "latitude": 30.3321838, 
+    #     "longitude": -81.65565099999999, 
+    #     "population": "842583", 
+    #     "rank": "13", 
+    #     "state": "Florida"
+    # },
+    # {
+    #     "city": "Wichita", 
+    #     "growth_from_2000_to_2013": "9.7%", 
+    #     "latitude": 37.688889, 
+    #     "longitude": -97.336111, 
+    #     "population": "386552", 
+    #     "rank": "49", 
+    #     "state": "Kansas"
+    # }, 
 ]
 
 
 def main():
     """main driver"""
-    keywords = ['coffee near me']
+    keywords = ['trump', ]
     config = serpscrap.Config()
     config.set('do_caching', False)
 
@@ -51,6 +69,8 @@ def main():
     config.set('num_results_per_page', 30)
     config.set('dir_screenshot', './tmp/screenshots')
     config.set('database_name', './tmp/serpscrap')
+    for location in LOCATIONS:
+        location['engine'] = 'google'
     config.set('search_instances', LOCATIONS)
 
     scrap = serpscrap.SerpScrap()
