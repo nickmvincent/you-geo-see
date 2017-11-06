@@ -4,13 +4,22 @@ import sys
 sys.path.append("C:/Users/Nick/Documents/GitHub/SerpScrap")
 import pandas as pd
 import serpscrap
-import pprint
+import time
+import json
 
-VERSION = 'chrome'  # chrome
+VERSION = 'chrome'
 
 LOCATIONS = [
-    {},
+    # {},
     # {
+    #     "city": "New York", 
+    #     "growth_from_2000_to_2013": "4.8%", 
+    #     "latitude": 40.7127837, 
+    #     "longitude": -74.0059413, 
+    #     "population": "8405837", 
+    #     "rank": "1", 
+    #     "state": "New York"
+    # },     {
     #     "city": "New York", 
     #     "growth_from_2000_to_2013": "4.8%", 
     #     "latitude": 40.7127837, 
@@ -48,10 +57,16 @@ LOCATIONS = [
     # }, 
 ]
 
+with open('cities.json') as data_file:    
+    LOCATIONS = json.load(data_file)
+
+
+
+
 
 def main():
     """main driver"""
-    keywords = ['coffee', ]
+    keywords = ['bagels', ]
     config = serpscrap.Config()
     config.set('do_caching', False)
 
@@ -69,18 +84,17 @@ def main():
     config.set('num_pages_for_keyword', 1)
     config.set('num_results_per_page', 30)
     config.set('dir_screenshot', './tmp/screenshots')
-    config.set('database_name', './tmp/serpscrap')
+    config.set('database_name', './tmp/bulk_serpscrap')
     for location in LOCATIONS:
         location['engine'] = 'google'
-    config.set('search_instances', LOCATIONS)
+    for location in LOCATIONS:
+        config.set('search_instances', [location])    
 
-    scrap = serpscrap.SerpScrap()
-    scrap.init(config=config.get(), keywords=keywords)
-    results = scrap.run()
-    # for result in results:
-    #     pprint.pprint(result)
-    results_df = pd.DataFrame(results)
-    results_df.to_csv("output.csv")
+        scrap = serpscrap.SerpScrap()
+        scrap.init(config=config.get(), keywords=keywords)
+        results = scrap.run()
+        results_df = pd.DataFrame(results)
+        results_df.to_csv("output.csv")
 
 
 main()
