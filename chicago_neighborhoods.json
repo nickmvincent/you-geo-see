@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Bronzeville", 
+        "latitude": 41.83, 
+        "longitude": -87.62
+    }, 
+    {
+        "name": "Andersonville",
+        "latitude": 41.99,
+        "longitude":  -87.66
+    }
+]
