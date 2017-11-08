@@ -4,5 +4,6 @@ In other words, anything stated in "assumptions" is not explicitly checked and t
 Eventually, it would be ideal to incorporate an automated method of verifying these assumptions, because the search platform could change at any moment.
 
 1. When Google Maps results are returned on a page, they are ALWAYS first. Therefore, maps results do not have a "Rank" - they are "Rank 0", overpowering other ranked results.
+^^ This is not true. We need to update code to account for this issue.
 
 2. There will at most be one "Tweet carousel" per page, and it will appear on the first page.

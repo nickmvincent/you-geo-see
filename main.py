@@ -8,7 +8,7 @@ import time
 import json
 from pytrends.request import TrendReq
 
-
+DBNAME = './tmp/chicago_neighborhoods3'
 VERSION = 'chrome'
 LOCATIONS = [
     # {},
@@ -62,19 +62,19 @@ with open('chicago_neighborhoods.json') as data_file:
     LOCATIONS = json.load(data_file)
 
 NUM_LOCATIONS = 2
-NUM_KEYWORDS = 10
+NUM_KEYWORDS = 2
 
 
 
 def main():
     """main driver"""
-    yearmonth = '201709'
-    cid = 'fast_food_restaurants'
-    pytrends = TrendReq(hl='en-US', tz=360)
-
-    keywords = pytrends.top_charts(yearmonth, cid, geo='US')
-    keywords = keywords.title.tolist()[:NUM_KEYWORDS]
-    print(keywords)
+    # yearmonth = '201709'
+    # cid = 'fast_food_restaurants'
+    # pytrends = TrendReq(hl='en-US', tz=360)
+    # keywords = pytrends.top_charts(yearmonth, cid, geo='US')
+    # keywords = keywords.title.tolist()[:NUM_KEYWORDS]
+    # print(keywords)
+    keywords = ['coffee']
 
     config = serpscrap.Config()
     config.set('do_caching', False)
@@ -93,16 +93,15 @@ def main():
     config.set('num_pages_for_keyword', 1)
     config.set('num_results_per_page', 30)
     config.set('dir_screenshot', './tmp/screenshots')
-    config.set('database_name', './tmp/chicago_neighborhoods')
+    config.set('database_name', DBNAME)
     for location in LOCATIONS:
         location['engine'] = 'google'
-    for location in LOCATIONS[:NUM_LOCATIONS]:
-        config.set('search_instances', [location])    
-        scrap = serpscrap.SerpScrap()
-        scrap.init(config=config.get(), keywords=keywords)
-        results = scrap.run()
-        results_df = pd.DataFrame(results)
-        results_df.to_csv("output.csv")
+    config.set('search_instances', LOCATIONS)    
+    scrap = serpscrap.SerpScrap()
+    scrap.init(config=config.get(), keywords=keywords)
+    results = scrap.run()
+    results_df = pd.DataFrame(results)
+    results_df.to_csv("output.csv")
 
 
 main()
