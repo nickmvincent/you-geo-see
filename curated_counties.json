@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Modoc County, CA", 
+        "latitude": 41.6,
+        "longitude": -120.72
+    }, 
+    {
+        "name": "Lassen County, CA",
+        "latitude": 40.65,
+        "longitude":  -120.58
+    },
+    {
+        "name": "San Francisco County, CA", 
+        "latitude": 37.783333,
+        "longitude": -122.416667
+    }, 
+    {
+        "name": "Alameda County, CA",
+        "latitude": 37.65,
+        "longitude":  -121.91
+    }
+]
