@@ -2,6 +2,9 @@
 import sys
 import platform
 import json
+import csv
+from pprint import pprint
+import pandas as pd
 from pytrends.request import TrendReq
 
 
@@ -18,12 +21,25 @@ import serpscrap
 
 DBNAME = './tmp/curated_counties'
 VERSION = 'chrome'
-LOCATIONFILENAME = 'curated_counties.json'
+LOCATIONFILENAME = '2017_gaz_counties_06.csv'
+CODE_FILENAME = 'NCHSURCodes2013.csv'
 
-with open(LOCATIONFILENAME) as locationfile:
-    LOCATIONS = json.load(locationfile)
+def load_locations():
+    """Loads locations from CSV or JSON"""
+    if '.csv' in LOCATIONFILENAME:
+        location_df = pd.read_csv(LOCATIONFILENAME)
+        codes_df = pd.read_csv(CODE_FILENAME)
+        location_df = location_df.merge(codes_df, on='GEOID')
+    else:
+        with open(LOCATIONFILENAME) as locationfile:
+            location_df = pd.read_json(locationfile)
+    return location_df
 
-NUM_LOCATIONS = 1
+        
+
+
+
+
 NUM_KEYWORDS = 1
 
 
@@ -34,7 +50,7 @@ def main():
     # pytrends = TrendReq(hl='en-US', tz=360)
     # keywords = pytrends.top_charts(yearmonth, cid, geo='US')
     # keywords = keywords.title.tolist()[:NUM_KEYWORDS]
-    keywords = ['trump', ]
+    keywords = ['coffee', ]
     print(keywords)
 
     config = serpscrap.Config()
@@ -53,12 +69,28 @@ def main():
     config.set('num_results_per_page', 30)  # overshoots actual number of results per page
     config.set('screenshot', False)
     config.set('database_name', DBNAME)
-    for location in LOCATIONS:
-        location['engine'] = 'google'
-    config.set('search_instances', LOCATIONS[:NUM_LOCATIONS])
+    config.set('save_html', True)
+    location_df = load_locations()
+    locations = []
+    for subset in [
+        location_df[location_df['2013 urban-rural code'] < 3],
+        location_df[(location_df['2013 urban-rural code'] >= 3) & (location_df['2013 urban-rural code'] < 5)],
+        location_df[location_df['2013 urban-rural code'] >= 5],
+    ]:
+        sample = subset.sample(n=5)
+        for _, row in sample.iterrows():
+            locations.append({
+                'engine': 'google',
+                'latitude': row.INTPTLAT,
+                'longitude': row.INTPTLONG,
+                'code': row['2013 urban-rural code'],
+                'name': row.NAME,
+            })
+    pprint(locations)
+    config.set('search_instances', locations)
     scrap = serpscrap.SerpScrap()
     scrap.init(config=config.get(), keywords=keywords)
-    results = scrap.run()
+    scrap.run()
     # results_df = pd.DataFrame(results)
     # results_df.to_csv("output.csv")
 

@@ -36,40 +36,39 @@ def main():
     df.domain = df.domain.astype('category')
     print(df.describe())
 
-    def variation_in_control():
-        controls = df[df.is_control == True]
-        first_results = {}
-        prev_dist = {
-            'results': 0,
-            'tweets': 0,
-            'news': 0,
-        }
-        for index, serp_id in enumerate(controls.serp_id):
-            filtered = df[df.serp_id == serp_id]
-            try:
-                results = {
-                    'results': filtered[filtered.link_type == 'results'].link,
-                    'tweets': filtered[filtered.link_type == 'tweets'].link,
-                    'news': filtered[filtered.link_type == 'news'].link,
-                }
-                if index == 0:
-                    first_results = results
-                for key, links in results.items():
-                    dist = editdistance.eval(list(first_results[key]), list(links))
-                    jac = jaccard_similarity(list(first_results[key]), list(links))
-                    if dist != 0 and dist != prev_dist[key]:
-                        prev_dist[key] = dist
-                        print('dist', key, dist)
-                        print(jac)
-                        for item0, item1 in zip(first_results[key], links):
-                            if item0 != item1:
-                                print(item0)
-                                print(item1, '\n====')
+    # def variation_in_control(filtered):
+    #     controls = df[df.is_control == True]
+    #     first_results = {}
+    #     prev_dist = {
+    #         'results': 0,
+    #         'tweets': 0,
+    #         'news': 0,
+    #     }
+    #     for index, serp_id in enumerate(controls.serp_id):
+    #         filtered = df[df.serp_id == serp_id]
+    #         try:
+    #             results = {
+    #                 'results': filtered[filtered.link_type == 'results'].link,
+    #                 'tweets': filtered[filtered.link_type == 'tweets'].link,
+    #                 'news': filtered[filtered.link_type == 'news'].link,
+    #             }
+    #             if index == 0:
+    #                 first_results = results
+    #             for key, links in results.items():
+    #                 dist = editdistance.eval(list(first_results[key]), list(links))
+    #                 jac = jaccard_similarity(list(first_results[key]), list(links))
+    #                 if dist != 0 and dist != prev_dist[key]:
+    #                     prev_dist[key] = dist
+    #                     print('dist', key, dist)
+    #                     print(jac)
+    #                     for item0, item1 in zip(first_results[key], links):
+    #                         if item0 != item1:
+    #                             print(item0)
+    #                             print(item1, '\n====')
                     
-            except Exception as err:
-                print('mismatch')
-                print(err)
-    variation_in_control()
+    #         except Exception as err:
+    #             print('mismatch')
+    #             print(err)
     location_set = df.reported_location.drop_duplicates()
     query_set = df['query'].drop_duplicates()
     link_type_set = df.link_type.drop_duplicates()
