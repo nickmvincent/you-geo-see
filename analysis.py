@@ -13,7 +13,7 @@ def jaccard_similarity(x,y):
     return intersection_cardinality/float(union_cardinality)
 
 
-DBNAME = './tmp/cities.db'
+DBNAME = './tmp/curated_counties.db'
 
 def main():
     conn = sqlite3.connect(DBNAME)
@@ -98,11 +98,14 @@ def main():
                         d[loc]['results'], 
                         d[comparison_loc]['results']
                     )
-                d[loc][comparison_loc]['jaccard'] = \
-                    jaccard_similarity(
-                        d[loc]['results'], 
-                        d[comparison_loc]['results']
-                    )
+                try:
+                    jac = jaccard_similarity(
+                            d[loc]['results'], 
+                            d[comparison_loc]['results']
+                        )
+                except ZeroDivisionError:
+                    jac = 0
+                d[loc][comparison_loc]['jaccard'] = jac
         return d
     
     links_to_analyze = [

@@ -2,7 +2,6 @@
 import sys
 import platform
 import json
-import pandas as pd
 from pytrends.request import TrendReq
 
 
@@ -12,8 +11,8 @@ if platform.system() == 'Windows':
     PHANT_PATH = 'C:/Users/Nick/Desktop/phantomjs-2.1.1-windows/bin/phantomjs.exe'
 else:
     sys.path.append("../SerpScrap")
-    CHROME_PATH = '../chromedriver.exe'
-    PHANT_PATH = '../phantomjs.exe'
+    CHROME_PATH = '../chromedriver'
+    PHANT_PATH = '../phantomjs'
 import serpscrap
 
 
@@ -35,7 +34,7 @@ def main():
     # pytrends = TrendReq(hl='en-US', tz=360)
     # keywords = pytrends.top_charts(yearmonth, cid, geo='US')
     # keywords = keywords.title.tolist()[:NUM_KEYWORDS]
-    keywords = ['coffee online', 'coffee near me', 'trump', ]
+    keywords = ['trump', ]
     print(keywords)
 
     config = serpscrap.Config()
@@ -60,8 +59,8 @@ def main():
     scrap = serpscrap.SerpScrap()
     scrap.init(config=config.get(), keywords=keywords)
     results = scrap.run()
-    results_df = pd.DataFrame(results)
-    results_df.to_csv("output.csv")
+    # results_df = pd.DataFrame(results)
+    # results_df.to_csv("output.csv")
 
 
 main()

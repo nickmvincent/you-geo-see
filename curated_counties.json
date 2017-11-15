@@ -5,15 +5,15 @@
         "longitude": -120.72
     }, 
     {
-        "name": "Lassen County, CA",
-        "latitude": 40.65,
-        "longitude":  -120.58
-    },
-    {
         "name": "San Francisco County, CA", 
         "latitude": 37.783333,
         "longitude": -122.416667
     }, 
+    {
+        "name": "Lassen County, CA",
+        "latitude": 40.65,
+        "longitude":  -120.58
+    },
     {
         "name": "Alameda County, CA",
         "latitude": 37.65,
