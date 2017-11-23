@@ -19,7 +19,7 @@ else:
 import serpscrap
 
 
-DBNAME = './tmp/curated_counties'
+DBNAME = './tmp/test1'
 VERSION = 'chrome'
 LOCATIONFILENAME = '2017_gaz_counties_06.csv'
 CODE_FILENAME = 'NCHSURCodes2013.csv'
@@ -35,23 +35,32 @@ def load_locations():
             location_df = pd.read_json(locationfile)
     return location_df
 
-        
-
-
-
 
 NUM_KEYWORDS = 1
-
+NUM_LOCATION_SAMPLES = 1
 
 def main():
     """main driver"""
-    # yearmonth = '201709'
-    # cid = 'fast_food_restaurants'
-    # pytrends = TrendReq(hl='en-US', tz=360)
-    # keywords = pytrends.top_charts(yearmonth, cid, geo='US')
-    # keywords = keywords.title.tolist()[:NUM_KEYWORDS]
-    keywords = ['coffee', ]
-    print(keywords)
+    econ_cats = [
+        'fast_food_restaurants', 'retail_companies',
+        # 'foods', 'fashion_labels', 'auto_companies',
+        # 'financial_companies',
+    ]
+    pol_cats = [
+        # 'politicians', 'governmental_bodies',
+    ]
+    keyword_objs = []
+    for cats in [econ_cats, pol_cats]:
+        for cid in cats:
+            print(cid)
+            yearmonth = '2016'
+            pytrends = TrendReq(hl='en-US', tz=360)
+            keywords = pytrends.top_charts(yearmonth, cid=cid, geo='US')
+            keywords = keywords.title.tolist()[:NUM_KEYWORDS]
+            keyword_objs += [
+                {'keyword': x, 'category': cid} for x in keywords
+            ]
+    print(keyword_objs)
 
     config = serpscrap.Config()
     config.set('do_caching', False)
@@ -77,7 +86,7 @@ def main():
         location_df[(location_df['2013 urban-rural code'] >= 3) & (location_df['2013 urban-rural code'] < 5)],
         location_df[location_df['2013 urban-rural code'] >= 5],
     ]:
-        sample = subset.sample(n=5)
+        sample = subset.sample(n=NUM_LOCATION_SAMPLES)
         for _, row in sample.iterrows():
             locations.append({
                 'engine': 'google',
@@ -89,7 +98,7 @@ def main():
     pprint(locations)
     config.set('search_instances', locations)
     scrap = serpscrap.SerpScrap()
-    scrap.init(config=config.get(), keywords=keywords)
+    scrap.init(config=config.get(), keywords=keyword_objs)
     scrap.run()
     # results_df = pd.DataFrame(results)
     # results_df.to_csv("output.csv")

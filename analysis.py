@@ -1,10 +1,34 @@
 import sqlite3
-from collections import defaultdict
 import operator
-import pandas as pd
-import editdistance
+from pprint import pprint
+from collections import defaultdict
+from string import ascii_lowercase
 
-def jaccard_similarity(x,y):
+import pandas as pd
+import numpy as np
+from scipy.stats import ttest_ind
+from pyxdameraulevenshtein import damerau_levenshtein_distance
+
+
+DBNAME = './tmp/collection1.db'
+
+
+def encode_links_as_strings(links1, links2):
+    """
+    Take two lists of pages and turn them into strings
+    For the sole purpose of calculating edit distance
+    """
+    set1, set2 = set(links1), set(links2)
+    union = set1.union(set2) 
+    mapping = {}
+    # will never have more than 10 results...
+    for item, letter in zip(list(union), ascii_lowercase):
+        mapping[item] = letter
+    string1 = ''.join([mapping[link] for link in links1])
+    string2 = ''.join([mapping[link] for link in links2])
+    return string1, string2
+
+def jaccard_similarity(x, y):
     """
     set implementation of jaccard similarity
     """
@@ -13,126 +37,244 @@ def jaccard_similarity(x,y):
     return intersection_cardinality/float(union_cardinality)
 
 
-DBNAME = './tmp/curated_counties.db'
-
-def main():
-    conn = sqlite3.connect(DBNAME)
-    select_query = (
-        """
-        SELECT * from serp INNER JOIN link on serp.id = link.serp_id;
-        """
-    )
-    df = pd.read_sql_query(select_query, conn)
-    conn.close()
+def calc_domain_fracs(domains_col, control_domains_col):
+    """
+    Figure out how many domains of interest appear in search results
     
-    df = df.fillna({
+    return a dict
+    """
+    domains_dict = domains_col.value_counts().to_dict()
+    control_dict = control_domains_col.value_counts().to_dict()
+    ret = {}
+    for key, val in domains_dict.items():
+        ret[key] = val / len(domains_col)
+    for key, val in control_dict.items():
+        ret[key] = (ret.get(key, 0) + val / len(control_domains_col)) / 2
+    return ret
+
+def compute_serp_features(links, control_links, domains_col, control_domains_col):
+    """
+    Computes features for a set of results corresponding to one serp
+    Args:
+        links - a list of links (as strings)
+        control_links - a list of links (as strings)
+    Returns:
+        A dictionary of computed values
+        ret: {
+            jaccard index with control,
+            edit distance with control,
+            number of wikipedia articles in results,
+            number of wikipedia articles in top 3,
+            number of wikipedia articles in top 1,
+        }
+    """
+    string, control_string = encode_links_as_strings(links, control_links)
+
+    return {
+        'control_jaccard': jaccard_similarity(
+            links, control_links
+        ),
+        'control_edit': damerau_levenshtein_distance(
+            string, control_string
+        ),
+        'full': {
+            'domain_fracs': calc_domain_fracs(domains_col, control_domains_col)
+        },
+        'top_three': {
+            'domain_fracs': calc_domain_fracs(
+                domains_col.iloc[:3], control_domains_col.iloc[:3])
+        },
+        'top': {
+            'domain_fracs': calc_domain_fracs(
+                domains_col.iloc[:1], control_domains_col.iloc[:1])
+        },
+    }
+
+
+def analyze_subset(data, location_set):
+    """
+    A subset consists of results of a certain TYPE for a certain QUERY
+    Args:
+        data - a dataframe object with rows matching a TYPE and QUERY
+        location_set - a set of strings corresponding to locations queried
+    """
+    # d holds the results and editdistances
+    # good variable naming was skipped for coding convenience. refactor later?
+    d = {}
+    for loc in location_set:
+        results = data[data.reported_location == loc]
+        control = results[results.is_control == 1]
+        treatment = results[results.is_control == 0]
+        control_links = list(control.link)
+        links = list(treatment.link)
+        if not control_links:
+            print('Empty control links for loc {}'.format(loc))
+            continue
+        if not links:
+            print('Empty links, continue')
+            continue
+        d[loc] = {}        
+        d[loc]['links'] = links
+        d[loc]['control_links'] = control_links
+        d[loc]['computed'] = compute_serp_features(links, control_links, treatment.domain, control.domain)
+        d[loc]['serp_id'] = results.iloc[0].serp_id
+
+    for loc in location_set:
+        if loc not in d:
+            continue
+        d[loc]['comparisons'] = {}
+        tmp = d[loc]['comparisons']
+        for comparison_loc in location_set:
+            if comparison_loc not in d:
+                continue
+            if loc == comparison_loc:
+                continue
+            tmp[comparison_loc] = {}
+            string1, string2 = encode_links_as_strings(
+                    d[loc]['links'], d[comparison_loc]['links'])
+            tmp[comparison_loc]['edit'] = \
+                damerau_levenshtein_distance(
+                string1, string2
+            )
+            try:
+                jac = jaccard_similarity(
+                        d[loc]['links'], 
+                        d[comparison_loc]['links']
+                    )
+            except ZeroDivisionError:
+                jac = 0
+            tmp[comparison_loc]['jaccard'] = jac
+    return d
+
+def prep_data(data):
+    """
+    Prep operation on the dataframe:
+        change nulls to false for Boolean variables
+        fill null links w/ empty string
+        make domain categorical variable
+    args:
+        data - dataframe with results
+    returns:
+        prepped dataframe
+    """
+    data = data.fillna({
         'isTweetCarousel': False,
         'isMapsPlaces': False,
         'isMapsLocations': False,
         'isNewsCarousel': False,
     })
-    df.loc[df.link.isnull(), 'link'] = '' 
+    data.loc[data.link.isnull(), 'link'] = ''
+    tweet_mask = data.isTweetCarousel == True 
+    news_mask = data.isNewsCarousel == True
+    kp_mask = data.link_type == 'knowledge_panel'
 
-    df.domain = df.domain.astype('category')
-    print(df.describe())
+    data.loc[tweet_mask, 'link'] = 'TweetCarousel'
+    data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
+    data.loc[news_mask, 'link'] = 'NewsCarousel'
+    data.loc[news_mask, 'domain'] = 'NewsCarousel'
+    data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
+    data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
 
-    # def variation_in_control(filtered):
-    #     controls = df[df.is_control == True]
-    #     first_results = {}
-    #     prev_dist = {
-    #         'results': 0,
-    #         'tweets': 0,
-    #         'news': 0,
-    #     }
-    #     for index, serp_id in enumerate(controls.serp_id):
-    #         filtered = df[df.serp_id == serp_id]
-    #         try:
-    #             results = {
-    #                 'results': filtered[filtered.link_type == 'results'].link,
-    #                 'tweets': filtered[filtered.link_type == 'tweets'].link,
-    #                 'news': filtered[filtered.link_type == 'news'].link,
-    #             }
-    #             if index == 0:
-    #                 first_results = results
-    #             for key, links in results.items():
-    #                 dist = editdistance.eval(list(first_results[key]), list(links))
-    #                 jac = jaccard_similarity(list(first_results[key]), list(links))
-    #                 if dist != 0 and dist != prev_dist[key]:
-    #                     prev_dist[key] = dist
-    #                     print('dist', key, dist)
-    #                     print(jac)
-    #                     for item0, item1 in zip(first_results[key], links):
-    #                         if item0 != item1:
-    #                             print(item0)
-    #                             print(item1, '\n====')
-                    
-    #         except Exception as err:
-    #             print('mismatch')
-    #             print(err)
-    location_set = df.reported_location.drop_duplicates()
-    query_set = df['query'].drop_duplicates()
-    link_type_set = df.link_type.drop_duplicates()
+    data.domain = data.domain.astype('category')
+    return data
 
-    def analyze_subset(filtered, location_set):
+
+def get_dataframes():
+    """
+    Get rows from the db and convert to dataframes
+    """
+    conn = sqlite3.connect(DBNAME)
+    select_results = (
         """
-        A subset consists of results of a certain TYPE for a certain QUERY
+        SELECT * from serp INNER JOIN link on serp.id = link.serp_id;
         """
-        # print(filtered.domain.value_counts())
+    )
+    select_serps = (
+        """
+        SELECT * from serp;
+        """
+    )
+    data = pd.read_sql_query(select_results, conn)
+    serp_df = pd.read_sql_query(select_serps, conn)
+    conn.close()
+    return data, serp_df
 
-        # d holds the results and editdistances
-        # good variable naming was skipped for coding convenience. refactor later?
-        d = {}
-        for loc in location_set:
-            d[loc] = {}
-            d[loc]['results'] = list(filtered[filtered.reported_location == loc].link)
 
-        for loc in location_set:
-            for comparison_loc in location_set:
-                if loc == comparison_loc:
-                    continue
-                d[loc][comparison_loc] = {}
+def main():
+    """Do analysis"""
+    data, serp_df = get_dataframes()
+    data = prep_data(data)
 
-                d[loc][comparison_loc]['edit'] = \
-                    editdistance.eval(
-                        d[loc]['results'], 
-                        d[comparison_loc]['results']
-                    )
-                try:
-                    jac = jaccard_similarity(
-                            d[loc]['results'], 
-                            d[comparison_loc]['results']
-                        )
-                except ZeroDivisionError:
-                    jac = 0
-                d[loc][comparison_loc]['jaccard'] = jac
-        return d
-    
-    links_to_analyze = [
-        'results', 'tweets', 'news'
+    location_set = data.reported_location.drop_duplicates()
+    query_set = data['query'].drop_duplicates()
+
+    link_types = [
+        'results',# 'tweets', 'news'
     ]
-    for link_type in links_to_analyze:
+
+    print(data.domain.value_counts())
+    top_ten_domains = list(data.domain.value_counts().to_dict().keys())[:10]
+    print(top_ten_domains)
+
+    serp_comps = {}
+    
+    for link_type in link_types:
         for query in query_set:
             print(link_type, query)
-            filtered = df[df.link_type == link_type]
+            filtered = data[data.link_type == link_type]
             filtered = filtered[filtered['query'] == query]
-            filtered = filtered[filtered.is_control == False]
             d = analyze_subset(filtered, location_set)
 
             for loc, vals in d.items():
+                sid = vals['serp_id']
+                tmp = d[loc]['computed']
                 dist_sum, jacc_sum, count = 0, 0, 0
-                for comparison_loc, metrics in vals.items():
-                    # consider implementing an actual class, that would be the right thing to do here...
-                    if comparison_loc == 'results':
-                        continue
+                for _, metrics in vals['comparisons'].items():
                     dist_sum += metrics['edit']
                     jacc_sum += metrics['jaccard']
                     count += 1
-                avg_dist = dist_sum / count
+                avg_edit = dist_sum / count
                 avg_jacc = jacc_sum / count
-                d[loc]['avg_edit'] = avg_dist
-                d[loc]['avg_jacc'] = avg_jacc
-                print(loc, avg_dist, avg_jacc)
-            print(list(d.items())[0:2])
-                    
+                tmp['avg_edit'] = avg_edit
+                tmp['avg_jaccard'] = avg_jacc
+                serp_comps[sid] = {
+                    'avg_edit': avg_edit,
+                    'avg_jacc': avg_jacc,
+                    'id': sid,
+                }
+                for comp_key in ['full', 'top', 'top_three', ]:
+                    domain_fracs = tmp[comp_key]['domain_fracs']
+                    for domain_string, frac, in domain_fracs.items():
+                        for top_domain in top_ten_domains:
+                            if domain_string == top_domain:
+                                concat_key = '_'.join(
+                                    [comp_key, 'domain_frac', domain_string]
+                                )
+                                serp_comps[sid][concat_key] = frac
+
+    serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
+    serp_comps_df.index.name = 'id'
+    serp_df = serp_df.merge(serp_comps_df, on='id')
+    serp_df.reported_location = serp_df.reported_location.astype('category')
+
+    # TODO: tukey
+    urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
+    rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
+    cols_to_compare = []
+    for top_domain in top_ten_domains:    
+        for prefix in [
+            'full_domain_frac_', 'top_three_domain_frac_',
+            'top_domain_frac_',
+        ]:
+            cols_to_compare.append(prefix + top_domain)
+    for col in cols_to_compare:
+        x = list(urban_rows[col])
+        y = list(rural_rows[col])
+        print(col)
+        _, pval = ttest_ind(x, y, equal_var=False)
+        print('Means', np.mean(x), np.mean(y), 'pval', pval)
+    
+
 
 main()
+
