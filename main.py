@@ -8,6 +8,10 @@ import pandas as pd
 from pytrends.request import TrendReq
 
 
+# Xvfb :1 -screen 1 1024x768x16
+# export DISPLAY=:.1
+
+
 if platform.system() == 'Windows':
     sys.path.append("C:/Users/Nick/Documents/GitHub/SerpScrap")
     CHROME_PATH = 'C:/Users/Nick/Desktop/chromedriver.exe'
