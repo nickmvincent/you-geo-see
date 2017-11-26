@@ -83,6 +83,7 @@ def main():
     config.set('screenshot', False)
     config.set('database_name', DBNAME)
     config.set('save_html', False)
+    config.set('use_control', False)
     location_df = load_locations()
     locations = []
     for subset in [

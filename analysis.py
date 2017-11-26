@@ -10,7 +10,7 @@ from scipy.stats import ttest_ind
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
 
-DBNAME = './tmp/collection1.db'
+DBNAME = './tmp/test_save.db'
 
 
 def encode_links_as_strings(links1, links2):
@@ -40,11 +40,14 @@ def jaccard_similarity(x, y):
 def calc_domain_fracs(domains_col, control_domains_col):
     """
     Figure out how many domains of interest appear in search results
-    
+
     return a dict
     """
     domains_dict = domains_col.value_counts().to_dict()
-    control_dict = control_domains_col.value_counts().to_dict()
+    if control_domains_col:
+        control_dict = control_domains_col.value_counts().to_dict()
+    else:
+        control_dict = {}
     ret = {}
     for key, val in domains_dict.items():
         ret[key] = val / len(domains_col)
@@ -52,7 +55,7 @@ def calc_domain_fracs(domains_col, control_domains_col):
         ret[key] = (ret.get(key, 0) + val / len(control_domains_col)) / 2
     return ret
 
-def compute_serp_features(links, control_links, domains_col, control_domains_col):
+def compute_serp_features(links, domains_col, control_links, control_domains_col):
     """
     Computes features for a set of results corresponding to one serp
     Args:
@@ -69,29 +72,35 @@ def compute_serp_features(links, control_links, domains_col, control_domains_col
         }
     """
     string, control_string = encode_links_as_strings(links, control_links)
-
-    return {
-        'control_jaccard': jaccard_similarity(
+    ret = {}
+    if control_links and control_domains_col:
+        ret['control_jaccard'] = jaccard_similarity(
             links, control_links
-        ),
-        'control_edit': damerau_levenshtein_distance(
+        )
+        ret['control_edit'] = damerau_levenshtein_distance(
             string, control_string
-        ),
-        'full': {
-            'domain_fracs': calc_domain_fracs(domains_col, control_domains_col)
-        },
-        'top_three': {
-            'domain_fracs': calc_domain_fracs(
-                domains_col.iloc[:3], control_domains_col.iloc[:3])
-        },
-        'top': {
-            'domain_fracs': calc_domain_fracs(
-                domains_col.iloc[:1], control_domains_col.iloc[:1])
-        },
+        )
+        control_domains_col_3 = control_domains_col.iloc[:3]
+        control_domains_col_1 = control_domains_col.iloc[:1]
+    else:
+        control_domains_col_3 = []
+        control_domains_col_1 = []
+
+    ret['full'] = {
+        'domain_fracs': calc_domain_fracs(domains_col, control_domains_col)
     }
+    ret['top_three'] = {
+        'domain_fracs': calc_domain_fracs(
+            domains_col.iloc[:3], control_domains_col_3)
+    }
+    ret['top'] = {
+        'domain_fracs': calc_domain_fracs(
+            domains_col.iloc[:1], control_domains_col_1)
+    }
+    return ret
 
 
-def analyze_subset(data, location_set):
+def analyze_subset(data, location_set, config):
     """
     A subset consists of results of a certain TYPE for a certain QUERY
     Args:
@@ -103,20 +112,27 @@ def analyze_subset(data, location_set):
     d = {}
     for loc in location_set:
         results = data[data.reported_location == loc]
-        control = results[results.is_control == 1]
         treatment = results[results.is_control == 0]
-        control_links = list(control.link)
         links = list(treatment.link)
-        if not control_links:
-            print('Empty control links for loc {}'.format(loc))
-            continue
-        if not links:
-            print('Empty links, continue')
-            continue
+        if config.get('use_control'):
+            control = results[results.is_control == 1]
+            control_links = list(control.link)
+            control_domain_col = control.domain
+            if not control_links:
+                print('Missing expected control links for loc {}'.format(loc))
+                continue
+            if not links:
+                print('Missing expected links for loc {}'.format(loc))
+                continue
+        else:
+            control = None
+            control_links = []
+            control_domain_col = []
+
         d[loc] = {}        
         d[loc]['links'] = links
         d[loc]['control_links'] = control_links
-        d[loc]['computed'] = compute_serp_features(links, control_links, treatment.domain, control.domain)
+        d[loc]['computed'] = compute_serp_features(links, treatment.domain, control_links, control_domain_col)
         d[loc]['serp_id'] = results.iloc[0].serp_id
 
     for loc in location_set:
@@ -167,6 +183,7 @@ def prep_data(data):
     tweet_mask = data.isTweetCarousel == True 
     news_mask = data.isNewsCarousel == True
     kp_mask = data.link_type == 'knowledge_panel'
+    maps_location_mask = data.link_type == 'maps_locations'
 
     data.loc[tweet_mask, 'link'] = 'TweetCarousel'
     data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
@@ -174,6 +191,9 @@ def prep_data(data):
     data.loc[news_mask, 'domain'] = 'NewsCarousel'
     data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
     data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
+
+    data.loc[maps_location_mask, 'link'] = 'MapsLocation' 
+    data.loc[maps_location_mask, 'domain'] = 'MapsLocation' 
 
     data.domain = data.domain.astype('category')
     return data
@@ -217,13 +237,16 @@ def main():
     print(top_ten_domains)
 
     serp_comps = {}
+
+    config = {}
+    config['use_control'] = False
     
     for link_type in link_types:
         for query in query_set:
             print(link_type, query)
             filtered = data[data.link_type == link_type]
             filtered = filtered[filtered['query'] == query]
-            d = analyze_subset(filtered, location_set)
+            d = analyze_subset(filtered, location_set, config)
 
             for loc, vals in d.items():
                 sid = vals['serp_id']
@@ -257,7 +280,6 @@ def main():
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
-    # TODO: tukey
     urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
     rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
     cols_to_compare = []
