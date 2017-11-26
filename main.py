@@ -23,7 +23,6 @@ else:
 import serpscrap
 
 
-DBNAME = './tmp/test1'
 VERSION = 'chrome'
 LOCATIONFILENAME = '2017_gaz_counties_06.csv'
 CODE_FILENAME = 'NCHSURCodes2013.csv'
@@ -40,8 +39,9 @@ def load_locations():
     return location_df
 
 
-NUM_KEYWORDS = 1
-NUM_LOCATION_SAMPLES = 1
+NUM_KEYWORDS = 2
+NUM_LOCATION_SAMPLES = 3
+DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
 
 def main():
     """main driver"""
@@ -82,7 +82,7 @@ def main():
     config.set('num_results_per_page', 30)  # overshoots actual number of results per page
     config.set('screenshot', False)
     config.set('database_name', DBNAME)
-    config.set('save_html', True)
+    config.set('save_html', False)
     location_df = load_locations()
     locations = []
     for subset in [
