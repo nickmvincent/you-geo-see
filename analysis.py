@@ -10,7 +10,7 @@ from scipy.stats import ttest_ind
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
 
-DBNAME = './tmp/test_save.db'
+DBNAME = './tmp/test_2kw_3loc.db'
 
 
 def encode_links_as_strings(links1, links2):
@@ -224,6 +224,8 @@ def main():
     """Do analysis"""
     data, serp_df = get_dataframes()
     data = prep_data(data)
+    print(serp_df['query'].value_counts())
+    print(serp_df.reported_location.value_counts())
 
     location_set = data.reported_location.drop_duplicates()
     query_set = data['query'].drop_duplicates()
