@@ -9,7 +9,7 @@ from pytrends.request import TrendReq
 
 
 # Xvfb :1 -screen 1 1024x768x16
-# export DISPLAY=:.1
+# export DISPLAY=:1
 
 
 if platform.system() == 'Windows':
