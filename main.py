@@ -26,7 +26,7 @@ import serpscrap
 VERSION = 'chrome'
 LOCATIONFILENAME = '2017_gaz_counties_all.csv'
 CODE_FILENAME = 'NCHSURCodes2013.csv'
-INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
+# INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
 KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
 def load_locations():
