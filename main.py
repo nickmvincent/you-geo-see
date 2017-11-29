@@ -24,8 +24,10 @@ import serpscrap
 
 
 VERSION = 'chrome'
-LOCATIONFILENAME = '2017_gaz_counties_06.csv'
+LOCATIONFILENAME = '2017_gaz_counties_all.csv'
 CODE_FILENAME = 'NCHSURCodes2013.csv'
+INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
+KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
 def load_locations():
     """Loads locations from CSV or JSON"""
@@ -38,20 +40,31 @@ def load_locations():
             location_df = pd.read_json(locationfile)
     return location_df
 
+def load_keywords():
+    """Loads keywords from CSV"""
+    datf = pd.read_csv(KEYWORD_CSV)
+    keywords = list(datf[datf.columns[0]])
+    keyword_objs = [
+        {
+            'keyword': keyword,
+            'category': 'manual_news',
+        } for keyword in keywords
+    ]
+    return keyword_objs
 
-NUM_KEYWORDS = 2
-NUM_LOCATION_SAMPLES = 3
-DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
 
-def main():
-    """main driver"""
+def query_keywords():
+    """
+    Get a set of keyword objects by quering Google Trends
+    Each keyword obj is a dict with keys: keyword, category
+    """
     econ_cats = [
         'fast_food_restaurants', 'retail_companies',
-        # 'foods', 'fashion_labels', 'auto_companies',
-        # 'financial_companies',
+        'foods', 'fashion_labels', 'auto_companies',
+        'financial_companies',
     ]
     pol_cats = [
-        # 'politicians', 'governmental_bodies',
+        'politicians', 'governmental_bodies',
     ]
     keyword_objs = []
     for cats in [econ_cats, pol_cats]:
@@ -64,6 +77,35 @@ def main():
             keyword_objs += [
                 {'keyword': x, 'category': cid} for x in keywords
             ]
+    return keyword_objs
+
+
+
+
+NUM_KEYWORDS = 5
+NUM_LOCATION_SAMPLES = 1
+DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
+
+KEYWORD_SOURCE = 'manual'
+def main():
+    """main driver"""
+    if KEYWORD_SOURCE == 'manual':
+        keywords = [
+            'tax bill', 'alabama senate',
+            'al franken', 'impeach trump',
+            'support trump'
+        ]
+        keyword_objs = [
+            {
+                'keyword': keyword,
+                'category': 'manual_news',
+            } for keyword in keywords
+        ]
+    elif KEYWORD_SOURCE == 'trends':
+        keyword_objs = query_keywords()
+    elif KEYWORD_SOURCE == 'csv':
+        keyword_objs = load_keywords()    
+    
     print(keyword_objs)
 
     config = serpscrap.Config()
