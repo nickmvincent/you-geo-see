@@ -83,10 +83,10 @@ def query_keywords():
 
 
 NUM_KEYWORDS = 5
-NUM_LOCATION_SAMPLES = 1
+NUM_LOCATION_SAMPLES = 10
 DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
 
-KEYWORD_SOURCE = 'manual'
+KEYWORD_SOURCE = 'trends'
 def main():
     """main driver"""
     if KEYWORD_SOURCE == 'manual':
@@ -130,7 +130,7 @@ def main():
     locations = []
     for subset in [
         location_df[location_df['2013 urban-rural code'] < 3],
-        location_df[(location_df['2013 urban-rural code'] >= 3) & (location_df['2013 urban-rural code'] < 5)],
+        # location_df[(location_df['2013 urban-rural code'] >= 3) & (location_df['2013 urban-rural code'] < 5)],
         location_df[location_df['2013 urban-rural code'] >= 5],
     ]:
         sample = subset.sample(n=NUM_LOCATION_SAMPLES)

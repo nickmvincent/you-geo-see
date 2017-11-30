@@ -7,10 +7,12 @@ from string import ascii_lowercase
 import pandas as pd
 import numpy as np
 from scipy.stats import ttest_ind
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk import tokenize
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
+import argparse
 
-DBNAME = './tmp/test_2kw_3loc.db'
 
 
 def encode_links_as_strings(links1, links2):
@@ -112,8 +114,11 @@ def analyze_subset(data, location_set, config):
     d = {}
     for loc in location_set:
         results = data[data.reported_location == loc]
+        if results.empty:
+            continue
         treatment = results[results.is_control == 0]
         links = list(treatment.link)
+        snippets = list(treatment.snippet)
         if config.get('use_control'):
             control = results[results.is_control == 1]
             control_links = list(control.link)
@@ -129,11 +134,20 @@ def analyze_subset(data, location_set, config):
             control_links = []
             control_domain_col = []
 
-        d[loc] = {}        
+        d[loc] = {}
         d[loc]['links'] = links
         d[loc]['control_links'] = control_links
         d[loc]['computed'] = compute_serp_features(links, treatment.domain, control_links, control_domain_col)
         d[loc]['serp_id'] = results.iloc[0].serp_id
+        sid = SentimentIntensityAnalyzer()
+        polarity_scores = [sid.polarity_scores(x)['compound'] for x in snippets if x]
+        for prefix, subset in [
+            ('full', polarity_scores),
+            ('top_three', polarity_scores[:3]),
+            ('top', polarity_scores[:1]),
+        ]:
+            mean_polarity = sum(subset) / len(subset)
+            d[loc]['computed'][prefix + '_mean_polarity'] = mean_polarity
 
     for loc in location_set:
         if loc not in d:
@@ -199,11 +213,11 @@ def prep_data(data):
     return data
 
 
-def get_dataframes():
+def get_dataframes(dbname):
     """
     Get rows from the db and convert to dataframes
     """
-    conn = sqlite3.connect(DBNAME)
+    conn = sqlite3.connect(dbname)
     select_results = (
         """
         SELECT * from serp INNER JOIN link on serp.id = link.serp_id;
@@ -220,9 +234,9 @@ def get_dataframes():
     return data, serp_df
 
 
-def main():
+def main(args):
     """Do analysis"""
-    data, serp_df = get_dataframes()
+    data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
     print(serp_df['query'].value_counts())
     print(serp_df.reported_location.value_counts())
@@ -231,22 +245,26 @@ def main():
     query_set = data['query'].drop_duplicates()
 
     link_types = [
-        'results',# 'tweets', 'news'
+        'results',
+        'tweets', 
+        # 'news'
     ]
-
-    print(data.domain.value_counts())
-    top_ten_domains = list(data.domain.value_counts().to_dict().keys())[:10]
-    print(top_ten_domains)
 
     serp_comps = {}
 
     config = {}
     config['use_control'] = False
-    
+
+    all_domains = []
+
     for link_type in link_types:
+        filtered = data[data.link_type == link_type]
+        top_ten_domains = list(filtered.domain.value_counts().to_dict().keys())[:10]
+        top_ten_domains = [domain for domain in top_ten_domains if isinstance(domain,str)]
+        all_domains += top_ten_domains
+        print(top_ten_domains)
         for query in query_set:
             print(link_type, query)
-            filtered = data[data.link_type == link_type]
             filtered = filtered[filtered['query'] == query]
             d = analyze_subset(filtered, location_set, config)
 
@@ -267,38 +285,67 @@ def main():
                     'avg_jacc': avg_jacc,
                     'id': sid,
                 }
-                for comp_key in ['full', 'top', 'top_three', ]:
+                for comp_key in ['full', 'top_three', 'top', ]:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac, in domain_fracs.items():
                         for top_domain in top_ten_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
-                                    [comp_key, 'domain_frac', domain_string]
+                                    [link_type, comp_key, 'domain_frac', str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
+                    pol_key = link_type + '_' + comp_key + '_mean_polarity'
+                    serp_comps[sid][pol_key] = tmp[pol_key]
 
     serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
-    urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
-    rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
     cols_to_compare = []
-    for top_domain in top_ten_domains:    
+    for top_domain in set(all_domains):
         for prefix in [
             'full_domain_frac_', 'top_three_domain_frac_',
             'top_domain_frac_',
         ]:
             cols_to_compare.append(prefix + top_domain)
+    for col in [
+        'full_mean_polarity', 'top_three_mean_polarity', 'top_mean_polarity',
+    ]:
+        cols_to_compare.append(col)
+    cols_to_compare.append('avg_jacc')
+    serp_df = serp_df.fillna({
+        col: 0 for col in cols_to_compare
+    })
+
+    urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
+    rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
+    
     for col in cols_to_compare:
         x = list(urban_rows[col])
         y = list(rural_rows[col])
-        print(col)
+        if not x and not y:
+            continue
+        mean_x = np.mean(x)
+        mean_y = np.mean(y)
+
         _, pval = ttest_ind(x, y, equal_var=False)
-        print('Means', np.mean(x), np.mean(y), 'pval', pval)
+        if mean_x == 0 and mean_y == 0:
+            continue
+        print(col)
+        print('Urban mean:', mean_x, 'Rural mean:', mean_y, 'pval:', pval)
     
 
 
-main()
+def parse():
+    """parse args"""
+    parser = argparse.ArgumentParser(description='Perform anlysis.')
+    parser.add_argument(
+        '--db', help='Name of the database', default='tmp/test_5kw_1loc.db')
+    
+
+    args = parser.parse_args()
+    main(args)
+
+parse()
 
