@@ -10,9 +10,7 @@ from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
 from pyxdameraulevenshtein import damerau_levenshtein_distance
-
 import argparse
-
 
 
 def encode_links_as_strings(links1, links2):
@@ -199,7 +197,6 @@ def prep_data(data):
     kp_mask = data.link_type == 'knowledge_panel'
     maps_location_mask = data.link_type == 'maps_locations'
 
-    data.loc[tweet_mask, 'link'] = 'TweetCarousel'
     data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
     data.loc[news_mask, 'link'] = 'NewsCarousel'
     data.loc[news_mask, 'domain'] = 'NewsCarousel'
@@ -220,7 +217,8 @@ def get_dataframes(dbname):
     conn = sqlite3.connect(dbname)
     select_results = (
         """
-        SELECT * from serp INNER JOIN link on serp.id = link.serp_id;
+        SELECT serp.*, link.*, scraper_searches_serps.scraper_search_id from serp INNER JOIN link on serp.id = link.serp_id
+        INNER JOIN scraper_searches_serps on serp.id = scraper_searches_serps.serp_id;
         """
     )
     select_serps = (
@@ -241,8 +239,9 @@ def main(args):
     print(serp_df['query'].value_counts())
     print(serp_df.reported_location.value_counts())
 
-    location_set = data.reported_location.drop_duplicates()
-    query_set = data['query'].drop_duplicates()
+    
+    # slight improvement below
+    scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
         'results',
@@ -258,14 +257,19 @@ def main(args):
     all_domains = []
 
     for link_type in link_types:
-        filtered = data[data.link_type == link_type]
-        top_ten_domains = list(filtered.domain.value_counts().to_dict().keys())[:10]
+        link_type_specific_data = data[data.link_type == link_type]
+        top_ten_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:10]
         top_ten_domains = [domain for domain in top_ten_domains if isinstance(domain,str)]
+        top_ten_domains.append('TweetCarousel')
         all_domains += top_ten_domains
-        print(top_ten_domains)
-        for query in query_set:
-            print(link_type, query)
-            filtered = filtered[filtered['query'] == query]
+        for scraper_search_id in scraper_search_id_set:
+            filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
+            if filtered.empty:
+                continue
+            queries = list(filtered['query'].drop_duplicates())
+            if len(queries) != 1:
+                raise ValueError('Multiple queries found in a single serp')
+            location_set = filtered.reported_location.drop_duplicates()
             d = analyze_subset(filtered, location_set, config)
 
             for loc, vals in d.items():
@@ -280,11 +284,10 @@ def main(args):
                 avg_jacc = jacc_sum / count
                 tmp['avg_edit'] = avg_edit
                 tmp['avg_jaccard'] = avg_jacc
-                serp_comps[sid] = {
-                    'avg_edit': avg_edit,
-                    'avg_jacc': avg_jacc,
-                    'id': sid,
-                }
+                if sid not in serp_comps:
+                    serp_comps[sid] = { 'id': sid }
+                serp_comps[sid][link_type + 'avg_edit'] = avg_edit
+                serp_comps[sid][link_type + 'avg_jacc'] = avg_jacc
                 for comp_key in ['full', 'top_three', 'top', ]:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac, in domain_fracs.items():
@@ -295,7 +298,7 @@ def main(args):
                                 )
                                 serp_comps[sid][concat_key] = frac
                     pol_key = link_type + '_' + comp_key + '_mean_polarity'
-                    serp_comps[sid][pol_key] = tmp[pol_key]
+                    serp_comps[sid][pol_key] = tmp[comp_key + '_mean_polarity']
 
     serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
     serp_comps_df.index.name = 'id'
@@ -303,17 +306,18 @@ def main(args):
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
     cols_to_compare = []
-    for top_domain in set(all_domains):
-        for prefix in [
-            'full_domain_frac_', 'top_three_domain_frac_',
-            'top_domain_frac_',
+    for link_type in link_types:
+        for top_domain in set(all_domains):
+            for prefix in [
+                '_full_domain_frac_', '_top_three_domain_frac_',
+                '_top_domain_frac_',
+            ]:
+                cols_to_compare.append(link_type + prefix + top_domain)
+        for col in [
+            '_full_mean_polarity', '_top_three_mean_polarity', '_top_mean_polarity',
         ]:
-            cols_to_compare.append(prefix + top_domain)
-    for col in [
-        'full_mean_polarity', 'top_three_mean_polarity', 'top_mean_polarity',
-    ]:
-        cols_to_compare.append(col)
-    cols_to_compare.append('avg_jacc')
+            cols_to_compare.append(link_type + col)
+        cols_to_compare.append(link_type +  '_avg_jacc')
     serp_df = serp_df.fillna({
         col: 0 for col in cols_to_compare
     })
@@ -322,15 +326,21 @@ def main(args):
     rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
     
     for col in cols_to_compare:
-        x = list(urban_rows[col])
-        y = list(rural_rows[col])
+        try:
+            x = list(urban_rows[col])
+            y = list(rural_rows[col])
+        except KeyError:
+            # print('Skipping {} bc KeyError'.format(col))
+            continue
         if not x and not y:
+            # print('Skipping {} bc Two empty lists'.format(col))
             continue
         mean_x = np.mean(x)
         mean_y = np.mean(y)
 
         _, pval = ttest_ind(x, y, equal_var=False)
         if mean_x == 0 and mean_y == 0:
+            # print('Skipping {} bc both have zero mean'.format(col))
             continue
         print(col)
         print('Urban mean:', mean_x, 'Rural mean:', mean_y, 'pval:', pval)
