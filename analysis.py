@@ -196,6 +196,7 @@ def prep_data(data):
     news_mask = data.isNewsCarousel == True
     kp_mask = data.link_type == 'knowledge_panel'
     maps_location_mask = data.link_type == 'maps_locations'
+    maps_places_mask = data.link_type == 'maps_places'
 
     data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
     data.loc[news_mask, 'link'] = 'NewsCarousel'
@@ -203,8 +204,11 @@ def prep_data(data):
     data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
     data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
 
-    data.loc[maps_location_mask, 'link'] = 'MapsLocation' 
-    data.loc[maps_location_mask, 'domain'] = 'MapsLocation' 
+    data.loc[maps_location_mask, 'link'] = 'MapsLocations' 
+    data.loc[maps_location_mask, 'domain'] = 'MapsLocations'
+
+    data.loc[maps_places_mask, 'link'] = 'MapsPlaces' 
+    data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
 
     data.domain = data.domain.astype('category')
     return data
@@ -258,10 +262,10 @@ def main(args):
 
     for link_type in link_types:
         link_type_specific_data = data[data.link_type == link_type]
-        top_ten_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:10]
-        top_ten_domains = [domain for domain in top_ten_domains if isinstance(domain,str)]
-        top_ten_domains.append('TweetCarousel')
-        all_domains += top_ten_domains
+        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:20]
+        top_domains = [domain for domain in top_domains if isinstance(domain,str)]
+        top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
+        all_domains += top_domains
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
             if filtered.empty:
@@ -291,7 +295,7 @@ def main(args):
                 for comp_key in ['full', 'top_three', 'top', ]:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac, in domain_fracs.items():
-                        for top_domain in top_ten_domains:
+                        for top_domain in top_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
                                     [link_type, comp_key, 'domain_frac', str(domain_string)]
