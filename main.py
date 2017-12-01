@@ -82,8 +82,8 @@ def query_keywords():
 
 
 
-NUM_KEYWORDS = 5
-NUM_LOCATION_SAMPLES = 10
+NUM_KEYWORDS = 10
+NUM_LOCATION_SAMPLES = 15
 DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
 
 KEYWORD_SOURCE = 'trends'

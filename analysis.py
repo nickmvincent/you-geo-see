@@ -132,11 +132,15 @@ def analyze_subset(data, location_set, config):
             control_links = []
             control_domain_col = []
 
+        first_row = results.iloc[0]
+
         d[loc] = {}
         d[loc]['links'] = links
+        d[loc]['has_' + first_row.link_type] = 1 if links else 0
+        d[loc]['domains'] = list(treatment.domain)
         d[loc]['control_links'] = control_links
         d[loc]['computed'] = compute_serp_features(links, treatment.domain, control_links, control_domain_col)
-        d[loc]['serp_id'] = results.iloc[0].serp_id
+        d[loc]['serp_id'] = first_row.serp_id
         sid = SentimentIntensityAnalyzer()
         polarity_scores = [sid.polarity_scores(x)['compound'] for x in snippets if x]
         for prefix, subset in [
@@ -240,8 +244,8 @@ def main(args):
     """Do analysis"""
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
-    print(serp_df['query'].value_counts())
-    print(serp_df.reported_location.value_counts())
+    # print(serp_df['query'].value_counts())
+    # print(serp_df.reported_location.value_counts())
 
     
     # slight improvement below
@@ -249,7 +253,9 @@ def main(args):
 
     link_types = [
         'results',
-        'tweets', 
+        # 'tweets',
+        'top_ads',
+        # 'bottom_ads',
         # 'news'
     ]
 
@@ -284,14 +290,19 @@ def main(args):
                     dist_sum += metrics['edit']
                     jacc_sum += metrics['jaccard']
                     count += 1
-                avg_edit = dist_sum / count
-                avg_jacc = jacc_sum / count
+                if count:
+                    avg_edit = dist_sum / count
+                    avg_jacc = jacc_sum / count
+                else:
+                    avg_edit = avg_jacc = float('nan')
                 tmp['avg_edit'] = avg_edit
                 tmp['avg_jaccard'] = avg_jacc
                 if sid not in serp_comps:
                     serp_comps[sid] = { 'id': sid }
                 serp_comps[sid][link_type + 'avg_edit'] = avg_edit
                 serp_comps[sid][link_type + 'avg_jacc'] = avg_jacc
+                has_type_key = 'has_' + link_type
+                serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in ['full', 'top_three', 'top', ]:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac, in domain_fracs.items():
@@ -322,13 +333,13 @@ def main(args):
         ]:
             cols_to_compare.append(link_type + col)
         cols_to_compare.append(link_type +  '_avg_jacc')
+        cols_to_compare.append('has_' + link_type)
     serp_df = serp_df.fillna({
         col: 0 for col in cols_to_compare
     })
 
     urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
     rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
-    
     for col in cols_to_compare:
         try:
             x = list(urban_rows[col])
@@ -343,11 +354,25 @@ def main(args):
         mean_y = np.mean(y)
 
         _, pval = ttest_ind(x, y, equal_var=False)
-        if mean_x == 0 and mean_y == 0:
-            # print('Skipping {} bc both have zero mean'.format(col))
+        if mean_x == mean_y:
+            print('Exactly equal means for {}'.format(col))
             continue
-        print(col)
-        print('Urban mean:', mean_x, 'Rural mean:', mean_y, 'pval:', pval)
+        elif mean_x > mean_y:
+            larger, smaller = mean_x, mean_y
+            winner, loser = 'urban', 'rural'
+        else:
+            larger, smaller = mean_y, mean_x
+            winner, loser = 'rural', 'urban'
+
+        mult_increase = round(larger / smaller, 2)
+        if mult_increase > 1.1 or pval <= 0.05:
+            if pval <= 0.05:
+                print('***')
+            print(col)
+            print('{} > {} by {}x ({} > {}), pval: {}, n: {}'.format(
+                winner, loser, mult_increase, round(larger, 4), round(smaller, 4), pval, len(x) + len(y)
+            ))
+        
     
 
 
