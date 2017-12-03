@@ -63,7 +63,11 @@ CONTROVERSIAL = [
 ]
 
 # I manually picked political and financial topics
-DEC1_NOV30_CURATED = [
+DEC3_NOV30_CURATED = [
+    'SNL',
+    'Brock Turner',
+    'Brias Ross',
+    'Tax Reform Bill 2017',
     'Michael Flynn',
     'tax bill',
     'finance',
@@ -74,5 +78,5 @@ DEC1_NOV30_CURATED = [
 
 CURATED = {
     'controversial': CONTROVERSIAL,
-    'dec1_nov30': DEC1_NOV30_CURATED,
+    'dec3_nov30': DEC3_NOV30_CURATED,
 }

@@ -12,6 +12,68 @@ from nltk import tokenize
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 import argparse
 
+class Comparison():
+    """
+    A comparison entity
+    For comparing two groups of results within a set of results
+    """
+    def __init__(self, df_a, name_a, df_b, name_b, cols_to_compare, print_all):
+        self.df_a = df_a
+        self.name_a = name_a
+        self.df_b = df_b
+        self.name_b = name_b
+        self.cols_to_compare = cols_to_compare
+        self.print_all = print_all
+
+    def print_results(self):
+        """
+        Compare columns for the two groups belonging to this Comparison entity
+        Prints out the results
+        """
+        for col in self.cols_to_compare:
+            try:
+                filtered_df_a = self.df_a[self.df_a[col].notnull()]
+                a = list(filtered_df_a[col])
+            except KeyError:
+                # if self.print_all:
+                #     print('Column {} missing from df_a, {}'.format(col, self.name_a))
+                continue
+            try:
+                filtered_df_b = self.df_b[self.df_b[col].notnull()]
+                b = list(filtered_df_b[col])
+            except KeyError:
+                if self.print_all:
+                    print('Column {} missing from df_a, {}'.format(col, self.name_a))
+                continue
+
+            if not a and not b:
+                if self.print_all:
+                    print('Skipping {} bc Two empty lists'.format(col))
+                continue
+            mean_a = np.mean(a)
+            mean_b = np.mean(b)
+            n = len(a) + len(b)
+
+            _, pval = ttest_ind(a, b, equal_var=False)
+            if mean_a == mean_b:
+                if self.print_all:
+                    print('Exactly equal means ({}) for {}, n={}'.format(mean_a, col, n))
+                continue
+            elif mean_a > mean_b:
+                larger, smaller = mean_a, mean_b
+                winner, loser = self.name_a, self.name_b
+            else:
+                larger, smaller = mean_b, mean_a
+                winner, loser = self.name_b, self.name_a
+            mult_increase = round(larger / smaller, 2)
+            if mult_increase > 1.5 or pval <= 0.05 or self.print_all:
+                if pval <= 0.05:
+                    print('*****')
+                if pval <= 0.05 or self.print_all:
+                    print('{}: {} > {} by {}x ({} > {}), pval: {}, n: {}'.format(
+                        col, winner, loser, mult_increase, round(larger, 4), round(smaller, 4), pval, n
+                    ))
+
 
 def encode_links_as_strings(links1, links2):
     """
@@ -174,7 +236,7 @@ def analyze_subset(data, location_set, config):
                         d[comparison_loc]['links']
                     )
             except ZeroDivisionError:
-                jac = 0
+                jac = float('nan')
             tmp[comparison_loc]['jaccard'] = jac
     return d
 
@@ -244,8 +306,8 @@ def main(args):
     """Do analysis"""
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
-    # print(serp_df['query'].value_counts())
-    # print(serp_df.reported_location.value_counts())
+    print(serp_df['query'].value_counts())
+    print(serp_df.reported_location.value_counts())
 
     
     # slight improvement below
@@ -263,14 +325,14 @@ def main(args):
     config = {}
     config['use_control'] = False
 
-    all_domains = []
+    link_type_to_domains = {}
 
     for link_type in link_types:
         link_type_specific_data = data[data.link_type == link_type]
         top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:20]
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
         top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
-        all_domains += top_domains
+        link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
             if filtered.empty:
@@ -293,25 +355,29 @@ def main(args):
                     avg_edit = dist_sum / count
                     avg_jacc = jacc_sum / count
                 else:
+                    # when there are NO comparisons at all edit is 0 and jacc is nan
                     avg_edit = avg_jacc = float('nan')
-                tmp['avg_edit'] = avg_edit
-                tmp['avg_jaccard'] = avg_jacc
+                tmp[link_type + '_avg_edit'] = avg_edit
+                tmp[link_type + '_avg_jaccard'] = avg_jacc
+
+                # make sure we're NOT overwriting an already existent sub-dict!
+                # (this comment suggests a foolish programmer did this in the past)
                 if sid not in serp_comps:
                     serp_comps[sid] = { 'id': sid }
-                serp_comps[sid][link_type + 'avg_edit'] = avg_edit
-                serp_comps[sid][link_type + 'avg_jacc'] = avg_jacc
+                serp_comps[sid][link_type + '_avg_edit'] = avg_edit
+                serp_comps[sid][link_type + '_avg_jacc'] = avg_jacc
                 has_type_key = 'has_' + link_type
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in ['full', 'top_three', 'top', ]:
                     domain_fracs = tmp[comp_key]['domain_fracs']
-                    for domain_string, frac, in domain_fracs.items():
+                    for domain_string, frac in domain_fracs.items():
                         for top_domain in top_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
                                     [link_type, comp_key, 'domain_frac', str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
-                    pol_key = link_type + '_' + comp_key + '_mean_polarity'
+                    pol_key = '_'.join([link_type, comp_key, 'mean_polarity'])
                     serp_comps[sid][pol_key] = tmp[comp_key + '_mean_polarity']
 
     serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
@@ -319,60 +385,44 @@ def main(args):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
-    cols_to_compare = []
     for link_type in link_types:
-        for top_domain in set(all_domains):
-            for prefix in [
-                '_full_domain_frac_', '_top_three_domain_frac_',
-                '_top_domain_frac_',
-            ]:
-                cols_to_compare.append(link_type + prefix + top_domain)
+        cols_to_compare = []
+        if link_type != 'tweets':
+            # tweets all have the same domain - twitter.com!
+            for top_domain in set(link_type_to_domains[link_type]):
+                for prefix in [
+                    '_full_domain_frac_', '_top_three_domain_frac_',
+                    '_top_domain_frac_',
+                ]:
+                    cols_to_compare.append(link_type + prefix + top_domain)
         for col in [
             '_full_mean_polarity', '_top_three_mean_polarity', '_top_mean_polarity',
+            '_avg_jacc', '_avg_edit'
         ]:
             cols_to_compare.append(link_type + col)
-        cols_to_compare.append(link_type +  '_avg_jacc')
-        cols_to_compare.append('has_' + link_type)
-    serp_df = serp_df.fillna({
-        col: 0 for col in cols_to_compare
-    })
 
-    urban_rows = serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)]
-    rural_rows = serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)]
-    for col in cols_to_compare:
-        try:
-            x = list(urban_rows[col])
-            y = list(rural_rows[col])
-        except KeyError:
-            # print('Skipping {} bc KeyError'.format(col))
-            continue
-        if not x and not y:
-            # print('Skipping {} bc Two empty lists'.format(col))
-            continue
-        mean_x = np.mean(x)
-        mean_y = np.mean(y)
+        # SERPS that have NO TWEETS or NO NEWS (etc)
+        # will have nan values for any related calculations (e.g. avg_jacc of Tweets)
 
-        _, pval = ttest_ind(x, y, equal_var=False)
-        if mean_x == mean_y:
-            print('Exactly equal means for {}'.format(col))
-            continue
-        elif mean_x > mean_y:
-            larger, smaller = mean_x, mean_y
-            winner, loser = 'urban', 'rural'
-        else:
-            larger, smaller = mean_y, mean_x
-            winner, loser = 'rural', 'urban'
 
-        mult_increase = round(larger / smaller, 2)
-        if mult_increase > 1.1 or pval <= 0.05:
-            if pval <= 0.05:
-                print('***')
-            print(col)
-            print('{} > {} by {}x ({} > {}), pval: {}, n: {}'.format(
-                winner, loser, mult_increase, round(larger, 4), round(smaller, 4), pval, len(x) + len(y)
-            ))
-        
-    
+        # cols_to_compare.append('has_' + link_type)
+        # serp_df = serp_df.fillna({
+        #     col: 0 for col in cols_to_compare
+        # })
+
+        comparisons = [
+            Comparison(
+                df_a=serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)],
+                name_a='urban',
+                df_b=serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)],
+                name_b='rural',
+                cols_to_compare=cols_to_compare,
+                print_all=args.print_all
+            )
+        ]
+
+        for comparison in comparisons:
+            comparison.print_results()
 
 
 def parse():
@@ -380,10 +430,11 @@ def parse():
     parser = argparse.ArgumentParser(description='Perform anlysis.')
     parser.add_argument(
         '--db', help='Name of the database', default='tmp/test_5kw_1loc.db')
-    
+    parser.add_argument(
+        '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
+    parser.set_defaults(print_all=False)        
 
     args = parser.parse_args()
     main(args)
 
 parse()
-

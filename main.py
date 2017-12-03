@@ -45,7 +45,7 @@ def load_locations():
 
 
 NUM_LOCATION_SAMPLES = 25
-KEYWORD_SOURCE = 'dec1_nov30'
+KEYWORD_SOURCE = 'dec3_nov30'
 
 DBNAME = './tmp/test_{}kw_{}loc_{}src'.format(
     NUM_KEYWORDS, NUM_LOCATION_SAMPLES, KEYWORD_SOURCE)
@@ -57,7 +57,7 @@ def main():
     elif KEYWORD_SOURCE == 'csv':
         keyword_objs = from_csv()
     else:
-        keywords = CURATED[KEYWORD_SOURCE]
+        keywords = CURATED[KEYWORD_SOURCE] + CURATED[KEYWORD_SOURCE]
         keyword_objs = [
             {
                 'keyword': keyword,
