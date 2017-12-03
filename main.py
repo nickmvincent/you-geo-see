@@ -5,7 +5,7 @@ import json
 import csv
 from pprint import pprint
 import pandas as pd
-from pytrends.request import TrendReq
+from querysets import from_csv, from_trends_top_query_by_category, NUM_KEYWORDS
 
 
 # Xvfb :1 -screen 1 1024x768x16
@@ -41,7 +41,6 @@ def load_locations():
 
 
 
-NUM_KEYWORDS = 1
 NUM_LOCATION_SAMPLES = 1
 DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
 
@@ -61,9 +60,9 @@ def main():
             } for keyword in keywords
         ]
     elif KEYWORD_SOURCE == 'trends':
-        keyword_objs = query_keywords()
+        keyword_objs = from_trends_top_query_by_category()
     elif KEYWORD_SOURCE == 'csv':
-        keyword_objs = load_keywords()    
+        keyword_objs = from_csv()    
     
     print(keyword_objs)
 

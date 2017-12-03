@@ -1,4 +1,7 @@
 import pandas as pd
+from pytrends.request import TrendReq
+
+NUM_KEYWORDS = 1
 
 KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
