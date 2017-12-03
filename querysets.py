@@ -43,3 +43,36 @@ def from_trends_top_query_by_category():
                 {'keyword': x, 'category': cid} for x in keywords
             ]
     return keyword_objs
+
+
+CONTROVERSIAL = [
+    'Progressive Tax',
+    'Impose A Flat Tax',
+    'End Medicaid',
+    'Affordable Health And Care Act',
+    'Fluoridate Water',
+    'Stem Cell Research',
+    'Andrew Wakefield Vindicated',
+    'Autism Caused By Vaccines',
+    'US Government Loses AAA Bond Rate',
+    'Is Global Warming Real',
+    'Man Made Global Warming Hoax',
+    'Nuclear Power Plants',
+    'Offshore Drilling',
+    'Genetically Modified Organi',
+]
+
+# I manually picked political and financial topics
+DEC1_NOV30_CURATED = [
+    'Michael Flynn',
+    'tax bill',
+    'finance',
+    'kate steinle',
+    'rex tillerson',
+    'john conyers',
+]
+
+CURATED = {
+    'controversial': CONTROVERSIAL,
+    'dec1_nov30': DEC1_NOV30_CURATED,
+}

@@ -5,7 +5,10 @@ import json
 import csv
 from pprint import pprint
 import pandas as pd
-from querysets import from_csv, from_trends_top_query_by_category, NUM_KEYWORDS
+from querysets import (
+    from_csv, from_trends_top_query_by_category, NUM_KEYWORDS,
+    CURATED
+)
 
 
 # Xvfb :1 -screen 1 1024x768x16
@@ -41,28 +44,26 @@ def load_locations():
 
 
 
-NUM_LOCATION_SAMPLES = 1
-DBNAME = './tmp/test_{}kw_{}loc'.format(NUM_KEYWORDS, NUM_LOCATION_SAMPLES)
+NUM_LOCATION_SAMPLES = 25
+KEYWORD_SOURCE = 'dec1_nov30'
 
-KEYWORD_SOURCE = 'trends'
+DBNAME = './tmp/test_{}kw_{}loc_{}src'.format(
+    NUM_KEYWORDS, NUM_LOCATION_SAMPLES, KEYWORD_SOURCE)
+
 def main():
     """main driver"""
-    if KEYWORD_SOURCE == 'manual':
-        keywords = [
-            'tax bill', 'alabama senate',
-            'al franken', 'impeach trump',
-            'support trump'
-        ]
+    if KEYWORD_SOURCE == 'trends':
+        keyword_objs = from_trends_top_query_by_category()
+    elif KEYWORD_SOURCE == 'csv':
+        keyword_objs = from_csv()
+    else:
+        keywords = CURATED[KEYWORD_SOURCE]
         keyword_objs = [
             {
                 'keyword': keyword,
                 'category': 'manual_news',
             } for keyword in keywords
         ]
-    elif KEYWORD_SOURCE == 'trends':
-        keyword_objs = from_trends_top_query_by_category()
-    elif KEYWORD_SOURCE == 'csv':
-        keyword_objs = from_csv()    
     
     print(keyword_objs)
 
@@ -87,9 +88,9 @@ def main():
     location_df = load_locations()
     locations = []
     for subset in [
-        location_df[location_df['2013 urban-rural code'] < 3],
+        location_df[location_df['2013 urban-rural code'] == 1],
         # location_df[(location_df['2013 urban-rural code'] >= 3) & (location_df['2013 urban-rural code'] < 5)],
-        location_df[location_df['2013 urban-rural code'] >= 5],
+        location_df[location_df['2013 urban-rural code'] == 6],
     ]:
         sample = subset.sample(n=NUM_LOCATION_SAMPLES)
         for _, row in sample.iterrows():

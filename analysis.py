@@ -253,8 +253,7 @@ def main(args):
 
     link_types = [
         'results',
-        # 'tweets',
-        'top_ads',
+        'tweets',
         # 'bottom_ads',
         # 'news'
     ]
