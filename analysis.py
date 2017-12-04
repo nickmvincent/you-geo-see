@@ -309,7 +309,6 @@ def main(args):
     print(serp_df['query'].value_counts())
     print(serp_df.reported_location.value_counts())
 
-    
     # slight improvement below
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 

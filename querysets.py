@@ -1,7 +1,7 @@
 import pandas as pd
 from pytrends.request import TrendReq
 
-NUM_KEYWORDS = 1
+NUM_KEYWORDS = 5
 
 KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
@@ -25,11 +25,10 @@ def from_trends_top_query_by_category():
     """
     econ_cats = [
         'fast_food_restaurants', 'retail_companies',
-        'foods', 'fashion_labels', 'auto_companies',
-        'financial_companies',
+        'foods', 'fashion_labels', 'financial_companies',
     ]
     pol_cats = [
-        'politicians', 'governmental_bodies',
+        'politicians',
     ]
     keyword_objs = []
     for cats in [econ_cats, pol_cats]:
@@ -63,7 +62,8 @@ CONTROVERSIAL = [
 ]
 
 # I manually picked political and financial topics
-DEC3_NOV30_CURATED = [
+TRENDS_CURATED = [
+    'Billy Bush',
     'SNL',
     'Brock Turner',
     'Brias Ross',
@@ -78,5 +78,5 @@ DEC3_NOV30_CURATED = [
 
 CURATED = {
     'controversial': CONTROVERSIAL,
-    'dec3_nov30': DEC3_NOV30_CURATED,
+    'dec3_nov30': TRENDS_CURATED,
 }
