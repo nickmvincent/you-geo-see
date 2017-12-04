@@ -28,15 +28,30 @@ import serpscrap
 
 VERSION = 'chrome'
 LOCATIONFILENAME = '2017_gaz_counties_all.csv'
+# Source: 
 CODE_FILENAME = 'NCHSURCodes2013.csv'
-# INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
+# Source:
+INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
+# Source:
+POLITICAL_FILENAME = '2016_US_County_Level_Presidential_Results.csv'
+# Source:
+POPULATION_FILENAME = '2016_estimated_population.csv'
+# Source: https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/
+
 
 def load_locations():
     """Loads locations from CSV or JSON"""
     if '.csv' in LOCATIONFILENAME:
         location_df = pd.read_csv(LOCATIONFILENAME)
         codes_df = pd.read_csv(CODE_FILENAME)
+        income_df = pd.read_csv(INCOME_FILENAME)
+        pol_df = pd.read_csv(POLITICAL_FILENAME)
+        pop_df = pd.read_csv(POPULATION_FILENAME)
+        # not in a loop b/c the key might change...
         location_df = location_df.merge(codes_df, on='GEOID')
+        location_df = location_df.merge(income_df, on='GEOID')
+        location_df = location_df.merge(pol_df, on='GEOID')
+        location_df = location_df.merge(pop_df, on='GEOID')
     else:
         with open(LOCATIONFILENAME) as locationfile:
             location_df = pd.read_json(locationfile)
@@ -86,6 +101,7 @@ def main():
     config.set('save_html', False)
     config.set('use_control', False)
     location_df = load_locations()
+    print(location_df)
     locations = []
     for subset in [
         location_df[location_df['2013 urban-rural code'] == 1],
@@ -98,8 +114,10 @@ def main():
                 'engine': 'google',
                 'latitude': row.INTPTLAT,
                 'longitude': row.INTPTLONG,
-                'code': row['2013 urban-rural code'],
-                'name': row.NAME,
+                'urban_rural_code': row['2013 urban-rural code'],
+                'median_income': row['HC01_EST_VC13'],
+                'percent_dem': row['per_dem'],
+                'name': row.NAME
             })
     pprint(locations)
     config.set('search_instances', locations)
