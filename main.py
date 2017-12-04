@@ -146,7 +146,6 @@ def main(args):
             a, b, estimated_time
         )
     )
-    return
     scrap.run()
     # results_df = pd.DataFrame(results)
     # results_df.to_csv("output.csv")
