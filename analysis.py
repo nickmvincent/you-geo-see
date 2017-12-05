@@ -3,6 +3,7 @@ import operator
 from pprint import pprint
 from collections import defaultdict
 from string import ascii_lowercase
+import csv
 
 import pandas as pd
 import numpy as np
@@ -30,13 +31,15 @@ class Comparison():
         Compare columns for the two groups belonging to this Comparison entity
         Prints out the results
         """
+        ret = []
+        errs = []
         for col in self.cols_to_compare:
             try:
                 filtered_df_a = self.df_a[self.df_a[col].notnull()]
                 a = list(filtered_df_a[col])
             except KeyError:
-                # if self.print_all:
-                #     print('Column {} missing from df_a, {}'.format(col, self.name_a))
+                if self.print_all:
+                    print('Column {} missing from df_a, {}'.format(col, self.name_a))
                 continue
             try:
                 filtered_df_b = self.df_b[self.df_b[col].notnull()]
@@ -47,8 +50,7 @@ class Comparison():
                 continue
 
             if not a and not b:
-                if self.print_all:
-                    print('Skipping {} bc Two empty lists'.format(col))
+                errs.append('Skipping {} bc Two empty lists'.format(col))
                 continue
             mean_a = np.mean(a)
             mean_b = np.mean(b)
@@ -56,8 +58,17 @@ class Comparison():
 
             _, pval = ttest_ind(a, b, equal_var=False)
             if mean_a == mean_b:
-                if self.print_all:
-                    print('Exactly equal means ({}) for {}, n={}'.format(mean_a, col, n))
+                ret.append({
+                    'column': col,
+                    'winner': None,
+                    'mult_increase': 1,
+                    'mean_a': round(mean_a, 4),
+                    'mean_b': round(mean_b, 4),
+                    'name_a': self.name_a,
+                    'name_b': self.name_b,
+                    'pval': None,
+                    'n': n
+                })
                 continue
             elif mean_a > mean_b:
                 larger, smaller = mean_a, mean_b
@@ -66,13 +77,23 @@ class Comparison():
                 larger, smaller = mean_b, mean_a
                 winner, loser = self.name_b, self.name_a
             mult_increase = round(larger / smaller, 2)
-            if mult_increase > 1.5 or pval <= 0.05 or self.print_all:
-                if pval <= 0.05:
-                    print('*****')
-                if pval <= 0.05 or self.print_all:
-                    print('{}: {} > {} by {}x ({} > {}), pval: {}, n: {}'.format(
-                        col, winner, loser, mult_increase, round(larger, 4), round(smaller, 4), pval, n
-                    ))
+            marker = ''
+            if pval <= 0.001:
+                marker = '**'
+            elif pval <= 0.05:
+                marker = '*'
+            ret.append({
+                'column': marker + col,
+                'winner': winner,
+                'mult_increase': mult_increase,
+                'mean_a': round(mean_a, 4),
+                'mean_b': round(mean_b, 4),
+                'name_a': self.name_a,
+                'name_b': self.name_b,
+                'pval': pval,
+                'n': n
+            })
+        return ret, errs
 
 
 def encode_links_as_strings(links1, links2):
@@ -306,8 +327,9 @@ def main(args):
     """Do analysis"""
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
-    print(serp_df['query'].value_counts())
-    print(serp_df.reported_location.value_counts())
+    for col in ['query', 'reported_location', ]:
+        serp_df[col].value_counts().to_csv('output/values_counts_' + col + '.csv')
+    data.domain.value_counts().to_csv('output/values_counts_domain.csv')
 
     # slight improvement below
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
@@ -384,6 +406,7 @@ def main(args):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
+    outputs, errors = [], []
     for link_type in link_types:
         cols_to_compare = []
         if link_type != 'tweets':
@@ -421,7 +444,18 @@ def main(args):
         ]
 
         for comparison in comparisons:
-            comparison.print_results()
+            out, error = comparison.print_results()
+            outputs += out
+            errors += error
+
+    output_df = pd.DataFrame(outputs)
+    output_df.to_csv("output/comparisons.csv")
+    print(output_df)
+
+    with open("errs.csv",'w') as outfile:
+        writer = csv.writer(outfile)        
+        for row in errors:
+            writer.writerow([row])
 
 
 def parse():
