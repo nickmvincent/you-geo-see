@@ -15,6 +15,11 @@ from nltk import tokenize
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 import argparse
 
+FULL = 'full'
+TOP_THREE = 'top_three'
+TOP = 'top'
+RESULT_SUBSETS = [FULL, TOP_THREE, TOP]
+
 class Comparison():
     """
     A comparison entity
@@ -34,7 +39,8 @@ class Comparison():
         Prints out the results
         """
         ret = []
-        errs = []
+        err = []
+        summary = {key: [] for key in RESULT_SUBSETS}
         for col in self.cols_to_compare:
             try:
                 filtered_df_a = self.df_a[self.df_a[col].notnull()]
@@ -52,9 +58,8 @@ class Comparison():
                 continue
 
             if not a and not b:
-                errs.append('Skipping {} bc Two empty lists'.format(col))
+                err.append('Skipping {} bc Two empty lists'.format(col))
                 continue
-            print(len(a), len(b))
             mean = np.mean( np.array(a + b), axis=0 )
             mean_a = np.mean(a)
             mean_b = np.mean(b)
@@ -71,6 +76,8 @@ class Comparison():
                     'name_a': self.name_a,
                     'name_b': self.name_b,
                     'pval': None,
+                    'len(a)': len(a),
+                    'len(b)': len(b),
                     'n': n,
                     'mean': mean,
                 })
@@ -90,16 +97,35 @@ class Comparison():
             ret.append({
                 'column': marker + col,
                 'winner': winner,
-                'mult_increase': mult_increase,
-                'mean_a': round(mean_a, 4),
-                'mean_b': round(mean_b, 4),
+                'mult_inc': mult_increase,
+                'add_inc': round(larger - smaller, 3),
+                'mean_a': round(mean_a, 3),
+                'mean_b': round(mean_b, 3),
                 'name_a': self.name_a,
                 'name_b': self.name_b,
                 'pval': pval,
+                'len(a)': len(a),
+                'len(b)': len(b),
                 'n': n,
                 'mean': mean,
             })
-        return ret, errs
+            if marker:
+                key = None
+                for result_subset in RESULT_SUBSETS:
+                    if result_subset + '_domain' in col:
+                        key = result_subset
+                if key:
+                    summary[key].append({
+                        'column': marker + col,
+                        'winner': winner,
+                        'mult_inc': mult_increase,
+                        # 'add_inc': round(larger - smaller, 3),
+                        'mean_a': round(mean_a, 3),
+                        'mean_b': round(mean_b, 3),
+                        'len(a)': len(a),
+                        'len(b)': len(b),
+                    })
+        return ret, summary, err
 
 
 def encode_links_as_strings(links1, links2):
@@ -175,14 +201,14 @@ def compute_serp_features(links, domains_col, control_links, control_domains_col
         control_domains_col_3 = []
         control_domains_col_1 = []
 
-    ret['full'] = {
+    ret[FULL] = {
         'domain_fracs': calc_domain_fracs(domains_col, control_domains_col)
     }
-    ret['top_three'] = {
+    ret[TOP_THREE] = {
         'domain_fracs': calc_domain_fracs(
             domains_col.iloc[:3], control_domains_col_3)
     }
-    ret['top'] = {
+    ret[TOP] = {
         'domain_fracs': calc_domain_fracs(
             domains_col.iloc[:1], control_domains_col_1)
     }
@@ -233,9 +259,9 @@ def analyze_subset(data, location_set, config):
         sid = SentimentIntensityAnalyzer()
         polarity_scores = [sid.polarity_scores(x)['compound'] for x in snippets if x]
         for prefix, subset in [
-            ('full', polarity_scores),
-            ('top_three', polarity_scores[:3]),
-            ('top', polarity_scores[:1]),
+            (FULL, polarity_scores),
+            (TOP_THREE, polarity_scores[:3]),
+            (TOP, polarity_scores[:1]),
         ]:
             mean_polarity = sum(subset) / len(subset)
             d[loc]['computed'][prefix + '_mean_polarity'] = mean_polarity
@@ -364,7 +390,7 @@ def main(args):
 
     for link_type in link_types:
         link_type_specific_data = data[data.link_type == link_type]
-        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:20]
+        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:50]
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
         top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
         link_type_to_domains[link_type] = top_domains
@@ -403,7 +429,7 @@ def main(args):
                 serp_comps[sid][link_type + '_avg_jacc'] = avg_jacc
                 has_type_key = 'has_' + link_type
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
-                for comp_key in ['full', 'top_three', 'top', ]:
+                for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac in domain_fracs.items():
                         for top_domain in top_domains:
@@ -421,6 +447,7 @@ def main(args):
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
     outputs, errors = [], []
+    summaries = {key: [] for key in RESULT_SUBSETS}
     for link_type in link_types:
         cols_to_compare = []
         if link_type != 'tweets':
@@ -474,13 +501,17 @@ def main(args):
         ]
 
         for comparison in comparisons:
-            out, error = comparison.print_results()
+            out, summary, error = comparison.print_results()
+            for key in RESULT_SUBSETS:
+                summaries[key] += summary[key]
             outputs += out
             errors += error
 
     output_df = pd.DataFrame(outputs)
     output_df.to_csv(path2+ '/comparisons.csv')
-    print(output_df)
+    for key in RESULT_SUBSETS:
+        subset_summary_df = pd.DataFrame(summaries[key])
+        subset_summary_df.to_csv(path2 + '/' + key + '_summary.csv')
 
     with open(path2 + '/errs.csv','w') as outfile:
         writer = csv.writer(outfile)        

@@ -63,8 +63,8 @@ def load_locations():
 
 def main(args):
     """main driver"""
-    dbname = './tmp/test_{}loc_{}kw'.format(
-        args.num_locations, args.query_source)
+    dbname = './tmp/{}_{}_{}'.format(
+        args.comparison, args.num_locations, args.query_source)
     if args.query_source == 'trends':
         keyword_objs = from_trends_top_query_by_category()
     elif args.query_source == 'csv':
