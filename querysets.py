@@ -93,4 +93,5 @@ TRENDS_CURATED = [
 CURATED = {
     'controversial': CONTROVERSIAL,
     'dec3_nov30': TRENDS_CURATED,
+    'procon_popular': PROCON_POPULAR,
 }

@@ -160,6 +160,7 @@ def parse():
         Number of location to sample per subset
         If this is 25, you'll get 25 urban and 25 rural samples
         If this is 25 and comparison is None, you'll just get 25 sample
+        Default is 25
         """, type=int, default=25)
     parser.add_argument(
         '--query_source', help="""
