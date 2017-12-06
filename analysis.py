@@ -1,7 +1,9 @@
+"""Data Analysis"""
 import sqlite3
 import operator
 from pprint import pprint
 from collections import defaultdict
+import os
 from string import ascii_lowercase
 import csv
 
@@ -52,6 +54,8 @@ class Comparison():
             if not a and not b:
                 errs.append('Skipping {} bc Two empty lists'.format(col))
                 continue
+            print(len(a), len(b))
+            mean = np.mean( np.array(a + b), axis=0 )
             mean_a = np.mean(a)
             mean_b = np.mean(b)
             n = len(a) + len(b)
@@ -67,7 +71,8 @@ class Comparison():
                     'name_a': self.name_a,
                     'name_b': self.name_b,
                     'pval': None,
-                    'n': n
+                    'n': n,
+                    'mean': mean,
                 })
                 continue
             elif mean_a > mean_b:
@@ -91,7 +96,8 @@ class Comparison():
                 'name_a': self.name_a,
                 'name_b': self.name_b,
                 'pval': pval,
-                'n': n
+                'n': n,
+                'mean': mean,
             })
         return ret, errs
 
@@ -327,9 +333,17 @@ def main(args):
     """Do analysis"""
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
+    path1 = 'output'
+    path2 = '{}/{}'.format(path1, args.db)
+    for path in [path1, path2]:
+        try:
+            os.mkdir(path)
+        except OSError:
+            pass
+
     for col in ['query', 'reported_location', ]:
-        serp_df[col].value_counts().to_csv('output/values_counts_' + col + '.csv')
-    data.domain.value_counts().to_csv('output/values_counts_domain.csv')
+        serp_df[col].value_counts().to_csv(path2 + '/values_counts_' + col + '.csv')
+    data.domain.value_counts().to_csv(path2 + '/values_counts_domain.csv')
 
     # slight improvement below
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
@@ -440,7 +454,23 @@ def main(args):
                 name_b='rural',
                 cols_to_compare=cols_to_compare,
                 print_all=args.print_all
-            )
+            ),
+            # Comparison(
+            #     df_a=serp_df[serp_df['median_income'] <= 59000],
+            #     name_a='high-income',
+            #     df_b=serp_df[serp_df['median_income'] > 59000],
+            #     name_b='low-income',
+            #     cols_to_compare=cols_to_compare,
+            #     print_all=args.print_all
+            # ),
+            # Comparison(
+            #     df_a=serp_df[serp_df['percent_dem'] <= 50],
+            #     name_a='GOP',
+            #     df_b=serp_df[serp_df['percent_dem'] >= 50],
+            #     name_b='DEM',
+            #     cols_to_compare=cols_to_compare,
+            #     print_all=args.print_all
+            # ),
         ]
 
         for comparison in comparisons:
@@ -449,10 +479,10 @@ def main(args):
             errors += error
 
     output_df = pd.DataFrame(outputs)
-    output_df.to_csv("output/comparisons.csv")
+    output_df.to_csv(path2+ '/comparisons.csv')
     print(output_df)
 
-    with open("errs.csv",'w') as outfile:
+    with open(path2 + '/errs.csv','w') as outfile:
         writer = csv.writer(outfile)        
         for row in errors:
             writer.writerow([row])

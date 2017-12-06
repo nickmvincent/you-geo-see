@@ -59,6 +59,20 @@ CONTROVERSIAL = [
     'Nuclear Power Plants',
     'Offshore Drilling',
     'Genetically Modified Organi',
+    'Trump',
+]
+
+PROCON_POPULAR = [
+    'medical marijuana',
+    'gun control',
+    'animal testing',
+    'death penalty',
+    'school uniforms',
+    'drinking age',
+    'social media',
+    'euthanasia',
+    'illegal immigration',
+    'abortion',
 ]
 
 # I manually picked political and financial topics
