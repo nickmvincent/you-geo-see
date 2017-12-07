@@ -73,17 +73,6 @@ PROCON_POPULAR = [
     'euthanasia',
     'illegal immigration',
     'abortion',
-
-    'why medical marijuana',
-    'why gun control',
-    'why animal testing',
-    'why death penalty',
-    'why school uniforms',
-    'why drinking age',
-    'why minimum wage',
-    'why euthanasia',
-    'why illegal immigration',
-    'why abortion',
 ]
 
 # I manually picked political and financial topics
