@@ -69,12 +69,20 @@ def main(args):
         keyword_objs = from_trends_top_query_by_category()
     elif args.query_source == 'csv':
         keyword_objs = from_csv()
+    elif args.query_source == 'test':
+        keyword_objs = [{
+            'keyword': 'minimum wage',
+            'category': args.query_source,
+        }, {
+            'keyword': 'donald trump',
+            'category': args.query_source,
+        }]
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [
             {
                 'keyword': keyword,
-                'category': 'manual_news',
+                'category': args.query_source,
             } for keyword in keywords
         ]
     
