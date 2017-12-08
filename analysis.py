@@ -426,9 +426,9 @@ def main(args):
             pass
         link_type_specific_data.domain.value_counts().to_csv(path3 + '/values_counts_domain.csv')
 
-        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:50]
+        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
-        top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
+        # top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
         link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]

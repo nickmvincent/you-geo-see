@@ -3,11 +3,15 @@ import sys
 import platform
 import argparse
 from pprint import pprint
+import time
+import os
+
 import pandas as pd
 from querysets import (
     from_csv, from_trends_top_query_by_category,
     CURATED
 )
+import yagmail
 
 
 # Xvfb :1 -screen 1 1024x768x16
@@ -77,6 +81,16 @@ def main(args):
             'keyword': 'donald trump',
             'category': args.query_source,
         }]
+    elif args.query_source == 'all':
+        keyword_objs = []
+        for query_source in ['procon_popular', 'trending', 'popular', ]:
+            keywords = CURATED[query_source]
+            keyword_objs += [
+                {
+                    'keyword': keyword,
+                    'category': query_source,
+                } for keyword in keywords
+            ]
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [
@@ -146,17 +160,33 @@ def main(args):
     scrap.init(config=config.get(), keywords=keyword_objs)
     a, b = len(keyword_objs), len(locations)
     estimated_time = round(a * b / 60, 2)
-    print("""
+    yag = yagmail.SMTP('nickmvincent.mailbot@gmail.com', os.environ['MAILBOT_PASSWORD'])
+    
+    start_contents = """
         About to run! In total, {} keywords will be searched across {} locations.
         At a rate of ~1 SERP/min, this will take approximately {} hours.
         Keep in mind that going over 28 hours may result in a longer term IP ban.
+        Arguments are {}.
         """.format(
-            a, b, estimated_time
+            a, b, estimated_time, args
         )
-    )
-    scrap.run()
-    # results_df = pd.DataFrame(results)
-    # results_df.to_csv("output.csv")
+    yag.send('nickmvincent@gmail.com', 'Scrape starting', start_contents)
+    try:
+        scrap.run()
+    except ValueError as err:
+        new_dbname = 'take2' + dbname
+        err_contents = ['Error: {}. Going to wait one hour and try again! Results will be in {}'.format(
+            err, new_dbname )]
+        yag.send('nickmvincent@gmail.com', 'Scrape starting', err_contents)
+        time.sleep(3600)
+        config.set('database_name', new_dbname)
+        scrap2 = serpscrap.SerpScrap()
+        scrap2.init(config=config.get(), keywords=keyword_objs)
+        scrap2.run()
+
+
+    end_contents = ['you-geo-see main.py finished running! Arguments were: {}'.format(args)]
+    yag.send('nickmvincent@gmail.com', 'Scrape success', end_contents)
 
 def parse():
     """parse args"""
