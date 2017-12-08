@@ -83,7 +83,7 @@ def main(args):
         }]
     elif args.query_source == 'all':
         keyword_objs = []
-        for query_source in ['procon_popular', 'trending', 'popular', ]:
+        for query_source in ['procon_popular', 'trending', ]:
             keywords = CURATED[query_source]
             keyword_objs += [
                 {
@@ -91,6 +91,7 @@ def main(args):
                     'category': query_source,
                 } for keyword in keywords
             ]
+        keyword_objs += CURATED['popular']
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [
