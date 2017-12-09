@@ -178,6 +178,7 @@ def main(args):
         new_dbname = 'take2' + dbname
         err_contents = ['Error: {}. Going to wait one hour and try again! Results will be in {}'.format(
             err, new_dbname )]
+        yag = yagmail.SMTP('nickmvincent.mailbot@gmail.com', os.environ['MAILBOT_PASSWORD'])
         yag.send('nickmvincent@gmail.com', 'Scrape starting', err_contents)
         time.sleep(3600)
         config.set('database_name', new_dbname)
@@ -187,6 +188,7 @@ def main(args):
 
 
     end_contents = ['you-geo-see main.py finished running! Arguments were: {}'.format(args)]
+    yag = yagmail.SMTP('nickmvincent.mailbot@gmail.com', os.environ['MAILBOT_PASSWORD'])
     yag.send('nickmvincent@gmail.com', 'Scrape success', end_contents)
 
 def parse():
