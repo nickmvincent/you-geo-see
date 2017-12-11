@@ -57,7 +57,7 @@ def load_locations():
         codes_df = pd.read_csv(CODE_FILENAME)
         income_df = pd.read_csv(INCOME_FILENAME)
         pol_df = pd.read_csv(POLITICAL_FILENAME)
-        pop_df = pd.read_csv(POPULATION_FILENAME)
+        pop_df = pd.read_csv(POPULATION_FILENAME, thousands=',')
         # not in a loop b/c the key might change...
         location_df = location_df.merge(codes_df, on='GEOID')
         location_df = location_df.merge(income_df, on='GEOID')
@@ -143,6 +143,11 @@ def main(args):
     else:
         subsets = [location_df]
     for subset in subsets:
+        if args.comparison == 'population_weighted':
+            sample = subset.sample(
+                n=args.num_locations, weights=subset.POP_ESTIMATE_2016)
+            print(sample)
+            input()
         sample = subset.sample(n=args.num_locations)
         for _, row in sample.iterrows():
             locations.append({

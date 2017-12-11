@@ -5,15 +5,7 @@ NUM_KEYWORDS = 3
 
 KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
-
-ECON_CATS = [
-    'fast_food_restaurants', 'retail_companies',
-    'auto_companies', 'financial_companies',
-]
-POL_CATS = [
-    'politicians', 'governmental_bodies',
-]
-POPULAR_CATEGORIES = ECON_CATS + POL_CATS
+from constants import POPULAR_CATEGORIES
 
 def from_csv():
     """Loads keywords from CSV"""

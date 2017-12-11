@@ -1,0 +1,6 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_MapsLocations,100,100,0.0,0.023,inf,DEM
+1,*results_top_three_domain_frac_MapsPlaces,100,100,0.0,0.02,inf,DEM
+2,*results_top_three_domain_frac_www.drugabuse.gov,100,100,0.027,0.0,inf,GOP
+3,*top_ads_top_three_domain_frac_info.carafem.org,69,56,0.0,0.033,inf,DEM
+4,*top_ads_top_three_domain_frac_www.allieded.org,69,56,0.019,0.0,inf,GOP

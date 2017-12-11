@@ -5,7 +5,7 @@ from string import ascii_lowercase
 import csv
 import argparse
 
-from querysets import POPULAR_CATEGORIES
+from constants import POPULAR_CATEGORIES
 
 import pandas as pd
 import numpy as np
@@ -388,7 +388,7 @@ def get_dataframes(dbname):
     return data, serp_df
 
 
-def main(args):
+def main(args, category):
     """Do analysis"""
     if 'dbs' in args.db:
         args.db = args.db[4:]
@@ -396,8 +396,8 @@ def main(args):
     data = prep_data(data)
     path1 = 'output'
     path2 = '{}/{}'.format(path1, args.db)
-    if args.category:
-        path2 += '__' + args.category
+    if category:
+        path2 += '__' + category
     for path in [path1, path2]:
         try:
             os.mkdir(path)
@@ -425,9 +425,9 @@ def main(args):
 
     for link_type in link_types:        
         link_type_specific_data = data[data.link_type == link_type]
-        if args.category in ['trending', 'procon_popular']:
-            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == args.category]
-        elif args.category == 'popular':
+        if category in ['trending', 'procon_popular']:
+            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
+        elif category == 'popular':
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'].isin(POPULAR_CATEGORIES)]
         path3 = '{}/{}'.format(path2, link_type)
         try:
@@ -598,6 +598,10 @@ def parse():
     parser.set_defaults(print_all=False)        
 
     args = parser.parse_args()
-    main(args)
+    if args.category == 'each':
+        for cat in ['popular', 'trending', 'procon_popular']:    
+            main(args, cat)
+    else:
+        main(args, args.category)
 
 parse()

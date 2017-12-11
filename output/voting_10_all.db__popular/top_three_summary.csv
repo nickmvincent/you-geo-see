@@ -1,0 +1,5 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,**results_top_three_domain_frac_MapsLocations,180,180,0.08,0.159,2.0,DEM
+1,**results_top_three_domain_frac_NewsCarousel,180,180,0.267,0.213,1.25,GOP
+2,*results_top_three_domain_frac_www.facebook.com,180,180,0.017,0.004,4.5,GOP
+3,*top_ads_top_three_domain_frac_www.kansascity.buyatoyota.com,100,92,0.015,0.0,inf,GOP

@@ -1,0 +1,7 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.046,*results_full_domain_frac_MapsLocations,10,10,0.023076923076923078,0.0,0.046,inf,20,GOP,DEM,0.005121072764272635,medical marijuana,DEM
+1,0.054,*results_full_domain_frac_MapsLocations,10,10,0.026923076923076928,0.0,0.054,inf,20,GOP,DEM,0.0013229505842674947,abortion,DEM
+2,0.091,**results_full_domain_frac_MapsPlaces,10,10,0.045454545454545456,0.0,0.091,inf,20,GOP,DEM,0.0,school uniforms,DEM
+3,0.165,**results_full_domain_frac_school-uniforms.procon.org,10,10,0.09136363636363636,0.174,0.009,19.1,20,GOP,DEM,9.128823872749863e-11,school uniforms,GOP
+4,0.054,*results_full_domain_frac_www.rainbowshops.com,10,10,0.03681818181818182,0.01,0.064,6.36,20,GOP,DEM,0.00626794420607664,school uniforms,DEM
+5,0.073,**results_full_domain_frac_www.macys.com,10,10,0.045454545454545456,0.082,0.009,9.0,20,GOP,DEM,2.292887199440008e-05,school uniforms,GOP
