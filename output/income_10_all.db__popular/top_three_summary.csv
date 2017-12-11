@@ -1,0 +1,12 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,**results_top_three_domain_frac_TweetCarousel,180,180,0.096,0.159,1.65,high-income
+1,**results_top_three_domain_frac_NewsCarousel,180,180,0.285,0.194,1.47,low-income
+2,*results_top_three_domain_frac_www.facebook.com,180,180,0.017,0.0,inf,low-income
+3,*results_top_three_domain_frac_www.yellowpages.com,180,180,0.0,0.019,inf,high-income
+4,*top_ads_top_three_domain_frac_dealers.autosite.com,94,87,0.027,0.0,inf,low-income
+5,*top_ads_top_three_domain_frac_www.pohankachevrolet.com,94,87,0.0,0.019,inf,high-income
+6,*top_ads_top_three_domain_frac_www.dancummins.com,94,87,0.014,0.0,inf,low-income
+7,*top_ads_top_three_domain_frac_explore.setbuyatoyota.com,94,87,0.016,0.0,inf,low-income
+8,*top_ads_top_three_domain_frac_www.hondaoftysonscorner.com,94,87,0.0,0.019,inf,high-income
+9,*top_ads_top_three_domain_frac_www.sportchevrolet.com,94,87,0.0,0.023,inf,high-income
+10,*top_ads_top_three_domain_frac_www.centralatlantic.buyatoyota.com,94,87,0.0,0.023,inf,high-income

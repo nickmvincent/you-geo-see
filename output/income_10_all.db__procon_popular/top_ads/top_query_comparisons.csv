@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.5,*top_ads_top_domain_frac_www.latinainstitute.org,10,10,0.25,0.0,0.5,inf,20,low-income,high-income,0.014956363910414203,abortion,high-income
+1,,top_ads_top_domain_frac_www.caron.org,7,0,1.0,1.0,,,7,low-income,high-income,,drinking age,high-income
+2,0.4,*top_ads_top_domain_frac_www.all.org,10,10,0.2,0.4,0.0,inf,20,low-income,high-income,0.03678749787978613,euthanasia,low-income
+3,0.778,**top_ads_top_domain_frac_www.heartlandalliance.org,9,4,0.5384615384615384,0.778,0.0,inf,13,low-income,high-income,0.0007359017195464888,illegal immigration,low-income

@@ -1,0 +1,5 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*top_ads_top_domain_frac_www.latinainstitute.org,76,58,0.0,0.086,inf,high-income
+1,*top_ads_top_domain_frac_www.caron.org,76,58,0.092,0.0,inf,low-income
+2,*top_ads_top_domain_frac_www.all.org,76,58,0.053,0.0,inf,low-income
+3,*top_ads_top_domain_frac_www.heartlandalliance.org,76,58,0.092,0.0,inf,low-income

@@ -1,0 +1,3 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_www.philadelphiaeagles.com,100,100,0.0,0.03,inf,high-income
+1,*results_top_three_domain_frac_eagles.com,100,100,0.033,0.003,10.0,low-income

@@ -5,6 +5,16 @@ NUM_KEYWORDS = 3
 
 KEYWORD_CSV = 'top_news_queries_20171029.csv'
 
+
+ECON_CATS = [
+    'fast_food_restaurants', 'retail_companies',
+    'auto_companies', 'financial_companies',
+]
+POL_CATS = [
+    'politicians', 'governmental_bodies',
+]
+POPULAR_CATEGORIES = ECON_CATS + POL_CATS
+
 def from_csv():
     """Loads keywords from CSV"""
     datf = pd.read_csv(KEYWORD_CSV)
@@ -23,24 +33,16 @@ def from_trends_top_query_by_category():
     Get a set of keyword objects by quering Google Trends
     Each keyword obj is a dict with keys: keyword, category
     """
-    econ_cats = [
-        'fast_food_restaurants', 'retail_companies',
-        'auto_companies', 'financial_companies',
-    ]
-    pol_cats = [
-        'politicians', 'governmental_bodies',
-    ]
+    
     keyword_objs = []
-    for cats in [econ_cats, pol_cats]:
-        for cid in cats:
-            print(cid)
-            yearmonth = '2016'
-            pytrends = TrendReq(hl='en-US', tz=360)
-            keywords = pytrends.top_charts(yearmonth, cid=cid, geo='US')
-            keywords = keywords.title.tolist()[:NUM_KEYWORDS]
-            keyword_objs += [
-                {'keyword': x, 'category': cid} for x in keywords
-            ]
+    for cid in POPULAR_CATEGORIES:
+        yearmonth = '2016'
+        pytrends = TrendReq(hl='en-US', tz=360)
+        keywords = pytrends.top_charts(yearmonth, cid=cid, geo='US')
+        keywords = keywords.title.tolist()[:NUM_KEYWORDS]
+        keyword_objs += [
+            {'keyword': x, 'category': cid} for x in keywords
+        ]
     return keyword_objs
 
 

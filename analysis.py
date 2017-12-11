@@ -5,6 +5,7 @@ from string import ascii_lowercase
 import csv
 import argparse
 
+from querysets import POPULAR_CATEGORIES
 
 import pandas as pd
 import numpy as np
@@ -144,6 +145,9 @@ class Comparison():
                                 recurse_on_queries=False,
                             )
                             comparison_dicts = query_comparison.print_results()[0]
+                            comparison_dicts = [x for x in comparison_dicts if x['mean'] != 0]
+                            for d in comparison_dicts:
+                                d['query'] = query
                             query_comparison_lists[key] += comparison_dicts
 
         return ret, summary, err, query_comparison_lists
@@ -392,6 +396,8 @@ def main(args):
     data = prep_data(data)
     path1 = 'output'
     path2 = '{}/{}'.format(path1, args.db)
+    if args.category:
+        path2 += '__' + args.category
     for path in [path1, path2]:
         try:
             os.mkdir(path)
@@ -419,6 +425,10 @@ def main(args):
 
     for link_type in link_types:        
         link_type_specific_data = data[data.link_type == link_type]
+        if args.category in ['trending', 'procon_popular']:
+            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == args.category]
+        elif args.category == 'popular':
+            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'].isin(POPULAR_CATEGORIES)]
         path3 = '{}/{}'.format(path2, link_type)
         try:
             os.mkdir(path3)
@@ -527,7 +537,8 @@ def main(args):
                 df_b=serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)],
                 name_b='urban',
                 cols_to_compare=cols_to_compare,
-                print_all=args.print_all
+                print_all=args.print_all,
+                recurse_on_queries=True
             ))
         if args.comparison in ['income', 'all']:
             comparisons.append(Comparison(
@@ -536,7 +547,8 @@ def main(args):
                 df_b=serp_df[serp_df['median_income'] > 45111],
                 name_b='high-income',
                 cols_to_compare=cols_to_compare,
-                print_all=args.print_all
+                print_all=args.print_all,
+                recurse_on_queries=True
             ))
         if args.comparison in ['voting', 'all']:
             comparisons.append(Comparison(
@@ -545,7 +557,8 @@ def main(args):
                 df_b=serp_df[serp_df['percent_dem'] > 0.5],
                 name_b='DEM',
                 cols_to_compare=cols_to_compare,
-                print_all=args.print_all
+                print_all=args.print_all,
+                recurse_on_queries=True
             ))
 
         for comparison in comparisons:
@@ -576,6 +589,8 @@ def parse():
 
     parser.add_argument(
         '--comparison', help='What comparison to do', default='all')
+    parser.add_argument(
+        '--category', help='What comparison to do', default='all')
     parser.add_argument(
         '--db', help='Name of the database', default='tmp/test_5kw_1loc.db')
     parser.add_argument(

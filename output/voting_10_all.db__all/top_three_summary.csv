@@ -1,0 +1,9 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,**results_top_three_domain_frac_MapsLocations,380,380,0.038,0.082,2.16,DEM
+1,*results_top_three_domain_frac_www.drugabuse.gov,380,380,0.007,0.0,inf,GOP
+2,*results_top_three_domain_frac_MapsPlaces,380,380,0.0,0.005,inf,DEM
+3,*results_top_three_domain_frac_www.facebook.com,380,380,0.008,0.002,4.5,GOP
+4,*results_top_three_domain_frac_NewsCarousel,380,380,0.241,0.215,1.12,GOP
+5,*top_ads_top_three_domain_frac_info.carafem.org,170,148,0.0,0.012,inf,DEM
+6,*top_ads_top_three_domain_frac_www.kansascity.buyatoyota.com,170,148,0.009,0.0,inf,GOP
+7,*top_ads_top_three_domain_frac_www.allieded.org,170,148,0.008,0.0,inf,GOP
