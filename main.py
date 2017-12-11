@@ -146,8 +146,6 @@ def main(args):
         if args.comparison == 'population_weighted':
             sample = subset.sample(
                 n=args.num_locations, weights=subset.POP_ESTIMATE_2016)
-            print(sample)
-            input()
         sample = subset.sample(n=args.num_locations)
         for _, row in sample.iterrows():
             locations.append({
