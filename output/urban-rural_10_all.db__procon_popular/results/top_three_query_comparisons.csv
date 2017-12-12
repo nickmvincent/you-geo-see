@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.06666666666666667,0.0,0.133,inf,20,rural,urban,0.03678749787978613,abortion,urban
+1,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.06666666666666667,0.0,0.133,inf,20,rural,urban,0.03678749787978613,medical marijuana,urban
+2,0.233,**results_top_three_domain_frac_www.childrensplace.com,10,10,0.18333333333333335,0.3,0.067,4.5,20,rural,urban,0.000623745701199474,school uniforms,rural
+3,0.233,*results_top_three_domain_frac_MapsPlaces,10,10,0.11666666666666667,0.0,0.233,inf,20,rural,urban,0.0013229505842674947,school uniforms,urban

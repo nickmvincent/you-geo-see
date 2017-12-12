@@ -1,2 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.15,*top_ads_full_domain_frac_www.kansascity.buyatoyota.com,10,10,0.075,0.15,0.0,inf,20,GOP,DEM,0.041416150486262786,Toyota,GOP
+0,,top_ads_full_domain_frac_www.googleadservices.com,5,0,1.0,1.0,,,5,rural,urban,,Wells Fargo,urban
+1,0.229,*top_ads_full_domain_frac_dvnf.org,12,6,0.1527777777777778,0.229,0.0,inf,18,rural,urban,0.008644570578677837,United States Department of Veterans Affairs,rural
+2,0.125,*top_ads_full_domain_frac_www.kansascity.buyatoyota.com,12,8,0.075,0.125,0.0,inf,20,rural,urban,0.04333332143930939,Toyota,rural

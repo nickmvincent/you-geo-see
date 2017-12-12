@@ -75,10 +75,13 @@ def main(args):
         keyword_objs = from_csv()
     elif args.query_source == 'test':
         keyword_objs = [{
-            'keyword': 'minimum wage',
+            'keyword': 'us senate',
             'category': args.query_source,
         }, {
-            'keyword': 'donald trump',
+            'keyword': 'pizza hut',
+            'category': args.query_source,
+        }, {
+            'keyword': 'animal testing',
             'category': args.query_source,
         }]
     elif args.query_source == 'all':
@@ -174,7 +177,7 @@ def main(args):
         """.format(
             a, b, estimated_time, args
         )
-    yag.send('nickmvincent@gmail.com', 'Scrape starting', start_contents)
+    # yag.send('nickmvincent@gmail.com', 'Scrape starting', start_contents)
     try:
         scrap.run()
     except ValueError as err:
@@ -182,7 +185,7 @@ def main(args):
         err_contents = ['Error: {}. Going to wait one hour and try again! Results will be in {}'.format(
             err, new_dbname )]
         yag = yagmail.SMTP('nickmvincent.mailbot@gmail.com', os.environ['MAILBOT_PASSWORD'])
-        yag.send('nickmvincent@gmail.com', 'Scrape starting', err_contents)
+        # yag.send('nickmvincent@gmail.com', 'Scrape starting', err_contents)
         time.sleep(3600)
         config.set('database_name', new_dbname)
         scrap2 = serpscrap.SerpScrap()
@@ -192,7 +195,7 @@ def main(args):
 
     end_contents = ['you-geo-see main.py finished running! Arguments were: {}'.format(args)]
     yag = yagmail.SMTP('nickmvincent.mailbot@gmail.com', os.environ['MAILBOT_PASSWORD'])
-    yag.send('nickmvincent@gmail.com', 'Scrape success', end_contents)
+    # yag.send('nickmvincent@gmail.com', 'Scrape success', end_contents)
 
 def parse():
     """parse args"""

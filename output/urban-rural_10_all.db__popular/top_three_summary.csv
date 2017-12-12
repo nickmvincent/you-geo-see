@@ -1,0 +1,4 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_NewsCarousel,180,180,0.243,0.189,1.28,rural
+1,**results_top_three_domain_frac_MapsLocations,180,180,0.106,0.187,1.77,urban
+2,*results_top_three_domain_frac_www.target.com,180,180,0.019,0.002,10.0,rural

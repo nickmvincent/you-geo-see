@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.2,results_top_domain_frac_MapsLocations,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,abortion,urban
+1,0.4,*results_top_domain_frac_MapsLocations,10,10,0.2,0.0,0.4,inf,20,rural,urban,0.03678749787978613,medical marijuana,urban
+2,0.5,*results_top_domain_frac_MapsPlaces,10,10,0.25,0.0,0.5,inf,20,rural,urban,0.014956363910414203,school uniforms,urban

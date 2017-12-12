@@ -259,6 +259,17 @@ def analyze_subset(data, location_set, config):
         links = list(treatment.link)
         snippets = list(treatment.snippet)
         titles = list(treatment.title)
+        if config.get('check_ranks'):
+            ranks = list(treatment['rank'])
+            largest_rank = ranks[-1]
+            perfect_sequence = set(range(1, largest_rank + 1))
+            missing_ranks = perfect_sequence.difference(set(ranks))
+            if missing_ranks and missing_ranks != set([1]):
+                print(results[['query', 'link', 'rank']])
+                print(set(ranks))
+                print(perfect_sequence)
+                print(missing_ranks)
+                input()
         if config.get('use_control'):
             control = results[results.is_control == 1]
             control_links = list(control.link)
@@ -387,15 +398,12 @@ def get_dataframes(dbname):
     conn.close()
     return data, serp_df
 
-
-def main(args, category):
-    """Do analysis"""
-    if 'dbs' in args.db:
-        args.db = args.db[4:]
-    data, serp_df = get_dataframes(args.db)
-    data = prep_data(data)
+def prep_paths(db, category):
+    """
+    Creates paths in the filesystem and return the path names
+    """
     path1 = 'output'
-    path2 = '{}/{}'.format(path1, args.db)
+    path2 = '{}/{}'.format(path1, db)
     if category:
         path2 += '__' + category
     for path in [path1, path2]:
@@ -403,8 +411,18 @@ def main(args, category):
             os.mkdir(path)
         except OSError:
             pass
+    return path1, path2
+
+
+def main(args, category):
+    """Do analysis"""
+    if 'dbs' in args.db:
+        args.db = args.db[4:]
+    data, serp_df = get_dataframes(args.db)
+    data = prep_data(data)
+    path1, path2 = prep_paths(args.db, category)
+    
     serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
-    # slight improvement below
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
@@ -417,9 +435,9 @@ def main(args, category):
     ]
 
     serp_comps = {}
-
     config = {}
     config['use_control'] = False
+    config['check_ranks'] = False
 
     link_type_to_domains = {}
 
@@ -438,7 +456,6 @@ def main(args, category):
 
         top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
-        # top_domains += ['TweetCarousel', 'MapsLocations', 'MapsPlaces']
         link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
@@ -584,7 +601,6 @@ def main(args, category):
 
 def parse():
     """parse args"""
-    
     parser = argparse.ArgumentParser(description='Perform anlysis.')
 
     parser.add_argument(
@@ -592,7 +608,7 @@ def parse():
     parser.add_argument(
         '--category', help='What comparison to do', default='all')
     parser.add_argument(
-        '--db', help='Name of the database', default='tmp/test_5kw_1loc.db')
+        '--db', help='Name of the database')
     parser.add_argument(
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
     parser.set_defaults(print_all=False)        
