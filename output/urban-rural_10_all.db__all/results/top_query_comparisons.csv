@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.182,results_top_domain_frac_MapsLocations,9,11,0.1,0.0,0.182,inf,20,GOP,DEM,0.16688959581639695,abortion,DEM
+1,0.364,*results_top_domain_frac_MapsLocations,9,11,0.2,0.0,0.364,inf,20,GOP,DEM,0.037928971445557756,medical marijuana,DEM
+2,0.455,*results_top_domain_frac_MapsPlaces,9,11,0.25,0.0,0.455,inf,20,GOP,DEM,0.016197070786617862,school uniforms,DEM

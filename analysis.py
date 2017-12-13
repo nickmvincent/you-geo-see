@@ -373,7 +373,20 @@ def prep_data(data):
     data.loc[maps_places_mask, 'link'] = 'MapsPlaces' 
     data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
 
+    def process_domain(x):
+        if x.domain == 'TweetCarousel':
+            if 'search' in x.link:
+                return 'SearchTweetCarousel'
+            else:
+                return 'UserTweetCarousel'
+        if x.domain.count('.') > 1:
+            first_period = x.domain.find('.')
+            stripped = x.domain[first_period+1:]
+            return stripped
+
+    df.assign(processed_domain = process_domain)
     data.domain = data.domain.astype('category')
+    data.processed_domain = data.processed_domain.astype('category')
     return data
 
 
@@ -620,4 +633,6 @@ def parse():
     else:
         main(args, args.category)
 
-parse()
+
+if __name__ == 'main':
+    parse()

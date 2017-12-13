@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.093,top_ads_top_three_domain_frac_,18,4,0.07575757575757575,0.093,0.0,inf,22,rural,urban,0.09616088553086961,abortion,rural
+1,0.05,top_ads_top_three_domain_frac_,20,5,0.04,0.05,0.0,inf,25,rural,urban,0.3298768009211248,school uniforms,rural
+2,0.022,top_ads_top_three_domain_frac_,15,4,0.017543859649122806,0.022,0.0,inf,19,rural,urban,0.33428194339465744,gun control,rural
+3,0.017,top_ads_top_three_domain_frac_,20,5,0.013333333333333332,0.017,0.0,inf,25,rural,urban,0.32987680092112504,animal testing,rural

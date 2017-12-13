@@ -25,17 +25,19 @@ UGC_WHITELIST = [
 
 DOMAINS_TO_CODE = [
     'TweetCarousel',
-    'www.facebook.com',
-    'twitter.com',
-    'www.yelp.com',
-    'www.youtube.com',
-    'www.instagram.com',
-    'www.linkedin.com',
+    # 'www.facebook.com',
+    # 'twitter.com',
+    # 'www.yelp.com',
+    # 'www.youtube.com',
+    # 'www.instagram.com',
+    # 'www.linkedin.com',
 ]
 
 def main(args):
     """main"""
     if args.db:
+        if 'dbs' in args.db:
+            args.db = args.db[4:]
         data, serp_df = get_dataframes(args.db)
         data = prep_data(data)
     elif args.csv:
@@ -43,11 +45,14 @@ def main(args):
     else:
         print('Please provide a --db or --csv to load data from')
     # we want to group items together to do coding all at once
-    results_to_code = data[data.domain.isin(DOMAINS_TO_CODE)]
-    
-
-
-    
+    for domain in DOMAINS_TO_CODE:
+        print(domain)
+        results_to_code = data[data.domain == domain]
+        for i, row in results_to_code.iterrows():
+            print(i)
+            print(row)
+            code = input()
+             
 
 def parse():
     """parse args"""

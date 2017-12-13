@@ -1,0 +1,4 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_full_domain_frac_www.bbc.com,210,50,0.002,0.0,inf,rural
+1,*results_full_domain_frac_www.greatschools.org,210,50,0.003,0.0,inf,rural
+2,*top_ads_full_domain_frac_,115,29,0.024,0.0,inf,rural

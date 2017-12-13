@@ -1,0 +1,7 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_domain_frac_MapsLocations,380,380,0.0,0.016,inf,urban
+1,*results_top_domain_frac_MapsPlaces,380,380,0.0,0.013,inf,urban
+2,*results_top_domain_frac_MapsLocations,266,494,0.0,0.012,inf,high-income
+3,*results_top_domain_frac_MapsPlaces,266,494,0.0,0.01,inf,high-income
+4,*results_top_domain_frac_MapsLocations,342,418,0.0,0.014,inf,DEM
+5,*results_top_domain_frac_MapsPlaces,342,418,0.0,0.012,inf,DEM

@@ -1,0 +1,44 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.034,*results_full_domain_frac_foursquare.com,9,11,0.01863636363636364,0.0,0.034,inf,20,GOP,DEM,0.03814628295078807,Pizza Hut,DEM
+1,0.008,results_full_domain_frac_www.facebook.com,9,11,0.004545454545454545,0.0,0.008,inf,20,GOP,DEM,0.3408931323020601,school uniforms,DEM
+2,0.002,results_full_domain_frac_www.facebook.com,9,11,0.10277777777777779,0.104,0.102,1.02,20,GOP,DEM,0.4742362816000967,Walmart,GOP
+3,0.012,results_full_domain_frac_www.facebook.com,9,11,0.09833333333333334,0.105,0.093,1.13,20,GOP,DEM,0.2367760463311455,Bank of America,GOP
+4,0.002,results_full_domain_frac_www.facebook.com,9,11,0.09111111111111111,0.09,0.092,1.02,20,GOP,DEM,0.9037750566961129,Wells Fargo,DEM
+5,0.009,results_full_domain_frac_www.facebook.com,9,11,0.13015873015873014,0.125,0.134,1.07,20,GOP,DEM,0.2268663885148829,Amazon,DEM
+6,0.095,**results_full_domain_frac_www.facebook.com,9,11,0.07698412698412697,0.129,0.034,3.8,20,GOP,DEM,0.00026299944204361296,Honda,GOP
+7,0.041,results_full_domain_frac_www.facebook.com,9,11,0.08881493506493505,0.112,0.07,1.59,20,GOP,DEM,0.08854374308609231,Chevrolet,GOP
+8,0.064,*results_full_domain_frac_www.facebook.com,9,11,0.09005952380952381,0.125,0.061,2.05,20,GOP,DEM,0.004729099378853809,Domino's Pizza,GOP
+9,0.002,results_full_domain_frac_www.facebook.com,9,11,0.01,0.011,0.009,1.22,20,GOP,DEM,0.8898042142820456,Toyota,GOP
+10,0.036,results_full_domain_frac_www.facebook.com,9,11,0.01611111111111111,0.036,0.0,inf,20,GOP,DEM,0.0809611936249699,McDonald's,GOP
+11,0.007,results_full_domain_frac_www.facebook.com,9,11,0.1348214285714286,0.139,0.131,1.06,20,GOP,DEM,0.06603152053696065,United States Department of Veterans Affairs,GOP
+12,0.046,*results_full_domain_frac_www.facebook.com,9,11,0.0552020202020202,0.08,0.035,2.31,20,GOP,DEM,0.04478177750859309,Pizza Hut,GOP
+13,0.0,*results_full_domain_frac_www.facebook.com,9,11,0.07692307692307691,0.077,0.077,1.0,20,GOP,DEM,0.01011955973543371,Hillary Clinton,GOP
+14,0.0,*results_full_domain_frac_www.facebook.com,9,11,0.07692307692307691,0.077,0.077,1.0,20,GOP,DEM,0.01011955973543371,Barack Obama,GOP
+15,0.0,*results_full_domain_frac_www.facebook.com,9,11,0.08333333333333331,0.083,0.083,1.0,20,GOP,DEM,0.01011955973543371,Donald Trump,DEM
+16,0.015,results_full_domain_frac_www.linkedin.com,9,11,0.008333333333333333,0.0,0.015,inf,20,GOP,DEM,0.16688959581639698,michael flynn,DEM
+17,0.009,results_full_domain_frac_www.linkedin.com,9,11,0.005,0.0,0.009,inf,20,GOP,DEM,0.34089313230206,Bank of America,DEM
+18,0.011,results_full_domain_frac_www.linkedin.com,9,11,0.00625,0.0,0.011,inf,20,GOP,DEM,0.34089313230206,United States Department of Veterans Affairs,DEM
+19,0.086,**results_full_domain_frac_MapsLocations,9,11,0.047159090909090914,0.0,0.086,inf,20,GOP,DEM,2.767552036905559e-06,Target Corporation,DEM
+20,0.015,results_full_domain_frac_MapsLocations,9,11,0.07500000000000002,0.067,0.082,1.23,20,GOP,DEM,0.47423628160009546,Walmart,DEM
+21,0.056,**results_full_domain_frac_MapsLocations,9,11,0.03076923076923077,0.0,0.056,inf,20,GOP,DEM,0.00042278119360601854,abortion,DEM
+22,0.017,results_full_domain_frac_MapsLocations,9,11,0.06500000000000002,0.056,0.073,1.31,20,GOP,DEM,0.45662831193567877,Bank of America,DEM
+23,0.013,results_full_domain_frac_MapsLocations,9,11,0.08500000000000002,0.078,0.091,1.17,20,GOP,DEM,0.46026474933111894,Wells Fargo,DEM
+24,0.027,results_full_domain_frac_MapsLocations,9,11,0.08454545454545456,0.069,0.097,1.4,20,GOP,DEM,0.28131986195237735,Honda,DEM
+25,0.035,*results_full_domain_frac_MapsLocations,9,11,0.019230769230769232,0.0,0.035,inf,20,GOP,DEM,0.016197070786617876,medical marijuana,DEM
+26,0.039,results_full_domain_frac_MapsLocations,9,11,0.07727272727272727,0.056,0.095,1.71,20,GOP,DEM,0.13285793968905843,Chevrolet,DEM
+27,0.02,results_full_domain_frac_MapsLocations,9,11,0.08625000000000001,0.097,0.077,1.26,20,GOP,DEM,0.4153003366552882,Domino's Pizza,GOP
+28,0.015,results_full_domain_frac_MapsLocations,9,11,0.07487179487179488,0.067,0.082,1.22,20,GOP,DEM,0.4431127693849455,Toyota,DEM
+29,0.042,results_full_domain_frac_MapsLocations,9,11,0.06742424242424243,0.044,0.086,1.94,20,GOP,DEM,0.055250380323782426,McDonald's,DEM
+30,0.052,results_full_domain_frac_MapsLocations,9,11,0.05625,0.028,0.08,2.86,20,GOP,DEM,0.06603152053696086,United States Department of Veterans Affairs,DEM
+31,0.013,results_full_domain_frac_MapsLocations,9,11,0.06272727272727271,0.056,0.069,1.23,20,GOP,DEM,0.5628129521869333,Pizza Hut,DEM
+32,0.008,results_full_domain_frac_MapsLocations,9,11,0.0875,0.083,0.091,1.09,20,GOP,DEM,0.7846139042924137,Chase Bank,DEM
+33,0.008,results_full_domain_frac_www.yelp.com,9,11,0.004545454545454545,0.0,0.008,inf,20,GOP,DEM,0.3408931323020601,Target Corporation,DEM
+34,0.008,results_full_domain_frac_www.yelp.com,9,11,0.004545454545454545,0.0,0.008,inf,20,GOP,DEM,0.3408931323020601,school uniforms,DEM
+35,0.009,results_full_domain_frac_www.yelp.com,9,11,0.005,0.0,0.009,inf,20,GOP,DEM,0.34089313230206,Walmart,DEM
+36,0.009,results_full_domain_frac_www.yelp.com,9,11,0.005,0.0,0.009,inf,20,GOP,DEM,0.34089313230206,Honda,DEM
+37,0.049,*results_full_domain_frac_www.yelp.com,9,11,0.02680555555555556,0.0,0.049,inf,20,GOP,DEM,0.04858977754421574,Domino's Pizza,DEM
+38,0.041,results_full_domain_frac_www.yelp.com,9,11,0.032424242424242425,0.01,0.051,5.02,20,GOP,DEM,0.07347997292273932,McDonald's,DEM
+39,0.082,*results_full_domain_frac_www.yelp.com,9,11,0.06727272727272728,0.022,0.104,4.69,20,GOP,DEM,0.019141754871841183,Pizza Hut,DEM
+40,0.013,results_full_domain_frac_www.yelp.com,9,11,0.007142857142857143,0.0,0.013,inf,20,GOP,DEM,0.34089313230206,Chase Bank,DEM
+41,0.058,*results_full_domain_frac_www.hondacertified.com,9,11,0.02589285714285714,0.058,0.0,inf,20,GOP,DEM,0.03571191493088916,Honda,GOP
+42,0.07,**results_full_domain_frac_MapsPlaces,9,11,0.0587121212121212,0.02,0.09,4.47,20,GOP,DEM,0.00077662887205729,school uniforms,DEM
