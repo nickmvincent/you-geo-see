@@ -77,10 +77,7 @@ def main(args):
     elif args.query_source == 'test':
         test = True
         keyword_objs = [{
-            'keyword': 'net neutrality',
-            'category': args.query_source,
-        }, {
-            'keyword': 'eagles',
+            'keyword': 'animal testing',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
