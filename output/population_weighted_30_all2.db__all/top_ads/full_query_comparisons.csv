@@ -1,0 +1,11 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.073,top_ads_full_domain_frac_nationalpolice.org,24,1,0.07,0.073,0.0,inf,25,GOP,DEM,,illegal immigration,GOP
+1,0.04,*top_ads_full_domain_frac_pregnancylittlerock.com,25,2,0.037037037037037035,0.04,0.0,inf,27,GOP,DEM,0.04289600309206789,abortion,GOP
+2,0.104,**top_ads_full_domain_frac_fbresearch.org,24,2,0.09615384615384616,0.104,0.0,inf,26,GOP,DEM,0.0004928669214315272,animal testing,GOP
+3,0.186,**top_ads_full_domain_frac_catholicsmobilizing.org,26,2,0.17261904761904762,0.186,0.0,inf,28,GOP,DEM,1.646103046179616e-08,death penalty,GOP
+4,0.076,top_ads_full_domain_frac_impactfund.org,24,1,0.07333333333333333,0.076,0.0,inf,25,GOP,DEM,,illegal immigration,GOP
+5,0.045,top_ads_full_domain_frac_humanityinaction.org,24,1,0.04333333333333333,0.045,0.0,inf,25,GOP,DEM,,illegal immigration,GOP
+6,0.066,top_ads_full_domain_frac_itep.org,24,1,0.06333333333333332,0.066,0.0,inf,25,GOP,DEM,,illegal immigration,GOP
+7,0.5,top_ads_full_domain_frac_ecnmy.org,21,1,0.4772727272727273,0.5,0.0,inf,22,GOP,DEM,,gun control,GOP
+8,0.054,*top_ads_full_domain_frac_portland.buyatoyota.com,28,2,0.049999999999999996,0.054,0.0,inf,30,GOP,DEM,0.04745069331046539,Toyota,GOP
+9,0.09,*top_ads_full_domain_frac_firstthings.com,25,2,0.08333333333333333,0.09,0.0,inf,27,GOP,DEM,0.0011947874173848434,abortion,GOP

@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.107,results_top_domain_frac_MapsLocations,28,2,0.1,0.107,0.0,inf,30,GOP,DEM,0.08304492144795934,medical marijuana,GOP
+1,0.036,results_top_domain_frac_MapsLocations,28,2,0.03333333333333333,0.036,0.0,inf,30,GOP,DEM,0.32618890067972717,Chase Bank,GOP
+2,0.679,**results_top_domain_frac_plannedparenthood.org,28,2,0.6333333333333333,0.679,0.0,inf,30,GOP,DEM,4.0293683617861855e-08,abortion,GOP

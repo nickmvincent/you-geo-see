@@ -1,4 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.182,results_top_domain_frac_MapsLocations,9,11,0.1,0.0,0.182,inf,20,GOP,DEM,0.16688959581639695,abortion,DEM
-1,0.364,*results_top_domain_frac_MapsLocations,9,11,0.2,0.0,0.364,inf,20,GOP,DEM,0.037928971445557756,medical marijuana,DEM
-2,0.455,*results_top_domain_frac_MapsPlaces,9,11,0.25,0.0,0.455,inf,20,GOP,DEM,0.016197070786617862,school uniforms,DEM
+0,0.4,*results_top_domain_frac_MapsLocations,10,10,0.2,0.0,0.4,inf,20,rural,urban,0.03678749787978613,medical marijuana,urban
+1,0.2,results_top_domain_frac_MapsLocations,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,abortion,urban
+2,0.5,*results_top_domain_frac_MapsPlaces,10,10,0.25,0.0,0.5,inf,20,rural,urban,0.014956363910414203,school uniforms,urban

@@ -1,0 +1,10 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.012,results_top_three_domain_frac_MapsPlaces,28,2,0.01111111111111111,0.012,0.0,inf,30,GOP,DEM,0.32618890067972695,medical marijuana,GOP
+1,0.036,results_top_three_domain_frac_MapsPlaces,28,2,0.03333333333333333,0.036,0.0,inf,30,GOP,DEM,0.08304492144795923,school uniforms,GOP
+2,0.286,**results_top_three_domain_frac_alcoholeducationtrust.org,28,2,0.2666666666666666,0.286,0.0,inf,30,GOP,DEM,6.374176133655495e-13,drinking age,GOP
+3,0.012,results_top_three_domain_frac_yelp.com,28,2,0.01111111111111111,0.012,0.0,inf,30,GOP,DEM,0.32618890067972695,Pizza Hut,GOP
+4,0.012,results_top_three_domain_frac_yelp.com,28,2,0.01111111111111111,0.012,0.0,inf,30,GOP,DEM,0.32618890067972695,Walmart,GOP
+5,0.024,results_top_three_domain_frac_yelp.com,28,2,0.02222222222222222,0.024,0.0,inf,30,GOP,DEM,0.16103934953023108,McDonald's,GOP
+6,0.012,results_top_three_domain_frac_yelp.com,28,2,0.01111111111111111,0.012,0.0,inf,30,GOP,DEM,0.32618890067972695,Chase Bank,GOP
+7,0.143,**results_top_three_domain_frac_people.com,28,2,0.13333333333333333,0.143,0.0,inf,30,GOP,DEM,0.00011668941602523952,matt lauer,GOP
+8,0.143,**results_top_three_domain_frac_nbclosangeles.com,28,2,0.13333333333333333,0.143,0.0,inf,30,GOP,DEM,0.00011668941602523952,california fires,GOP

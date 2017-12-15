@@ -374,19 +374,27 @@ def prep_data(data):
     data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
 
     def process_domain(x):
-        if x.domain == 'TweetCarousel':
+        if x.raw_domain == 'TweetCarousel':
             if 'search' in x.link:
                 return 'SearchTweetCarousel'
             else:
                 return 'UserTweetCarousel'
-        if x.domain.count('.') > 1:
-            first_period = x.domain.find('.')
-            stripped = x.domain[first_period+1:]
-            return stripped
-
-    df.assign(processed_domain = process_domain)
+        try:
+            if x.raw_domain.count('.') > 1:
+                first_period = x.raw_domain.find('.')
+                stripped = x.raw_domain[first_period+1:]
+                return stripped
+        except TypeError:
+            pass
+        return x.raw_domain
+    
+    def process_each_domain(df):
+        return df.apply(process_domain, axis=1)
+    
+    data = data.rename(index=str, columns={"domain": "raw_domain"})
+    data = data.assign(domain = process_each_domain)
+    data.raw_domain = data.raw_domain.astype('category')
     data.domain = data.domain.astype('category')
-    data.processed_domain = data.processed_domain.astype('category')
     return data
 
 
@@ -614,6 +622,7 @@ def main(args, category):
 
 def parse():
     """parse args"""
+    print('parsing...')
     parser = argparse.ArgumentParser(description='Perform anlysis.')
 
     parser.add_argument(
@@ -624,7 +633,7 @@ def parse():
         '--db', help='Name of the database')
     parser.add_argument(
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
-    parser.set_defaults(print_all=False)        
+    parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
     if args.category == 'each':
@@ -634,5 +643,5 @@ def parse():
         main(args, args.category)
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     parse()
