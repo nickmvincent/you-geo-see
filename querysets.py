@@ -20,7 +20,7 @@ def from_csv():
     return keyword_objs
 
 
-def from_trends_top_query_by_category():
+def from_trends_top_query_by_category(n=NUM_KEYWORDS):
     """
     Get a set of keyword objects by quering Google Trends
     Each keyword obj is a dict with keys: keyword, category
@@ -31,7 +31,7 @@ def from_trends_top_query_by_category():
         yearmonth = '2016'
         pytrends = TrendReq(hl='en-US', tz=360)
         keywords = pytrends.top_charts(yearmonth, cid=cid, geo='US')
-        keywords = keywords.title.tolist()[:NUM_KEYWORDS]
+        keywords = keywords.title.tolist()[:n]
         keyword_objs += [
             {'keyword': x, 'category': cid} for x in keywords
         ]
@@ -67,21 +67,6 @@ PROCON_POPULAR = [
     'euthanasia',
     'illegal immigration',
     'abortion',
-]
-
-# I manually picked political and financial topics
-TRENDS_CURATED = [
-    'Billy Bush',
-    'SNL',
-    'Brock Turner',
-    'Brias Ross',
-    'Tax Reform Bill 2017',
-    'Michael Flynn',
-    'tax bill',
-    'finance',
-    'kate steinle',
-    'rex tillerson',
-    'john conyers',
 ]
 
 TRENDING = [
@@ -156,8 +141,32 @@ PROCON_A_TO_Z = [
     'WTC Muslim Center',
 ]
 
+ALL_TRENDS_DEC1617 = [
+    'December global festivities',
+    'Atlanta airport',
+    'A Christmas Story live',
+    'Philadelphia Eagles',
+    'Cowboys vs Raiders',
+    'Christopher Plummer',
+    'Aaron Rodgers',
+    'Clash of champions 2017',
+    'Marvin Lewis',
+    'New Orleans Saints',
+    'Saints',
+    'White Christmas',
+    'Miami Dolphins',
+    'The sound of music',
+    'Chris Matthews',
+    'Gujarat Elections',
+    'NFL Playoff Predictions',
+    'Scarlett Johansson',
+    'Baltimore Ravens',
+    'Danny Kaye',
+]
+
 CURATED = {
     'trending': TRENDING,
     'popular': from_trends_top_query_by_category(),
     'procon_popular': PROCON_POPULAR,
+    'procon_a_to_z': PROCON_A_TO_Z,
 }

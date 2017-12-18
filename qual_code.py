@@ -3,15 +3,13 @@ This module is meant to provide a nice, terminal based interface for qualitative
 
 From the terminal, one can parse through results that need coding, select a result, and save the results to csv.
 """
-import sqlite3
-import csv
 import argparse
 import os
 
 import tweepy
 import pandas as pd
 import numpy as np
-from analysis import get_dataframes, prep_data
+from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
 
 
 # axes 1: indivudal or organization
@@ -74,12 +72,15 @@ def strip_twitter_screename(link):
     """
     Args: link - a link a twitter page or status
     Returns: the screename of the page/status
+    TODO
     """
     username_starts = link.find(START_STRING) + START_STRING_LENGTH      
     if '/status/' in link:
         username_ends = link.find('/status/')
-    else:
+    elif '?' in link:
         username_ends = link.find('?')
+    else:
+        username_ends = len(link)
     return link[username_starts:username_ends]
 
 def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
@@ -87,20 +88,15 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
     This function helps a qualitative coder apply a code to a single link
     or twitter screen name
     """
-    # if domain == 'linkedin.com':
-    #     if '/company/' in link:
-    #         print('auto coding as a LI company page')
-    #         print(link)
-    #         return 'organization-corporate'
+    if domain == TWITTER_DOMAIN and screen_name:
+        user_obj = api.get_user(screen_name=screen_name)
+        print('Bio:', user_obj.description)
+        print('Location', user_obj.location)
+        print('Verified?', user_obj.verified)
     code = input()
-    if code == 'more':
-        print('Showing more!')
+    if code == 'snippet':
+        print('Showing snippet!')
         print('Snippet:', snippet)
-        if domain == TWITTER_DOMAIN and screen_name:
-            user_obj = api.get_user(screen_name=screen_name)
-            print('Bio:', user_obj.description)
-            print('Location', user_obj.location)
-            print('Verified?', user_obj.verified)
         code = input()
     while len(code) != 2:
         print('Please enter a 2 digit code with the following format')
@@ -110,7 +106,7 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
         code = input()
     code_str = SHORTHAND[code[0]] + '-' + SHORTHAND[code[1]]
     return code_str
-
+    
 
 def main(args):
     """main"""
@@ -134,17 +130,8 @@ def main(args):
     # we want to group items together to do coding all at once
     link_codes_file = 'link_codes.csv'
     twitter_user_codes_file = 'twitter_user_codes.csv'
-    try:
-        link_codes_df = pd.read_csv(link_codes_file)
-        link_codes = pd.Series(link_codes_df.code_str.values, index=link_codes_df.key).to_dict()
-        print(link_codes)
-    except FileNotFoundError:
-        print('Could not load {} creating empty dict'.format(link_codes_file))
-        link_codes = {}
-    try:
-        twitter_user_codes = pd.read_csv(twitter_user_codes_file).to_dict()
-    except FileNotFoundError:
-        twitter_user_codes = {}
+    link_codes, twitter_user_codes = load_coded_as_dicts(link_codes_file, twitter_user_codes_file)
+
     for domain in DOMAINS_TO_CODE:
         df_in_domain = data[data.domain == domain]
         links = df_in_domain.link.drop_duplicates()
@@ -155,7 +142,10 @@ def main(args):
         for link in links:
             print(link)
             if domain == TWITTER_DOMAIN:
+                if '/search/' in link or '/hashtag/' in link:
+                    continue
                 screen_name = strip_twitter_screename(link)
+                print(screen_name)
                 cached_val = twitter_user_codes.get(screen_name)
             else:
                 screen_name = None
@@ -222,4 +212,5 @@ def parse():
     args = parser.parse_args()
     main(args)
 
-parse()
+if __name__ == '__main__':
+    parse()

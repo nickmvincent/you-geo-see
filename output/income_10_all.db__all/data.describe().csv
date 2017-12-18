@@ -1,0 +1,12 @@
+,id,status,search_engine_name,scrape_method,page_number,requested_at,requested_by,latitude,longitude,reported_location,is_control,category,urban_rural_code,median_income,percent_dem,num_results_for_query,num_results,query,effective_query,no_results,id,title,snippet,link,raw_domain,visible_link,rank,link_type,rating,sitelinks,isTweetCarousel,isMapsPlaces,isMapsLocations,isNewsCarousel,serp_id,scraper_search_id,domain,code
+count,14004.0,14004,14004,14004,14004.0,14004,14004,14004,14004,14004,14004.0,14004,14004.0,14004.0,14004.0,14004,14004.0,14004,14004,14004.0,14004.0,11529,12535,14004,14004,12292,14004.0,14004,325,1056,300.0,16.0,181.0,636.0,14004.0,14004.0,14004,1973
+unique,,1,1,1,,760,1,20,20,20,,8,,,,547,,38,1,,,1369,1799,1204,499,1051,,9,78,125,,,,,,,473,7
+top,,successful,google,selenium,,2017-12-09 16:02:44.780207,localhost,38.884722,-77.175603,"22046, Falls Church, VA",,procon_popular,,,,"About 55,500,000 results (0.43 seconds) ",,death penalty,,,,McDonald's,"Capital punishment, also known as the death penalty, is a government sanctioned practice whereby a person is put to death by the state as a punishment for a crime.",KnowledgePanel,twitter.com,CNN.com,,results,"Nov 20, 2008 - Uploaded by Button Wood",?Communications · ?Fact Sheets · ?DVBE/Small Business · ?Multimedia,,,,,,,twitter.com,organization-corporate
+freq,,14004,14004,14004,,28,14004,722,722,722,,3836,,,,131,,519,14004,,,69,40,691,1653,159,,8329,20,20,,,,,,,1653,1267
+mean,376.13439017423593,,,,1.0,,,,,,0.0,,4.0882604970008565,64755.54984290203,0.5699949820381586,,19.184518708940303,,,0.0,7002.5,,,,,,4.815267066552414,,,,1.0,1.0,1.0,1.0,376.13439017423593,19.281776635247073,,
+std,218.00544684432708,,,,0.0,,,,,,0.0,,2.026372400381725,44539.173442409694,0.21026533497878544,,3.6094332720017577,,,0.0,4042.7509198564285,,,,,,3.6615850810939223,,,,0.0,0.0,0.0,0.0,218.00544684432708,10.892048866724869,,
+min,1.0,,,,1.0,,,,,,0.0,,1.0,19328.0,0.11503811503799999,,8.0,,,0.0,1.0,,,,,,1.0,,,,1.0,1.0,1.0,1.0,1.0,1.0,,
+25%,186.0,,,,1.0,,,,,,0.0,,2.0,20541.0,0.407993539429,,17.0,,,0.0,3501.75,,,,,,2.0,,,,1.0,1.0,1.0,1.0,186.0,10.0,,
+50%,384.0,,,,1.0,,,,,,0.0,,5.0,100667.0,0.621140543277,,19.0,,,0.0,7002.5,,,,,,3.0,,,,1.0,1.0,1.0,1.0,384.0,20.0,,
+75%,563.0,,,,1.0,,,,,,0.0,,6.0,105763.0,0.7577931394290001,,22.0,,,0.0,10503.25,,,,,,7.0,,,,1.0,1.0,1.0,1.0,563.0,29.0,,
+max,760.0,,,,1.0,,,,,,0.0,,6.0,123453.0,0.864731795802,,28.0,,,0.0,14004.0,,,,,,16.0,,,,1.0,1.0,1.0,1.0,760.0,38.0,,

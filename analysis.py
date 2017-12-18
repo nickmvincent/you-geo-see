@@ -1,17 +1,17 @@
 """Data Analysis"""
-import sqlite3
 import os
 from string import ascii_lowercase
 import csv
 import argparse
 
 from constants import POPULAR_CATEGORIES
+from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
+from qual_code import TWITTER_DOMAIN, strip_twitter_screename
 
 import pandas as pd
 import numpy as np
 from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk import tokenize
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
 FULL = 'full'
@@ -25,8 +25,9 @@ class Comparison():
     For comparing two groups of results within a set of results
     """
     def __init__(
-        self, df_a, name_a, df_b, name_b, cols_to_compare,
-        print_all=False, recurse_on_queries=False):
+            self, df_a, name_a, df_b, name_b, cols_to_compare,
+            print_all=False, recurse_on_queries=False
+        ):
         self.df_a = df_a
         self.name_a = name_a
         self.df_b = df_b
@@ -168,6 +169,7 @@ def encode_links_as_strings(links1, links2):
     string2 = ''.join([mapping[link] for link in links2])
     return string1, string2
 
+
 def jaccard_similarity(x, y):
     """
     set implementation of jaccard similarity
@@ -196,20 +198,40 @@ def calc_domain_fracs(domains_col, control_domains_col):
         ret[key] = (ret.get(key, 0) + val / len(control_domains_col)) / 2
     return ret
 
-def compute_serp_features(links, domains_col, control_links, control_domains_col):
+
+def calc_coded_ugc_frac(code_col, control_code_col):
+    """
+    This is specific to a given SERP
+    Figure out how many domains of interest appear in search results
+
+    return a dict
+    """
+    codes_dict = code_col.value_counts().to_dict()
+    if control_code_col:
+        control_codes_dict = control_code_col.value_counts().to_dict()
+    else:
+        control_codes_dict = {}
+    ret = {}
+    for key, val in codes_dict.items():
+        ret[key] = val / len(code_col)
+    for key, val in control_codes_dict.items():
+        ret[key] = (ret.get(key, 0) + val / len(control_code_col)) / 2
+    return ret
+
+def compute_serp_features(links, domains_col, code_col, control_links, control_domains_col, control_code_col):
     """
     Computes features for a set of results corresponding to one serp
     Args:
         links - a list of links (as strings)
         control_links - a list of links (as strings)
+        domains_col - a pandas series corresponding to the "domain" column
+        code_col - a pandas series corresponding to the "code" column
     Returns:
         A dictionary of computed values
         ret: {
             jaccard index with control,
             edit distance with control,
-            number of wikipedia articles in results,
-            number of wikipedia articles in top 3,
-            number of wikipedia articles in top 1,
+            domain_fracs for results, top3, top1,
         }
     """
     string, control_string = encode_links_as_strings(links, control_links)
@@ -238,6 +260,9 @@ def compute_serp_features(links, domains_col, control_links, control_domains_col
         'domain_fracs': calc_domain_fracs(
             domains_col.iloc[:1], control_domains_col_1)
     }
+    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col, [])
+    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:3], [])
+    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:1], [])
     return ret
 
 
@@ -292,7 +317,7 @@ def analyze_subset(data, location_set, config):
         d[loc]['has_' + first_row.link_type] = 1 if links else 0
         d[loc]['domains'] = list(treatment.domain)
         d[loc]['control_links'] = control_links
-        d[loc]['computed'] = compute_serp_features(links, treatment.domain, control_links, control_domain_col)
+        d[loc]['computed'] = compute_serp_features(links, treatment.domain, treatment.code, control_links, control_domain_col, None)
         d[loc]['serp_id'] = first_row.serp_id
         sid = SentimentIntensityAnalyzer()
         snippet_polarities = [sid.polarity_scores(x)['compound'] for x in snippets if x]
@@ -337,87 +362,6 @@ def analyze_subset(data, location_set, config):
             tmp[comparison_loc]['jaccard'] = jac
     return d
 
-def prep_data(data):
-    """
-    Prep operation on the dataframe:
-        change nulls to false for Boolean variables
-        fill null links w/ empty string
-        make domain categorical variable
-    args:
-        data - dataframe with results
-    returns:
-        prepped dataframe
-    """
-    data = data.fillna({
-        'isTweetCarousel': False,
-        'isMapsPlaces': False,
-        'isMapsLocations': False,
-        'isNewsCarousel': False,
-    })
-    data.loc[data.link.isnull(), 'link'] = ''
-    tweet_mask = data.isTweetCarousel == True 
-    news_mask = data.isNewsCarousel == True
-    kp_mask = data.link_type == 'knowledge_panel'
-    maps_location_mask = data.isMapsLocations == True
-    maps_places_mask = data.isMapsPlaces == True
-
-    data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
-    data.loc[news_mask, 'link'] = 'NewsCarousel'
-    data.loc[news_mask, 'domain'] = 'NewsCarousel'
-    data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
-    data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
-
-    data.loc[maps_location_mask, 'link'] = 'MapsLocations' 
-    data.loc[maps_location_mask, 'domain'] = 'MapsLocations'
-
-    data.loc[maps_places_mask, 'link'] = 'MapsPlaces' 
-    data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
-
-    def process_domain(x):
-        if x.raw_domain == 'TweetCarousel':
-            if 'search' in x.link:
-                return 'SearchTweetCarousel'
-            else:
-                return 'UserTweetCarousel'
-        try:
-            if x.raw_domain.count('.') > 1:
-                first_period = x.raw_domain.find('.')
-                stripped = x.raw_domain[first_period+1:]
-                return stripped
-        except TypeError:
-            pass
-        return x.raw_domain
-    
-    def process_each_domain(df):
-        return df.apply(process_domain, axis=1)
-    
-    data = data.rename(index=str, columns={"domain": "raw_domain"})
-    data = data.assign(domain = process_each_domain)
-    data.raw_domain = data.raw_domain.astype('category')
-    data.domain = data.domain.astype('category')
-    return data
-
-
-def get_dataframes(dbname):
-    """
-    Get rows from the db and convert to dataframes
-    """
-    conn = sqlite3.connect('dbs/' + dbname)
-    select_results = (
-        """
-        SELECT serp.*, link.*, scraper_searches_serps.scraper_search_id from serp INNER JOIN link on serp.id = link.serp_id
-        INNER JOIN scraper_searches_serps on serp.id = scraper_searches_serps.serp_id;
-        """
-    )
-    select_serps = (
-        """
-        SELECT * from serp;
-        """
-    )
-    data = pd.read_sql_query(select_results, conn)
-    serp_df = pd.read_sql_query(select_serps, conn)
-    conn.close()
-    return data, serp_df
 
 def prep_paths(db, category):
     """
@@ -441,10 +385,31 @@ def main(args, category):
         args.db = args.db[4:]
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
-    path1, path2 = prep_paths(args.db, category)
+    _, path2 = prep_paths(args.db, category)
+
+    link_codes_file = 'link_codes.csv'
+    twitter_user_codes_file = 'twitter_user_codes.csv'
+    link_codes, twitter_user_codes = load_coded_as_dicts(link_codes_file, twitter_user_codes_file)
+    for link, code in link_codes.items():
+        data.loc[data.link == link, 'code'] = code
+    twitter_data = data[data.domain == TWITTER_DOMAIN]
+    print('***')
     
+    print(len(twitter_data))
+    twitter_links = twitter_data.link.drop_duplicates()
+    print(len(twitter_links))
+    for link in twitter_links:
+        screen_name = strip_twitter_screename(link)
+        code = twitter_user_codes.get(screen_name)
+        if not code:
+            print('Could not get code for screen_name {}'.format(screen_name))
+        data.loc[data.link == link, 'code'] = code
+    data.code = data.code.astype('category')
+    print(data.code.value_counts())
+    data.describe(include='all').to_csv(path2+'/data.describe().csv')
     serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
+    
 
     link_types = [
         'results',
@@ -475,7 +440,7 @@ def main(args, category):
             pass
         link_type_specific_data.domain.value_counts().to_csv(path3 + '/values_counts_domain.csv')
 
-        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())
+        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:10]
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
         link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
@@ -500,7 +465,6 @@ def main(args, category):
                     avg_edit = dist_sum / count
                     avg_jacc = jacc_sum / count
                 else:
-                    # when there are NO comparisons at all edit is 0 and jacc is nan
                     avg_edit = avg_jacc = float('nan')
                 tmp[link_type + '_avg_edit'] = avg_edit
                 tmp[link_type + '_avg_jaccard'] = avg_jacc
@@ -515,6 +479,7 @@ def main(args, category):
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
+                    coded_ugc_fracs = tmp[comp_key]['coded_ugc_fracs']
                     for domain_string, frac in domain_fracs.items():
                         for top_domain in top_domains:
                             if domain_string == top_domain:
@@ -522,6 +487,11 @@ def main(args, category):
                                     [link_type, comp_key, 'domain_frac', str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
+                    for code, frac in coded_ugc_fracs.items():
+                        concat_key = '_'.join(
+                            [link_type, comp_key, 'coded_ugc_frac', str(code)]
+                        )
+                        serp_comps[sid][concat_key] = frac
                     for textcol in ['snippet', 'title']:
                         pol_key = '_'.join([link_type, comp_key, textcol, 'mean_polarity'])
                         serp_comps[sid][pol_key] = tmp.get(
@@ -532,6 +502,7 @@ def main(args, category):
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
+    serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
 
     outputs, errors = [], []
     summaries = {key: [] for key in RESULT_SUBSETS}
@@ -628,7 +599,7 @@ def parse():
     parser.add_argument(
         '--comparison', help='What comparison to do', default='all')
     parser.add_argument(
-        '--category', help='What comparison to do', default='all')
+        '--category', help='Which category to include in the analysis', default='all')
     parser.add_argument(
         '--db', help='Name of the database')
     parser.add_argument(

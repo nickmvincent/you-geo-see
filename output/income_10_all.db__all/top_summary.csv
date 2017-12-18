@@ -1,6 +1,1 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*top_ads_top_domain_frac_all.org,173,145,0.023,0.0,inf,low-income
-1,*top_ads_top_domain_frac_centralatlantic.buyatoyota.com,173,145,0.0,0.028,inf,high-income
-2,*top_ads_top_domain_frac_caron.org,173,145,0.04,0.0,inf,low-income
-3,*top_ads_top_domain_frac_heartlandalliance.org,173,145,0.04,0.0,inf,low-income
-4,*top_ads_top_domain_frac_latinainstitute.org,173,145,0.0,0.034,inf,high-income
+""

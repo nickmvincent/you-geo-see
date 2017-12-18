@@ -91,6 +91,16 @@ def main(args):
                 } for keyword in keywords
             ]
         keyword_objs += CURATED['popular']
+    elif args.query_source == 'expanded':
+        keyword_objs = []
+        keywords = CURATED['procon_a_to_z']
+        keyword_objs += [
+            {
+                'keyword': keyword,
+                'category': query_source,
+            } for keyword in keywords
+        ]
+        keyword_objs += from_trends_top_query_by_category(15)
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [
