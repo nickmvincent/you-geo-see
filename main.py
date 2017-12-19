@@ -97,7 +97,7 @@ def main(args):
         keyword_objs += [
             {
                 'keyword': keyword,
-                'category': query_source,
+                'category': args.query_source,
             } for keyword in keywords
         ]
         keyword_objs += from_trends_top_query_by_category(15)
