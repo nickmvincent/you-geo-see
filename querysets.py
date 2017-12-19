@@ -83,7 +83,6 @@ TRENDING = [
 ]
 
 PROCON_A_TO_Z = [
-    'Topics A-Z',
     'Abortion',
     'ACLU - Good or Bad?',
     'Alternative Energy vs. Fossil Fuels',
