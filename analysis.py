@@ -260,9 +260,9 @@ def compute_serp_features(links, domains_col, code_col, control_links, control_d
         'domain_fracs': calc_domain_fracs(
             domains_col.iloc[:1], control_domains_col_1)
     }
-    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col, [])
-    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:3], [])
-    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:1], [])
+    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col, control_code_col)
+    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:3], control_code_col)
+    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:1], control_code_col)
     return ret
 
 
