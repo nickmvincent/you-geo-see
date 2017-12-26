@@ -1,5 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_full_domain_frac_hbr.org,378,90,0.003,0.0,inf,rural
-1,*results_full_domain_frac_MapsLocations,378,90,0.041,0.055,1.35,urban
-2,*results_full_domain_frac_en.wikipedia.org,378,90,0.093,0.076,1.23,rural
-3,*top_ads_full_domain_frac_dvnf.org,201,49,0.01,0.0,inf,rural

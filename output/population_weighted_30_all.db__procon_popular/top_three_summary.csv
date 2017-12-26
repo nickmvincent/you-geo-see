@@ -1,4 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_top_three_domain_frac_www.bbc.com,210,50,0.008,0.0,inf,rural
-1,*results_top_three_domain_frac_www.landsend.com,210,50,0.008,0.0,inf,rural
-2,*top_ads_top_three_domain_frac_,115,29,0.029,0.0,inf,rural

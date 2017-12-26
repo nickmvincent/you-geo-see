@@ -1,9 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.036,results_top_three_domain_frac_yellowpages.com,28,2,0.03333333333333333,0.036,0.0,inf,30,GOP,DEM,0.08304492144795923,Chase Bank,GOP
-1,0.012,results_top_three_domain_frac_yellowpages.com,28,2,0.01111111111111111,0.012,0.0,inf,30,GOP,DEM,0.32618890067972695,Pizza Hut,GOP
-2,0.06,*results_top_three_domain_frac_yellowpages.com,28,2,0.05555555555555555,0.06,0.0,inf,30,GOP,DEM,0.022388211118330333,Bank of America,GOP
-3,0.155,**results_top_three_domain_frac_eagles.com,28,2,0.14444444444444443,0.155,0.0,inf,30,GOP,DEM,4.7155189518798866e-05,eagles,GOP
-4,0.06,*results_top_three_domain_frac_bbc.com,28,2,0.05555555555555555,0.06,0.0,inf,30,GOP,DEM,0.022388211118330333,minimum wage,GOP
-5,0.06,*results_top_three_domain_frac_landsend.com,28,2,0.05555555555555555,0.06,0.0,inf,30,GOP,DEM,0.022388211118330333,school uniforms,GOP
-6,0.238,**results_top_three_domain_frac_nbclosangeles.com,28,2,0.22222222222222218,0.238,0.0,inf,30,GOP,DEM,8.027367843584255e-09,california fires,GOP
-7,0.06,*results_top_three_domain_frac_allmenus.com,28,2,0.05555555555555555,0.06,0.0,inf,30,GOP,DEM,0.02238821111833034,Pizza Hut,GOP
