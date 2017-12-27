@@ -1,5 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_top_three_domain_frac_MapsLocations,100,100,0.0,0.027,inf,urban
-1,*results_top_three_domain_frac_www.childrensplace.com,100,100,0.03,0.007,4.5,rural
-2,*results_top_three_domain_frac_MapsPlaces,100,100,0.0,0.023,inf,urban
-3,*top_ads_top_three_domain_frac_www.amnestyusa.org,58,48,0.029,0.0,inf,rural

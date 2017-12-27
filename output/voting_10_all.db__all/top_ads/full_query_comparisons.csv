@@ -1,5 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.111,*top_ads_full_domain_frac_californiainnocenceproject.org,9,8,0.058823529411764705,0.111,0.0,inf,17,GOP,DEM,0.03526520347508,death penalty,GOP
-1,0.111,*top_ads_full_domain_frac_www.allieded.org,9,2,0.09090909090909091,0.111,0.0,inf,11,GOP,DEM,0.03526520347508,illegal immigration,GOP
-2,0.15,*top_ads_full_domain_frac_info.carafem.org,10,10,0.075,0.0,0.15,inf,20,GOP,DEM,0.023856384540122025,abortion,DEM
-3,0.15,*top_ads_full_domain_frac_www.kansascity.buyatoyota.com,10,10,0.075,0.15,0.0,inf,20,GOP,DEM,0.041416150486262786,Toyota,GOP

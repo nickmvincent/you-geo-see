@@ -1,4 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.167,*results_top_three_domain_frac_www.bbc.com,10,10,0.08333333333333333,0.167,0.0,inf,20,low-income,high-income,0.014956363910414203,minimum wage,low-income
-1,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.06666666666666667,0.0,0.133,inf,20,low-income,high-income,0.03678749787978613,medical marijuana,high-income
-2,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.0811261888458405,abortion,high-income

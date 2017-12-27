@@ -44,13 +44,14 @@ CODES = {
 
 # this should probably go somewhere else?
 UGC_WHITELIST = [
-    'en.wikipedia.org',
+    'wikipedia.org',
     'TweetCarousel',
     'facebook.com',
     'twitter.com',
     'youtube.com',
-    'imdb',
+    'imdb.com',
     'instagram.com',
+    'linkedin.com',
 ]
 
 DOMAINS_TO_CODE = [

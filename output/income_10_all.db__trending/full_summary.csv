@@ -1,7 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_full_domain_frac_www.pro-football-reference.com,100,100,0.0,0.008,inf,high-income
-1,*results_full_domain_frac_www.dictionary.com,100,100,0.0,0.006,inf,high-income
-2,*results_full_domain_frac_www.philadelphiaeagles.com,100,100,0.0,0.007,inf,high-income
-3,*results_full_domain_frac_a-z-animals.com,100,100,0.003,0.0,inf,low-income
-4,*results_full_domain_frac_m.philadelphiaeagles.com,100,100,0.008,0.001,10.0,low-income
-5,*results_full_domain_frac_www.cbssports.com,100,100,0.005,0.0,inf,low-income

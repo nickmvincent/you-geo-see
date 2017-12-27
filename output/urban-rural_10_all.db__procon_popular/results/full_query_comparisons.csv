@@ -1,6 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.075,*results_full_domain_frac_www.guttmacher.org,10,10,0.05352564102564102,0.091,0.016,5.68,20,rural,urban,0.011628881198450501,abortion,rural
-1,0.076,*results_full_domain_frac_www.youtube.com,10,10,0.054807692307692314,0.017,0.093,5.58,20,rural,urban,0.0037742817811720498,abortion,urban
-2,0.062,**results_full_domain_frac_MapsLocations,10,10,0.03076923076923077,0.0,0.062,inf,20,rural,urban,0.0002024993220676408,abortion,urban
-3,0.038,*results_full_domain_frac_MapsLocations,10,10,0.019230769230769232,0.0,0.038,inf,20,rural,urban,0.014956363910414203,medical marijuana,urban
-4,0.063,*results_full_domain_frac_MapsPlaces,10,10,0.0587121212121212,0.027,0.09,3.31,20,rural,urban,0.001422545056623553,school uniforms,urban

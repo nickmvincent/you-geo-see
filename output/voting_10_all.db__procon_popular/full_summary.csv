@@ -1,9 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,**results_full_domain_frac_MapsLocations,100,100,0.0,0.01,inf,DEM
-1,*results_full_domain_frac_MapsPlaces,100,100,0.0,0.009,inf,DEM
-2,*results_full_domain_frac_school-uniforms.procon.org,100,100,0.017,0.001,19.1,GOP
-3,*results_full_domain_frac_www.rainbowshops.com,100,100,0.001,0.006,6.36,DEM
-4,*results_full_domain_frac_www.macys.com,100,100,0.008,0.001,9.0,GOP
-5,*top_ads_full_domain_frac_californiainnocenceproject.org,69,56,0.014,0.0,inf,GOP
-6,*top_ads_full_domain_frac_info.carafem.org,69,56,0.0,0.027,inf,DEM
-7,*top_ads_full_domain_frac_www.allieded.org,69,56,0.014,0.0,inf,GOP

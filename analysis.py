@@ -6,7 +6,7 @@ import argparse
 
 from constants import POPULAR_CATEGORIES
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
-from qual_code import TWITTER_DOMAIN, strip_twitter_screename
+from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST
 
 import pandas as pd
 import numpy as np
@@ -153,6 +153,17 @@ class Comparison():
 
         return ret, summary, err, query_comparison_lists
 
+
+def get_matching_columns(columns, whitelist):
+    """
+    Takes a list of columns and returns the ones that match whitelist
+    """
+    ret = []
+    for x in whitelist:
+        for column in columns:
+            if x in column and column not in ret:
+                ret.append(column)
+    return ret
 
 def encode_links_as_strings(links1, links2):
     """
@@ -407,6 +418,9 @@ def main(args, category):
     data.code = data.code.astype('category')
     print(data.code.value_counts())
     data.describe(include='all').to_csv(path2+'/data.describe().csv')
+    # cols = get_matching_columns(list(data.columns.values), UGC_WHITELIST)
+    # data[cols].describe().to_csv(path2+'/ugc_data.csv')
+
     serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
     
@@ -440,7 +454,7 @@ def main(args, category):
             pass
         link_type_specific_data.domain.value_counts().to_csv(path3 + '/values_counts_domain.csv')
 
-        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:10]
+        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:30]
         top_domains = [domain for domain in top_domains if isinstance(domain,str)]
         link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
@@ -503,6 +517,8 @@ def main(args, category):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
     serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
+    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST)
+    serp_df[cols].describe().to_csv(path2+'/ugcin_serp_df.csv')
 
     outputs, errors = [], []
     summaries = {key: [] for key in RESULT_SUBSETS}

@@ -1,7 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,**results_top_three_domain_frac_www.facebook.com,216,144,0.017,0.0,inf,rural
-1,**results_top_three_domain_frac_MapsLocations,216,144,0.08,0.178,2.22,urban
-2,**results_top_three_domain_frac_NewsCarousel,216,144,0.267,0.199,1.34,rural
-3,*top_ads_top_three_domain_frac_www.googleadservices.com,119,73,0.042,0.0,inf,rural
-4,*top_ads_top_three_domain_frac_dvnf.org,119,73,0.021,0.0,inf,rural
-5,*top_ads_top_three_domain_frac_www.kansascity.buyatoyota.com,119,73,0.013,0.0,inf,rural

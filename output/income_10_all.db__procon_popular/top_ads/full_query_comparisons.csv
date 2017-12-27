@@ -1,6 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.12,*top_ads_full_domain_frac_www.retroreport.org,9,4,0.08333333333333333,0.12,0.0,inf,13,low-income,high-income,0.03750186742499944,illegal immigration,low-income
-1,0.133,*top_ads_full_domain_frac_www.latinainstitute.org,10,10,0.06666666666666667,0.0,0.133,inf,20,low-income,high-income,0.016110716531911606,abortion,high-income
-2,,top_ads_full_domain_frac_www.caron.org,7,0,0.8571428571428571,0.857,,,7,low-income,high-income,,drinking age,high-income
-3,0.259,**top_ads_full_domain_frac_www.allieded.org,9,4,0.17948717948717946,0.259,0.0,inf,13,low-income,high-income,7.969638774577049e-05,illegal immigration,low-income
-4,0.222,**top_ads_full_domain_frac_www.heartlandalliance.org,9,4,0.15384615384615385,0.222,0.0,inf,13,low-income,high-income,0.0009774802123911045,illegal immigration,low-income

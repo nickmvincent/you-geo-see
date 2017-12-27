@@ -1,9 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.038,*results_full_domain_frac_www.bbc.com,10,10,0.019230769230769232,0.038,0.0,inf,20,low-income,high-income,0.014956363910414203,minimum wage,low-income
-1,0.042,*results_full_domain_frac_norml.org,10,10,0.020833333333333332,0.042,0.0,inf,20,low-income,high-income,0.014956363910414203,medical marijuana,low-income
-2,0.062,**results_full_domain_frac_www.investopedia.com,10,10,0.03846153846153846,0.008,0.069,9.0,20,low-income,high-income,2.292887199439995e-05,minimum wage,high-income
-3,0.046,*results_full_domain_frac_doh.dc.gov,10,10,0.023076923076923078,0.0,0.046,inf,20,low-income,high-income,0.005121072764272635,medical marijuana,high-income
-4,0.046,*results_full_domain_frac_www.amnestyusa.org,10,10,0.023076923076923078,0.0,0.046,inf,20,low-income,high-income,0.005121072764272635,death penalty,high-income
-5,0.069,**results_full_domain_frac_MapsLocations,10,10,0.03461538461538462,0.0,0.069,inf,20,low-income,high-income,8.538051223166254e-06,medical marijuana,high-income
-6,0.077,**results_full_domain_frac_MapsLocations,10,10,0.03846153846153846,0.0,0.077,inf,20,low-income,high-income,5.23783598407298e-143,abortion,high-income
-7,0.093,**results_full_domain_frac_www.academy.com,10,10,0.046363636363636364,0.093,0.0,inf,20,low-income,high-income,5.638813272779128e-14,school uniforms,low-income

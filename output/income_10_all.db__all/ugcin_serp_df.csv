@@ -1,0 +1,9 @@
+,results_full_domain_frac_wikipedia.org,results_top_three_domain_frac_wikipedia.org,results_top_domain_frac_wikipedia.org,results_full_domain_frac_UserTweetCarousel,results_top_three_domain_frac_UserTweetCarousel,results_top_domain_frac_UserTweetCarousel,results_full_domain_frac_facebook.com,results_top_three_domain_frac_facebook.com,results_top_domain_frac_facebook.com,knowledge_panel_full_domain_frac_facebook.com,knowledge_panel_top_three_domain_frac_facebook.com,knowledge_panel_top_domain_frac_facebook.com,tweets_full_domain_frac_facebook.com,tweets_top_three_domain_frac_facebook.com,tweets_top_domain_frac_facebook.com,tweets_full_domain_frac_twitter.com,tweets_top_three_domain_frac_twitter.com,tweets_top_domain_frac_twitter.com
+count,760.0,760.0,760.0,760.0,760.0,760.0,760.0,760.0,760.0,658.0,658.0,658.0,280.0,280.0,280.0,280.0,280.0,280.0
+mean,0.09042608341950507,0.13596491228070112,0.14868421052631578,0.0347037246379351,0.08070175438596512,0.003947368421052632,0.02894337022626491,0.010526315789473679,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+std,0.056875759444358395,0.1956759289782914,0.3560112139625605,0.051689444604606054,0.14287992527381876,0.06274525418895774,0.05134017768645394,0.058330485234640704,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+min,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+25%,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+50%,0.08333333333333333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+75%,0.14285714285714285,0.3333333333333333,0.0,0.07692307692307693,0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+max,0.2,0.6666666666666666,1.0,0.16666666666666666,0.3333333333333333,1.0,0.16666666666666666,0.3333333333333333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
