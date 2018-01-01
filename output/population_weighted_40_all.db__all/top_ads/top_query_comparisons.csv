@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,,top_ads_top_domain_frac_caron.org,8,0,0.875,0.875,,,8,GOP,DEM,,drinking age,DEM
+1,0.3,*top_ads_top_domain_frac_deathpenaltyfail.org,30,3,0.2727272727272727,0.3,0.0,inf,33,GOP,DEM,0.001425827417902557,death penalty,GOP
+2,0.357,**top_ads_top_domain_frac_apha.org,28,2,0.3333333333333333,0.357,0.0,inf,30,GOP,DEM,0.0006187322367720655,gun control,GOP
+3,0.233,*top_ads_top_domain_frac_prisonfellowship.org,30,3,0.21212121212121213,0.233,0.0,inf,33,GOP,DEM,0.005912950806161381,death penalty,GOP

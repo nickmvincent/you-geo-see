@@ -77,7 +77,7 @@ def main(args):
     elif args.query_source == 'test':
         test = True
         keyword_objs = [{
-            'keyword': 'animal testing',
+            'keyword': 'drinking age',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
@@ -127,6 +127,7 @@ def main(args):
     config.set('num_pages_for_keyword', 1)
     config.set('num_results_per_page', 30)  # overshoots actual number of results per page
     config.set('screenshot', False)
+    # config.set('mobile_emulation', True)
     config.set('database_name', dbname)
     if args.save_html:
         config.set('save_html', True)
@@ -136,40 +137,65 @@ def main(args):
     location_df = load_locations()
     locations = []
 
-    if args.comparison == 'urban-rural':
-        subsets = [
-            location_df[location_df[URBAN_RURAL_COL] == 1],
-            location_df[location_df[URBAN_RURAL_COL] == 6],
-        ]
-    elif args.comparison == 'income' or args.comparison == 'voting':
-        if args.comparison == 'income':
-            sort_col = MEDIAN_INCOME_COL
-        else:
-            sort_col = VOTING_COL
-        print('Going to sort by {}'.format(sort_col))
-        location_df = location_df.sort_values(by=[sort_col])
-        print(location_df)
-        lower_set = location_df.head(args.num_locations)
-        upper_set = location_df.tail(args.num_locations)
-        subsets = [lower_set, upper_set]
+    if args.comparison == 'test':
+        # counties = ['Cook County', 'Santa Clara County']
+        # for county in counties:
+        #     for _, row in location_df[location_df.NAME == county].iterrows():
+        #         locations.append({
+        #             'engine': 'google',
+        #             'latitude': row.INTPTLAT,
+        #             'longitude': row.INTPTLONG,
+        #             'urban_rural_code': row[URBAN_RURAL_COL],
+        #             'median_income': row[MEDIAN_INCOME_COL],
+        #             'percent_dem': row[VOTING_COL],
+        #             'population_estimate': row[POPULATION_COL],
+        #             'name': row.NAME
+        #         })
+        locations.append({
+            'engine': 'google',
+            'latitude': 41.8781,
+            'longitude': -87.6298,
+            'urban_rural_code': 1,
+            'median_income': 0,
+            'percent_dem': 0,
+            'population_estimate': 0,
+            'name': 'almaden',
+        })
     else:
-        subsets = [location_df]
-    for subset in subsets:
-        if args.comparison == 'population_weighted':
-            sample = subset.sample(
-                n=args.num_locations, weights=subset.POP_ESTIMATE_2016)
-        sample = subset.sample(n=args.num_locations)
-        for _, row in sample.iterrows():
-            locations.append({
-                'engine': 'google',
-                'latitude': row.INTPTLAT,
-                'longitude': row.INTPTLONG,
-                'urban_rural_code': row[URBAN_RURAL_COL],
-                'median_income': row[MEDIAN_INCOME_COL],
-                'percent_dem': row[VOTING_COL],
-                'population_estimate': row[POPULATION_COL],
-                'name': row.NAME
-            })
+        if args.comparison == 'urban-rural':
+            subsets = [
+                location_df[location_df[URBAN_RURAL_COL] == 1],
+                location_df[location_df[URBAN_RURAL_COL] == 6],
+            ]
+        elif args.comparison == 'income' or args.comparison == 'voting':
+            if args.comparison == 'income':
+                sort_col = MEDIAN_INCOME_COL
+            else:
+                sort_col = VOTING_COL
+            print('Going to sort by {}'.format(sort_col))
+            location_df = location_df.sort_values(by=[sort_col])
+            print(location_df)
+            lower_set = location_df.head(args.num_locations)
+            upper_set = location_df.tail(args.num_locations)
+            subsets = [lower_set, upper_set]
+        else:
+            subsets = [location_df]
+        for subset in subsets:
+            if args.comparison == 'population_weighted':
+                sample = subset.sample(
+                    n=args.num_locations, weights=subset.POP_ESTIMATE_2016)
+            sample = subset.sample(n=args.num_locations)
+            for _, row in sample.iterrows():
+                locations.append({
+                    'engine': 'google',
+                    'latitude': row.INTPTLAT,
+                    'longitude': row.INTPTLONG,
+                    'urban_rural_code': row[URBAN_RURAL_COL],
+                    'median_income': row[MEDIAN_INCOME_COL],
+                    'percent_dem': row[VOTING_COL],
+                    'population_estimate': row[POPULATION_COL],
+                    'name': row.NAME
+                })
     pprint(locations)
     config.set('search_instances', locations)
     scrap = serpscrap.SerpScrap()

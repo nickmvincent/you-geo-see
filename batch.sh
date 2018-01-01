@@ -6,3 +6,6 @@ sleep 1h
 
 python main.py --num_locations 10 --query_source all --comparison urban-rural
 sleep 1h
+
+python main.py --num_locations 40 --query_source all --comparison population_weighted
+sleep 1h

@@ -1,14 +1,15 @@
 """
-This module is meant to provide a nice, terminal based interface for qualitatively coding the results!
+This module is meant to provide a nice, terminal based interface for
+qualitatively coding the results!
 
-From the terminal, one can parse through results that need coding, select a result, and save the results to csv.
+From the terminal, one can parse through results that need coding, select a result,
+and save the results to csv.
 """
 import argparse
 import os
 
 import tweepy
 import pandas as pd
-import numpy as np
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
 
 
@@ -52,6 +53,7 @@ UGC_WHITELIST = [
     'imdb.com',
     'instagram.com',
     'linkedin.com',
+    'KnowledgePanel',
 ]
 
 DOMAINS_TO_CODE = [

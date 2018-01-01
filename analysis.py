@@ -6,7 +6,7 @@ import argparse
 
 from constants import POPULAR_CATEGORIES
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
-from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST
+from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST, CODES
 
 import pandas as pd
 import numpy as np
@@ -217,19 +217,13 @@ def calc_coded_ugc_frac(code_col, control_code_col):
 
     return a dict
     """
-    codes_dict = code_col.value_counts().to_dict()
-    if control_code_col:
-        control_codes_dict = control_code_col.value_counts().to_dict()
-    else:
-        control_codes_dict = {}
-    ret = {}
-    for key, val in codes_dict.items():
-        ret[key] = val / len(code_col)
-    for key, val in control_codes_dict.items():
-        ret[key] = (ret.get(key, 0) + val / len(control_code_col)) / 2
-    return ret
+    return calc_domain_fracs(code_col, control_code_col)
 
-def compute_serp_features(links, domains_col, code_col, control_links, control_domains_col, control_code_col):
+
+def compute_serp_features(
+        links, domains_col, code_col, domains_plus_codes, 
+        control_links, control_domains_col, control_code_col, control_domains_plus_codes
+    ):
     """
     Computes features for a set of results corresponding to one serp
     Args:
@@ -274,6 +268,13 @@ def compute_serp_features(links, domains_col, code_col, control_links, control_d
     ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col, control_code_col)
     ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:3], control_code_col)
     ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:1], control_code_col)
+
+    ret[FULL]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
+        domains_plus_codes, control_domains_plus_codes))
+    ret[TOP_THREE]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
+        domains_plus_codes.iloc[:3], control_domains_plus_codes))
+    ret[TOP]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
+        domains_plus_codes.iloc[:1], control_domains_plus_codes))
     return ret
 
 
@@ -328,7 +329,10 @@ def analyze_subset(data, location_set, config):
         d[loc]['has_' + first_row.link_type] = 1 if links else 0
         d[loc]['domains'] = list(treatment.domain)
         d[loc]['control_links'] = control_links
-        d[loc]['computed'] = compute_serp_features(links, treatment.domain, treatment.code, control_links, control_domain_col, None)
+        d[loc]['computed'] = compute_serp_features(
+            links, treatment.domain, treatment.code, treatment.domains_plus_codes,
+            control_links, control_domain_col, None, None
+        )
         d[loc]['serp_id'] = first_row.serp_id
         sid = SentimentIntensityAnalyzer()
         snippet_polarities = [sid.polarity_scores(x)['compound'] for x in snippets if x]
@@ -404,11 +408,8 @@ def main(args, category):
     for link, code in link_codes.items():
         data.loc[data.link == link, 'code'] = code
     twitter_data = data[data.domain == TWITTER_DOMAIN]
-    print('***')
     
-    print(len(twitter_data))
     twitter_links = twitter_data.link.drop_duplicates()
-    print(len(twitter_links))
     for link in twitter_links:
         screen_name = strip_twitter_screename(link)
         code = twitter_user_codes.get(screen_name)
@@ -416,11 +417,15 @@ def main(args, category):
             print('Could not get code for screen_name {}'.format(screen_name))
         data.loc[data.link == link, 'code'] = code
     data.code = data.code.astype('category')
-    print(data.code.value_counts())
+    domains_plus_codes = [
+        str(x) + '_' + str(y) for x, y in zip(
+            list(data.domain),
+            list(data.code)
+        )
+    ]
+    data = data.assign(domains_plus_codes=domains_plus_codes)
+    data.domains_plus_codes = data.domains_plus_codes.astype('category')
     data.describe(include='all').to_csv(path2+'/data.describe().csv')
-    # cols = get_matching_columns(list(data.columns.values), UGC_WHITELIST)
-    # data[cols].describe().to_csv(path2+'/ugc_data.csv')
-
     serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
     
@@ -517,8 +522,12 @@ def main(args, category):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
     serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
-    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST)
-    serp_df[cols].describe().to_csv(path2+'/ugcin_serp_df.csv')
+    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + list(CODES.keys()))
+    cols_with_nonzero_mean = []
+    for col in cols:
+        if serp_df[col].mean() != 0:
+            cols_with_nonzero_mean.append(col)
+    serp_df[cols_with_nonzero_mean].describe().to_csv(path2+'/ugcin_serp_df.csv')
 
     outputs, errors = [], []
     summaries = {key: [] for key in RESULT_SUBSETS}

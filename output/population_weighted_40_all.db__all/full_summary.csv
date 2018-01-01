@@ -1,0 +1,11 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_full_domain_frac_wikipedia.org,1102,76,0.099,0.083,1.2,rural
+1,*results_full_domain_frac_facebook.com,1102,76,0.034,0.02,1.65,rural
+2,*top_ads_full_domain_frac_heartlandalliance.org,452,32,0.018,0.0,inf,rural
+3,**top_ads_full_domain_frac_prisonfellowship.org,452,32,0.008,0.0,inf,rural
+4,*top_ads_full_domain_frac_californiainnocenceproject.org,452,32,0.003,0.0,inf,rural
+5,**top_ads_full_domain_frac_truecar.com,452,32,0.012,0.0,inf,rural
+6,**top_ads_full_domain_frac_,569,48,0.011,0.0,inf,GOP
+7,*top_ads_full_domain_frac_caron.org,569,48,0.013,0.0,inf,GOP
+8,**top_ads_full_domain_frac_prisonfellowship.org,569,48,0.007,0.0,inf,GOP
+9,**top_ads_full_domain_frac_truecar.com,569,48,0.012,0.0,inf,GOP
