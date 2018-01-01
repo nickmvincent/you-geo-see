@@ -10,6 +10,7 @@ from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST, CO
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
@@ -528,6 +529,7 @@ def main(args, category):
         if serp_df[col].mean() != 0:
             cols_with_nonzero_mean.append(col)
     serp_df[cols_with_nonzero_mean].describe().to_csv(path2+'/ugcin_serp_df.csv')
+    serp_df[cols_with_nonzero_mean].mean().plot(kind='bar')
 
     outputs, errors = [], []
     summaries = {key: [] for key in RESULT_SUBSETS}
@@ -614,6 +616,7 @@ def main(args, category):
             writer = csv.writer(outfile)        
             for row in errors:
                 writer.writerow([row])
+    plt.show()
 
 
 def parse():

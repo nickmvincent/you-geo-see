@@ -11,6 +11,7 @@ from querysets import (
     from_csv, from_trends_top_query_by_category,
     CURATED
 )
+
 import yagmail
 
 
