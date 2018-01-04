@@ -1,0 +1,26 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,mult_increase,n,name_a,name_b,pval,query,winner
+0,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.15,0.3,0.0,inf,,20,low-income,high-income,8.538051223166285e-06,Pizza Hut,low-income
+1,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,US Supreme Court,
+2,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.24999999999999994,0.333,0.167,2.0,,20,low-income,high-income,0.014956363910414187,Chase Bank,low-income
+3,0.267,**results_top_three_domain_frac_NewsCarousel,10,10,0.16666666666666669,0.3,0.033,9.0,,20,low-income,high-income,2.292887199439995e-05,Toyota,low-income
+4,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Barack Obama,
+5,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333335,0.1,0.267,2.67,,20,low-income,high-income,0.024143272996065522,Walmart,high-income
+6,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.08333333333333333,0.167,0.0,inf,,20,low-income,high-income,0.014956363910414203,Domino's Pizza,low-income
+7,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,US Senate,
+8,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,McDonald's,
+9,0.067,results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.3,0.233,1.29,,20,low-income,high-income,0.2900334160014484,Wells Fargo,low-income
+10,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Donald Trump,
+11,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Hillary Clinton,
+12,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Amazon,
+13,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.016666666666666666,0.033,0.0,inf,,20,low-income,high-income,0.34343639613791355,Chevrolet,low-income
+14,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333332,0.333,0.033,10.0,,20,low-income,high-income,8.538051223166254e-06,Honda,low-income
+15,0.133,*results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.333,0.2,1.67,,20,low-income,high-income,0.03678749787978607,Bank of America,low-income
+16,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.2,0.067,0.333,5.0,,20,low-income,high-income,0.00020249932206764027,Pizza Hut,high-income
+17,0.3,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.033,0.333,10.0,,20,low-income,high-income,8.538051223166254e-06,Toyota,high-income
+18,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.267,0.1,2.67,,20,low-income,high-income,0.024143272996065522,Walmart,low-income
+19,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.24999999999999994,0.167,0.333,2.0,,20,low-income,high-income,0.014956363910414187,Domino's Pizza,high-income
+20,,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Donald Trump,
+21,,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Amazon,
+22,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.16666666666666669,0.033,0.3,9.0,,20,low-income,high-income,2.292887199439995e-05,Honda,high-income
+23,0.033,results_top_three_domain_frac_facebook.com,10,10,0.016666666666666666,0.033,0.0,inf,,20,low-income,high-income,0.34343639613791355,Domino's Pizza,low-income
+24,0.267,**results_top_three_domain_frac_facebook.com,10,10,0.13333333333333333,0.267,0.0,inf,,20,low-income,high-income,0.00020249932206764005,Bank of America,low-income

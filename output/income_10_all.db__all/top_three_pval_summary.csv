@@ -1,0 +1,5 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_MapsLocations,380,380,0.069,0.096,1.38,high-income
+1,*results_top_three_domain_frac_NewsCarousel,380,380,0.242,0.209,1.16,low-income
+2,*results_top_three_domain_frac_facebook.com,380,380,0.008,0.0,inf,low-income
+3,*results_top_three_domain_frac_UserTweetCarousel,380,380,0.032,0.054,1.68,high-income

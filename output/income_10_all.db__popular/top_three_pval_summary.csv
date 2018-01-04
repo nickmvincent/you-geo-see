@@ -1,0 +1,4 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,**results_top_three_domain_frac_NewsCarousel,180,180,0.252,0.181,1.39,low-income
+1,*results_top_three_domain_frac_UserTweetCarousel,180,180,0.069,0.115,1.68,high-income
+2,*results_top_three_domain_frac_facebook.com,180,180,0.017,0.0,inf,low-income

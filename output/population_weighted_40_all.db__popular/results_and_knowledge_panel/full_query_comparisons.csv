@@ -1,0 +1,19 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.013,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.05681818181818181,0.059,0.045,1.29,40,GOP,DEM,0.5587159379920426,Walmart,GOP
+1,0.004,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.162260101010101,0.163,0.159,1.03,40,GOP,DEM,0.8796556372266587,Chevrolet,GOP
+2,0.01,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.14795454545454545,0.149,0.139,1.07,40,GOP,DEM,0.6468989068789022,Wells Fargo,GOP
+3,0.0,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.14313186813186812,0.143,0.143,1.0,40,GOP,DEM,0.32458712748877205,Hillary Clinton,GOP
+4,0.023,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.14578157953157952,0.149,0.126,1.18,40,GOP,DEM,0.5678536031126074,Toyota,GOP
+5,0.064,*results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.14708333333333332,0.157,0.093,1.69,40,GOP,DEM,0.041906780676483346,Bank of America,GOP
+6,0.07,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.16816919191919194,0.179,0.109,1.64,40,GOP,DEM,0.0642454735527058,Honda,GOP
+7,0.0,**results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.15384615384615385,0.154,0.154,1.0,40,GOP,DEM,2.0476003123314473e-06,Donald Trump,GOP
+8,0.027,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.12116841491841493,0.125,0.098,1.27,40,GOP,DEM,0.5381753837001515,Domino's Pizza,GOP
+9,0.0,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.14313186813186812,0.143,0.143,1.0,40,GOP,DEM,0.32458712748877205,US Senate,GOP
+10,0.002,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.09819139194139194,0.098,0.1,1.02,40,GOP,DEM,0.8904934446630935,US Supreme Court,DEM
+11,0.0,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.1,0.1,0.1,1.0,40,GOP,DEM,0.0755868184216124,Amazon,GOP
+12,0.018,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.1034132534132534,0.101,0.119,1.18,40,GOP,DEM,0.462485446871128,McDonald's,DEM
+13,0.007,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.21875,0.218,0.225,1.03,40,GOP,DEM,0.8161681088089559,United States Department of Veterans Affairs,DEM
+14,0.026,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.22152777777777777,0.225,0.199,1.13,40,GOP,DEM,0.3268048788508048,Chase Bank,GOP
+15,0.021,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.2072916666666667,0.21,0.19,1.11,40,GOP,DEM,0.3762106449337749,Target Corporation,GOP
+16,0.001,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.1434065934065934,0.144,0.143,1.0,40,GOP,DEM,0.16037503271413261,Barack Obama,GOP
+17,0.046,results_and_knowledge_panel_full_domain_frac_wikipedia.org,34,6,0.11005050505050504,0.117,0.071,1.65,40,GOP,DEM,0.1442226213783991,Pizza Hut,GOP

@@ -1,0 +1,2 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.007,results_top_three_domain_frac_SearchTweetCarousel,100,100,0.09666666666666666,0.1,0.093,1.07,200,low-income,high-income,0.7567525569717775,low-income

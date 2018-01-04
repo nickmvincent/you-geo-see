@@ -1,0 +1,64 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,mult_increase,n,name_a,name_b,pval,query,winner
+0,0.037,*results_full_domain_frac_facebook.com,10,10,0.08984848484848484,0.108,0.071,1.52,,20,GOP,DEM,0.04896241771927604,Pizza Hut,GOP
+1,0.094,**results_full_domain_frac_facebook.com,10,10,0.04722222222222222,0.094,0.0,inf,,20,GOP,DEM,9.54561055628027e-06,McDonald's,GOP
+2,0.002,results_full_domain_frac_facebook.com,10,10,0.10111111111111112,0.102,0.1,1.02,,20,GOP,DEM,0.1678506560570766,Wells Fargo,GOP
+3,0.079,*results_full_domain_frac_facebook.com,10,10,0.05178571428571428,0.091,0.012,7.29,,20,GOP,DEM,0.004520865928209008,Toyota,GOP
+4,,results_full_domain_frac_facebook.com,10,10,0.08333333333333331,0.083,0.083,,1.0,20,GOP,DEM,,Donald Trump,
+5,0.003,results_full_domain_frac_facebook.com,10,10,0.10166666666666668,0.103,0.1,1.03,,20,GOP,DEM,0.08112618884583968,Walmart,GOP
+6,0.006,*results_full_domain_frac_facebook.com,10,10,0.10500000000000001,0.108,0.102,1.05,,20,GOP,DEM,0.024143272996064946,Bank of America,GOP
+7,0.088,**results_full_domain_frac_facebook.com,10,10,0.06875,0.112,0.025,4.5,,20,GOP,DEM,0.0006237457011994753,Chevrolet,GOP
+8,0.083,*results_full_domain_frac_facebook.com,10,10,0.08551948051948052,0.127,0.044,2.88,,20,GOP,DEM,0.0012947882500064561,Domino's Pizza,GOP
+9,0.008,results_full_domain_frac_facebook.com,10,10,0.08076923076923076,0.085,0.077,1.1,,20,GOP,DEM,0.3434363961379128,Barack Obama,GOP
+10,0.106,**results_full_domain_frac_facebook.com,10,10,0.07787698412698411,0.131,0.025,5.23,,20,GOP,DEM,0.00010901337814044185,Honda,GOP
+11,0.015,results_full_domain_frac_facebook.com,10,10,0.007692307692307693,0.015,0.0,inf,,20,GOP,DEM,0.16785065605707486,Hillary Clinton,GOP
+12,0.001,results_full_domain_frac_facebook.com,10,10,0.11055555555555556,0.11,0.111,1.01,,20,GOP,DEM,0.3434363961379045,Amazon,DEM
+13,0.02,results_full_domain_frac_MapsLocations,10,10,0.0981439393939394,0.108,0.088,1.23,,20,GOP,DEM,0.08672555154045279,Pizza Hut,GOP
+14,0.02,results_full_domain_frac_MapsLocations,10,10,0.07000000000000002,0.06,0.08,1.33,,20,GOP,DEM,0.3558411460416391,McDonald's,DEM
+15,0.02,results_full_domain_frac_MapsLocations,10,10,0.09000000000000002,0.08,0.1,1.25,,20,GOP,DEM,0.16785065605707486,Wells Fargo,DEM
+16,0.046,*results_full_domain_frac_MapsLocations,10,10,0.023076923076923078,0.0,0.046,inf,,20,GOP,DEM,0.005121072764272635,medical marijuana,DEM
+17,0.007,results_full_domain_frac_MapsLocations,10,10,0.0900631313131313,0.094,0.087,1.08,,20,GOP,DEM,0.7180617122242068,Toyota,GOP
+18,0.03,results_full_domain_frac_MapsLocations,10,10,0.08500000000000003,0.07,0.1,1.43,,20,GOP,DEM,0.08112618884584057,Walmart,DEM
+19,0.059,*results_full_domain_frac_MapsLocations,10,10,0.04772727272727273,0.018,0.077,4.25,,20,GOP,DEM,0.013507386990149863,Target Corporation,DEM
+20,0.05,*results_full_domain_frac_MapsLocations,10,10,0.05500000000000001,0.03,0.08,2.67,,20,GOP,DEM,0.024143272996065567,Bank of America,DEM
+21,0.089,**results_full_domain_frac_MapsLocations,10,10,0.06805555555555556,0.024,0.112,4.76,,20,GOP,DEM,0.0003724819618780795,Chase Bank,DEM
+22,0.031,*results_full_domain_frac_MapsLocations,10,10,0.10602272727272728,0.122,0.09,1.34,,20,GOP,DEM,0.020349156874198752,Chevrolet,GOP
+23,0.02,results_full_domain_frac_MapsLocations,10,10,0.09409090909090911,0.084,0.104,1.24,,20,GOP,DEM,0.3179411793448489,Domino's Pizza,DEM
+24,0.05,results_full_domain_frac_MapsLocations,10,10,0.05,0.025,0.075,3.0,,20,GOP,DEM,0.07459169984478176,United States Department of Veterans Affairs,DEM
+25,0.015,results_full_domain_frac_MapsLocations,10,10,0.007692307692307693,0.0,0.015,inf,,20,GOP,DEM,0.16785065605707486,Barack Obama,DEM
+26,0.035,results_full_domain_frac_MapsLocations,10,10,0.07861111111111112,0.061,0.096,1.57,,20,GOP,DEM,0.1548221407863041,Honda,DEM
+27,0.054,*results_full_domain_frac_MapsLocations,10,10,0.026923076923076928,0.0,0.054,inf,,20,GOP,DEM,0.0013229505842674947,abortion,DEM
+28,,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,illegal immigration,
+29,,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,,1.0,20,GOP,DEM,,gertrude jekyll,
+30,0.077,**results_full_domain_frac_wikipedia.org,10,10,0.05996212121212121,0.098,0.022,4.55,,20,GOP,DEM,0.0006776228532218272,Pizza Hut,GOP
+31,0.001,results_full_domain_frac_wikipedia.org,10,10,0.08044871794871793,0.08,0.081,1.01,,20,GOP,DEM,0.673322036950531,al franken,DEM
+32,0.043,*results_full_domain_frac_wikipedia.org,10,10,0.07277777777777779,0.094,0.051,1.85,,20,GOP,DEM,0.04777775194776014,McDonald's,GOP
+33,0.002,results_full_domain_frac_wikipedia.org,10,10,0.10111111111111112,0.102,0.1,1.02,,20,GOP,DEM,0.1678506560570766,Wells Fargo,GOP
+34,,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,,1.0,20,GOP,DEM,,US Supreme Court,
+35,,results_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,GOP,DEM,,minimum wage,
+36,0.001,results_full_domain_frac_wikipedia.org,10,10,0.0830128205128205,0.083,0.083,1.01,,20,GOP,DEM,0.34343639613790455,california fires,GOP
+37,0.004,*results_full_domain_frac_wikipedia.org,10,10,0.08141025641025638,0.083,0.079,1.05,,20,GOP,DEM,0.0051210727642724855,medical marijuana,GOP
+38,0.083,*results_full_domain_frac_wikipedia.org,10,10,0.0664484126984127,0.108,0.025,4.32,,20,GOP,DEM,0.0010341702767992836,Toyota,GOP
+39,,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,,1.0,20,GOP,DEM,,Donald Trump,
+40,0.02,results_full_domain_frac_wikipedia.org,10,10,0.01,0.0,0.02,inf,,20,GOP,DEM,0.16785065605707486,Walmart,DEM
+41,,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,euthanasia,
+42,,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,,1.0,20,GOP,DEM,,ryan shazier,
+43,,results_full_domain_frac_wikipedia.org,10,10,0.0909090909090909,0.091,0.091,,1.0,20,GOP,DEM,,college football playoff,
+44,,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,death penalty,
+45,0.012,results_full_domain_frac_wikipedia.org,10,10,0.1262987012987013,0.132,0.12,1.1,,20,GOP,DEM,0.22104019477513714,Target Corporation,GOP
+46,0.004,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.098,0.102,1.05,,20,GOP,DEM,0.6968886656607682,Bank of America,DEM
+47,0.012,results_full_domain_frac_wikipedia.org,10,10,0.12053571428571427,0.127,0.114,1.11,,20,GOP,DEM,0.5218521175392457,Chase Bank,GOP
+48,0.021,*results_full_domain_frac_wikipedia.org,10,10,0.11102272727272726,0.122,0.1,1.21,,20,GOP,DEM,0.001259198674884475,Chevrolet,GOP
+49,0.118,**results_full_domain_frac_wikipedia.org,10,10,0.05892857142857143,0.118,0.0,inf,,20,GOP,DEM,1.0072896493570209e-05,Domino's Pizza,GOP
+50,0.001,results_full_domain_frac_wikipedia.org,10,10,0.08301282051282048,0.083,0.083,1.01,,20,GOP,DEM,0.34343639613790455,matt lauer,GOP
+51,,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,,1.0,20,GOP,DEM,,animal testing,
+52,0.007,results_full_domain_frac_wikipedia.org,10,10,0.13571428571428573,0.139,0.132,1.05,,20,GOP,DEM,0.0745916998447815,United States Department of Veterans Affairs,GOP
+53,,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,Barack Obama,
+54,0.075,*results_full_domain_frac_wikipedia.org,10,10,0.09343253968253969,0.131,0.056,2.33,,20,GOP,DEM,0.0032606113443628317,Honda,GOP
+55,,results_full_domain_frac_wikipedia.org,10,10,0.1818181818181818,0.182,0.182,,1.0,20,GOP,DEM,,gomer pyle,
+56,0.007,results_full_domain_frac_wikipedia.org,10,10,0.08021978021978021,0.084,0.077,1.09,,20,GOP,DEM,0.34343639613791305,gun control,GOP
+57,0.007,results_full_domain_frac_wikipedia.org,10,10,0.03269230769230769,0.036,0.029,1.25,,20,GOP,DEM,0.7790071804446363,eagles,GOP
+58,,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,Hillary Clinton,
+59,0.007,results_full_domain_frac_wikipedia.org,10,10,0.15726495726495723,0.161,0.154,1.04,,20,GOP,DEM,0.3434363961379111,US Senate,GOP
+60,,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,,1.0,20,GOP,DEM,,michael flynn,
+61,0.003,results_full_domain_frac_wikipedia.org,10,10,0.14917582417582415,0.148,0.151,1.02,,20,GOP,DEM,0.4497416820791206,drinking age,DEM
+62,0.001,results_full_domain_frac_wikipedia.org,10,10,0.07641025641025641,0.077,0.076,1.01,,20,GOP,DEM,0.3434363961379142,abortion,GOP

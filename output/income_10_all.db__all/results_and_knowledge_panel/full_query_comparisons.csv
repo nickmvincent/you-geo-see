@@ -1,0 +1,66 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,mult_increase,n,name_a,name_b,pval,query,winner
+0,0.018,results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.03636363636363636,0.045,0.027,1.67,,20,low-income,high-income,0.38809613338586946,Wells Fargo,low-income
+1,0.011,results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.005555555555555555,0.011,0.0,inf,,20,low-income,high-income,0.34343639613791355,Chase Bank,low-income
+2,0.015,results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.08954545454545453,0.097,0.082,1.19,,20,low-income,high-income,0.1256540474282812,Bank of America,low-income
+3,0.045,*results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.06818181818181818,0.091,0.045,2.0,,20,low-income,high-income,0.014956363910414203,gertrude jekyll,low-income
+4,0.016,results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.07464646464646463,0.083,0.067,1.24,,20,low-income,high-income,0.38428365980732604,Pizza Hut,low-income
+5,0.01,results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.06954545454545454,0.075,0.065,1.15,,20,low-income,high-income,0.6021351664004148,Walmart,low-income
+6,0.158,**results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.07878787878787878,0.158,0.0,inf,,20,low-income,high-income,0.00024154422470980052,McDonald's,low-income
+7,0.09,**results_and_knowledge_panel_full_domain_frac_google.com,10,10,0.04513888888888889,0.09,0.0,inf,,20,low-income,high-income,0.00020873526088911818,Domino's Pizza,low-income
+8,0.001,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.0717032967032967,0.072,0.071,1.01,,20,low-income,high-income,0.34343639613791566,Barack Obama,low-income
+9,0.027,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.07727272727272726,0.091,0.064,1.43,,20,low-income,high-income,0.08112618884584044,Wells Fargo,low-income
+10,0.006,*results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.09409090909090907,0.097,0.091,1.07,,20,low-income,high-income,0.0013229505842674986,Bank of America,low-income
+11,0.001,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.07664835164835164,0.077,0.076,1.01,,20,low-income,high-income,0.34343639613791566,Donald Trump,low-income
+12,0.008,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.08873737373737371,0.093,0.085,1.09,,20,low-income,high-income,0.48343766286978274,Pizza Hut,low-income
+13,0.007,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.0035714285714285713,0.007,0.0,inf,,20,low-income,high-income,0.34343639613791355,Toyota,low-income
+14,0.007,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.003333333333333333,0.007,0.0,inf,,20,low-income,high-income,0.34343639613791355,eagles,low-income
+15,0.03,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.09210858585858586,0.107,0.077,1.39,,20,low-income,high-income,0.05826410692136512,Chevrolet,low-income
+16,0.0,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.09189393939393938,0.092,0.092,1.0,,20,low-income,high-income,0.9333952915732358,Walmart,low-income
+17,,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.07142857142857142,0.071,0.071,,1.0,20,low-income,high-income,,Hillary Clinton,
+18,0.033,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.016666666666666666,0.033,0.0,inf,,20,low-income,high-income,0.08112618884584057,McDonald's,low-income
+19,0.055,*results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.08498737373737372,0.112,0.057,1.96,,20,low-income,high-income,0.00681328646279579,Domino's Pizza,low-income
+20,0.104,**results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.06041666666666666,0.112,0.008,13.5,,20,low-income,high-income,3.6956186686684423e-07,Honda,low-income
+21,,results_and_knowledge_panel_full_domain_frac_facebook.com,10,10,0.10000000000000002,0.1,0.1,,1.0,20,low-income,high-income,,Amazon,
+22,0.001,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1434065934065934,0.144,0.143,1.01,,20,low-income,high-income,0.34343639613791566,Barack Obama,low-income
+23,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.25,0.25,0.25,,1.0,20,low-income,high-income,,gomer pyle,
+24,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.15384615384615383,0.154,0.154,,1.0,20,low-income,high-income,,michael flynn,
+25,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.15384615384615383,0.154,0.154,,1.0,20,low-income,high-income,,matt lauer,
+26,0.04,*results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.12307692307692306,0.103,0.143,1.38,,20,low-income,high-income,0.005121072764272635,minimum wage,high-income
+27,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,low-income,high-income,,drinking age,
+28,0.018,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1727272727272727,0.182,0.164,1.11,,20,low-income,high-income,0.16785065605707467,Wells Fargo,low-income
+29,0.043,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.20366161616161618,0.225,0.182,1.24,,20,low-income,high-income,0.05339379721027348,Chase Bank,low-income
+30,0.012,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.17863636363636362,0.185,0.173,1.07,,20,low-income,high-income,0.387770848030352,Bank of America,low-income
+31,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1818181818181818,0.182,0.182,,1.0,20,low-income,high-income,,gertrude jekyll,
+32,0.001,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.15329670329670328,0.154,0.153,1.01,,20,low-income,high-income,0.34343639613791566,Donald Trump,low-income
+33,0.007,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.13956043956043956,0.143,0.136,1.05,,20,low-income,high-income,0.34343639613791305,euthanasia,low-income
+34,0.029,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.11654040404040407,0.131,0.102,1.28,,20,low-income,high-income,0.23330131888621536,Pizza Hut,low-income
+35,0.002,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1419047619047619,0.143,0.141,1.01,,20,low-income,high-income,0.16785065605707367,al franken,low-income
+36,0.039,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.21666666666666665,0.236,0.197,1.2,,20,low-income,high-income,0.0811343586241784,Target Corporation,low-income
+37,0.078,*results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.12959623709623708,0.169,0.09,1.87,,20,low-income,high-income,0.0028823242824880025,Toyota,low-income
+38,0.063,*results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.0980952380952381,0.13,0.067,1.94,,20,low-income,high-income,0.003751970467425952,eagles,low-income
+39,0.01,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.22291666666666665,0.228,0.218,1.04,,20,low-income,high-income,0.4187486057439681,United States Department of Veterans Affairs,low-income
+40,0.03,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.18099747474747474,0.196,0.166,1.18,,20,low-income,high-income,0.18100362507109186,Chevrolet,low-income
+41,0.015,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.16013431013431012,0.168,0.153,1.1,,20,low-income,high-income,0.14114811914184824,US Supreme Court,low-income
+42,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1818181818181818,0.182,0.182,,1.0,20,low-income,high-income,,animal testing,
+43,0.046,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.09507575757575756,0.072,0.118,1.64,,20,low-income,high-income,0.06105297305853702,Walmart,high-income
+44,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,low-income,high-income,,gun control,
+45,0.002,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.21510989010989015,0.214,0.216,1.01,,20,low-income,high-income,0.34343639613791577,US Senate,high-income
+46,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,low-income,high-income,,death penalty,
+47,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,,1.0,20,low-income,high-income,,california fires,
+48,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,low-income,high-income,,Hillary Clinton,
+49,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.0909090909090909,0.091,0.091,,1.0,20,low-income,high-income,,college football playoff,
+50,0.01,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.07992424242424243,0.085,0.075,1.13,,20,low-income,high-income,0.26998391891282747,school uniforms,low-income
+51,0.007,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.13956043956043956,0.136,0.143,1.05,,20,low-income,high-income,0.34343639613791305,abortion,high-income
+52,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,,1.0,20,low-income,high-income,,illegal immigration,
+53,0.033,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.15098484848484847,0.168,0.134,1.25,,20,low-income,high-income,0.2387892858641472,McDonald's,low-income
+54,0.104,**results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.11584595959595959,0.168,0.064,2.64,,20,low-income,high-income,0.0002731593130566804,Domino's Pizza,low-income
+55,0.066,*results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.1795328282828283,0.212,0.147,1.45,,20,low-income,high-income,0.023425754824859486,Honda,low-income
+56,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,,1.0,20,low-income,high-income,,Amazon,
+57,,results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.0909090909090909,0.091,0.091,,1.0,20,low-income,high-income,,ryan shazier,
+58,0.011,**results_and_knowledge_panel_full_domain_frac_wikipedia.org,10,10,0.14835164835164835,0.154,0.143,1.08,,20,low-income,high-income,1.082191743138519e-132,medical marijuana,low-income
+59,0.34,**results_and_knowledge_panel_full_domain_frac_dominos.com,10,10,0.32713383838383836,0.157,0.497,3.17,,20,low-income,high-income,1.1122069501125767e-06,Domino's Pizza,high-income
+60,0.035,results_and_knowledge_panel_full_domain_frac_yelp.com,10,10,0.017361111111111112,0.0,0.035,inf,,20,low-income,high-income,0.08171171219218488,Chase Bank,high-income
+61,0.117,**results_and_knowledge_panel_full_domain_frac_yelp.com,10,10,0.06863636363636365,0.01,0.127,12.73,,20,low-income,high-income,4.510223860992937e-06,Pizza Hut,high-income
+62,0.011,results_and_knowledge_panel_full_domain_frac_yelp.com,10,10,0.02196969696969697,0.017,0.027,1.64,,20,low-income,high-income,0.683412737194731,Walmart,high-income
+63,0.176,**results_and_knowledge_panel_full_domain_frac_yelp.com,10,10,0.09795454545454547,0.01,0.186,18.59,,20,low-income,high-income,0.0006020819957087136,McDonald's,high-income
+64,0.055,*results_and_knowledge_panel_full_domain_frac_yelp.com,10,10,0.02734848484848485,0.0,0.055,inf,,20,low-income,high-income,0.005223833975712862,Domino's Pizza,high-income

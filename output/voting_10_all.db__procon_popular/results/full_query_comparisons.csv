@@ -1,0 +1,9 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,mult_increase,n,name_a,name_b,pval,query,winner
+0,,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,illegal immigration,
+1,,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,euthanasia,
+2,0.082,**results_full_domain_frac_people also ask,10,10,0.05,0.091,0.009,10.0,,20,GOP,DEM,8.538051223166285e-06,school uniforms,GOP
+3,,results_full_domain_frac_people also ask,10,10,0.07142857142857142,0.071,0.071,,1.0,20,GOP,DEM,,minimum wage,
+4,0.002,results_full_domain_frac_people also ask,10,10,0.07458791208791207,0.074,0.075,1.02,,20,GOP,DEM,0.4497416820791206,drinking age,DEM
+5,,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,,1.0,20,GOP,DEM,,death penalty,
+6,0.055,**results_full_domain_frac_people also ask,10,10,0.04948717948717949,0.077,0.022,3.49,,20,GOP,DEM,0.000881036038802726,abortion,GOP
+7,0.001,results_full_domain_frac_people also ask,10,10,0.07664835164835164,0.076,0.077,1.01,,20,GOP,DEM,0.34343639613791566,gun control,DEM

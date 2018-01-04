@@ -1,0 +1,5 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_cnn.com,220,80,0.014,0.0,inf,rural
+1,*results_top_three_domain_frac_independent.co.uk,340,60,0.004,0.0,inf,GOP
+2,*results_and_knowledge_panel_top_three_domain_frac_cnn.com,220,80,0.014,0.0,inf,rural
+3,*results_and_knowledge_panel_top_three_domain_frac_independent.co.uk,340,60,0.004,0.0,inf,GOP

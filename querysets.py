@@ -38,24 +38,6 @@ def from_trends_top_query_by_category(n=NUM_KEYWORDS):
     return keyword_objs
 
 
-CONTROVERSIAL = [
-    'Progressive Tax',
-    'Impose A Flat Tax',
-    'End Medicaid',
-    'Affordable Health And Care Act',
-    'Fluoridate Water',
-    'Stem Cell Research',
-    'Andrew Wakefield Vindicated',
-    'Autism Caused By Vaccines',
-    'US Government Loses AAA Bond Rate',
-    'Is Global Warming Real',
-    'Man Made Global Warming Hoax',
-    'Nuclear Power Plants',
-    'Offshore Drilling',
-    'Genetically Modified Organi',
-    'Trump',
-]
-
 PROCON_POPULAR = [
     'medical marijuana',
     'gun control',
@@ -69,6 +51,7 @@ PROCON_POPULAR = [
     'abortion',
 ]
 
+# the top trending search from _ to _ (in paper)
 TRENDING = [
     'bitcoin price',
     'al franken',
@@ -140,6 +123,7 @@ PROCON_A_TO_Z = [
     'WTC Muslim Center',
 ]
 
+# the top trending searches from Dec 16 and 17
 ALL_TRENDS_DEC1617 = [
     'December global festivities',
     'Atlanta airport',
@@ -161,6 +145,60 @@ ALL_TRENDS_DEC1617 = [
     'Scarlett Johansson',
     'Baltimore Ravens',
     'Danny Kaye',
+]
+
+
+# the top 10 queries form  https://trends.google.com/trends/explore?geo=US&q=insurance
+# on 1/3/2018
+# United States
+# past year
+TOP_INSURANCE = [
+    'health insurance',
+    'car insurance',
+    'auto insurance',
+    'life insurance',
+    'progressive',
+    'progressive insurance',
+    'home insurance',
+    'insurance companies',
+    'geico insurance',
+    'geico',
+]
+
+
+# the top 10 queries form  https://trends.google.com/trends/explore?geo=US&q=loans
+# on 1/3/2018
+# United States
+# past year
+TOP_LOANS = [
+    'student loan',
+    'loan',
+    'payday loans',
+    'home loans',
+    'loans bad credit',
+    'personal loans',
+    'loans online',
+    'quicken loans'
+    'bank loans',
+    'quicken',
+]
+
+
+# https://trends.google.com/trends/explore?geo=US&q=symptoms
+# on 1/3/2018
+# United States
+# past year
+TOP_SYMPTOMS = [
+    'cancer symptoms',
+    'pregnancy symptoms',
+    'flu symptoms',
+    'symptoms of cancer',
+    'diabetes',
+    'diabetes symptoms',
+    'uti symptomps',
+    'anxiety symptoms',
+    'cold symptoms'
+    'period symptoms',
 ]
 
 CURATED = {

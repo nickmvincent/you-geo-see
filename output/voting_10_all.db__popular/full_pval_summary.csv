@@ -1,0 +1,7 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_full_domain_frac_yelp.com,180,180,0.002,0.012,5.62,DEM
+1,*results_full_domain_frac_NewsCarousel,180,180,0.1,0.092,1.08,GOP
+2,**results_full_domain_frac_facebook.com,180,180,0.071,0.042,1.69,GOP
+3,*results_full_domain_frac_apple.com,180,180,0.017,0.009,1.98,GOP
+4,*results_full_domain_frac_MapsLocations,180,180,0.043,0.061,1.43,DEM
+5,**results_full_domain_frac_wikipedia.org,180,180,0.097,0.073,1.33,GOP

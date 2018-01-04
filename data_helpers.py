@@ -88,17 +88,22 @@ def prep_data(data):
     maps_location_mask = data.isMapsLocations == True
     maps_places_mask = data.isMapsPlaces == True
 
+    people_also_ask_mask = data.misc.astype(str).str.contains(';People also ask')
+    data.loc[people_also_ask_mask, 'domain'] = 'people also ask'
+
     data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
     data.loc[news_mask, 'link'] = 'NewsCarousel'
     data.loc[news_mask, 'domain'] = 'NewsCarousel'
-    data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
-    data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
+    # data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
+    # data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
 
     data.loc[maps_location_mask, 'link'] = 'MapsLocations' 
     data.loc[maps_location_mask, 'domain'] = 'MapsLocations'
 
     data.loc[maps_places_mask, 'link'] = 'MapsPlaces' 
     data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
+
+
 
     
     

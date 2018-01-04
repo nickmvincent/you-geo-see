@@ -1,7 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_top_three_domain_frac_MapsLocations,380,380,0.072,0.093,1.29,high-income
-1,*results_top_three_domain_frac_google.com,380,380,0.006,0.0,inf,low-income
-2,*results_top_three_domain_frac_yelp.com,380,380,0.0,0.004,inf,high-income
-3,**results_top_three_domain_frac_NewsCarousel,380,380,0.253,0.208,1.22,low-income
-4,*top_ads_top_three_domain_frac_truecar.com,169,152,0.023,0.004,5.17,low-income
-5,*top_ads_top_three_domain_frac_lfda.org,169,152,0.029,0.005,5.22,low-income

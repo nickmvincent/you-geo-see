@@ -1,0 +1,15 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.3166666666666666,0.333,0.3,1.11,20,GOP,DEM,0.3434363961379127,Pizza Hut,GOP
+1,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.2333333333333333,0.2,0.267,1.33,20,GOP,DEM,0.3558411460416391,McDonald's,DEM
+2,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.233,0.333,1.43,20,GOP,DEM,0.08112618884584036,Wells Fargo,DEM
+3,0.167,*results_top_three_domain_frac_MapsLocations,10,10,0.08333333333333333,0.0,0.167,inf,20,GOP,DEM,0.014956363910414203,medical marijuana,DEM
+4,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,20,GOP,DEM,0.5565650165675339,Toyota,DEM
+5,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.233,0.333,1.43,20,GOP,DEM,0.08112618884584044,Walmart,DEM
+6,0.2,*results_top_three_domain_frac_MapsLocations,10,10,0.13333333333333333,0.033,0.233,7.0,20,GOP,DEM,0.004811028180854976,Target Corporation,DEM
+7,0.233,**results_top_three_domain_frac_MapsLocations,10,10,0.15000000000000002,0.033,0.267,8.0,20,GOP,DEM,0.0006237457011994739,Bank of America,DEM
+8,0.233,**results_top_three_domain_frac_MapsLocations,10,10,0.18333333333333335,0.067,0.3,4.5,20,GOP,DEM,0.000623745701199474,Chase Bank,DEM
+9,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.3166666666666666,0.333,0.3,1.11,20,GOP,DEM,0.3434363961379127,Chevrolet,GOP
+10,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.233,0.333,1.43,20,GOP,DEM,0.08112618884584036,Domino's Pizza,DEM
+11,0.2,*results_top_three_domain_frac_MapsLocations,10,10,0.09999999999999999,0.0,0.2,inf,20,GOP,DEM,0.005121072764272635,United States Department of Veterans Affairs,DEM
+12,0.167,*results_top_three_domain_frac_MapsLocations,10,10,0.21666666666666665,0.133,0.3,2.25,20,GOP,DEM,0.01972363221865994,Honda,DEM
+13,0.167,*results_top_three_domain_frac_MapsLocations,10,10,0.08333333333333333,0.0,0.167,inf,20,GOP,DEM,0.014956363910414203,abortion,DEM

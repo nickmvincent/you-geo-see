@@ -1,8 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.01,top_ads_top_three_domain_frac_,33,3,0.009259259259259259,0.01,0.0,inf,36,GOP,DEM,0.32481271365109843,animal testing,GOP
-1,0.009,top_ads_top_three_domain_frac_,37,3,0.008333333333333333,0.009,0.0,inf,40,GOP,DEM,0.32398502626512726,Honda,GOP
-2,0.066,*top_ads_top_three_domain_frac_,33,3,0.06018518518518518,0.066,0.0,inf,36,GOP,DEM,0.030262950160866078,abortion,GOP
-3,0.095,*top_ads_top_three_domain_frac_,37,3,0.0875,0.095,0.0,inf,40,GOP,DEM,0.00635194105551423,Bank of America,GOP
-4,,top_ads_top_three_domain_frac_caron.org,8,0,0.9166666666666666,0.917,,,8,GOP,DEM,,drinking age,DEM
-5,0.15,**top_ads_top_three_domain_frac_prisonfellowship.org,30,3,0.13636363636363635,0.15,0.0,inf,33,GOP,DEM,6.849344400375612e-05,death penalty,GOP
-6,0.189,**top_ads_top_three_domain_frac_truecar.com,37,3,0.175,0.189,0.0,inf,40,GOP,DEM,5.396411306724973e-06,Honda,GOP

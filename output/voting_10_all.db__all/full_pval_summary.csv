@@ -1,0 +1,4 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,**results_full_domain_frac_facebook.com,380,380,0.033,0.02,1.69,GOP
+1,**results_full_domain_frac_MapsLocations,380,380,0.02,0.032,1.55,DEM
+2,**results_full_domain_frac_wikipedia.org,380,380,0.091,0.079,1.15,GOP

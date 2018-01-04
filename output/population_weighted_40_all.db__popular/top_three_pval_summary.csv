@@ -1,0 +1,7 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_top_three_domain_frac_MapsLocations,396,144,0.114,0.153,1.34,urban
+1,*results_top_three_domain_frac_NewsCarousel,396,144,0.229,0.176,1.3,rural
+2,*results_top_three_domain_frac_facebook.com,396,144,0.013,0.002,5.45,rural
+3,*results_and_knowledge_panel_top_three_domain_frac_MapsLocations,396,144,0.114,0.153,1.34,urban
+4,*results_and_knowledge_panel_top_three_domain_frac_NewsCarousel,396,144,0.229,0.176,1.3,rural
+5,*results_and_knowledge_panel_top_three_domain_frac_facebook.com,396,144,0.013,0.002,5.45,rural

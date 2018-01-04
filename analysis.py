@@ -45,7 +45,8 @@ class Comparison():
         ret = []
         err = []
         query_comparison_lists = {key: [] for key in RESULT_SUBSETS}
-        summary = {key: [] for key in RESULT_SUBSETS}
+        pval_summary = {key: [] for key in RESULT_SUBSETS}
+        whitelist_summary = {key: [] for key in RESULT_SUBSETS}
         for col in self.cols_to_compare:
             try:
                 filtered_df_a = self.df_a[self.df_a[col].notnull()]
@@ -76,8 +77,8 @@ class Comparison():
                     'column': col,
                     'winner': None,
                     'mult_increase': 1,
-                    'mean_a': round(mean_a, 4),
-                    'mean_b': round(mean_b, 4),
+                    'mean_a': round(mean_a, 3),
+                    'mean_b': round(mean_b, 3),
                     'name_a': self.name_a,
                     'name_b': self.name_b,
                     'pval': None,
@@ -114,14 +115,33 @@ class Comparison():
                 'n': n,
                 'mean': mean,
             })
-            if marker:
-                key = None
-                # what does this do
-                for result_subset in RESULT_SUBSETS:
-                    if result_subset + '_domain' in col:
-                        key = result_subset
-                if key:
-                    summary[key].append({
+            is_in_whitelist = False
+            for domain in UGC_WHITELIST:
+                if domain in col:
+                    is_in_whitelist = True
+            key = None
+            for result_subset in RESULT_SUBSETS:
+                if result_subset + '_domain' in col:
+                    key = result_subset
+            if key:
+                if is_in_whitelist:
+                    whitelist_summary[key].append({
+                        'column': marker + col,
+                        'winner': winner,
+                        'mult_inc': mult_increase,
+                        'add_inc': round(larger - smaller, 3),
+                        'mean_a': round(mean_a, 3),
+                        'mean_b': round(mean_b, 3),
+                        'name_a': self.name_a,
+                        'name_b': self.name_b,
+                        'pval': pval,
+                        'len(a)': len(a),
+                        'len(b)': len(b),
+                        'n': n,
+                        'mean': mean,
+                    })
+                if marker:
+                    pval_summary[key].append({
                         'column': marker + col,
                         'winner': winner,
                         'mult_inc': mult_increase,
@@ -151,7 +171,10 @@ class Comparison():
                             for d in comparison_dicts:
                                 d['query'] = query
                             query_comparison_lists[key] += comparison_dicts
-
+        summary = {
+            'pval': pval_summary,
+            'whitelist': whitelist_summary
+        }
         return ret, summary, err, query_comparison_lists
 
 
@@ -199,7 +222,7 @@ def calc_domain_fracs(domains_col, control_domains_col):
     return a dict
     """
     domains_dict = domains_col.value_counts().to_dict()
-    if control_domains_col:
+    if not control_domains_col.empty:
         control_dict = control_domains_col.value_counts().to_dict()
     else:
         control_dict = {}
@@ -208,6 +231,22 @@ def calc_domain_fracs(domains_col, control_domains_col):
         ret[key] = val / len(domains_col)
     for key, val in control_dict.items():
         ret[key] = (ret.get(key, 0) + val / len(control_domains_col)) / 2
+    return ret
+
+
+def calc_domain_ranks(cols):
+    """
+    average rank of a given domain
+
+    danger
+    if you every use this with control_domains you should probably double check it
+    """
+    ret = {}
+    domains_dict = cols.domain.value_counts().to_dict()
+    for key, val in domains_dict.items():
+        matching_rows = cols[cols.domain == key]
+        total_rank = sum(matching_rows['rank'])
+        ret[key] = total_rank / val
     return ret
 
 
@@ -222,8 +261,8 @@ def calc_coded_ugc_frac(code_col, control_code_col):
 
 
 def compute_serp_features(
-        links, domains_col, code_col, domains_plus_codes, 
-        control_links, control_domains_col, control_code_col, control_domains_plus_codes
+        links, cols, 
+        control_links, control_cols,
     ):
     """
     Computes features for a set of results corresponding to one serp
@@ -242,40 +281,42 @@ def compute_serp_features(
     """
     string, control_string = encode_links_as_strings(links, control_links)
     ret = {}
-    if control_links and control_domains_col:
+    if control_links and control_cols:
         ret['control_jaccard'] = jaccard_similarity(
             links, control_links
         )
         ret['control_edit'] = damerau_levenshtein_distance(
             string, control_string
         )
-        control_domains_col_3 = control_domains_col.iloc[:3]
-        control_domains_col_1 = control_domains_col.iloc[:1]
-    else:
-        control_domains_col_3 = []
-        control_domains_col_1 = []
 
     ret[FULL] = {
-        'domain_fracs': calc_domain_fracs(domains_col, control_domains_col)
+        'domain_fracs': calc_domain_fracs(cols.domain, control_cols.domain),
     }
+    ret[FULL]['domain_ranks'] = calc_domain_ranks(cols)
+    ret[FULL]['domain_appears'] = {}
+    for key, val in ret[FULL]['domain_fracs'].items():
+        if val > 0:
+            ret[FULL]['domain_appears'][key] = 1
+        else:
+            ret[FULL]['domain_appears'][key] = 0
     ret[TOP_THREE] = {
         'domain_fracs': calc_domain_fracs(
-            domains_col.iloc[:3], control_domains_col_3)
+            cols.iloc[:3].domain, control_cols.iloc[:3].domain)
     }
     ret[TOP] = {
         'domain_fracs': calc_domain_fracs(
-            domains_col.iloc[:1], control_domains_col_1)
+            cols.iloc[:1].domain, control_cols.iloc[:1].domain)
     }
-    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col, control_code_col)
-    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:3], control_code_col)
-    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(code_col.iloc[:1], control_code_col)
+    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.code, control_cols.code)
+    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:3].code, control_cols.iloc[:3].code)
+    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:1].code, control_cols.iloc[:1].code)
 
     ret[FULL]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
-        domains_plus_codes, control_domains_plus_codes))
+        cols.domains_plus_codes, control_cols.domains_plus_codes))
     ret[TOP_THREE]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
-        domains_plus_codes.iloc[:3], control_domains_plus_codes))
+        cols.iloc[:3].domains_plus_codes, control_cols.iloc[:3].domains_plus_codes))
     ret[TOP]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
-        domains_plus_codes.iloc[:1], control_domains_plus_codes))
+        cols.iloc[:1].domains_plus_codes, control_cols.iloc[:1].domains_plus_codes))
     return ret
 
 
@@ -311,7 +352,6 @@ def analyze_subset(data, location_set, config):
         if config.get('use_control'):
             control = results[results.is_control == 1]
             control_links = list(control.link)
-            control_domain_col = control.domain
             if not control_links:
                 print('Missing expected control links for loc {}'.format(loc))
                 continue
@@ -319,9 +359,15 @@ def analyze_subset(data, location_set, config):
                 print('Missing expected links for loc {}'.format(loc))
                 continue
         else:
-            control = None
+            control = pd.DataFrame(
+                data={
+                    'domain': [],
+                    'code': [],
+                    'rank': [],
+                    'domains_plus_codes': [],
+                }
+            )
             control_links = []
-            control_domain_col = []
 
         first_row = results.iloc[0]
 
@@ -331,8 +377,8 @@ def analyze_subset(data, location_set, config):
         d[loc]['domains'] = list(treatment.domain)
         d[loc]['control_links'] = control_links
         d[loc]['computed'] = compute_serp_features(
-            links, treatment.domain, treatment.code, treatment.domains_plus_codes,
-            control_links, control_domain_col, None, None
+            links, treatment[['domain', 'code', 'rank', 'domains_plus_codes']],
+            control_links, control[['domain', 'code', 'rank', 'domains_plus_codes']],
         )
         d[loc]['serp_id'] = first_row.serp_id
         sid = SentimentIntensityAnalyzer()
@@ -433,11 +479,11 @@ def main(args, category):
 
     link_types = [
         'results',
-        'tweets',
-        'top_ads',
-        'knowledge_panel',
-        # 'bottom_ads',
-        # 'news'
+        #'tweets',
+        #'top_ads',
+        #'knowledge_panel',
+        # ['results', 'tweets'],
+        # ['results', 'knowledge_panel']
     ]
 
     serp_comps = {}
@@ -447,8 +493,16 @@ def main(args, category):
 
     link_type_to_domains = {}
 
-    for link_type in link_types:        
-        link_type_specific_data = data[data.link_type == link_type]
+    for i, link_type in enumerate(link_types):        
+        if isinstance(link_type, list):
+            mask = data.link_type == link_type[0]
+            for x in link_type:
+                mask = (mask) | (data.link_type == x)
+            link_type_specific_data = data[mask]
+            link_type = '_and_'.join(link_type)
+            link_types[i] = link_type # carry this beyond the for loop
+        else:
+            link_type_specific_data = data[data.link_type == link_type]
         if category in ['trending', 'procon_popular']:
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
         elif category == 'popular':
@@ -507,6 +561,11 @@ def main(args, category):
                                     [link_type, comp_key, 'domain_frac', str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
+                                if comp_key == FULL:
+                                    domain_appears_concat_key = concat_key.replace('_frac', '_appears')
+                                    domain_ranks_concat_key = concat_key.replace('_frac', '_rank')
+                                    serp_comps[sid][domain_appears_concat_key] = tmp[comp_key]['domain_appears'][domain_string]
+                                    serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
                     for code, frac in coded_ugc_fracs.items():
                         concat_key = '_'.join(
                             [link_type, comp_key, 'coded_ugc_frac', str(code)]
@@ -523,16 +582,50 @@ def main(args, category):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
     serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
-    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + list(CODES.keys()))
-    cols_with_nonzero_mean = []
-    for col in cols:
-        if serp_df[col].mean() != 0:
-            cols_with_nonzero_mean.append(col)
+    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + list(CODES.keys()) + [
+        'NewsCarousel', 'MapsPlaces', 'MapsLocations'
+    ])
+    cols_with_nonzero_mean = [
+        x for x in cols if serp_df[x].mean() != 0
+    ]
     serp_df[cols_with_nonzero_mean].describe().to_csv(path2+'/ugcin_serp_df.csv')
-    serp_df[cols_with_nonzero_mean].mean().plot(kind='bar')
+    # nz for non-zero (variable name was too long)
+    results_domain_fracs_cols_nz = [
+        x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_frac' in x
+    ]
+    results_domain_ranks_cols_nz = [
+        x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_rank' in x
+    ]
+    results_domain_appears_cols_nz = [
+        x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_appears' in x
+    ]
+    _, axes1 = plt.subplots(nrows=3)
+    _, axes2 = plt.subplots(nrows=2)
+    _, big_fracs_ax = plt.subplots(nrows=3)
+    for index, subset in enumerate(RESULT_SUBSETS):
+        results_domain_fracs_cols_nz_subset = [
+            x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
+        ]
+        big_fraction_cols = [
+            x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_frac' in x and serp_df[x].mean() > 0.01
+        ]
+        if results_domain_fracs_cols_nz_subset:
+            serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
+                kind='barh', ax=axes1[index], title='Domain Fractions: {}'.format(subset))
+        if big_fraction_cols:
+            serp_df[big_fraction_cols].mean().sort_values().plot(
+                kind='barh', ax=big_fracs_ax[index], title='Big Fractions: {}'.format(subset))
+    serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
+        kind='barh', ax=axes2[0], title='Domain Ranks')
+    serp_df[results_domain_appears_cols_nz].mean().sort_values().plot(
+        kind='barh', ax=axes2[1], title='Domain Appears')
+    
+
+    
 
     outputs, errors = [], []
-    summaries = {key: [] for key in RESULT_SUBSETS}
+    pval_summaries = {key: [] for key in RESULT_SUBSETS}
+    whitelist_summaries = {key: [] for key in RESULT_SUBSETS}
     for link_type in link_types:
         path3 = '{}/{}'.format(path2, link_type)
         cols_to_compare = []
@@ -600,15 +693,21 @@ def main(args, category):
         for comparison in comparisons:
             out, summary, error, query_comparison_lists = comparison.print_results()
             for key in RESULT_SUBSETS:
-                summaries[key] += summary[key]
+                pval_summaries[key] += summary['pval'][key]
+                whitelist_summaries[key] += summary['whitelist'][key]
             outputs += out
             errors += error
 
+        # write out the comparisons
         output_df = pd.DataFrame(outputs)
         output_df.to_csv(path2+ '/comparisons.csv')
+
+        # write out a summary of statistically significant comparisons
         for key in RESULT_SUBSETS:
-            subset_summary_df = pd.DataFrame(summaries[key])
-            subset_summary_df.to_csv(path2 + '/' + key + '_summary.csv')
+            pval_summary_df = pd.DataFrame(pval_summaries[key])
+            pval_summary_df.to_csv(path2 + '/' + key + '_pval_summary.csv')
+            whitelist_summary_df = pd.DataFrame(whitelist_summaries[key])
+            whitelist_summary_df.to_csv(path2 + '/' + key + '_whitelist_summary.csv')
             query_comparison_df = pd.DataFrame(query_comparison_lists[key])
             query_comparison_df.to_csv(path3 + '/' + key +'_query_comparisons.csv')
 
@@ -616,12 +715,12 @@ def main(args, category):
             writer = csv.writer(outfile)        
             for row in errors:
                 writer.writerow([row])
-    plt.show()
+    if args.plot:
+        plt.show()
 
 
 def parse():
     """parse args"""
-    print('parsing...')
     parser = argparse.ArgumentParser(description='Perform anlysis.')
 
     parser.add_argument(
@@ -632,11 +731,13 @@ def parse():
         '--db', help='Name of the database')
     parser.add_argument(
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
+    parser.add_argument(
+        '--plot', dest='plot', help='Whether to plot', action='store_true')
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
     if args.category == 'each':
-        for cat in ['popular', 'trending', 'procon_popular']:    
+        for cat in ['popular', 'trending', 'procon_popular', 'all']:    
             main(args, cat)
     else:
         main(args, args.category)

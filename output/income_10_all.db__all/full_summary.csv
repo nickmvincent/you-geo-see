@@ -1,7 +1,0 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,**results_full_domain_frac_wikipedia.org,380,380,0.099,0.081,1.22,low-income
-1,*results_full_domain_frac_google.com,380,380,0.015,0.009,1.67,low-income
-2,*results_full_domain_frac_facebook.com,380,380,0.034,0.024,1.46,low-income
-3,**results_full_domain_frac_yelp.com,380,380,0.001,0.011,10.27,high-income
-4,*top_ads_full_domain_frac_truecar.com,169,152,0.023,0.004,5.17,low-income
-5,*top_ads_full_domain_frac_lfda.org,169,152,0.036,0.01,3.41,low-income

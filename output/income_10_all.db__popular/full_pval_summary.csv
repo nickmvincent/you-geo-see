@@ -1,0 +1,7 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_full_domain_frac_NewsCarousel,180,180,0.099,0.092,1.07,low-income
+1,*results_full_domain_frac_dominos.com,180,180,0.01,0.03,3.1,high-income
+2,*results_full_domain_frac_facebook.com,180,180,0.066,0.048,1.36,low-income
+3,**results_full_domain_frac_google.com,180,180,0.035,0.015,2.36,low-income
+4,*results_full_domain_frac_wikipedia.org,180,180,0.092,0.075,1.23,low-income
+5,**results_full_domain_frac_yelp.com,180,180,0.002,0.026,11.75,high-income

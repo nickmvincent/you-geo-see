@@ -1,0 +1,6 @@
+,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
+0,*results_full_domain_frac_dominos.com,380,380,0.005,0.014,3.1,high-income
+1,**results_full_domain_frac_google.com,380,380,0.019,0.008,2.3,low-income
+2,*results_full_domain_frac_wikipedia.org,380,380,0.084,0.074,1.14,low-income
+3,**results_full_domain_frac_yelp.com,380,380,0.001,0.012,11.75,high-income
+4,*results_full_domain_frac_facebook.com,380,380,0.031,0.023,1.36,low-income

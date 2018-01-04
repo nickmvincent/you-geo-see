@@ -78,7 +78,7 @@ def main(args):
     elif args.query_source == 'test':
         test = True
         keyword_objs = [{
-            'keyword': 'drinking age',
+            'keyword': 'etiquette',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
