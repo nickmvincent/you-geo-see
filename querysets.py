@@ -178,7 +178,7 @@ TOP_LOANS = [
     'loans bad credit',
     'personal loans',
     'loans online',
-    'quicken loans'
+    'quicken loans',
     'bank loans',
     'quicken',
 ]
