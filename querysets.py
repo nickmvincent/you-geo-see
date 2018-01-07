@@ -197,7 +197,7 @@ TOP_SYMPTOMS = [
     'diabetes symptoms',
     'uti symptomps',
     'anxiety symptoms',
-    'cold symptoms'
+    'cold symptoms',
     'period symptoms',
 ]
 
