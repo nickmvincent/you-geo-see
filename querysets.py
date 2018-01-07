@@ -206,4 +206,7 @@ CURATED = {
     'popular': from_trends_top_query_by_category(),
     'procon_popular': PROCON_POPULAR,
     'procon_a_to_z': PROCON_A_TO_Z,
+    'top_insurance': TOP_INSURANCE,
+    'top_loans': TOP_LOANS,
+    'top_symptoms': TOP_SYMPTOMS,
 }

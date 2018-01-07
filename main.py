@@ -78,7 +78,7 @@ def main(args):
     elif args.query_source == 'test':
         test = True
         keyword_objs = [{
-            'keyword': 'etiquette',
+            'keyword': 'weather',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
@@ -102,6 +102,16 @@ def main(args):
             } for keyword in keywords
         ]
         keyword_objs += from_trends_top_query_by_category(15)
+    elif args.query_source == 'extra':
+        keyword_objs = []
+        for query_source in ['top_insurance', 'top_loans', 'top_symptoms', ]:
+            keywords = CURATED[query_source] 
+            keyword_objs += [
+                {
+                    'keyword': keyword,
+                    'category': query_source,
+                } for keyword in keywords
+            ]
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [
