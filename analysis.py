@@ -11,6 +11,7 @@ from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST, CO
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
@@ -73,27 +74,14 @@ class Comparison():
 
             _, pval = ttest_ind(a, b, equal_var=False)
             if mean_a == mean_b:
-                ret.append({
-                    'column': col,
-                    'winner': None,
-                    'mult_increase': 1,
-                    'mean_a': round(mean_a, 3),
-                    'mean_b': round(mean_b, 3),
-                    'name_a': self.name_a,
-                    'name_b': self.name_b,
-                    'pval': None,
-                    'len(a)': len(a),
-                    'len(b)': len(b),
-                    'n': n,
-                    'mean': mean,
-                })
-                continue
+                larger, smaller = mean_a, mean_b
+                winner = None
             elif mean_a > mean_b:
                 larger, smaller = mean_a, mean_b
-                winner, loser = self.name_a, self.name_b
+                winner = self.name_a
             else:
                 larger, smaller = mean_b, mean_a
-                winner, loser = self.name_b, self.name_a
+                winner = self.name_b
             mult_increase = round(larger / smaller, 2)
             marker = ''
             if pval <= 0.001:
@@ -145,11 +133,16 @@ class Comparison():
                         'column': marker + col,
                         'winner': winner,
                         'mult_inc': mult_increase,
-                        # 'add_inc': round(larger - smaller, 3),
+                        'add_inc': round(larger - smaller, 3),
                         'mean_a': round(mean_a, 3),
                         'mean_b': round(mean_b, 3),
+                        'name_a': self.name_a,
+                        'name_b': self.name_b,
+                        'pval': pval,
                         'len(a)': len(a),
                         'len(b)': len(b),
+                        'n': n,
+                        'mean': mean,
                     })
                     if self.recurse_on_queries:
                         # now mark all the comparisons
@@ -239,11 +232,14 @@ def calc_domain_ranks(cols):
     average rank of a given domain
 
     danger
-    if you every use this with control_domains you should probably double check it
+    if you ever use this with control_domains you should probably double check it
     """
     ret = {}
     domains_dict = cols.domain.value_counts().to_dict()
     for key, val in domains_dict.items():
+        if val == 0:
+            ret[key] = None
+            continue
         matching_rows = cols[cols.domain == key]
         total_rank = sum(matching_rows['rank'])
         ret[key] = total_rank / val
@@ -293,12 +289,8 @@ def compute_serp_features(
         'domain_fracs': calc_domain_fracs(cols.domain, control_cols.domain),
     }
     ret[FULL]['domain_ranks'] = calc_domain_ranks(cols)
-    ret[FULL]['domain_appears'] = {}
-    for key, val in ret[FULL]['domain_fracs'].items():
-        if val > 0:
-            ret[FULL]['domain_appears'][key] = 1
-        else:
-            ret[FULL]['domain_appears'][key] = 0
+    
+    
     ret[TOP_THREE] = {
         'domain_fracs': calc_domain_fracs(
             cols.iloc[:3].domain, control_cols.iloc[:3].domain)
@@ -307,6 +299,13 @@ def compute_serp_features(
         'domain_fracs': calc_domain_fracs(
             cols.iloc[:1].domain, control_cols.iloc[:1].domain)
     }
+    for subset in RESULT_SUBSETS:
+        ret[subset]['domain_appears'] = {}
+        for key, val in ret[subset]['domain_fracs'].items():
+            if val > 0:
+                ret[subset]['domain_appears'][key] = 1
+            else:
+                ret[subset]['domain_appears'][key] = 0
     ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.code, control_cols.code)
     ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:3].code, control_cols.iloc[:3].code)
     ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:1].code, control_cols.iloc[:1].code)
@@ -443,11 +442,13 @@ def prep_paths(db, category):
 
 def main(args, category):
     """Do analysis"""
-    if 'dbs' in args.db:
-        args.db = args.db[4:]
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
-    _, path2 = prep_paths(args.db, category)
+    if 'dbs' in args.db:
+        shortened_db = args.db[4:]
+    else:
+        shortened_db = args.db
+    _, path2 = prep_paths(shortened_db, category)
 
     link_codes_file = 'link_codes.csv'
     twitter_user_codes_file = 'twitter_user_codes.csv'
@@ -503,7 +504,7 @@ def main(args, category):
             link_types[i] = link_type # carry this beyond the for loop
         else:
             link_type_specific_data = data[data.link_type == link_type]
-        if category in ['trending', 'procon_popular']:
+        if category in ['trending', 'procon_popular', 'top_insurance', 'top_loans', 'top_symptoms']:
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
         elif category == 'popular':
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'].isin(POPULAR_CATEGORIES)]
@@ -561,10 +562,11 @@ def main(args, category):
                                     [link_type, comp_key, 'domain_frac', str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
+                                domain_appears_concat_key = concat_key.replace('_frac', '_appears')
+                                serp_comps[sid][domain_appears_concat_key] = tmp[comp_key]['domain_appears'][domain_string]
+                                
                                 if comp_key == FULL:
-                                    domain_appears_concat_key = concat_key.replace('_frac', '_appears')
                                     domain_ranks_concat_key = concat_key.replace('_frac', '_rank')
-                                    serp_comps[sid][domain_appears_concat_key] = tmp[comp_key]['domain_appears'][domain_string]
                                     serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
                     for code, frac in coded_ugc_fracs.items():
                         concat_key = '_'.join(
@@ -582,6 +584,8 @@ def main(args, category):
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
     serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
+
+    # ANCHOR: plotting
     cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + list(CODES.keys()) + [
         'NewsCarousel', 'MapsPlaces', 'MapsLocations'
     ])
@@ -599,33 +603,66 @@ def main(args, category):
     results_domain_appears_cols_nz = [
         x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_appears' in x
     ]
-    _, axes1 = plt.subplots(nrows=3)
-    _, axes2 = plt.subplots(nrows=2)
+    _, domain_fracs_ax = plt.subplots(nrows=3)
+    _, axes2 = plt.subplots(nrows=4)
     _, big_fracs_ax = plt.subplots(nrows=3)
+    _, dist_axes = plt.subplots(nrows=2)
+    _, personalization_ax = plt.subplots(nrows=2)
     for index, subset in enumerate(RESULT_SUBSETS):
         results_domain_fracs_cols_nz_subset = [
             x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
+        ]
+        results_domain_appears_cols_nz_subset = [
+            x for x in results_domain_appears_cols_nz if subset + '_domain_appears' in x
         ]
         big_fraction_cols = [
             x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_frac' in x and serp_df[x].mean() > 0.01
         ]
         if results_domain_fracs_cols_nz_subset:
             serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
-                kind='barh', ax=axes1[index], title='Domain Fractions: {}'.format(subset))
+                kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
+        if results_domain_appears_cols_nz_subset:
+            serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
+                kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
         if big_fraction_cols:
             serp_df[big_fraction_cols].mean().sort_values().plot(
                 kind='barh', ax=big_fracs_ax[index], title='Big Fractions: {}'.format(subset))
     serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
-        kind='barh', ax=axes2[0], title='Domain Ranks')
-    serp_df[results_domain_appears_cols_nz].mean().sort_values().plot(
-        kind='barh', ax=axes2[1], title='Domain Appears')
-    
+        kind='barh', ax=axes2[3], title='Domain Ranks')
 
     
+    sns.set(style="white", palette="muted", color_codes=True)
+    wp_vals = serp_df[
+        'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
+    sns.distplot(
+        wp_vals, bins=list(range(1,13)), norm_hist=True,
+        kde=False, color="b", ax=dist_axes[0]) 
+    dist_axes[0].axvline(wp_vals.mean(), color='b', linestyle='dashed', linewidth=2)
+    try:
+        tw_vals = serp_df[
+            'results_full_domain_rank_UserTweetCarousel'][serp_df['results_full_domain_rank_UserTweetCarousel'].notnull() == True]
+        sns.distplot(
+            tw_vals, bins=list(range(1,13)), norm_hist=True,
+            kde=False, color="g", ax=dist_axes[1])
+        dist_axes[1].axvline(tw_vals.mean(), color='g', linestyle='dashed', linewidth=2)
+    except:
+        pass
+    # PERSONALIZATION
+    jacc_vals = serp_df['results_avg_jacc']
+    sns.distplot(
+        jacc_vals, norm_hist=True,
+        kde=False, color="b", ax=personalization_ax[0])
+    personalization_ax[0].axvline(jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
+    edit_vals = serp_df['results_avg_edit']
+    sns.distplot(
+        edit_vals, norm_hist=True,
+        kde=False, color="g", ax=personalization_ax[1]) 
+    personalization_ax[1].axvline(edit_vals.mean(), color='g', linestyle='dashed', linewidth=2)
 
     outputs, errors = [], []
     pval_summaries = {key: [] for key in RESULT_SUBSETS}
     whitelist_summaries = {key: [] for key in RESULT_SUBSETS}
+    query_comparison_listss = {key: [] for key in RESULT_SUBSETS}
     for link_type in link_types:
         path3 = '{}/{}'.format(path2, link_type)
         cols_to_compare = []
@@ -695,6 +732,7 @@ def main(args, category):
             for key in RESULT_SUBSETS:
                 pval_summaries[key] += summary['pval'][key]
                 whitelist_summaries[key] += summary['whitelist'][key]
+                query_comparison_listss[key] += query_comparison_lists[key]
             outputs += out
             errors += error
 
@@ -703,20 +741,23 @@ def main(args, category):
         output_df.to_csv(path2+ '/comparisons.csv')
 
         # write out a summary of statistically significant comparisons
+        paper_table_list = []
         for key in RESULT_SUBSETS:
+            paper_table_list += pval_summaries[key]
+            paper_table_list += whitelist_summaries[key]
             pval_summary_df = pd.DataFrame(pval_summaries[key])
             pval_summary_df.to_csv(path2 + '/' + key + '_pval_summary.csv')
             whitelist_summary_df = pd.DataFrame(whitelist_summaries[key])
             whitelist_summary_df.to_csv(path2 + '/' + key + '_whitelist_summary.csv')
-            query_comparison_df = pd.DataFrame(query_comparison_lists[key])
+            query_comparison_df = pd.DataFrame(query_comparison_listss[key])
             query_comparison_df.to_csv(path3 + '/' + key +'_query_comparisons.csv')
+        pd.DataFrame(paper_table_list).to_csv(path2+'/paper_table.csv')
 
         with open(path2 + '/errs.csv','w') as outfile:
             writer = csv.writer(outfile)        
             for row in errors:
                 writer.writerow([row])
-    if args.plot:
-        plt.show()
+    
 
 
 def parse():
@@ -736,11 +777,17 @@ def parse():
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
-    if args.category == 'each':
-        for cat in ['popular', 'trending', 'procon_popular', 'all']:    
+    if args.category == 'each_all':
+        for cat in ['popular', 'trending', 'procon_popular']:    
+            main(args, cat)
+    elif args.category == 'each_extra':
+        for cat in ['top_insurance', 'top_loans', 'top_symptoms']:    
             main(args, cat)
     else:
         main(args, args.category)
+    if args.plot:
+        plt.show()
+
 
 
 if __name__ == '__main__':

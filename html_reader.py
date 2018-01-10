@@ -15,15 +15,27 @@ def main(args):
     for filename in os.listdir(args.dir):
         full = os.path.join(args.dir, filename)        
         if filename.endswith(".html") or filename.endswith(".py"): 
-            print(full)
-            files.append(full)
-            input()
+            file_paths.append(full)
         else:
             db = full
-    data, serp_df = get_dataframes(args.db)
-    for file in files:
-
-        webbrowser.open(full)
+    print(db)
+    data, serp_df = get_dataframes(db)
+    for file_path in file_paths:
+        print(file_path)
+        _, after_searched = file_path.split('_searched')
+        after_searched_before_from, after_from = after_searched.split(' from ')
+        query = after_searched_before_from.strip()
+        reported_location = after_from.replace('.html', '').strip()
+        print('*'+query+'*')
+        print('*'+reported_location+'*')
+        rows = serp_df[
+            (serp_df.reported_location==reported_location) 
+            & (serp_df['query']==query)
+        ]
+        print(int(rows.head()['id']))
+        webbrowser.open(file_path)
+        input()
+        
     
 
 
@@ -32,7 +44,10 @@ def parse():
     parser = argparse.ArgumentParser(description='Open web pages to do testing.')
 
     parser.add_argument(
-        '--dir', help='Path to the directory w/ HTML files', default='/')
+        '--dir', help='Path to the directory w/ HTML files',
+        #default='/'
+        default='dbs/urban_rural_extra_tests'
+        )
 
     args = parser.parse_args()
     main(args)

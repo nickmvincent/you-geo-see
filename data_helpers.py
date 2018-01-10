@@ -29,7 +29,8 @@ def get_dataframes(dbname):
     """
     Get rows from the db and convert to dataframes
     """
-    conn = sqlite3.connect('dbs/' + dbname)
+    print(dbname)
+    conn = sqlite3.connect(dbname)
     select_results = (
         """
         SELECT serp.*, link.*, scraper_searches_serps.scraper_search_id from serp INNER JOIN link on serp.id = link.serp_id

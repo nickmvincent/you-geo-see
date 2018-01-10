@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,,results_top_domain_frac_facebook.com,20,0,0.0,0.0,,,20,rural,urban,,urban
+1,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,rural,urban,,urban
+2,,results_top_domain_frac_twitter.com,20,0,0.0,0.0,,,20,rural,urban,,urban
+3,,results_top_domain_frac_youtube.com,20,0,0.0,0.0,,,20,rural,urban,,urban

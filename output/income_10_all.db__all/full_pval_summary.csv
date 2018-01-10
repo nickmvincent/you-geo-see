@@ -1,6 +1,10 @@
-,column,len(a),len(b),mean_a,mean_b,mult_inc,winner
-0,*results_full_domain_frac_dominos.com,380,380,0.005,0.014,3.1,high-income
-1,**results_full_domain_frac_google.com,380,380,0.019,0.008,2.3,low-income
-2,*results_full_domain_frac_wikipedia.org,380,380,0.084,0.074,1.14,low-income
-3,**results_full_domain_frac_yelp.com,380,380,0.001,0.012,11.75,high-income
-4,*results_full_domain_frac_facebook.com,380,380,0.031,0.023,1.36,low-income
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.009,*results_full_domain_frac_google.com,418,342,0.013622977899293688,0.017,0.009,1.96,760,rural,urban,0.0016346907169244793,rural
+1,0.007,*results_full_domain_frac_facebook.com,418,342,0.027067128777655096,0.03,0.023,1.3,760,rural,urban,0.030600972315848515,rural
+2,0.009,*results_full_domain_frac_wikipedia.org,418,342,0.07938061938061937,0.083,0.074,1.12,760,rural,urban,0.009479200218987799,rural
+3,0.011,**results_full_domain_frac_yelp.com,418,342,0.0067802080959975695,0.002,0.013,6.68,760,rural,urban,0.00012631985837676825,urban
+4,0.01,*results_full_domain_frac_dominos.com,380,380,0.009537717399559505,0.005,0.014,3.1,760,low-income,high-income,0.04502541284385066,high-income
+5,0.011,**results_full_domain_frac_google.com,380,380,0.013622977899293688,0.019,0.008,2.3,760,low-income,high-income,0.00014805999262703984,low-income
+6,0.008,*results_full_domain_frac_facebook.com,380,380,0.027067128777655096,0.031,0.023,1.36,760,low-income,high-income,0.010980866263713893,low-income
+7,0.01,*results_full_domain_frac_wikipedia.org,380,380,0.07938061938061938,0.084,0.074,1.14,760,low-income,high-income,0.003379740961155218,low-income
+8,0.011,**results_full_domain_frac_yelp.com,380,380,0.00678020809599757,0.001,0.012,11.75,760,low-income,high-income,9.88922288154277e-06,high-income

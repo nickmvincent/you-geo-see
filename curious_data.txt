@@ -1,0 +1,2 @@
+Histogram of avg_jacc for income_10_all revealed some pages had a jaccard index of around 0.1!!!
+This seemed crazy low. Inspection revelead the query was "dominoe's pizza" and all the results were pages on the dominos domain that referrred to individual locations

@@ -1,54 +1,107 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,mult_increase,n,name_a,name_b,pval,query,winner
-0,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.3,0.233,1.29,,20,low-income,high-income,0.2900334160014484,Domino's Pizza,low-income
-1,0.3,**results_top_three_domain_frac_MapsLocations,10,10,0.18333333333333335,0.033,0.333,10.0,,20,low-income,high-income,8.538051223166254e-06,Bank of America,high-income
-2,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.333,0.2,1.67,,20,low-income,high-income,0.03678749787978607,Toyota,low-income
-3,0.233,**results_top_three_domain_frac_MapsLocations,10,10,0.15,0.033,0.267,8.0,,20,low-income,high-income,0.0006237457011994715,Target Corporation,high-income
-4,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,,20,low-income,high-income,0.16785065605707492,Wells Fargo,high-income
-5,,results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.267,0.267,,1.0,20,low-income,high-income,,Chevrolet,
-6,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.13333333333333336,0.1,0.167,1.67,,20,low-income,high-income,0.38809613338586946,United States Department of Veterans Affairs,high-income
-7,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,,20,low-income,high-income,0.5565650165675339,McDonald's,high-income
-8,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,,20,low-income,high-income,0.16785065605707492,Pizza Hut,high-income
-9,0.167,*results_top_three_domain_frac_MapsLocations,10,10,0.08333333333333333,0.0,0.167,inf,,20,low-income,high-income,0.014956363910414203,abortion,high-income
-10,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,,20,low-income,high-income,0.5565650165675339,Walmart,high-income
-11,,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.3,0.3,,1.0,20,low-income,high-income,,Honda,
-12,0.233,*results_top_three_domain_frac_MapsLocations,10,10,0.11666666666666665,0.0,0.233,inf,,20,low-income,high-income,0.0013229505842674947,medical marijuana,high-income
-13,,results_top_three_domain_frac_MapsLocations,10,10,0.2,0.2,0.2,,1.0,20,low-income,high-income,,Chase Bank,
-14,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,death penalty,
-15,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.08333333333333333,0.167,0.0,inf,,20,low-income,high-income,0.014956363910414203,Domino's Pizza,low-income
-16,0.133,*results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.333,0.2,1.67,,20,low-income,high-income,0.03678749787978607,Bank of America,low-income
-17,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,california fires,
-18,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,US Senate,
-19,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,minimum wage,
-20,0.267,**results_top_three_domain_frac_NewsCarousel,10,10,0.16666666666666669,0.3,0.033,9.0,,20,low-income,high-income,2.292887199439995e-05,Toyota,low-income
-21,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,US Supreme Court,
-22,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Hillary Clinton,
-23,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Donald Trump,
-24,0.067,results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.3,0.233,1.29,,20,low-income,high-income,0.2900334160014484,Wells Fargo,low-income
-25,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.016666666666666666,0.033,0.0,inf,,20,low-income,high-income,0.34343639613791355,Chevrolet,low-income
-26,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,matt lauer,
-27,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,illegal immigration,
-28,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,McDonald's,
-29,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,gun control,
-30,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,al franken,
-31,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.15,0.3,0.0,inf,,20,low-income,high-income,8.538051223166285e-06,Pizza Hut,low-income
-32,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Barack Obama,
-33,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,abortion,
-34,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Amazon,
-35,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333335,0.1,0.267,2.67,,20,low-income,high-income,0.024143272996065522,Walmart,high-income
-36,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,college football playoff,
-37,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,michael flynn,
-38,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,ryan shazier,
-39,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333332,0.333,0.033,10.0,,20,low-income,high-income,8.538051223166254e-06,Honda,low-income
-40,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,eagles,
-41,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,bitcoin price,
-42,,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,medical marijuana,
-43,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.24999999999999994,0.333,0.167,2.0,,20,low-income,high-income,0.014956363910414187,Chase Bank,low-income
-44,0.033,results_top_three_domain_frac_facebook.com,10,10,0.016666666666666666,0.033,0.0,inf,,20,low-income,high-income,0.34343639613791355,Domino's Pizza,low-income
-45,0.267,**results_top_three_domain_frac_facebook.com,10,10,0.13333333333333333,0.267,0.0,inf,,20,low-income,high-income,0.00020249932206764005,Bank of America,low-income
-46,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.24999999999999994,0.167,0.333,2.0,,20,low-income,high-income,0.014956363910414187,Domino's Pizza,high-income
-47,0.3,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.033,0.333,10.0,,20,low-income,high-income,8.538051223166254e-06,Toyota,high-income
-48,,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Donald Trump,
-49,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.2,0.067,0.333,5.0,,20,low-income,high-income,0.00020249932206764027,Pizza Hut,high-income
-50,,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,,1.0,20,low-income,high-income,,Amazon,
-51,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.267,0.1,2.67,,20,low-income,high-income,0.024143272996065522,Walmart,low-income
-52,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.16666666666666669,0.033,0.3,9.0,,20,low-income,high-income,2.292887199439995e-05,Honda,high-income
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.242,**results_top_three_domain_frac_UserTweetCarousel,11,9,0.2,0.091,0.333,3.67,20,rural,urban,0.00042278119360601886,Pizza Hut,urban
+1,0.0,*results_top_three_domain_frac_UserTweetCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Donald Trump,rural
+2,0.199,*results_top_three_domain_frac_UserTweetCarousel,11,9,0.18333333333333332,0.273,0.074,3.68,20,rural,urban,0.006391314481386077,Walmart,rural
+3,0.303,**results_top_three_domain_frac_UserTweetCarousel,11,9,0.16666666666666669,0.03,0.333,11.0,20,rural,urban,1.5895531755964127e-06,Honda,urban
+4,0.0,*results_top_three_domain_frac_UserTweetCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Amazon,rural
+5,0.152,*results_top_three_domain_frac_UserTweetCarousel,11,9,0.24999999999999994,0.182,0.333,1.83,20,rural,urban,0.016197070786617862,Domino's Pizza,urban
+6,0.273,**results_top_three_domain_frac_UserTweetCarousel,11,9,0.18333333333333335,0.061,0.333,5.5,20,rural,urban,5.310182118962637e-05,Toyota,urban
+7,0.242,**results_top_three_domain_frac_facebook.com,11,9,0.13333333333333333,0.242,0.0,inf,20,rural,urban,0.00042278119360601854,Bank of America,rural
+8,0.03,results_top_three_domain_frac_facebook.com,11,9,0.016666666666666666,0.03,0.0,inf,20,rural,urban,0.3408931323020601,Domino's Pizza,rural
+9,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,al franken,rural
+10,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,michael flynn,rural
+11,0.273,**results_top_three_domain_frac_NewsCarousel,11,9,0.15,0.273,0.0,inf,20,rural,urban,5.310182118962637e-05,Pizza Hut,rural
+12,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,US Senate,rural
+13,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,illegal immigration,rural
+14,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Donald Trump,rural
+15,0.03,results_top_three_domain_frac_NewsCarousel,11,9,0.016666666666666666,0.03,0.0,inf,20,rural,urban,0.3408931323020601,Chevrolet,rural
+16,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,medical marijuana,rural
+17,0.205,*results_top_three_domain_frac_NewsCarousel,11,9,0.18333333333333335,0.091,0.296,3.26,20,rural,urban,0.003006465537467892,Walmart,urban
+18,0.333,**results_top_three_domain_frac_NewsCarousel,11,9,0.1833333333333333,0.333,0.0,inf,20,rural,urban,4.037527308640458e-159,Honda,rural
+19,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,minimum wage,rural
+20,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,california fires,rural
+21,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,matt lauer,rural
+22,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Hillary Clinton,rural
+23,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Barack Obama,rural
+24,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,death penalty,rural
+25,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,Amazon,rural
+26,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,abortion,rural
+27,0.185,*results_top_three_domain_frac_NewsCarousel,11,9,0.24999999999999994,0.333,0.148,2.25,20,rural,urban,0.013349063426018683,Chase Bank,rural
+28,0.081,results_top_three_domain_frac_NewsCarousel,11,9,0.2666666666666666,0.303,0.222,1.36,20,rural,urban,0.22469451250111622,Bank of America,rural
+29,0.081,results_top_three_domain_frac_NewsCarousel,11,9,0.2666666666666666,0.303,0.222,1.36,20,rural,urban,0.22469451250111624,Wells Fargo,rural
+30,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,eagles,rural
+31,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,gun control,rural
+32,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,college football playoff,rural
+33,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,US Supreme Court,rural
+34,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,bitcoin price,rural
+35,0.152,*results_top_three_domain_frac_NewsCarousel,11,9,0.08333333333333333,0.152,0.0,inf,20,rural,urban,0.016197070786617876,Domino's Pizza,rural
+36,0.303,**results_top_three_domain_frac_NewsCarousel,11,9,0.16666666666666666,0.303,0.0,inf,20,rural,urban,1.5895531755964102e-06,Toyota,rural
+37,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,ryan shazier,rural
+38,0.0,*results_top_three_domain_frac_NewsCarousel,11,9,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,0.01011955973543371,McDonald's,rural
+39,0.061,results_top_three_domain_frac_MapsLocations,11,9,0.29999999999999993,0.273,0.333,1.22,20,rural,urban,0.16688959581639737,Pizza Hut,urban
+40,0.199,*results_top_three_domain_frac_MapsLocations,11,9,0.15,0.061,0.259,4.28,20,rural,urban,0.006391314481386071,Target Corporation,urban
+41,0.013,results_top_three_domain_frac_MapsLocations,11,9,0.2666666666666666,0.273,0.259,1.05,20,rural,urban,0.835051269316935,Chevrolet,rural
+42,0.259,**results_top_three_domain_frac_MapsLocations,11,9,0.11666666666666665,0.0,0.259,inf,20,rural,urban,0.0007359017195464876,medical marijuana,urban
+43,0.024,results_top_three_domain_frac_MapsLocations,11,9,0.28333333333333327,0.273,0.296,1.09,20,rural,urban,0.6733343737917845,Walmart,urban
+44,0.007,results_top_three_domain_frac_MapsLocations,11,9,0.29999999999999993,0.303,0.296,1.02,20,rural,urban,0.8898042142820453,Honda,rural
+45,0.185,*results_top_three_domain_frac_MapsLocations,11,9,0.08333333333333333,0.0,0.185,inf,20,rural,urban,0.01334906342601871,abortion,urban
+46,0.04,results_top_three_domain_frac_MapsLocations,11,9,0.2,0.182,0.222,1.22,20,rural,urban,0.603685537938679,Chase Bank,urban
+47,0.273,**results_top_three_domain_frac_MapsLocations,11,9,0.18333333333333335,0.061,0.333,5.5,20,rural,urban,5.310182118962637e-05,Bank of America,urban
+48,0.061,results_top_three_domain_frac_MapsLocations,11,9,0.29999999999999993,0.273,0.333,1.22,20,rural,urban,0.16688959581639737,Wells Fargo,urban
+49,0.013,results_top_three_domain_frac_MapsLocations,11,9,0.2666666666666666,0.273,0.259,1.05,20,rural,urban,0.8350512693169356,Domino's Pizza,rural
+50,0.081,results_top_three_domain_frac_MapsLocations,11,9,0.2666666666666666,0.303,0.222,1.36,20,rural,urban,0.22469451250111622,Toyota,rural
+51,0.094,results_top_three_domain_frac_MapsLocations,11,9,0.13333333333333336,0.091,0.185,2.04,20,rural,urban,0.22686638851488228,United States Department of Veterans Affairs,urban
+52,0.091,results_top_three_domain_frac_MapsLocations,11,9,0.28333333333333327,0.242,0.333,1.37,20,rural,urban,0.08155339870160584,McDonald's,urban
+53,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.2,0.067,0.333,5.0,20,low-income,high-income,0.00020249932206764027,Pizza Hut,high-income
+54,0.0,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Donald Trump,
+55,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.267,0.1,2.67,20,low-income,high-income,0.024143272996065522,Walmart,low-income
+56,0.267,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.16666666666666669,0.033,0.3,9.0,20,low-income,high-income,2.292887199439995e-05,Honda,high-income
+57,0.0,results_top_three_domain_frac_UserTweetCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Amazon,
+58,0.167,*results_top_three_domain_frac_UserTweetCarousel,10,10,0.24999999999999994,0.167,0.333,2.0,20,low-income,high-income,0.014956363910414187,Domino's Pizza,high-income
+59,0.3,**results_top_three_domain_frac_UserTweetCarousel,10,10,0.18333333333333335,0.033,0.333,10.0,20,low-income,high-income,8.538051223166254e-06,Toyota,high-income
+60,0.267,**results_top_three_domain_frac_facebook.com,10,10,0.13333333333333333,0.267,0.0,inf,20,low-income,high-income,0.00020249932206764005,Bank of America,low-income
+61,0.033,results_top_three_domain_frac_facebook.com,10,10,0.016666666666666666,0.033,0.0,inf,20,low-income,high-income,0.34343639613791355,Domino's Pizza,low-income
+62,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,al franken,
+63,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,michael flynn,
+64,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.15,0.3,0.0,inf,20,low-income,high-income,8.538051223166285e-06,Pizza Hut,low-income
+65,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,US Senate,
+66,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,illegal immigration,
+67,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Donald Trump,
+68,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.016666666666666666,0.033,0.0,inf,20,low-income,high-income,0.34343639613791355,Chevrolet,low-income
+69,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,medical marijuana,
+70,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333335,0.1,0.267,2.67,20,low-income,high-income,0.024143272996065522,Walmart,high-income
+71,0.3,**results_top_three_domain_frac_NewsCarousel,10,10,0.18333333333333332,0.333,0.033,10.0,20,low-income,high-income,8.538051223166254e-06,Honda,low-income
+72,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,minimum wage,
+73,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,california fires,
+74,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,matt lauer,
+75,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Hillary Clinton,
+76,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Barack Obama,
+77,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,death penalty,
+78,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,Amazon,
+79,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,abortion,
+80,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.24999999999999994,0.333,0.167,2.0,20,low-income,high-income,0.014956363910414187,Chase Bank,low-income
+81,0.133,*results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.333,0.2,1.67,20,low-income,high-income,0.03678749787978607,Bank of America,low-income
+82,0.067,results_top_three_domain_frac_NewsCarousel,10,10,0.2666666666666666,0.3,0.233,1.29,20,low-income,high-income,0.2900334160014484,Wells Fargo,low-income
+83,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,eagles,
+84,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,gun control,
+85,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,college football playoff,
+86,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,US Supreme Court,
+87,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,bitcoin price,
+88,0.167,*results_top_three_domain_frac_NewsCarousel,10,10,0.08333333333333333,0.167,0.0,inf,20,low-income,high-income,0.014956363910414203,Domino's Pizza,low-income
+89,0.267,**results_top_three_domain_frac_NewsCarousel,10,10,0.16666666666666669,0.3,0.033,9.0,20,low-income,high-income,2.292887199439995e-05,Toyota,low-income
+90,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,ryan shazier,
+91,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,low-income,high-income,1.0,McDonald's,
+92,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,20,low-income,high-income,0.16785065605707492,Pizza Hut,high-income
+93,0.233,**results_top_three_domain_frac_MapsLocations,10,10,0.15,0.033,0.267,8.0,20,low-income,high-income,0.0006237457011994715,Target Corporation,high-income
+94,0.0,results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.267,0.267,1.0,20,low-income,high-income,1.0,Chevrolet,
+95,0.233,*results_top_three_domain_frac_MapsLocations,10,10,0.11666666666666665,0.0,0.233,inf,20,low-income,high-income,0.0013229505842674947,medical marijuana,high-income
+96,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,20,low-income,high-income,0.5565650165675339,Walmart,high-income
+97,0.0,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.3,0.3,1.0,20,low-income,high-income,1.0,Honda,
+98,0.167,*results_top_three_domain_frac_MapsLocations,10,10,0.08333333333333333,0.0,0.167,inf,20,low-income,high-income,0.014956363910414203,abortion,high-income
+99,0.0,results_top_three_domain_frac_MapsLocations,10,10,0.2,0.2,0.2,1.0,20,low-income,high-income,1.0,Chase Bank,
+100,0.3,**results_top_three_domain_frac_MapsLocations,10,10,0.18333333333333335,0.033,0.333,10.0,20,low-income,high-income,8.538051223166254e-06,Bank of America,high-income
+101,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,20,low-income,high-income,0.16785065605707492,Wells Fargo,high-income
+102,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.3,0.233,1.29,20,low-income,high-income,0.2900334160014484,Domino's Pizza,low-income
+103,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.333,0.2,1.67,20,low-income,high-income,0.03678749787978607,Toyota,low-income
+104,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.13333333333333336,0.1,0.167,1.67,20,low-income,high-income,0.38809613338586946,United States Department of Veterans Affairs,high-income
+105,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,20,low-income,high-income,0.5565650165675339,McDonald's,high-income

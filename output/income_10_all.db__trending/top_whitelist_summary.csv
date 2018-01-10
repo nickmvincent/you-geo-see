@@ -1,1 +1,13 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_top_domain_frac_UserTweetCarousel,110,90,0.0,0.0,0.0,,200,rural,urban,,
+1,0.0,results_top_domain_frac_wikipedia.org,110,90,0.2,0.2,0.2,1.0,200,rural,urban,1.0,
+2,0.0,results_top_domain_frac_twitter.com,110,90,0.0,0.0,0.0,,200,rural,urban,,
+3,0.0,results_top_domain_frac_SearchTweetCarousel,110,90,0.0,0.0,0.0,,200,rural,urban,,
+4,0.0,results_top_domain_frac_UserTweetCarousel,100,100,0.0,0.0,0.0,,200,low-income,high-income,,
+5,0.0,results_top_domain_frac_wikipedia.org,100,100,0.2,0.2,0.2,1.0,200,low-income,high-income,1.0,
+6,0.0,results_top_domain_frac_twitter.com,100,100,0.0,0.0,0.0,,200,low-income,high-income,,
+7,0.0,results_top_domain_frac_SearchTweetCarousel,100,100,0.0,0.0,0.0,,200,low-income,high-income,,
+8,0.0,results_top_domain_frac_UserTweetCarousel,50,150,0.0,0.0,0.0,,200,GOP,DEM,,
+9,0.0,results_top_domain_frac_wikipedia.org,50,150,0.2,0.2,0.2,1.0,200,GOP,DEM,1.0,
+10,0.0,results_top_domain_frac_twitter.com,50,150,0.0,0.0,0.0,,200,GOP,DEM,,
+11,0.0,results_top_domain_frac_SearchTweetCarousel,50,150,0.0,0.0,0.0,,200,GOP,DEM,,
