@@ -15,7 +15,9 @@ from querysets import (
 import yagmail
 
 
+# In one tab:
 # Xvfb :1 -screen 0 1024x768x16
+# In the tab that will run main.py:
 # export DISPLAY=:1
 
 
@@ -104,7 +106,7 @@ def main(args):
         keyword_objs += from_trends_top_query_by_category(15)
     elif args.query_source == 'extra':
         keyword_objs = []
-        for query_source in ['top_insurance', 'top_loans', 'top_symptoms', ]:
+        for query_source in ['top_insurance', 'top_loans', 'med_sample_first_20', ]:
             keywords = CURATED[query_source] 
             keyword_objs += [
                 {
