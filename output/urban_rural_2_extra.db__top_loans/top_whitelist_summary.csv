@@ -1,2 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,rural,urban,,urban
+1,0.0,results_top_domain_frac_wikipedia.org,10,10,0.0,0.0,0.0,,20,low-income,high-income,,
+2,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,GOP,DEM,,DEM

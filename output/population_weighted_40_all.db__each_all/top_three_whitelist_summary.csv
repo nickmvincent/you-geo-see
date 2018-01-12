@@ -1,0 +1,16 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.013,results_top_three_domain_frac_UserTweetCarousel,836,304,0.04502923976608187,0.041,0.055,1.32,1140,rural,urban,0.09792050936170303,urban
+1,0.0,results_top_three_domain_frac_SearchTweetCarousel,836,304,0.027192982456140352,0.027,0.027,1.01,1140,rural,urban,0.9611321824161333,urban
+2,0.0,results_top_three_domain_frac_twitter.com,836,304,0.03508771929824561,0.035,0.035,1.0,1140,rural,urban,1.0,
+3,0.007,results_top_three_domain_frac_wikipedia.org,836,304,0.14298245614035088,0.145,0.138,1.05,1140,rural,urban,0.5888631471782269,rural
+4,0.005,*results_top_three_domain_frac_facebook.com,836,304,0.004678362573099415,0.006,0.001,5.45,1140,rural,urban,0.009627318075961205,rural
+5,0.002,results_top_three_domain_frac_UserTweetCarousel,494,1026,0.04583333333333334,0.045,0.046,1.04,1520,low-income,high-income,0.7583145117094363,high-income
+6,0.005,results_top_three_domain_frac_SearchTweetCarousel,494,1026,0.027412280701754384,0.031,0.026,1.21,1520,low-income,high-income,0.29901661783295186,low-income
+7,0.004,results_top_three_domain_frac_twitter.com,494,1026,0.03508771929824561,0.032,0.036,1.12,1520,low-income,high-income,0.4678424737159954,high-income
+8,0.001,results_top_three_domain_frac_wikipedia.org,494,1026,0.1412280701754386,0.14,0.142,1.01,1520,low-income,high-income,0.8961097057393541,high-income
+9,0.0,results_top_three_domain_frac_facebook.com,494,1026,0.003728070175438596,0.004,0.004,1.13,1520,low-income,high-income,0.8089298349123417,low-income
+10,0.006,results_top_three_domain_frac_UserTweetCarousel,1292,228,0.04583333333333333,0.045,0.051,1.14,1520,GOP,DEM,0.4649742800707375,DEM
+11,0.004,results_top_three_domain_frac_SearchTweetCarousel,1292,228,0.02741228070175438,0.027,0.031,1.14,1520,GOP,DEM,0.5740615586699223,DEM
+12,0.003,results_top_three_domain_frac_twitter.com,1292,228,0.03508771929824561,0.036,0.032,1.11,1520,GOP,DEM,0.6299628198797966,GOP
+13,0.003,results_top_three_domain_frac_wikipedia.org,1292,228,0.14122807017543856,0.142,0.139,1.02,1520,GOP,DEM,0.8331140973006796,GOP
+14,0.001,results_top_three_domain_frac_facebook.com,1292,228,0.003728070175438597,0.004,0.003,1.32,1520,GOP,DEM,0.679780536606913,GOP

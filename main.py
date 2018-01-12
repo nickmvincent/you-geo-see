@@ -80,7 +80,7 @@ def main(args):
     elif args.query_source == 'test':
         test = True
         keyword_objs = [{
-            'keyword': 'weather',
+            'keyword': 'pizza',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
@@ -151,23 +151,10 @@ def main(args):
     locations = []
 
     if args.comparison == 'test':
-        # counties = ['Cook County', 'Santa Clara County']
-        # for county in counties:
-        #     for _, row in location_df[location_df.NAME == county].iterrows():
-        #         locations.append({
-        #             'engine': 'google',
-        #             'latitude': row.INTPTLAT,
-        #             'longitude': row.INTPTLONG,
-        #             'urban_rural_code': row[URBAN_RURAL_COL],
-        #             'median_income': row[MEDIAN_INCOME_COL],
-        #             'percent_dem': row[VOTING_COL],
-        #             'population_estimate': row[POPULATION_COL],
-        #             'name': row.NAME
-        #         })
         locations.append({
             'engine': 'google',
-            'latitude': 41.8781,
-            'longitude': -87.6298,
+            'latitude': 40.7095,
+            'longitude': -73.9563,
             'urban_rural_code': 1,
             'median_income': 0,
             'percent_dem': 0,

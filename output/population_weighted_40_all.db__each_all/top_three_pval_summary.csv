@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.004,*results_top_three_domain_frac_cnn.com,836,304,0.002631578947368421,0.004,0.0,inf,1140,rural,urban,0.002652119227098574,rural
+1,0.025,*results_top_three_domain_frac_NewsCarousel,836,304,0.2245614035087719,0.231,0.206,1.12,1140,rural,urban,0.019436797638456543,rural
+2,0.005,*results_top_three_domain_frac_facebook.com,836,304,0.004678362573099415,0.006,0.001,5.45,1140,rural,urban,0.009627318075961205,rural
+3,0.022,*results_top_three_domain_frac_MapsLocations,836,304,0.05964912280701754,0.054,0.076,1.41,1140,rural,urban,0.01652639216898907,urban

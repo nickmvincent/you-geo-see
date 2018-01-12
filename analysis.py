@@ -6,7 +6,7 @@ import argparse
 
 from constants import POPULAR_CATEGORIES
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
-from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST, CODES
+from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST
 
 import pandas as pd
 import numpy as np
@@ -444,6 +444,11 @@ def main(args, category):
     """Do analysis"""
     data, serp_df = get_dataframes(args.db)
     data = prep_data(data)
+    categories = list(data['category'].drop_duplicates())
+    print(categories)
+    if category not in categories:
+        print('Skipping category {}'.format(category))
+        return pd.DataFrame()
     if 'dbs' in args.db:
         shortened_db = args.db[4:]
     else:
@@ -475,6 +480,7 @@ def main(args, category):
     data.domains_plus_codes = data.domains_plus_codes.astype('category')
     data.describe(include='all').to_csv(path2+'/data.describe().csv')
     serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
+    serp_df['query'].value_counts().to_csv(path2 + '/values_counts_query.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
     
 
@@ -504,7 +510,10 @@ def main(args, category):
             link_types[i] = link_type # carry this beyond the for loop
         else:
             link_type_specific_data = data[data.link_type == link_type]
-        if category in ['trending', 'procon_popular', 'top_insurance', 'top_loans', 'top_symptoms']:
+        if category in [
+            'trending', 'procon_popular', 'top_insurance', 'top_loans',
+            'med_sample_first_20'
+        ]:
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
         elif category == 'popular':
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'].isin(POPULAR_CATEGORIES)]
@@ -586,7 +595,9 @@ def main(args, category):
     serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
 
     # ANCHOR: plotting
-    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + list(CODES.keys()) + [
+    ret_cols = []
+    # TODO: consider adding something to w/ codes here
+    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + [
         'NewsCarousel', 'MapsPlaces', 'MapsLocations'
     ])
     cols_with_nonzero_mean = [
@@ -621,9 +632,11 @@ def main(args, category):
         if results_domain_fracs_cols_nz_subset:
             serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
                 kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
+            ret_cols += results_domain_appears_cols_nz_subset
         if results_domain_appears_cols_nz_subset:
             serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
                 kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
+            ret_cols += results_domain_appears_cols_nz_subset
         if big_fraction_cols:
             serp_df[big_fraction_cols].mean().sort_values().plot(
                 kind='barh', ax=big_fracs_ax[index], title='Big Fractions: {}'.format(subset))
@@ -631,7 +644,7 @@ def main(args, category):
         kind='barh', ax=axes2[3], title='Domain Ranks')
 
     
-    sns.set(style="white", palette="muted", color_codes=True)
+    sns.set(style="white", palette="colorblind", color_codes=True)
     wp_vals = serp_df[
         'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
     sns.distplot(
@@ -648,12 +661,12 @@ def main(args, category):
     except:
         pass
     # PERSONALIZATION
-    jacc_vals = serp_df['results_avg_jacc']
+    jacc_vals = serp_df[serp_df['results_avg_jacc'].notnull() == True]['results_avg_jacc']
     sns.distplot(
         jacc_vals, norm_hist=True,
         kde=False, color="b", ax=personalization_ax[0])
     personalization_ax[0].axvline(jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
-    edit_vals = serp_df['results_avg_edit']
+    edit_vals = serp_df[serp_df['results_avg_edit'].notnull() == True]['results_avg_edit']
     sns.distplot(
         edit_vals, norm_hist=True,
         kde=False, color="g", ax=personalization_ax[1]) 
@@ -757,6 +770,7 @@ def main(args, category):
             writer = csv.writer(outfile)        
             for row in errors:
                 writer.writerow([row])
+    return serp_df[list(set(ret_cols)) + ['category']]
     
 
 
@@ -777,14 +791,50 @@ def parse():
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
-    if args.category == 'each_all':
-        for cat in ['popular', 'trending', 'procon_popular']:    
-            main(args, cat)
-    elif args.category == 'each_extra':
-        for cat in ['top_insurance', 'top_loans', 'top_symptoms']:    
-            main(args, cat)
+    df = None
+    if args.category == 'each':
+        for cat in ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]:
+            df_for_cat = main(args, cat)
+            if df is None:
+                df = df_for_cat
+            else:
+                df = pd.concat([df, df_for_cat])
     else:
-        main(args, args.category)
+        df = main(args, args.category)
+    row_dicts = []
+    for col in df.columns.values:
+        if col:
+            if '_domain_appears_' in col:
+                # tmp is of the form resulttype_subset
+                # e.g. results_top_three
+                tmp, domain = col.split('_domain_appears_')
+                link_type, subset = None, None
+                for key in RESULT_SUBSETS:
+                    if key + '_domain' in col:
+                        subset = key
+                        link_type = tmp.replace(key, '').strip('_')
+                for _, row in df.iterrows():
+                    row_dict = {
+                        'link_type': link_type,
+                        'subset': subset,
+                        'metric': 'domain_appears',
+                        'domain': domain,
+                        'val':  row[col],
+                        'category': row['category'],
+                    }
+                    row_dicts.append(row_dict)
+            # _, axes = plt.subplots()
+            # sns.barplot(x='category', y=col, data=df, ax=axes)
+    df2 = pd.DataFrame(row_dicts)
+    plt.close('all')
+    _, axes = plt.subplots(nrows=2)
+    row1_mask = (df2.metric == 'domain_appears') & (df2.subset == FULL)
+    row2_mask = (df2.metric == 'domain_appears') & (df2.subset == TOP_THREE)
+    tmpdf = df2[df2.subset == FULL][['domain', 'val']]
+    order = list(tmpdf.groupby('domain').mean().sort_values('val', ascending=False).index)
+    sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row1_mask], ax=axes[0], ci=99)
+    sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row2_mask], ax=axes[1], ci=99)
+
     if args.plot:
         plt.show()
 

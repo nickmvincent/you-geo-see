@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.008,results_full_domain_frac_wikipedia.org,20,16,0.037166537166537165,0.033,0.042,1.25,36,rural,urban,0.5644399592889948,urban
+1,0.008,results_top_three_domain_frac_wikipedia.org,20,16,0.037037037037037035,0.033,0.042,1.25,36,rural,urban,0.821202789301498,urban
+2,0.0,results_top_domain_frac_wikipedia.org,20,16,0.0,0.0,0.0,,36,rural,urban,,

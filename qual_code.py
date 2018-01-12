@@ -12,35 +12,32 @@ import tweepy
 import pandas as pd
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
 
-
-# axes 1: indivudal or organization
-# axes 2: corporate, journalistic, political, or none?
-
-# i = individual
-# o = organization
-
-# 
-# u = unaffiliated
+# axes 1: creative effort?
+# axes 2: made outside professional practice?
+# axes 3: indivudal or organization
+# axes 4: corporate, journalistic, political, or none?
 
 SHORTHAND = {
-    'i': 'individual',
-    'o': 'organization',
-    'n': 'none',
-    'c': 'corporate',
-    'j': 'journalistic',
-    'p': 'political',
-}
-
-
-CODES = {
-    'individual-none': 1,
-    'individual-journalistic': 2,
-    'individual-corporate': 3,
-    'individual-political': 4,
-    'organization-journalistic': 5,
-    'organization-corporate': 6,
-    'organization-political': 7,
-    'organization-none': 8,
+    'creative': {
+        't': 'true',
+        'f': 'false',
+    },
+    'outside_prof': {
+        't': 'true',
+        'f': 'false',
+    },
+    'author': {
+        'i': 'individual',
+        'o': 'organization',
+        'b': 'bot',
+    },
+    'type': {
+        'z': 'other',
+        'n': 'nonprofit',
+        'c': 'corporate',
+        'j': 'journalistic',
+        'p': 'political',
+    }
 }
 
 # this should probably go somewhere else?
@@ -50,7 +47,6 @@ UGC_WHITELIST = [
     'facebook.com',
     'twitter.com',
     'youtube.com',
-    'imdb.com',
     'instagram.com',
     'linkedin.com',
     'KnowledgePanel',
@@ -64,10 +60,6 @@ DOMAINS_TO_CODE = [
 ]
 TWITTER_DOMAIN = 'twitter.com'
 
-# todo strip domains
-# see where most of these Twitter Links go...
-# todo hit Twitter API
-
 START_STRING = '.com/'
 START_STRING_LENGTH = len(START_STRING)
 
@@ -75,7 +67,6 @@ def strip_twitter_screename(link):
     """
     Args: link - a link a twitter page or status
     Returns: the screename of the page/status
-    TODO
     """
     username_starts = link.find(START_STRING) + START_STRING_LENGTH      
     if '/status/' in link:
@@ -101,10 +92,18 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
         print('Showing snippet!')
         print('Snippet:', snippet)
         code = input()
-    while len(code) != 2:
-        print('Please enter a 2 digit code with the following format')
-        print('First character: i (individual) or o (organization')
-        print('Second character: j (journalistic), c (corporate), p (political), or n (none)')
+    while (
+                len(code) != 4 or
+                code[0] not in SHORTHAND['creative'].keys() or
+                code[1] not in SHORTHAND['outside_prof'].keys() or
+                code[2] not in SHORTHAND['author'].keys() or
+                code[3] not in SHORTHAND['type'].keys()
+    ):
+        print('Please enter 4 digits like so:')
+        print('First second character: t (true) or f (false) regarding creative effort')
+        print('Second second character: t (true) or f (false) regarding "outside professional practice"')
+        print('Third character: i (individual), o (organization, or b (bot)')
+        print('Fourth character: j (journalistic), c (corporate), p (political), n (nonprofit), or z (other)')
         print(link)
         code = input()
     code_str = SHORTHAND[code[0]] + '-' + SHORTHAND[code[1]]
@@ -188,9 +187,6 @@ def main(args):
     else:
         csv_name = args.csv
     data.to_csv(csv_name)
-
-    
-
 
 
 def parse():

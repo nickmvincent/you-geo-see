@@ -1,4 +1,10 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,,results_full_domain_frac_wikipedia.org,20,0,0.0401098901098901,0.04,,,20,rural,urban,,urban
-1,,results_top_three_domain_frac_wikipedia.org,20,0,0.03333333333333333,0.033,,,20,rural,urban,,urban
-2,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,rural,urban,,urban
+1,0.008,results_full_domain_frac_wikipedia.org,10,10,0.0401098901098901,0.036,0.044,1.21,20,low-income,high-income,0.7810739473973479,high-income
+2,,results_full_domain_frac_wikipedia.org,20,0,0.0401098901098901,0.04,,,20,GOP,DEM,,DEM
+3,,results_top_three_domain_frac_wikipedia.org,20,0,0.03333333333333333,0.033,,,20,rural,urban,,urban
+4,0.0,results_top_three_domain_frac_wikipedia.org,10,10,0.03333333333333333,0.033,0.033,1.0,20,low-income,high-income,1.0,
+5,,results_top_three_domain_frac_wikipedia.org,20,0,0.03333333333333333,0.033,,,20,GOP,DEM,,DEM
+6,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,rural,urban,,urban
+7,0.0,results_top_domain_frac_wikipedia.org,10,10,0.0,0.0,0.0,,20,low-income,high-income,,
+8,,results_top_domain_frac_wikipedia.org,20,0,0.0,0.0,,,20,GOP,DEM,,DEM
