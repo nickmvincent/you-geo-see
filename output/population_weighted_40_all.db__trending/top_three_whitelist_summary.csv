@@ -1,5 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_top_three_domain_frac_wikipedia.org,220,80,0.2,0.2,0.2,1.0,300,rural,urban,0.9999999999999984,rural
-1,0.0,results_top_three_domain_frac_wikipedia.org,130,270,0.2,0.2,0.2,1.0,400,low-income,high-income,0.9999999999999972,high-income
-2,0.0,results_and_knowledge_panel_top_three_domain_frac_wikipedia.org,220,80,0.2,0.2,0.2,1.0,300,rural,urban,0.9999999999999984,rural
-3,0.0,results_and_knowledge_panel_top_three_domain_frac_wikipedia.org,130,270,0.2,0.2,0.2,1.0,400,low-income,high-income,0.9999999999999972,high-income

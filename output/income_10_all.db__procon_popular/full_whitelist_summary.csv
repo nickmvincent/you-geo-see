@@ -1,7 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.002,results_full_domain_frac_youtube.com,110,90,0.01807692307692308,0.019,0.017,1.1,200,rural,urban,0.7928770271551353,rural
-1,0.001,results_full_domain_frac_wikipedia.org,110,90,0.07878205128205126,0.079,0.078,1.02,200,rural,urban,0.8028781355194021,rural
-2,0.004,results_full_domain_frac_youtube.com,100,100,0.018076923076923077,0.02,0.016,1.24,200,low-income,high-income,0.5684424599726223,low-income
-3,0.001,results_full_domain_frac_wikipedia.org,100,100,0.07878205128205126,0.079,0.078,1.02,200,low-income,high-income,0.7829143545782267,low-income
-4,0.005,results_full_domain_frac_youtube.com,50,150,0.01807692307692308,0.022,0.017,1.27,200,GOP,DEM,0.5760638253049943,GOP
-5,0.0,results_full_domain_frac_wikipedia.org,50,150,0.07878205128205126,0.079,0.079,1.0,200,GOP,DEM,0.9481403038253511,DEM

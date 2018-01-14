@@ -1,0 +1,2 @@
+CAreful about urban-rural vs urban_rural in main.py
+Doing urban_rural throws NO ERROR - it just randomly samples from the whole distribution. OK for testing but not for the experiments!

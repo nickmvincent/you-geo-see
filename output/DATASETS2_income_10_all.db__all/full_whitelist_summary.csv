@@ -1,4 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.014,**results_full_domain_frac_wikipedia.org,380,380,0.07779669526380052,0.085,0.071,1.21,760,low-income,high-income,0.00014109897242632323,low-income
-1,0.011,*results_full_domain_frac_facebook.com,380,380,0.028943370226264958,0.034,0.024,1.46,760,low-income,high-income,0.0038032969111917283,low-income
-2,0.003,results_full_domain_frac_UserTweetCarousel,380,380,0.03470372463793516,0.036,0.033,1.08,760,low-income,high-income,0.452419858716654,low-income

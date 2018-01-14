@@ -11,14 +11,12 @@ def load_coded_as_dicts(link_codes_file, twitter_user_codes_file):
     try:
         link_codes_df = pd.read_csv(link_codes_file)
         link_codes = pd.Series(link_codes_df.code_str.values, index=link_codes_df.key).to_dict()
-        print(link_codes)
     except FileNotFoundError:
         print('Could not load {} creating empty dict'.format(link_codes_file))
         link_codes = {}
     try:
         twitter_user_codes_df = pd.read_csv(twitter_user_codes_file)
         twitter_user_codes = pd.Series(twitter_user_codes_df.code_str.values, index=twitter_user_codes_df.key).to_dict()
-        print(twitter_user_codes)
     except FileNotFoundError:
         print('Could not load {} creating empty dict'.format(twitter_user_codes_file))
         twitter_user_codes = {}
@@ -29,7 +27,6 @@ def get_dataframes(dbname):
     """
     Get rows from the db and convert to dataframes
     """
-    print(dbname)
     conn = sqlite3.connect(dbname)
     select_results = (
         """

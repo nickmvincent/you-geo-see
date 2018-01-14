@@ -440,19 +440,24 @@ def prep_paths(db, category):
     return path1, path2
 
 
-def main(args, category):
+def main(args, db, category):
     """Do analysis"""
-    data, serp_df = get_dataframes(args.db)
+    data, serp_df = get_dataframes(db)
     data = prep_data(data)
+    if args.group_popular:
+        pop_mask = serp_df['category'].isin(POPULAR_CATEGORIES)
+        serp_df.loc[pop_mask, 'category'] = 'popular'
+        pop_mask = data['category'].isin(POPULAR_CATEGORIES)
+        data.loc[pop_mask, 'category'] = 'popular'
     categories = list(data['category'].drop_duplicates())
     print(categories)
     if category not in categories:
         print('Skipping category {}'.format(category))
         return pd.DataFrame()
-    if 'dbs' in args.db:
-        shortened_db = args.db[4:]
+    if 'dbs' in db:
+        shortened_db = db[4:]
     else:
-        shortened_db = args.db
+        shortened_db = db
     _, path2 = prep_paths(shortened_db, category)
 
     link_codes_file = 'link_codes.csv'
@@ -511,12 +516,10 @@ def main(args, category):
         else:
             link_type_specific_data = data[data.link_type == link_type]
         if category in [
-            'trending', 'procon_popular', 'top_insurance', 'top_loans',
+            'trending', 'procon_popular', 'popular', 'top_insurance', 'top_loans',
             'med_sample_first_20'
         ]:
             link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
-        elif category == 'popular':
-            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'].isin(POPULAR_CATEGORIES)]
         path3 = '{}/{}'.format(path2, link_type)
         try:
             os.mkdir(path3)
@@ -767,7 +770,7 @@ def main(args, category):
         pd.DataFrame(paper_table_list).to_csv(path2+'/paper_table.csv')
 
         with open(path2 + '/errs.csv','w') as outfile:
-            writer = csv.writer(outfile)        
+            writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
     return serp_df[list(set(ret_cols)) + ['category']]
@@ -781,27 +784,30 @@ def parse():
     parser.add_argument(
         '--comparison', help='What comparison to do', default='all')
     parser.add_argument(
-        '--category', help='Which category to include in the analysis', default='all')
+        '--category', help='Which category to include in the analysis', default='each')
     parser.add_argument(
-        '--db', help='Name of the database')
+        '--db', help='Name of the database(s)', nargs='?', required=True)
     parser.add_argument(
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
     parser.add_argument(
         '--plot', dest='plot', help='Whether to plot', action='store_true')
+    parser.add_argument(
+        '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
     df = None
-    if args.category == 'each':
-        for cat in ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]:
-            df_for_cat = main(args, cat)
-            if df is None:
-                df = df_for_cat
-            else:
-                df = pd.concat([df, df_for_cat])
-    else:
-        df = main(args, args.category)
-    row_dicts = []
+    for db in args.db:
+        if args.category == 'each':
+            for cat in ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]:
+                df_for_cat = main(args, db, cat)
+                if df is None:
+                    df = df_for_cat
+                else:
+                    df = pd.concat([df, df_for_cat])
+        else:
+            df = main(args, db, args.category)
+        row_dicts = []
     for col in df.columns.values:
         if col:
             if '_domain_appears_' in col:

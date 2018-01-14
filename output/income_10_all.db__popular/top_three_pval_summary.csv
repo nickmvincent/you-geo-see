@@ -1,9 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.04,*results_top_three_domain_frac_MapsLocations,198,162,0.16296296296296295,0.145,0.185,1.28,360,rural,urban,0.022127577102425272,urban
-1,0.068,**results_top_three_domain_frac_NewsCarousel,198,162,0.21666666666666667,0.247,0.179,1.38,360,rural,urban,5.3311924022734174e-05,rural
-2,0.015,*results_top_three_domain_frac_facebook.com,198,162,0.008333333333333333,0.015,0.0,inf,360,rural,urban,0.0024990309277761395,rural
-3,0.043,*results_top_three_domain_frac_UserTweetCarousel,198,162,0.09166666666666666,0.072,0.115,1.59,360,rural,urban,0.00733453928180042,urban
-4,0.011,*results_top_three_domain_frac_yellowpages.com,198,162,0.006481481481481482,0.002,0.012,7.33,360,rural,urban,0.043170548978877406,urban
-5,0.07,**results_top_three_domain_frac_NewsCarousel,180,180,0.21666666666666667,0.252,0.181,1.39,360,low-income,high-income,2.277148679154833e-05,low-income
-6,0.017,*results_top_three_domain_frac_facebook.com,180,180,0.008333333333333333,0.017,0.0,inf,360,low-income,high-income,0.0024790405779731048,low-income
-7,0.046,*results_top_three_domain_frac_UserTweetCarousel,180,180,0.09166666666666666,0.069,0.115,1.68,360,low-income,high-income,0.003095046393233596,high-income
