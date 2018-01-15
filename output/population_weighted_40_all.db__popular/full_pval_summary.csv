@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.006,*results_full_domain_frac_yelp.com,396,144,0.005004064865175977,0.003,0.01,2.88,540,rural,urban,0.046072347321351834,urban
+1,0.012,*results_full_domain_frac_facebook.com,396,144,0.06542672348227904,0.069,0.056,1.22,540,rural,urban,0.01819749989115528,rural
+2,0.006,*results_full_domain_frac_linkedin.com,396,144,0.007561060338838117,0.009,0.003,3.11,540,rural,urban,0.004262692098634073,rural
+3,0.015,*results_full_domain_frac_wikipedia.org,396,144,0.0805304263637597,0.085,0.069,1.22,540,rural,urban,0.0016225809782320789,rural

@@ -27,6 +27,7 @@ def get_dataframes(dbname):
     """
     Get rows from the db and convert to dataframes
     """
+    print('dbname,', dbname)
     conn = sqlite3.connect(dbname)
     select_results = (
         """
@@ -113,3 +114,11 @@ def prep_data(data):
     data.raw_domain = data.raw_domain.astype('category')
     data.domain = data.domain.astype('category')
     return data
+
+
+def set_or_concat(df, newdf):
+    if df is None:
+        ret = newdf
+    else:
+        ret = pd.concat([df, newdf])
+    return ret

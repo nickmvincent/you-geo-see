@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_top_three_domain_frac_UserTweetCarousel,100,100,0.0,0.0,0.0,,200,rural,urban,,
+1,0.0,results_top_three_domain_frac_wikipedia.org,100,100,0.16666666666666663,0.167,0.167,1.0,200,rural,urban,1.0,
+2,0.0,results_top_three_domain_frac_twitter.com,100,100,0.06666666666666667,0.067,0.067,1.0,200,rural,urban,1.0,

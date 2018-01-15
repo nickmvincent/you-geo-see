@@ -1,0 +1,16 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.267,**results_top_three_domain_frac_progressive.insurance,9,10,0.19298245614035087,0.333,0.067,5.0,19,low-income,high-income,0.0002024993220676408,progressive insurance,low-income
+1,0.2,*results_top_three_domain_frac_uhc.com,10,10,0.1,0.2,0.0,inf,20,low-income,high-income,0.005121072764272635,health insurance,low-income
+2,0.133,results_top_three_domain_frac_google.com,10,10,0.16666666666666669,0.233,0.1,2.33,20,low-income,high-income,0.08055387210850923,progressive,low-income
+3,0.115,results_top_three_domain_frac_google.com,9,10,0.08771929824561403,0.148,0.033,4.44,19,low-income,high-income,0.11248459321957328,geico insurance,low-income
+4,0.148,*results_top_three_domain_frac_safeauto.com,9,10,0.07017543859649122,0.148,0.0,inf,19,low-income,high-income,0.03526520347508,auto insurance,low-income
+5,0.167,*results_top_three_domain_frac_thegeneral.com,8,10,0.07407407407407407,0.167,0.0,inf,18,low-income,high-income,0.03314550026377369,car insurance,low-income
+6,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.11666666666666665,0.1,0.133,1.33,20,low-income,high-income,0.6600791471799283,progressive,high-income
+7,0.156,*results_top_three_domain_frac_MapsLocations,9,10,0.1929824561403509,0.111,0.267,2.4,19,low-income,high-income,0.04421485795572501,auto insurance,high-income
+8,0.2,*results_top_three_domain_frac_MapsLocations,9,10,0.10526315789473684,0.0,0.2,inf,19,low-income,high-income,0.005121072764272635,progressive insurance,high-income
+9,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.016666666666666666,0.0,0.033,inf,20,low-income,high-income,0.34343639613791355,home insurance,high-income
+10,0.117,results_top_three_domain_frac_MapsLocations,8,10,0.14814814814814814,0.083,0.2,2.4,18,low-income,high-income,0.14988130495720964,car insurance,high-income
+11,0.267,**results_top_three_domain_frac_MapsLocations,9,10,0.14035087719298245,0.0,0.267,inf,19,low-income,high-income,0.00020249932206764005,geico insurance,high-income
+12,0.0,*results_top_three_domain_frac_MapsLocations,9,10,0.33333333333333326,0.333,0.333,1.0,19,low-income,high-income,0.014956363910414203,insurance companies,high-income
+13,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.03333333333333333,0.0,0.067,inf,20,low-income,high-income,0.16785065605707486,geico,high-income
+14,0.3,**results_top_three_domain_frac_wikipedia.org,10,10,0.18333333333333332,0.333,0.033,10.0,20,low-income,high-income,8.538051223166254e-06,geico,low-income

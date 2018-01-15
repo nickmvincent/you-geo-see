@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.188,**results_top_three_domain_frac_rocketloans.com,23,7,0.14444444444444443,0.188,0.0,inf,30,rural,urban,2.2785535363600537e-05,personal loans,rural
+1,0.174,**results_top_three_domain_frac_debt.org,23,7,0.13333333333333333,0.174,0.0,inf,30,rural,urban,6.73043204786012e-05,personal loans,rural
+2,0.136,*results_top_three_domain_frac_avant.com,19,21,0.14166666666666666,0.07,0.206,2.94,40,low-income,high-income,0.007655251559493057,personal loans,high-income

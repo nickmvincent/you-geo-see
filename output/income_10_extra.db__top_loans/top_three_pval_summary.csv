@@ -1,0 +1,2 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.024,*results_top_three_domain_frac_santanderbank.com,97,100,0.018612521150592216,0.031,0.007,4.64,197,low-income,high-income,0.02805108735781931,low-income

@@ -1,0 +1,11 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.019,*results_full_domain_frac_MapsLocations,99,97,0.03959284762856192,0.03,0.049,1.64,196,rural,urban,0.00160396047235378,urban
+1,0.005,results_full_domain_frac_wikipedia.org,99,97,0.03233628616281677,0.03,0.035,1.16,196,rural,urban,0.5526665687604599,urban
+2,0.0,results_full_domain_frac_UserTweetCarousel,99,97,0.02897230320699708,0.029,0.029,1.01,196,rural,urban,0.9780094410399301,urban
+3,0.02,*results_top_three_domain_frac_rocketloans.com,99,97,0.01020408163265306,0.02,0.0,inf,196,rural,urban,0.013548993007448303,rural
+4,0.001,results_top_three_domain_frac_wikipedia.org,99,97,0.03401360544217687,0.034,0.034,1.02,196,rural,urban,0.9618380267871462,urban
+5,0.001,results_top_three_domain_frac_UserTweetCarousel,99,97,0.06802721088435373,0.067,0.069,1.02,196,rural,urban,0.9427019427338039,urban
+6,0.061,*results_top_domain_frac_rocketloans.com,99,97,0.030612244897959183,0.061,0.0,inf,196,rural,urban,0.013548993007448336,rural
+7,0.04,*results_top_domain_frac_santanderbank.com,99,97,0.02040816326530612,0.04,0.0,inf,196,rural,urban,0.044928744272077145,rural
+8,0.0,results_top_domain_frac_wikipedia.org,99,97,0.0,0.0,0.0,,196,rural,urban,,
+9,0.0,results_top_domain_frac_UserTweetCarousel,99,97,0.0,0.0,0.0,,196,rural,urban,,

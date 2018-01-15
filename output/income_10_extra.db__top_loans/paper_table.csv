@@ -1,0 +1,9 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.022,**results_full_domain_frac_MapsLocations,97,100,0.044365955533468227,0.033,0.055,1.65,197,low-income,high-income,0.0008632225884140078,high-income
+1,0.0,results_full_domain_frac_wikipedia.org,97,100,0.036881054647552106,0.037,0.037,1.0,197,low-income,high-income,0.983677721935868,low-income
+2,0.002,results_full_domain_frac_UserTweetCarousel,97,100,0.03027556200145032,0.031,0.029,1.08,197,low-income,high-income,0.7944690208135217,low-income
+3,0.024,*results_top_three_domain_frac_santanderbank.com,97,100,0.018612521150592216,0.031,0.007,4.64,197,low-income,high-income,0.02805108735781931,low-income
+4,0.001,results_top_three_domain_frac_wikipedia.org,97,100,0.03384094754653131,0.034,0.033,1.03,197,low-income,high-income,0.9430915785190193,low-income
+5,0.002,results_top_three_domain_frac_UserTweetCarousel,97,100,0.0676818950930626,0.069,0.067,1.03,197,low-income,high-income,0.9146341840498927,low-income
+6,0.0,results_top_domain_frac_wikipedia.org,97,100,0.0,0.0,0.0,,197,low-income,high-income,,
+7,0.0,results_top_domain_frac_UserTweetCarousel,97,100,0.0,0.0,0.0,,197,low-income,high-income,,

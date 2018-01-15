@@ -1,0 +1,3 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.016,**results_full_domain_frac_debt.org,95,100,0.012306496921881536,0.021,0.004,4.7,195,GOP,DEM,0.0001916857736035901,GOP
+1,0.044,**results_full_domain_frac_MapsLocations,95,100,0.03083945968561353,0.008,0.052,6.29,195,GOP,DEM,3.18883190465286e-14,DEM

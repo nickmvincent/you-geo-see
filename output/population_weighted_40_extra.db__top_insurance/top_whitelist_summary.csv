@@ -1,0 +1,13 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_top_domain_frac_UserTweetCarousel,230,70,0.0,0.0,0.0,,300,rural,urban,,
+1,0.0,results_top_domain_frac_youtube.com,230,70,0.0,0.0,0.0,,300,rural,urban,,
+2,0.0,results_top_domain_frac_wikipedia.org,230,70,0.0,0.0,0.0,,300,rural,urban,,
+3,0.0,results_top_domain_frac_facebook.com,230,70,0.0,0.0,0.0,,300,rural,urban,,
+4,0.0,results_top_domain_frac_UserTweetCarousel,190,206,0.0,0.0,0.0,,396,low-income,high-income,,
+5,0.0,results_top_domain_frac_youtube.com,190,206,0.0,0.0,0.0,,396,low-income,high-income,,
+6,0.0,results_top_domain_frac_wikipedia.org,190,206,0.0,0.0,0.0,,396,low-income,high-income,,
+7,0.0,results_top_domain_frac_facebook.com,190,206,0.0,0.0,0.0,,396,low-income,high-income,,
+8,0.0,results_top_domain_frac_UserTweetCarousel,340,56,0.0,0.0,0.0,,396,GOP,DEM,,
+9,0.0,results_top_domain_frac_youtube.com,340,56,0.0,0.0,0.0,,396,GOP,DEM,,
+10,0.0,results_top_domain_frac_wikipedia.org,340,56,0.0,0.0,0.0,,396,GOP,DEM,,
+11,0.0,results_top_domain_frac_facebook.com,340,56,0.0,0.0,0.0,,396,GOP,DEM,,

@@ -5,6 +5,7 @@ import argparse
 from pprint import pprint
 import time
 import os
+from datetime import datetime
 
 import pandas as pd
 from querysets import (
@@ -29,6 +30,7 @@ if platform.system() == 'Windows':
 else:
     sys.path.append("../SerpScrap")
     CHROME_PATH = '../chromedriver'
+    CHROMEDRIVER_LOG = '../cd.log'
     PHANT_PATH = '../phantomjs'
 import serpscrap
 
@@ -71,7 +73,8 @@ def load_locations():
 def main(args):
     """main driver"""
     test = False
-    dbname = './tmp/{}_{}_{}'.format(
+    dbname = './tmp/{}_{}_{}_{}'.format(
+        datetime.now(),
         args.comparison, args.num_locations, args.query_source)
     if args.query_source == 'trends':
         keyword_objs = from_trends_top_query_by_category()
@@ -131,6 +134,7 @@ def main(args):
     if VERSION == 'chrome':
         config.set('sel_browser', 'chrome')
         config.set('executable_path', CHROME_PATH)
+        config.set('chromedriver_log', CHROMEDRIVER_LOG)
     else:
         config.set('executable_path',
                    PHANT_PATH)

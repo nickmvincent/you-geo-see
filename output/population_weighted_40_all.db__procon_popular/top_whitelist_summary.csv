@@ -1,0 +1,7 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_top_domain_frac_youtube.com,220,80,0.0,0.0,0.0,,300,rural,urban,,
+1,0.0,results_top_domain_frac_wikipedia.org,220,80,0.2,0.2,0.2,1.0,300,rural,urban,1.0,
+2,0.0,results_top_domain_frac_youtube.com,130,270,0.0,0.0,0.0,,400,low-income,high-income,,
+3,0.0,results_top_domain_frac_wikipedia.org,130,270,0.2,0.2,0.2,1.0,400,low-income,high-income,1.0,
+4,0.0,results_top_domain_frac_youtube.com,340,60,0.0,0.0,0.0,,400,GOP,DEM,,
+5,0.0,results_top_domain_frac_wikipedia.org,340,60,0.2,0.2,0.2,1.0,400,GOP,DEM,1.0,

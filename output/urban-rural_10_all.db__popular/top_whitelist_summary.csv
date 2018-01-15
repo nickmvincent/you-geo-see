@@ -1,0 +1,7 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_top_domain_frac_facebook.com,180,180,0.0,0.0,0.0,,360,rural,urban,,
+1,0.0,results_top_domain_frac_wikipedia.org,180,180,0.0,0.0,0.0,,360,rural,urban,,
+2,0.0,results_top_domain_frac_twitter.com,180,180,0.0,0.0,0.0,,360,rural,urban,,
+3,0.0,results_top_domain_frac_SearchTweetCarousel,180,180,0.0,0.0,0.0,,360,rural,urban,,
+4,0.0,results_top_domain_frac_UserTweetCarousel,180,180,0.0,0.0,0.0,,360,rural,urban,,
+5,0.0,results_top_domain_frac_instagram.com,180,180,0.0,0.0,0.0,,360,rural,urban,,

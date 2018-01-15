@@ -1,0 +1,17 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.016,*results_full_domain_frac_MapsLocations,230,70,0.03677447552447552,0.033,0.049,1.48,300,rural,urban,0.010362260925184389,urban
+1,0.009,*results_full_domain_frac_debt.org,230,70,0.011771561771561773,0.014,0.005,2.65,300,rural,urban,0.010273141408076152,rural
+2,0.005,results_full_domain_frac_wikipedia.org,230,70,0.03071336996336996,0.032,0.027,1.18,300,rural,urban,0.5446221768691897,rural
+3,0.004,results_full_domain_frac_wikipedia.org,190,207,0.029520164973565476,0.032,0.027,1.16,397,low-income,high-income,0.45660312535771075,low-income
+4,0.004,results_full_domain_frac_wikipedia.org,340,57,0.02952016497356548,0.03,0.027,1.13,397,GOP,DEM,0.6659566464933351,GOP
+5,0.019,**results_top_three_domain_frac_rocketloans.com,230,70,0.014444444444444444,0.019,0.0,inf,300,rural,urban,0.0002661503783764722,rural
+6,0.017,**results_top_three_domain_frac_debt.org,230,70,0.013333333333333334,0.017,0.0,inf,300,rural,urban,0.0004667192985173523,rural
+7,0.014,*results_top_three_domain_frac_avant.com,190,207,0.014273719563392106,0.007,0.021,2.98,397,low-income,high-income,0.03635449333381716,high-income
+8,0.001,results_top_three_domain_frac_wikipedia.org,230,70,0.05333333333333333,0.054,0.052,1.02,300,rural,urban,0.9408218416717692,rural
+9,0.001,results_top_three_domain_frac_wikipedia.org,190,207,0.05373635600335853,0.054,0.053,1.02,397,low-income,high-income,0.9197040420268683,low-income
+10,0.008,results_top_three_domain_frac_wikipedia.org,340,57,0.05373635600335853,0.055,0.047,1.17,397,GOP,DEM,0.6316219135454464,GOP
+11,0.057,**results_top_domain_frac_rocketloans.com,230,70,0.043333333333333335,0.057,0.0,inf,300,rural,urban,0.00026615037837647224,rural
+12,0.026,*results_top_domain_frac_santanderbank.com,340,57,0.022670025188916875,0.026,0.0,inf,397,GOP,DEM,0.002582701092114697,GOP
+13,0.0,results_top_domain_frac_wikipedia.org,230,70,0.0,0.0,0.0,,300,rural,urban,,
+14,0.0,results_top_domain_frac_wikipedia.org,190,207,0.0,0.0,0.0,,397,low-income,high-income,,
+15,0.0,results_top_domain_frac_wikipedia.org,340,57,0.0,0.0,0.0,,397,GOP,DEM,,

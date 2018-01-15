@@ -5,7 +5,7 @@ import csv
 import argparse
 
 from constants import POPULAR_CATEGORIES
-from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
+from data_helpers import get_dataframes, load_coded_as_dicts, prep_data, set_or_concat
 from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST
 
 import pandas as pd
@@ -453,7 +453,7 @@ def main(args, db, category):
     print(categories)
     if category not in categories:
         print('Skipping category {}'.format(category))
-        return pd.DataFrame()
+        return None, None
     if 'dbs' in db:
         shortened_db = db[4:]
     else:
@@ -679,6 +679,7 @@ def main(args, db, category):
     pval_summaries = {key: [] for key in RESULT_SUBSETS}
     whitelist_summaries = {key: [] for key in RESULT_SUBSETS}
     query_comparison_listss = {key: [] for key in RESULT_SUBSETS}
+    comparison_df = None
     for link_type in link_types:
         path3 = '{}/{}'.format(path2, link_type)
         cols_to_compare = []
@@ -767,14 +768,22 @@ def main(args, db, category):
             whitelist_summary_df.to_csv(path2 + '/' + key + '_whitelist_summary.csv')
             query_comparison_df = pd.DataFrame(query_comparison_listss[key])
             query_comparison_df.to_csv(path3 + '/' + key +'_query_comparisons.csv')
-        pd.DataFrame(paper_table_list).to_csv(path2+'/paper_table.csv')
+
+            if not whitelist_summary_df.empty and not pval_summary_df.empty:
+                merged = pd.merge(whitelist_summary_df, pval_summary_df, on='column')
+                merged.loc['subset'] = key
+                comparison_df = set_or_concat(comparison_df, merged)
+
+        pd.DataFrame(paper_table_list).to_csv(path3+'/paper_table.csv')
 
         with open(path2 + '/errs.csv','w') as outfile:
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
-    return serp_df[list(set(ret_cols)) + ['category']]
-    
+    importance_df = serp_df[list(set(ret_cols)) + ['category']]
+    if comparison_df is not None:
+        comparison_df.loc['category'] = category
+    return comparison_df, importance_df
 
 
 def parse():
@@ -786,7 +795,7 @@ def parse():
     parser.add_argument(
         '--category', help='Which category to include in the analysis', default='each')
     parser.add_argument(
-        '--db', help='Name of the database(s)', nargs='?', required=True)
+        '--db', help='Name of the database(s)', nargs='+', required=True)
     parser.add_argument(
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
     parser.add_argument(
@@ -796,17 +805,20 @@ def parse():
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
+    print(args.db)
+    comparison_df = None
     df = None
     for db in args.db:
         if args.category == 'each':
             for cat in ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]:
-                df_for_cat = main(args, db, cat)
-                if df is None:
-                    df = df_for_cat
-                else:
-                    df = pd.concat([df, df_for_cat])
+                comparisons_for_cat, df_for_cat = main(args, db, cat)
+                # about to write unintuitive code that overuses None...
+                if comparisons_for_cat is not None:
+                    comparison_df = set_or_concat(comparison_df, comparisons_for_cat)
+                if df_for_cat is not None:
+                    df = set_or_concat(df, df_for_cat)
         else:
-            df = main(args, db, args.category)
+            comparison_df, df = main(args, db, args.category)
         row_dicts = []
     for col in df.columns.values:
         if col:
@@ -840,6 +852,18 @@ def parse():
     order = list(tmpdf.groupby('domain').mean().sort_values('val', ascending=False).index)
     sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row1_mask], ax=axes[0], ci=99)
     sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row2_mask], ax=axes[1], ci=99)
+
+    if comparison_df is not None:
+        comparison_df.to_csv('comparison_df.csv')
+        comparison_df = pd.melt(
+            comparison_df, id_vars=['column', 'category',], value_vars=['mean_a', 'mean_b', 'pval'])
+        _, comparison_axes = plt.subplots(nrows=1)
+        sns.barplot(
+            x='column', y='value', hue='variable',
+            data=comparison_df,
+            ax=comparison_axes)
+    else:
+        print('found no comparisons...')
 
     if args.plot:
         plt.show()

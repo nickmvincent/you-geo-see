@@ -1,0 +1,6 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.02,*results_top_three_domain_frac_tdbank.com,95,100,0.010256410256410256,0.0,0.02,inf,195,GOP,DEM,0.013556758919315058,DEM
+1,0.021,*results_top_three_domain_frac_debt.org,95,100,0.017094017094017092,0.028,0.007,4.21,195,GOP,DEM,0.04616724391568896,GOP
+2,0.025,*results_top_three_domain_frac_santanderbank.com,95,100,0.02222222222222222,0.035,0.01,3.51,195,GOP,DEM,0.03829221557370874,GOP
+3,0.025,*results_top_three_domain_frac_rocketloans.com,95,100,0.02222222222222222,0.035,0.01,3.51,195,GOP,DEM,0.03829221557370874,GOP
+4,0.072,**results_top_three_domain_frac_MapsLocations,95,100,0.058119658119658114,0.021,0.093,4.43,195,GOP,DEM,4.5033196777020474e-05,DEM
