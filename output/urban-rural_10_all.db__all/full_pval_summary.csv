@@ -1,0 +1,3 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.009,*results_full_domain_frac_facebook.com,380,380,0.020952574472311313,0.026,0.016,1.56,760,rural,urban,0.002047218002257845,rural
+1,0.01,*results_full_domain_frac_wikipedia.org,380,380,0.08668263753790069,0.092,0.082,1.12,760,rural,urban,0.008462672729204404,rural

@@ -6,7 +6,7 @@ import argparse
 
 from constants import POPULAR_CATEGORIES
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data, set_or_concat
-from qual_code import TWITTER_DOMAIN, strip_twitter_screename, UGC_WHITELIST
+from qual_code import TWITTER_DOMAIN, strip_twitter_screename
 
 import pandas as pd
 import numpy as np
@@ -21,15 +21,34 @@ TOP_THREE = 'top_three'
 TOP = 'top'
 RESULT_SUBSETS = [FULL, TOP_THREE, TOP]
 
+UGC_WHITELIST = [
+    'wikipedia.org',
+    'TweetCarousel',
+    'facebook.com',
+    'twitter.com',
+    'youtube.com',
+    'instagram.com',
+    'linkedin.com',
+    'yelp.com',
+    'pinterest.com',
+    'tripadvisor.com',
+    'KnowledgePanel',
+    'MapsPlaces',
+    'MapsLocations',
+    'NewsCarousel',
+]
+
+
 class Comparison():
     """
     A comparison entity
     For comparing two groups of results within a set of results
     """
+
     def __init__(
-            self, df_a, name_a, df_b, name_b, cols_to_compare,
-            print_all=False, recurse_on_queries=False
-        ):
+        self, df_a, name_a, df_b, name_b, cols_to_compare,
+        print_all=False, recurse_on_queries=False
+    ):
         self.df_a = df_a
         self.name_a = name_a
         self.df_b = df_b
@@ -54,20 +73,22 @@ class Comparison():
                 a = list(filtered_df_a[col])
             except KeyError:
                 if self.print_all:
-                    print('Column {} missing from df_a, {}'.format(col, self.name_a))
+                    print('Column {} missing from df_a, {}'.format(
+                        col, self.name_a))
                 continue
             try:
                 filtered_df_b = self.df_b[self.df_b[col].notnull()]
                 b = list(filtered_df_b[col])
             except KeyError:
                 if self.print_all:
-                    print('Column {} missing from df_a, {}'.format(col, self.name_a))
+                    print('Column {} missing from df_a, {}'.format(
+                        col, self.name_a))
                 continue
 
             if not a and not b:
                 err.append('Skipping {} bc Two empty lists'.format(col))
                 continue
-            mean = np.mean( np.array(a + b), axis=0 )
+            mean = np.mean(np.array(a + b), axis=0)
             mean_a = np.mean(a)
             mean_b = np.mean(b)
             n = len(a) + len(b)
@@ -147,11 +168,14 @@ class Comparison():
                     if self.recurse_on_queries:
                         # now mark all the comparisons
                         queries = set(
-                            list(filtered_df_a['query'].drop_duplicates()) + list(filtered_df_b['query'].drop_duplicates())
+                            list(
+                                filtered_df_a['query'].drop_duplicates()) +
+                            list(filtered_df_b['query'].drop_duplicates()
+                                 )
                         )
                         for query in queries:
-                            query_a = filtered_df_a[filtered_df_a['query'] ==  query]
-                            query_b = filtered_df_b[filtered_df_b['query'] ==  query]
+                            query_a = filtered_df_a[filtered_df_a['query'] == query]
+                            query_b = filtered_df_b[filtered_df_b['query'] == query]
                             query_comparison = Comparison(
                                 df_a=query_a, name_a=self.name_a,
                                 df_b=query_b, name_b=self.name_b,
@@ -159,8 +183,10 @@ class Comparison():
                                 print_all=self.print_all,
                                 recurse_on_queries=False,
                             )
-                            comparison_dicts = query_comparison.print_results()[0]
-                            comparison_dicts = [x for x in comparison_dicts if x['mean'] != 0]
+                            comparison_dicts = query_comparison.print_results()[
+                                0]
+                            comparison_dicts = [
+                                x for x in comparison_dicts if x['mean'] != 0]
                             for d in comparison_dicts:
                                 d['query'] = query
                             query_comparison_lists[key] += comparison_dicts
@@ -182,13 +208,14 @@ def get_matching_columns(columns, whitelist):
                 ret.append(column)
     return ret
 
+
 def encode_links_as_strings(links1, links2):
     """
     Take two lists of pages and turn them into strings
     For the sole purpose of calculating edit distance
     """
     set1, set2 = set(links1), set(links2)
-    union = set1.union(set2) 
+    union = set1.union(set2)
     mapping = {}
     # will never have more than 10 results...
     for item, letter in zip(list(union), ascii_lowercase):
@@ -204,7 +231,7 @@ def jaccard_similarity(x, y):
     """
     intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
     union_cardinality = len(set.union(*[set(x), set(y)]))
-    return intersection_cardinality/float(union_cardinality)
+    return intersection_cardinality / float(union_cardinality)
 
 
 def calc_domain_fracs(domains_col, control_domains_col):
@@ -257,9 +284,9 @@ def calc_coded_ugc_frac(code_col, control_code_col):
 
 
 def compute_serp_features(
-        links, cols, 
-        control_links, control_cols,
-    ):
+    links, cols,
+    control_links, control_cols,
+):
     """
     Computes features for a set of results corresponding to one serp
     Args:
@@ -289,8 +316,7 @@ def compute_serp_features(
         'domain_fracs': calc_domain_fracs(cols.domain, control_cols.domain),
     }
     ret[FULL]['domain_ranks'] = calc_domain_ranks(cols)
-    
-    
+
     ret[TOP_THREE] = {
         'domain_fracs': calc_domain_fracs(
             cols.iloc[:3].domain, control_cols.iloc[:3].domain)
@@ -306,9 +332,12 @@ def compute_serp_features(
                 ret[subset]['domain_appears'][key] = 1
             else:
                 ret[subset]['domain_appears'][key] = 0
-    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.code, control_cols.code)
-    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:3].code, control_cols.iloc[:3].code)
-    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(cols.iloc[:1].code, control_cols.iloc[:1].code)
+    ret[FULL]['coded_ugc_fracs'] = calc_coded_ugc_frac(
+        cols.code, control_cols.code)
+    ret[TOP_THREE]['coded_ugc_fracs'] = calc_coded_ugc_frac(
+        cols.iloc[:3].code, control_cols.iloc[:3].code)
+    ret[TOP]['coded_ugc_fracs'] = calc_coded_ugc_frac(
+        cols.iloc[:1].code, control_cols.iloc[:1].code)
 
     ret[FULL]['coded_ugc_fracs'].update(calc_coded_ugc_frac(
         cols.domains_plus_codes, control_cols.domains_plus_codes))
@@ -352,10 +381,10 @@ def analyze_subset(data, location_set, config):
             control = results[results.is_control == 1]
             control_links = list(control.link)
             if not control_links:
-                print('Missing expected control links for loc {}'.format(loc))
+                # 'Missing expected control links for loc {}'.format(loc))
                 continue
             if not links:
-                print('Missing expected links for loc {}'.format(loc))
+                # 'Missing expected links for loc {}'.format(loc))
                 continue
         else:
             control = pd.DataFrame(
@@ -377,12 +406,15 @@ def analyze_subset(data, location_set, config):
         d[loc]['control_links'] = control_links
         d[loc]['computed'] = compute_serp_features(
             links, treatment[['domain', 'code', 'rank', 'domains_plus_codes']],
-            control_links, control[['domain', 'code', 'rank', 'domains_plus_codes']],
+            control_links, control[['domain', 'code',
+                                    'rank', 'domains_plus_codes']],
         )
         d[loc]['serp_id'] = first_row.serp_id
         sid = SentimentIntensityAnalyzer()
-        snippet_polarities = [sid.polarity_scores(x)['compound'] for x in snippets if x]
-        title_polarities = [sid.polarity_scores(x)['compound'] for x in titles if x]
+        snippet_polarities = [sid.polarity_scores(
+            x)['compound'] for x in snippets if x]
+        title_polarities = [sid.polarity_scores(
+            x)['compound'] for x in titles if x]
         for polarities, textname in [
                 (snippet_polarities, 'snippet'),
                 (title_polarities, 'title')
@@ -394,7 +426,8 @@ def analyze_subset(data, location_set, config):
             ]:
                 if subset:
                     mean_polarity = sum(subset) / len(subset)
-                    d[loc]['computed'][prefix + '_' + textname + '_mean_polarity'] = mean_polarity
+                    d[loc]['computed'][prefix + '_' + textname +
+                                       '_mean_polarity'] = mean_polarity
 
     for loc in location_set:
         if loc not in d:
@@ -408,16 +441,16 @@ def analyze_subset(data, location_set, config):
                 continue
             tmp[comparison_loc] = {}
             string1, string2 = encode_links_as_strings(
-                    d[loc]['links'], d[comparison_loc]['links'])
+                d[loc]['links'], d[comparison_loc]['links'])
             tmp[comparison_loc]['edit'] = \
                 damerau_levenshtein_distance(
                 string1, string2
             )
             try:
                 jac = jaccard_similarity(
-                        d[loc]['links'], 
-                        d[comparison_loc]['links']
-                    )
+                    d[loc]['links'],
+                    d[comparison_loc]['links']
+                )
             except ZeroDivisionError:
                 jac = float('nan')
             tmp[comparison_loc]['jaccard'] = jac
@@ -449,10 +482,9 @@ def main(args, db, category):
         serp_df.loc[pop_mask, 'category'] = 'popular'
         pop_mask = data['category'].isin(POPULAR_CATEGORIES)
         data.loc[pop_mask, 'category'] = 'popular'
-    categories = list(data['category'].drop_duplicates())
-    print(categories)
+    categories = list(data['category'].drop_duplicates()) + ['all']
     if category not in categories:
-        print('Skipping category {}'.format(category))
+        # 'Skipping category {}'.format(category))
         return None, None
     if 'dbs' in db:
         shortened_db = db[4:]
@@ -462,17 +494,19 @@ def main(args, db, category):
 
     link_codes_file = 'link_codes.csv'
     twitter_user_codes_file = 'twitter_user_codes.csv'
-    link_codes, twitter_user_codes = load_coded_as_dicts(link_codes_file, twitter_user_codes_file)
+    link_codes, twitter_user_codes = load_coded_as_dicts(
+        link_codes_file, twitter_user_codes_file)
     for link, code in link_codes.items():
         data.loc[data.link == link, 'code'] = code
     twitter_data = data[data.domain == TWITTER_DOMAIN]
-    
+
     twitter_links = twitter_data.link.drop_duplicates()
     for link in twitter_links:
         screen_name = strip_twitter_screename(link)
         code = twitter_user_codes.get(screen_name)
         if not code:
-            print('Could not get code for screen_name {}'.format(screen_name))
+            # 'Could not get code for screen_name {}'.format(screen_name))
+            pass
         data.loc[data.link == link, 'code'] = code
     data.code = data.code.astype('category')
     domains_plus_codes = [
@@ -483,11 +517,11 @@ def main(args, db, category):
     ]
     data = data.assign(domains_plus_codes=domains_plus_codes)
     data.domains_plus_codes = data.domains_plus_codes.astype('category')
-    data.describe(include='all').to_csv(path2+'/data.describe().csv')
-    serp_df.reported_location.value_counts().to_csv(path2 + '/values_counts_reported_location.csv')
+    data.describe(include='all').to_csv(path2 + '/data.describe().csv')
+    serp_df.reported_location.value_counts().to_csv(
+        path2 + '/values_counts_reported_location.csv')
     serp_df['query'].value_counts().to_csv(path2 + '/values_counts_query.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
-    
 
     link_types = [
         'results',
@@ -505,30 +539,37 @@ def main(args, db, category):
 
     link_type_to_domains = {}
 
-    for i, link_type in enumerate(link_types):        
+    for i, link_type in enumerate(link_types):
         if isinstance(link_type, list):
             mask = data.link_type == link_type[0]
             for x in link_type:
                 mask = (mask) | (data.link_type == x)
             link_type_specific_data = data[mask]
             link_type = '_and_'.join(link_type)
-            link_types[i] = link_type # carry this beyond the for loop
+            link_types[i] = link_type  # carry this beyond the for loop
         else:
             link_type_specific_data = data[data.link_type == link_type]
         if category in [
             'trending', 'procon_popular', 'popular', 'top_insurance', 'top_loans',
             'med_sample_first_20'
         ]:
-            link_type_specific_data = link_type_specific_data[link_type_specific_data['category'] == category]
+            link_type_specific_data = link_type_specific_data[
+                link_type_specific_data['category'] == category]
+        else:
+            if category != 'all':
+                raise ValueError('INVALID CATEGORY')
         path3 = '{}/{}'.format(path2, link_type)
         try:
             os.mkdir(path3)
         except OSError:
             pass
-        link_type_specific_data.domain.value_counts().to_csv(path3 + '/values_counts_domain.csv')
+        link_type_specific_data.domain.value_counts().to_csv(
+            path3 + '/values_counts_domain.csv')
 
-        top_domains = list(link_type_specific_data.domain.value_counts().to_dict().keys())[:30]
-        top_domains = [domain for domain in top_domains if isinstance(domain,str)]
+        top_domains = list(
+            link_type_specific_data.domain.value_counts().to_dict().keys())[:30]
+        top_domains = [
+            domain for domain in top_domains if isinstance(domain, str)]
         link_type_to_domains[link_type] = top_domains
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
@@ -559,7 +600,7 @@ def main(args, db, category):
                 # make sure we're NOT overwriting an already existent sub-dict!
                 # (this comment suggests a foolish programmer did this in the past)
                 if sid not in serp_comps:
-                    serp_comps[sid] = { 'id': sid }
+                    serp_comps[sid] = {'id': sid}
                 serp_comps[sid][link_type + '_avg_edit'] = avg_edit
                 serp_comps[sid][link_type + '_avg_jacc'] = avg_jacc
                 has_type_key = 'has_' + link_type
@@ -571,14 +612,17 @@ def main(args, db, category):
                         for top_domain in top_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
-                                    [link_type, comp_key, 'domain_frac', str(domain_string)]
+                                    [link_type, comp_key, 'domain_frac',
+                                        str(domain_string)]
                                 )
                                 serp_comps[sid][concat_key] = frac
-                                domain_appears_concat_key = concat_key.replace('_frac', '_appears')
+                                domain_appears_concat_key = concat_key.replace(
+                                    '_frac', '_appears')
                                 serp_comps[sid][domain_appears_concat_key] = tmp[comp_key]['domain_appears'][domain_string]
-                                
+
                                 if comp_key == FULL:
-                                    domain_ranks_concat_key = concat_key.replace('_frac', '_rank')
+                                    domain_ranks_concat_key = concat_key.replace(
+                                        '_frac', '_rank')
                                     serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
                     for code, frac in coded_ugc_fracs.items():
                         concat_key = '_'.join(
@@ -586,7 +630,8 @@ def main(args, db, category):
                         )
                         serp_comps[sid][concat_key] = frac
                     for textcol in ['snippet', 'title']:
-                        pol_key = '_'.join([link_type, comp_key, textcol, 'mean_polarity'])
+                        pol_key = '_'.join(
+                            [link_type, comp_key, textcol, 'mean_polarity'])
                         serp_comps[sid][pol_key] = tmp.get(
                             '_'.join([comp_key, textcol, 'mean_polarity'])
                         )
@@ -595,7 +640,7 @@ def main(args, db, category):
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
-    serp_df.describe(include='all').to_csv(path2+'/serp_df.describe().csv')
+    serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
 
     # ANCHOR: plotting
     ret_cols = []
@@ -606,7 +651,8 @@ def main(args, db, category):
     cols_with_nonzero_mean = [
         x for x in cols if serp_df[x].mean() != 0
     ]
-    serp_df[cols_with_nonzero_mean].describe().to_csv(path2+'/ugcin_serp_df.csv')
+    serp_df[cols_with_nonzero_mean].describe().to_csv(
+        path2 + '/ugcin_serp_df.csv')
     # nz for non-zero (variable name was too long)
     results_domain_fracs_cols_nz = [
         x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_frac' in x
@@ -646,34 +692,40 @@ def main(args, db, category):
     serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
         kind='barh', ax=axes2[3], title='Domain Ranks')
 
+    sns.set(style="whitegrid", palette="colorblind", color_codes=True)
     
-    sns.set(style="white", palette="colorblind", color_codes=True)
     wp_vals = serp_df[
         'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
     sns.distplot(
-        wp_vals, bins=list(range(1,13)), norm_hist=True,
-        kde=False, color="b", ax=dist_axes[0]) 
-    dist_axes[0].axvline(wp_vals.mean(), color='b', linestyle='dashed', linewidth=2)
+        wp_vals, bins=list(range(1, 13)), norm_hist=True,
+        kde=False, color="b", ax=dist_axes[0])
+    dist_axes[0].axvline(wp_vals.mean(), color='b',
+                         linestyle='dashed', linewidth=2)
     try:
         tw_vals = serp_df[
             'results_full_domain_rank_UserTweetCarousel'][serp_df['results_full_domain_rank_UserTweetCarousel'].notnull() == True]
         sns.distplot(
-            tw_vals, bins=list(range(1,13)), norm_hist=True,
+            tw_vals, bins=list(range(1, 13)), norm_hist=True,
             kde=False, color="g", ax=dist_axes[1])
-        dist_axes[1].axvline(tw_vals.mean(), color='g', linestyle='dashed', linewidth=2)
+        dist_axes[1].axvline(tw_vals.mean(), color='g',
+                             linestyle='dashed', linewidth=2)
     except:
         pass
     # PERSONALIZATION
-    jacc_vals = serp_df[serp_df['results_avg_jacc'].notnull() == True]['results_avg_jacc']
+    jacc_vals = serp_df[serp_df['results_avg_jacc'].notnull()
+                        == True]['results_avg_jacc']
     sns.distplot(
         jacc_vals, norm_hist=True,
         kde=False, color="b", ax=personalization_ax[0])
-    personalization_ax[0].axvline(jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
-    edit_vals = serp_df[serp_df['results_avg_edit'].notnull() == True]['results_avg_edit']
+    personalization_ax[0].axvline(
+        jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
+    edit_vals = serp_df[serp_df['results_avg_edit'].notnull()
+                        == True]['results_avg_edit']
     sns.distplot(
         edit_vals, norm_hist=True,
-        kde=False, color="g", ax=personalization_ax[1]) 
-    personalization_ax[1].axvline(edit_vals.mean(), color='g', linestyle='dashed', linewidth=2)
+        kde=False, color="g", ax=personalization_ax[1])
+    personalization_ax[1].axvline(
+        edit_vals.mean(), color='g', linestyle='dashed', linewidth=2)
 
     outputs, errors = [], []
     pval_summaries = {key: [] for key in RESULT_SUBSETS}
@@ -687,8 +739,8 @@ def main(args, db, category):
             # tweets all have the same domain - twitter.com!
             for top_domain in set(link_type_to_domains[link_type]):
                 for prefix in [
-                        '_full_domain_frac_', '_top_three_domain_frac_',
-                        '_top_domain_frac_',
+                        '_full_domain_appears_', '_top_three_domain_appears_',
+                        '_top_domain_appears_',
                 ]:
                     cols_to_compare.append(link_type + prefix + top_domain)
         for col in [
@@ -715,9 +767,11 @@ def main(args, db, category):
         comparisons = []
         if args.comparison in ['urban-rural', 'all']:
             comparisons.append(Comparison(
-                df_a=serp_df[(serp_df['urban_rural_code'] == 5) | (serp_df['urban_rural_code'] == 6)],
+                df_a=serp_df[(serp_df['urban_rural_code'] == 5) |
+                             (serp_df['urban_rural_code'] == 6)],
                 name_a='rural',
-                df_b=serp_df[(serp_df['urban_rural_code'] == 1) | (serp_df['urban_rural_code'] == 2)],
+                df_b=serp_df[(serp_df['urban_rural_code'] == 1) |
+                             (serp_df['urban_rural_code'] == 2)],
                 name_b='urban',
                 cols_to_compare=cols_to_compare,
                 print_all=args.print_all,
@@ -755,7 +809,7 @@ def main(args, db, category):
 
         # write out the comparisons
         output_df = pd.DataFrame(outputs)
-        output_df.to_csv(path2+ '/comparisons.csv')
+        output_df.to_csv(path2 + '/comparisons.csv')
 
         # write out a summary of statistically significant comparisons
         paper_table_list = []
@@ -765,31 +819,54 @@ def main(args, db, category):
             pval_summary_df = pd.DataFrame(pval_summaries[key])
             pval_summary_df.to_csv(path2 + '/' + key + '_pval_summary.csv')
             whitelist_summary_df = pd.DataFrame(whitelist_summaries[key])
-            whitelist_summary_df.to_csv(path2 + '/' + key + '_whitelist_summary.csv')
+            whitelist_summary_df.to_csv(
+                path2 + '/' + key + '_whitelist_summary.csv')
             query_comparison_df = pd.DataFrame(query_comparison_listss[key])
-            query_comparison_df.to_csv(path3 + '/' + key +'_query_comparisons.csv')
+            query_comparison_df.to_csv(
+                path3 + '/' + key + '_query_comparisons.csv')
 
+            # merged will hold the union of the whitelist summary and the pval summary
             if not whitelist_summary_df.empty and not pval_summary_df.empty:
-                merged = pd.merge(whitelist_summary_df, pval_summary_df, on='column')
-                merged.loc['subset'] = key
-                comparison_df = set_or_concat(comparison_df, merged)
+                merged = pd.merge(whitelist_summary_df,
+                                  pval_summary_df[['column']], on='column')
+                if not merged.empty:
+                    merged.loc[:, 'subset'] = key
+                    # comparison_df = set_or_concat(comparison_df, merged)
+            whitelist_summary_df.loc[:, 'subset'] = key
+            comparison_df = set_or_concat(comparison_df, whitelist_summary_df)
 
-        pd.DataFrame(paper_table_list).to_csv(path3+'/paper_table.csv')
+        pd.DataFrame(paper_table_list).to_csv(path3 + '/paper_table.csv')
 
-        with open(path2 + '/errs.csv','w') as outfile:
+        with open(path2 + '/errs.csv', 'w') as outfile:
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
     importance_df = serp_df[list(set(ret_cols)) + ['category']]
+    if category == 'all':
+        importance_df.loc[:, 'category'] = 'all'
     if comparison_df is not None:
-        comparison_df.loc['category'] = category
+        comparison_df.loc[:, 'category'] = category
     return comparison_df, importance_df
+
+
+
+def strip_domain_strings_wrapper(subset):
+    """wraps a function to strip results_type, subset, and domain_frac text"""
+
+    def strip_domain_strings(x):
+        """Strip the string"""
+        x = x.strip('*')
+        x = x.replace('results_', '')
+        x = x.replace(subset, '')
+        x = x.replace('domain_frac_', '')
+        x = x.strip('_')
+        return x
+    return strip_domain_strings
 
 
 def parse():
     """parse args"""
     parser = argparse.ArgumentParser(description='Perform anlysis.')
-
     parser.add_argument(
         '--comparison', help='What comparison to do', default='all')
     parser.add_argument(
@@ -810,15 +887,18 @@ def parse():
     df = None
     for db in args.db:
         if args.category == 'each':
-            for cat in ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]:
-                comparisons_for_cat, df_for_cat = main(args, db, cat)
-                # about to write unintuitive code that overuses None...
-                if comparisons_for_cat is not None:
-                    comparison_df = set_or_concat(comparison_df, comparisons_for_cat)
-                if df_for_cat is not None:
-                    df = set_or_concat(df, df_for_cat)
+            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]
         else:
-            comparison_df, df = main(args, db, args.category)
+            cats = [args.category]
+        for cat in cats:
+            comparisons_for_cat, df_for_cat = main(args, db, cat)
+            # about to write unintuitive code that overuses None...
+            if comparisons_for_cat is not None:
+                comparison_df = set_or_concat(
+                    comparison_df, comparisons_for_cat)
+            if df_for_cat is not None:
+                df = set_or_concat(
+                    df, df_for_cat)
         row_dicts = []
     for col in df.columns.values:
         if col:
@@ -841,33 +921,71 @@ def parse():
                         'category': row['category'],
                     }
                     row_dicts.append(row_dict)
-            # _, axes = plt.subplots()
-            # sns.barplot(x='category', y=col, data=df, ax=axes)
     df2 = pd.DataFrame(row_dicts)
     plt.close('all')
-    _, axes = plt.subplots(nrows=2)
-    row1_mask = (df2.metric == 'domain_appears') & (df2.subset == FULL)
-    row2_mask = (df2.metric == 'domain_appears') & (df2.subset == TOP_THREE)
+    _, axes = plt.subplots(ncols=2)
+    mask1 = (df2.metric == 'domain_appears') & (df2.subset == FULL)
+    mask2 = (df2.metric == 'domain_appears') & (df2.subset == TOP_THREE)
     tmpdf = df2[df2.subset == FULL][['domain', 'val']]
-    order = list(tmpdf.groupby('domain').mean().sort_values('val', ascending=False).index)
-    sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row1_mask], ax=axes[0], ci=99)
-    sns.barplot(x='domain', y='val', hue='category', order=order, data=df2[row2_mask], ax=axes[1], ci=99)
+    order = list(
+        tmpdf.groupby('domain').mean().sort_values(
+            'val', ascending=False).index)
+    for subset in [FULL, TOP_THREE]:
+        df2.loc[:, 'domain'] = df2['domain'].apply(strip_domain_strings_wrapper(subset))
+    sns.barplot(x='val', y='domain', hue='category', order=order,
+                data=df2[mask1], ax=axes[0], ci=None)
+    sns.barplot(x='val', y='domain', hue='category', order=order,
+                data=df2[mask2], ax=axes[1], ci=None)
+    axes[0].set_title('Full Domain Fractions')
+    axes[0].set_xlabel('Fraction of Full Results')
+    axes[0].legend(ncol=2, loc = 'lower right', frameon=True)
+
+
+    axes[1].set_title('Domain Appears')    
+    axes[1].set_xlabel('Domain Appears in Top 3')
+    for axis in [axes[0], axes[1]]:
+        axis.set_ylabel('')
+        sns.despine(ax=axis, bottom=True, left=False)
+        # axis.set(xlim=(0, 0.15))
 
     if comparison_df is not None:
         comparison_df.to_csv('comparison_df.csv')
-        comparison_df = pd.melt(
-            comparison_df, id_vars=['column', 'category',], value_vars=['mean_a', 'mean_b', 'pval'])
-        _, comparison_axes = plt.subplots(nrows=1)
-        sns.barplot(
-            x='column', y='value', hue='variable',
-            data=comparison_df,
-            ax=comparison_axes)
+        # comparison_df = pd.melt(
+        #     comparison_df, id_vars=['column', 'category', 'subset', ], value_vars=['add', 'mean_b',])
+        _, comparison_axes = plt.subplots(nrows=2, ncols=1)
+        for location_groups in [['urban', 'rural']]:
+            title = 'Domain Fractions Differences: {0} (left) vs {1} (right)'.format(*location_groups)
+            for x, subset in enumerate([FULL, TOP_THREE]):
+                row_mask = comparison_df.subset == subset
+                data = comparison_df[row_mask]
+
+                def invert_add_inc(downwards):
+                    def func(x):
+                        if x.winner == downwards:
+                            return x.add_inc * -1
+                        return x.add_inc
+                    return func
+                data.loc[:, 'add_inc'] = data.apply(invert_add_inc(location_groups[0]), axis=1)
+                data.loc[:, 'add_inc'] = data.add_inc.astype(float)
+                data.loc[:, 'column'] = data['column'].apply(strip_domain_strings_wrapper(subset))
+                ax = comparison_axes[x]
+                if not data.empty:
+                    sns.barplot(
+                        x='add_inc', y='column', hue='category',
+                        data=data,
+                        ax=ax, ci=None)
+                    ax.set_title(title)
+                    ax.set_xlabel('Domain')
+                    ax.set_ylabel('Increase in fraction')
+                    ax.axvline(0, color='black')
+                    sns.despine(ax=ax, bottom=True, left=False)
+
+
     else:
         print('found no comparisons...')
 
     if args.plot:
         plt.show()
-
 
 
 if __name__ == '__main__':

@@ -1,0 +1,6 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,results_full_domain_frac_NewsCarousel,399,386,0.031188249118185424,0.031,0.031,1.0,785,rural,urban,0.9928807307285149,rural
+1,0.014,**results_full_domain_frac_MapsLocations,399,386,0.026145457514884268,0.02,0.033,1.69,785,rural,urban,7.575342414767275e-06,urban
+2,0.005,results_full_domain_frac_youtube.com,399,386,0.010515758127223097,0.013,0.008,1.59,785,rural,urban,0.06866972270101553,rural
+3,0.001,results_full_domain_frac_UserTweetCarousel,399,386,0.020837124658780706,0.021,0.02,1.03,785,rural,urban,0.8483693978292992,rural
+4,0.001,results_full_domain_frac_wikipedia.org,399,386,0.03719255267025968,0.037,0.037,1.01,785,rural,urban,0.88192699411293,urban

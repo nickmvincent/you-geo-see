@@ -42,17 +42,6 @@ SHORTHAND = {
     }
 }
 
-# this should probably go somewhere else?
-UGC_WHITELIST = [
-    'wikipedia.org',
-    'TweetCarousel',
-    'facebook.com',
-    'twitter.com',
-    'youtube.com',
-    'instagram.com',
-    'linkedin.com',
-    'KnowledgePanel',
-]
 
 DOMAINS_TO_CODE = [
     'facebook.com',
@@ -98,11 +87,11 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
         print('Snippet:', snippet)
         code = input()
     while (
-                len(code) != 4 or
-                code[0] not in SHORTHAND['creative'].keys() or
-                code[1] not in SHORTHAND['outside_prof'].keys() or
-                code[2] not in SHORTHAND['author'].keys() or
-                code[3] not in SHORTHAND['type'].keys()
+        len(code) != 4 or
+        code[0] not in SHORTHAND['creative'].keys() or
+        code[1] not in SHORTHAND['outside_prof'].keys() or
+        code[2] not in SHORTHAND['author'].keys() or
+        code[3] not in SHORTHAND['type'].keys()
     ):
         print('Please enter 4 digits like so:')
         print('First second character: t (true) or f (false) regarding creative effort')
@@ -114,6 +103,9 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
     code_str = SHORTHAND[code[0]] + '-' + SHORTHAND[code[1]]
     return code_str
     
+
+def quote(x):
+    return '"' + x + '"'
 
 def main(args):
     """main"""
@@ -206,26 +198,25 @@ def main(args):
     if args.produce_reliability_doc:
         for domain, deduped_on_link in domain_to_df.items():
             n = 10 if len(deduped_on_link) > 10 else len(deduped_on_link)            
-            ret.append(domain.upper() + '\n' + '{} sampled out of {}'.format(n, len(deduped_on_link)) + '\n**********\n')
+            # ret.append(domain.upper() + '\n' + '{} sampled out of {}'.format(n, len(deduped_on_link)) + '\n**********\n')
             if not n:
                 continue
             sample = deduped_on_link.sample(n=n)
             for _, row in sample.iterrows():
                 link = row.link
                 snippet = row.snippet
-                entry = link + '\n'
+                entry = {
+                    'link': quote(link)
+                }
                 if snippet:
-                    entry += 'Snippet: ' + snippet + '\n'
+                    entry['snippet'] = quote(snippet)
                 if domain == TWITTER_DOMAIN:
                     screen_name = strip_twitter_screename(link)
                     user_obj = api.get_user(screen_name=screen_name)
-                    entry += '\n'.join([
-                        'Bio: ' + user_obj.description,
-                        'Location: ', user_obj.location,
-                        'Verified: ' + str(user_obj.verified),
-                        'Follower Count: ' + str(user_obj.followers_count),
-                    ]) + '\n'
-                entry += 'Code: \n'
+                    entry['bio'] = quote(user_obj.description)
+                    entry['location'] = quote(user_obj.location)
+                    entry['verified'] = quote(str(user_obj.verified))
+                    entry['follower_count'] = quote(str(user_obj.followers_count))
                 ret.append(entry)
     return ret
 
@@ -253,13 +244,31 @@ def parse():
 
     args = parser.parse_args()
     samples = main(args)
-    with open('coding_samples.txt','wb') as outfile:
+    with open('coding_samples.csv','wb') as outfile:
         top_lines = '\n'.join([
             'Sample produced on {}'.format(datetime.now()),
             'Samples come from the following dbs: {}'.format(str(args.db)),
         ])
         outfile.write((top_lines +'\n\n').encode('utf-8'))
-        outfile.write('===\n'.join(samples).encode('utf-8'))
+        col_order = ['link', 'snippet', 'bio', 'location', 'verified', 'follower_count']
+        class_cols = [
+            'Shows Creative Effort (t)', 'No Creative Effort (f)', 'Created outside professional practice (t)', 'Not created outside professional practice (f)',
+            '',
+            'individual (i)', 'organization (o)' , 'bot (b)',
+            '',
+            'nonprofit (n)', 'celebrity (c)', 'corporate ($)', 'journalistic (j)', 'political (p)', 'other (z)',
+        ]
+        headers = col_order + class_cols
+        line = ','.join(headers) + '\n'
+        outfile.write(line.encode('utf-8'))
+
+        for sample in samples:
+            row = [sample.get(col, '') for col in col_order] + [
+                '' for x in class_cols
+            ]
+            line = ','.join(row) + '\n'
+            outfile.write(line.encode('utf-8'))
+
 
 if __name__ == '__main__':
     parse()

@@ -1,0 +1,48 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.064,*results_full_domain_frac_facebook.com,10,10,0.05714285714285714,0.089,0.025,3.57,20,rural,urban,0.022511680727814353,Chevrolet,rural
+1,0.114,**results_full_domain_frac_facebook.com,10,10,0.06964285714285715,0.127,0.012,10.14,20,rural,urban,6.203720602344276e-06,Honda,rural
+2,0.022,results_full_domain_frac_facebook.com,10,10,0.08111111111111113,0.092,0.07,1.32,20,rural,urban,0.24616044946149068,Wells Fargo,rural
+3,0.07,*results_full_domain_frac_facebook.com,10,10,0.08950396825396825,0.124,0.055,2.27,20,rural,urban,0.004233065714554547,Domino's Pizza,rural
+4,0.0,results_full_domain_frac_facebook.com,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,Barack Obama,
+5,0.007,results_full_domain_frac_facebook.com,10,10,0.010714285714285714,0.014,0.007,2.0,20,rural,urban,0.5565650165675332,eagles,rural
+6,0.012,results_full_domain_frac_facebook.com,10,10,0.09611111111111112,0.102,0.09,1.14,20,rural,urban,0.2561995061134575,Bank of America,rural
+7,0.011,results_full_domain_frac_facebook.com,10,10,0.013012820512820511,0.018,0.008,2.38,20,rural,urban,0.47410337261855195,McDonald's,rural
+8,0.008,results_full_domain_frac_facebook.com,10,10,0.0038461538461538464,0.0,0.008,inf,20,rural,urban,0.34343639613791355,Hillary Clinton,urban
+9,0.001,results_full_domain_frac_facebook.com,10,10,0.10065656565656567,0.101,0.1,1.01,20,rural,urban,0.49870180444080536,Walmart,rural
+10,0.038,*results_full_domain_frac_facebook.com,10,10,0.018846153846153846,0.038,0.0,inf,20,rural,urban,0.03817910541791229,Toyota,rural
+11,0.019,results_full_domain_frac_facebook.com,10,10,0.09535353535353534,0.105,0.086,1.22,20,rural,urban,0.09321332108105562,Pizza Hut,rural
+12,0.0,results_full_domain_frac_facebook.com,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,Donald Trump,
+13,0.0,results_full_domain_frac_wikipedia.org,10,10,0.14285714285714285,0.143,0.143,1.0,20,rural,urban,,minimum wage,
+14,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,gun control,
+15,0.0,results_full_domain_frac_wikipedia.org,10,10,0.0909090909090909,0.091,0.091,1.0,20,rural,urban,,college football playoff,
+16,0.003,results_full_domain_frac_wikipedia.org,10,10,0.08141025641025638,0.083,0.08,1.03,20,rural,urban,0.057731896784977345,medical marijuana,rural
+17,0.024,*results_full_domain_frac_wikipedia.org,10,10,0.11314935064935065,0.125,0.101,1.24,20,rural,urban,0.002626888312300043,Chevrolet,rural
+18,0.057,*results_full_domain_frac_wikipedia.org,10,10,0.12359126984126985,0.152,0.095,1.6,20,rural,urban,0.01908982756823087,Chase Bank,rural
+19,0.0,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,1.0,20,rural,urban,,animal testing,
+20,0.0,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,matt lauer,
+21,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,euthanasia,
+22,0.078,*results_full_domain_frac_wikipedia.org,10,10,0.08789682539682539,0.127,0.049,2.59,20,rural,urban,0.0038757999224548773,Honda,rural
+23,0.021,results_full_domain_frac_wikipedia.org,10,10,0.08166666666666669,0.092,0.071,1.3,20,rural,urban,0.2755346833295694,Wells Fargo,rural
+24,0.085,*results_full_domain_frac_wikipedia.org,10,10,0.042499999999999996,0.085,0.0,inf,20,rural,urban,0.001399005672162694,Domino's Pizza,rural
+25,0.012,*results_full_domain_frac_wikipedia.org,10,10,0.1242694805194805,0.13,0.118,1.1,20,rural,urban,0.03673228534213096,Target Corporation,rural
+26,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,illegal immigration,
+27,0.002,results_full_domain_frac_wikipedia.org,10,10,0.1674242424242424,0.168,0.167,1.01,20,rural,urban,0.34343639613791105,drinking age,rural
+28,0.0,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,michael flynn,
+29,0.0,results_full_domain_frac_wikipedia.org,10,10,0.15384615384615383,0.154,0.154,1.0,20,rural,urban,1.0,Barack Obama,
+30,0.0,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,1.0,20,rural,urban,,gertrude jekyll,
+31,0.008,results_full_domain_frac_wikipedia.org,10,10,0.03956043956043955,0.036,0.043,1.22,20,rural,urban,0.6521364571906928,eagles,urban
+32,0.0,results_full_domain_frac_wikipedia.org,10,10,0.17857142857142855,0.179,0.179,1.0,20,rural,urban,1.0,United States Department of Veterans Affairs,
+33,0.0,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,US Supreme Court,
+34,0.012,results_full_domain_frac_wikipedia.org,10,10,0.09611111111111112,0.102,0.09,1.14,20,rural,urban,0.2561995061134575,Bank of America,rural
+35,0.019,results_full_domain_frac_wikipedia.org,10,10,0.06863636363636363,0.059,0.078,1.33,20,rural,urban,0.17481550140818783,McDonald's,urban
+36,0.0,results_full_domain_frac_wikipedia.org,10,10,0.15384615384615383,0.154,0.154,1.0,20,rural,urban,1.0,Hillary Clinton,
+37,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,abortion,
+38,0.0,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,california fires,
+39,0.054,*results_full_domain_frac_wikipedia.org,10,10,0.07297008547008547,0.1,0.046,2.17,20,rural,urban,0.006992743661734547,Toyota,rural
+40,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,death penalty,
+41,0.056,*results_full_domain_frac_wikipedia.org,10,10,0.03777777777777777,0.066,0.01,6.56,20,rural,urban,0.016727891285220134,Pizza Hut,rural
+42,0.0,results_full_domain_frac_wikipedia.org,10,10,0.08333333333333331,0.083,0.083,1.0,20,rural,urban,1.0,Donald Trump,
+43,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,al franken,
+44,0.0,results_full_domain_frac_wikipedia.org,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,US Senate,
+45,0.0,results_full_domain_frac_wikipedia.org,10,10,0.1818181818181818,0.182,0.182,1.0,20,rural,urban,,gomer pyle,
+46,0.0,results_full_domain_frac_wikipedia.org,10,10,0.10000000000000002,0.1,0.1,1.0,20,rural,urban,,ryan shazier,

@@ -1,2 +1,2 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.02,*results_top_three_domain_frac_rocketloans.com,99,97,0.01020408163265306,0.02,0.0,inf,196,rural,urban,0.013548993007448303,rural
+0,0.061,*results_top_three_domain_appears_rocketloans.com,99,97,0.030612244897959183,0.061,0.0,inf,196,rural,urban,0.013548993007448336,rural

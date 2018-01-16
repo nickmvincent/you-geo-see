@@ -1,9 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.0,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,gun control,
-1,0.0,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,euthanasia,
-2,0.0,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,death penalty,
-3,0.001,results_full_domain_frac_people also ask,10,10,0.0837121212121212,0.084,0.083,1.01,20,rural,urban,0.34343639613791105,drinking age,rural
-4,0.0,results_full_domain_frac_people also ask,10,10,0.07142857142857142,0.071,0.071,1.0,20,rural,urban,,minimum wage,
-5,0.064,*results_full_domain_frac_people also ask,10,10,0.031818181818181815,0.064,0.0,inf,20,rural,urban,0.0013229505842674947,school uniforms,rural
-6,0.0,results_full_domain_frac_people also ask,10,10,0.07692307692307691,0.077,0.077,1.0,20,rural,urban,1.0,illegal immigration,
-7,0.046,*results_full_domain_frac_people also ask,10,10,0.03076923076923077,0.054,0.008,7.0,20,rural,urban,0.00481102818085497,abortion,rural
+""

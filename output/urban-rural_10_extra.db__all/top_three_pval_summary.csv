@@ -1,0 +1,3 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.036,**results_top_three_domain_frac_MapsLocations,399,386,0.04925690021231422,0.032,0.067,2.12,785,rural,urban,2.54908317585382e-05,urban
+1,0.006,*results_top_three_domain_frac_google.com,399,386,0.0029723991507430996,0.006,0.0,inf,785,rural,urban,0.007990507595224397,rural

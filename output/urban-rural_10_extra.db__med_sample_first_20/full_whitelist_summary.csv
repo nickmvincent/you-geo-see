@@ -1,3 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.001,results_full_domain_frac_youtube.com,200,192,0.011810893188444208,0.012,0.011,1.07,392,rural,urban,0.8384380770829646,rural
-1,0.0,results_full_domain_frac_wikipedia.org,200,192,0.0382126801769659,0.038,0.038,1.01,392,rural,urban,0.950043816244893,urban
+0,0.003,results_full_domain_appears_wikipedia.org,200,192,0.44642857142857145,0.445,0.448,1.01,392,rural,urban,0.9538417924868653,urban
+1,0.01,results_full_domain_appears_NewsCarousel,200,192,0.24489795918367346,0.25,0.24,1.04,392,rural,urban,0.8110580011290883,rural
+2,0.001,results_full_domain_appears_youtube.com,200,192,0.09948979591836735,0.1,0.099,1.01,392,rural,urban,0.9726079982609758,rural

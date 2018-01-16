@@ -1,0 +1,19 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.009,results_full_domain_frac_MapsLocations,10,10,0.08636363636363635,0.082,0.091,1.11,20,rural,urban,0.34343639613791355,home insurance,urban
+1,0.046,*results_full_domain_frac_MapsLocations,10,9,0.06658692185007974,0.045,0.091,2.03,19,rural,urban,0.012760764086055941,personal loans,urban
+2,0.0,results_full_domain_frac_MapsLocations,10,9,0.0909090909090909,0.091,0.091,1.0,19,rural,urban,,auto insurance,
+3,0.015,results_full_domain_frac_MapsLocations,10,10,0.007692307692307693,0.0,0.015,inf,20,rural,urban,0.16785065605707486,health insurance,urban
+4,0.075,*results_full_domain_frac_MapsLocations,10,10,0.0375,0.0,0.075,inf,20,rural,urban,0.005121072764272635,geico insurance,urban
+5,0.064,*results_full_domain_frac_MapsLocations,9,10,0.03349282296650718,0.0,0.064,inf,19,rural,urban,0.0013229505842674947,loans bad credit,urban
+6,0.0,*results_full_domain_frac_MapsLocations,10,9,0.07692307692307691,0.077,0.077,1.0,19,rural,urban,0.014956363910414203,loan,urban
+7,0.05,results_full_domain_frac_MapsLocations,10,10,0.0625,0.038,0.088,2.33,20,rural,urban,0.08055387210850919,progressive,urban
+8,0.012,results_full_domain_frac_MapsLocations,10,10,0.00625,0.0,0.012,inf,20,rural,urban,0.34343639613791355,quicken loans,urban
+9,0.028,results_full_domain_frac_MapsLocations,10,10,0.07689393939393938,0.063,0.091,1.45,20,rural,urban,0.0717794871658932,bank loans,urban
+10,0.0,*results_full_domain_frac_MapsLocations,10,9,0.07692307692307691,0.077,0.077,1.0,19,rural,urban,0.014956363910414203,payday loans,urban
+11,0.027,results_full_domain_frac_MapsLocations,10,9,0.0741626794258373,0.061,0.088,1.44,19,rural,urban,0.07564792357255011,life insurance,urban
+12,0.0,*results_full_domain_frac_MapsLocations,10,9,0.07692307692307691,0.077,0.077,1.0,19,rural,urban,0.014956363910414203,insurance companies,urban
+13,0.031,*results_full_domain_frac_MapsLocations,10,10,0.015384615384615385,0.0,0.031,inf,20,rural,urban,0.03678749787978613,hairloss,urban
+14,0.062,*results_full_domain_frac_MapsLocations,10,10,0.04375,0.012,0.075,6.0,20,rural,urban,0.019723632218659942,geico,urban
+15,0.009,results_full_domain_frac_MapsLocations,10,10,0.08636363636363635,0.082,0.091,1.11,20,rural,urban,0.34343639613791355,car insurance,urban
+16,0.062,*results_full_domain_frac_MapsLocations,10,10,0.06875,0.038,0.1,2.67,20,rural,urban,0.024143272996065546,progressive insurance,urban
+17,0.055,*results_full_domain_frac_MapsLocations,10,10,0.06363636363636363,0.036,0.091,2.5,20,rural,urban,0.005121072764272635,home loans,urban

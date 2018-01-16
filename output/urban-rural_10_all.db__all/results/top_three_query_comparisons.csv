@@ -1,0 +1,46 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,minimum wage,
+1,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,gun control,
+2,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,college football playoff,
+3,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,medical marijuana,
+4,0.2,*results_top_three_domain_frac_NewsCarousel,10,10,0.16666666666666669,0.267,0.067,4.0,20,rural,urban,0.0051629256736767945,Chevrolet,rural
+5,0.1,results_top_three_domain_frac_NewsCarousel,10,10,0.28333333333333327,0.333,0.233,1.43,20,rural,urban,0.08112618884584036,Chase Bank,rural
+6,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,matt lauer,
+7,0.233,**results_top_three_domain_frac_NewsCarousel,10,10,0.15,0.267,0.033,8.0,20,rural,urban,0.0006237457011994715,Honda,rural
+8,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Wells Fargo,
+9,0.233,*results_top_three_domain_frac_NewsCarousel,10,10,0.11666666666666665,0.233,0.0,inf,20,rural,urban,0.0013229505842674947,Domino's Pizza,rural
+10,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.016666666666666666,0.033,0.0,inf,20,rural,urban,0.34343639613791355,Target Corporation,rural
+11,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,michael flynn,
+12,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Barack Obama,
+13,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,eagles,
+14,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,US Supreme Court,
+15,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Bank of America,
+16,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,McDonald's,
+17,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Hillary Clinton,
+18,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,abortion,
+19,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.28333333333333327,0.267,0.3,1.12,20,rural,urban,0.5565650165675339,Walmart,urban
+20,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,california fires,
+21,0.033,results_top_three_domain_frac_NewsCarousel,10,10,0.016666666666666666,0.033,0.0,inf,20,rural,urban,0.34343639613791355,Toyota,rural
+22,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,death penalty,
+23,0.133,results_top_three_domain_frac_NewsCarousel,10,10,0.13333333333333333,0.2,0.067,3.0,20,rural,urban,0.07459169984478177,Pizza Hut,rural
+24,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,bitcoin price,
+25,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Donald Trump,
+26,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,al franken,
+27,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,US Senate,
+28,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,Amazon,
+29,0.0,results_top_three_domain_frac_NewsCarousel,10,10,0.33333333333333326,0.333,0.333,1.0,20,rural,urban,1.0,ryan shazier,
+30,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.03333333333333333,0.0,0.067,inf,20,rural,urban,0.16785065605707486,medical marijuana,urban
+31,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,20,rural,urban,0.16785065605707492,Chevrolet,urban
+32,0.267,**results_top_three_domain_frac_MapsLocations,10,10,0.16666666666666669,0.033,0.3,9.0,20,rural,urban,2.292887199439995e-05,Chase Bank,urban
+33,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,20,rural,urban,0.5565650165675339,Honda,urban
+34,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.233,0.3,1.29,20,rural,urban,0.29003341600144855,Wells Fargo,urban
+35,0.0,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.3,0.3,1.0,20,rural,urban,1.0,Domino's Pizza,
+36,0.233,*results_top_three_domain_frac_MapsLocations,10,10,0.21666666666666665,0.1,0.333,3.33,20,rural,urban,0.0013229505842674947,Target Corporation,urban
+37,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.16666666666666669,0.2,0.133,1.5,20,rural,urban,0.39787297935196175,United States Department of Veterans Affairs,rural
+38,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.24999999999999994,0.2,0.3,1.5,20,rural,urban,0.13814824935619238,Bank of America,urban
+39,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.2,0.333,1.67,20,rural,urban,0.03678749787978607,McDonald's,urban
+40,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.05,0.0,0.1,inf,20,rural,urban,0.0811261888458405,abortion,urban
+41,0.067,results_top_three_domain_frac_MapsLocations,10,10,0.29999999999999993,0.267,0.333,1.25,20,rural,urban,0.16785065605707492,Walmart,urban
+42,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.28333333333333327,0.267,0.3,1.12,20,rural,urban,0.5565650165675339,Toyota,urban
+43,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.2666666666666666,0.2,0.333,1.67,20,rural,urban,0.03678749787978607,Pizza Hut,urban
+44,0.133,*results_top_three_domain_frac_facebook.com,10,10,0.06666666666666667,0.133,0.0,inf,20,rural,urban,0.03678749787978613,Bank of America,rural

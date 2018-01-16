@@ -1,0 +1,14 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.133,*results_top_three_domain_frac_MapsLocations,10,10,0.06666666666666667,0.0,0.133,inf,20,rural,urban,0.03678749787978613,home insurance,urban
+1,0.259,**results_top_three_domain_frac_MapsLocations,10,9,0.12280701754385963,0.0,0.259,inf,19,rural,urban,0.0007359017195464876,personal loans,urban
+2,0.2,*results_top_three_domain_frac_MapsLocations,10,9,0.22807017543859648,0.133,0.333,2.5,19,rural,urban,0.005121072764272635,auto insurance,urban
+3,0.2,*results_top_three_domain_frac_MapsLocations,10,10,0.09999999999999999,0.0,0.2,inf,20,rural,urban,0.005121072764272635,geico insurance,urban
+4,0.0,*results_top_three_domain_frac_MapsLocations,10,9,0.33333333333333326,0.333,0.333,1.0,19,rural,urban,0.014956363910414203,loan,rural
+5,0.1,results_top_three_domain_frac_MapsLocations,10,10,0.11666666666666665,0.067,0.167,2.5,20,rural,urban,0.1776880165605986,progressive,urban
+6,0.0,*results_top_three_domain_frac_MapsLocations,10,9,0.33333333333333326,0.333,0.333,1.0,19,rural,urban,0.014956363910414203,payday loans,rural
+7,0.0,*results_top_three_domain_frac_MapsLocations,10,9,0.33333333333333326,0.333,0.333,1.0,19,rural,urban,0.014956363910414203,insurance companies,rural
+8,0.2,*results_top_three_domain_frac_MapsLocations,10,10,0.09999999999999999,0.0,0.2,inf,20,rural,urban,0.005121072764272635,geico,urban
+9,0.233,**results_top_three_domain_frac_MapsLocations,10,10,0.15000000000000002,0.033,0.267,8.0,20,rural,urban,0.0006237457011994715,car insurance,urban
+10,0.133,results_top_three_domain_frac_MapsLocations,10,10,0.09999999999999999,0.033,0.167,5.0,20,rural,urban,0.05773189678497691,progressive insurance,urban
+11,0.033,results_top_three_domain_frac_MapsLocations,10,10,0.016666666666666666,0.0,0.033,inf,20,rural,urban,0.34343639613791355,home loans,urban
+12,0.233,*results_top_three_domain_frac_google.com,10,10,0.11666666666666665,0.233,0.0,inf,20,rural,urban,0.0013229505842674947,progressive,rural

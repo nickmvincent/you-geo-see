@@ -1,6 +1,6 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.033,*results_top_three_domain_frac_thegeneral.com,100,97,0.01692047377326565,0.033,0.0,inf,197,rural,urban,0.00127483847198362,rural
-1,0.119,**results_top_three_domain_frac_MapsLocations,100,97,0.11844331641285953,0.06,0.179,2.98,197,rural,urban,8.970734275575835e-08,urban
-2,0.027,*results_top_three_domain_frac_progressive.insurance,100,97,0.01353637901861252,0.027,0.0,inf,197,rural,urban,0.004158024036355906,rural
-3,0.023,*results_top_three_domain_frac_google.com,100,97,0.011844331641285955,0.023,0.0,inf,197,rural,urban,0.00750256753860964,rural
-4,0.024,*results_top_three_domain_frac_yellowpages.com,100,97,0.011844331641285955,0.0,0.024,inf,197,rural,urban,0.007482173258916498,urban
+0,0.08,*results_top_three_domain_appears_progressive.insurance,100,97,0.04060913705583756,0.08,0.0,inf,197,rural,urban,0.004158024036355908,rural
+1,0.356,**results_top_three_domain_appears_MapsLocations,100,97,0.3553299492385787,0.18,0.536,2.98,197,rural,urban,8.97073427557583e-08,urban
+2,0.07,*results_top_three_domain_appears_google.com,100,97,0.03553299492385787,0.07,0.0,inf,197,rural,urban,0.007502567538609626,rural
+3,0.1,*results_top_three_domain_appears_thegeneral.com,100,97,0.050761421319796954,0.1,0.0,inf,197,rural,urban,0.0012748384719836199,rural
+4,0.072,*results_top_three_domain_appears_yellowpages.com,100,97,0.03553299492385787,0.0,0.072,inf,197,rural,urban,0.007482173258916498,urban

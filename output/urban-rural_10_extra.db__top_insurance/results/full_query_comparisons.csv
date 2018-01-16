@@ -1,17 +1,17 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.062,*results_full_domain_frac_MapsLocations,10,10,0.06875,0.038,0.1,2.67,20,rural,urban,0.024143272996065546,progressive insurance,urban
-1,0.009,results_full_domain_frac_MapsLocations,10,10,0.08636363636363635,0.082,0.091,1.11,20,rural,urban,0.34343639613791355,home insurance,urban
-2,0.015,results_full_domain_frac_MapsLocations,10,10,0.007692307692307693,0.0,0.015,inf,20,rural,urban,0.16785065605707486,health insurance,urban
-3,0.0,results_full_domain_frac_MapsLocations,10,9,0.0909090909090909,0.091,0.091,1.0,19,rural,urban,,auto insurance,
-4,0.075,*results_full_domain_frac_MapsLocations,10,10,0.0375,0.0,0.075,inf,20,rural,urban,0.005121072764272635,geico insurance,urban
-5,0.05,results_full_domain_frac_MapsLocations,10,10,0.0625,0.038,0.088,2.33,20,rural,urban,0.08055387210850919,progressive,urban
-6,0.027,results_full_domain_frac_MapsLocations,10,9,0.0741626794258373,0.061,0.088,1.44,19,rural,urban,0.07564792357255011,life insurance,urban
-7,0.062,*results_full_domain_frac_MapsLocations,10,10,0.04375,0.012,0.075,6.0,20,rural,urban,0.019723632218659942,geico,urban
-8,0.009,results_full_domain_frac_MapsLocations,10,10,0.08636363636363635,0.082,0.091,1.11,20,rural,urban,0.34343639613791355,car insurance,urban
-9,0.0,*results_full_domain_frac_MapsLocations,10,9,0.07692307692307691,0.077,0.077,1.0,19,rural,urban,0.014956363910414203,insurance companies,urban
-10,0.064,*results_full_domain_frac_youtube.com,10,10,0.11071428571428572,0.143,0.079,1.82,20,rural,urban,0.015181612444652484,geico insurance,rural
-11,0.112,**results_full_domain_frac_youtube.com,10,10,0.07053571428571428,0.127,0.014,8.88,20,rural,urban,2.663274920129395e-05,geico,rural
-12,0.075,*results_full_domain_frac_yellowpages.com,10,10,0.0375,0.0,0.075,inf,20,rural,urban,0.023856384540122025,progressive insurance,urban
-13,0.066,*results_full_domain_frac_yellowpages.com,10,10,0.033035714285714286,0.0,0.066,inf,20,rural,urban,0.04821310416200713,geico insurance,urban
-14,0.064,results_full_domain_frac_yellowpages.com,10,10,0.03214285714285714,0.0,0.064,inf,20,rural,urban,0.05019056610409128,progressive,urban
-15,0.077,*results_full_domain_frac_yellowpages.com,10,10,0.05267857142857143,0.014,0.091,6.38,20,rural,urban,0.006430805962002639,geico,urban
+0,0.3,results_full_domain_appears_MapsLocations,10,9,0.8421052631578947,0.7,1.0,1.43,19,rural,urban,0.0811261888458405,life insurance,urban
+1,0.5,*results_full_domain_appears_MapsLocations,10,10,0.35,0.1,0.6,6.0,20,rural,urban,0.019723632218659942,geico,urban
+2,0.0,results_full_domain_appears_MapsLocations,10,9,1.0,1.0,1.0,1.0,19,rural,urban,,insurance companies,
+3,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,health insurance,urban
+4,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,rural,urban,0.005121072764272635,geico insurance,urban
+5,0.4,results_full_domain_appears_MapsLocations,10,10,0.5,0.3,0.7,2.33,20,rural,urban,0.08055387210850919,progressive,urban
+6,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,home insurance,urban
+7,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,car insurance,urban
+8,0.0,results_full_domain_appears_MapsLocations,10,9,1.0,1.0,1.0,1.0,19,rural,urban,,auto insurance,
+9,0.5,*results_full_domain_appears_MapsLocations,10,10,0.55,0.3,0.8,2.67,20,rural,urban,0.024143272996065546,progressive insurance,urban
+10,0.6,*results_full_domain_appears_yellowpages.com,10,10,0.4,0.1,0.7,7.0,20,rural,urban,0.00481102818085497,geico,urban
+11,0.4,*results_full_domain_appears_yellowpages.com,10,10,0.2,0.0,0.4,inf,20,rural,urban,0.03678749787978613,geico insurance,urban
+12,0.4,*results_full_domain_appears_yellowpages.com,10,10,0.2,0.0,0.4,inf,20,rural,urban,0.03678749787978613,progressive,urban
+13,0.5,*results_full_domain_appears_yellowpages.com,10,10,0.25,0.0,0.5,inf,20,rural,urban,0.014956363910414203,progressive insurance,urban
+14,0.8,**results_full_domain_appears_youtube.com,10,10,0.5,0.9,0.1,9.0,20,rural,urban,2.2928871994400028e-05,geico,rural
+15,0.4,*results_full_domain_appears_youtube.com,10,10,0.8,1.0,0.6,1.67,20,rural,urban,0.03678749787978613,geico insurance,rural

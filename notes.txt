@@ -53,3 +53,29 @@ selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome fa
 
 This happeneded on the 12th page (6th query, 2 locations)
 Going to use logger to try to figure it out faster
+Also happens w/ only TWO LOCATIONS. So it's not a certain number of simultaneous threads that causes the error.
+
+
+
+Some technical details
+Digging into the chromedriver logs, it looks like after initializing a chomre instance, chromedriver makes a request to 
+DevTools request: http://localhost:12162/json/version
+
+Sometimes, it tries this many many times w/ no response and then the crash occurs!
+
+
+This g thread: https://groups.google.com/forum/#!msg/chromedriver-users/2pxHCAINxX0/zZQwdumcAgAJ 
+suggests this github convo from selenium-docker: https://github.com/SeleniumHQ/docker-selenium/issues/87
+which suggests this fix:
+export DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+I also found this official bug report:
+https://bugs.chromium.org/p/chromedriver/issues/detail?id=1620
+
+Hasn't worked yet.
+
+Also put this directly into the code...
+
+
+Run Xvfb as sudo?
+[nvl0834@butter you-geo-see]$ sudo Xvfb :1 -screen 0 1024x900x24
