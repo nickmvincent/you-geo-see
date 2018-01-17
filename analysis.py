@@ -19,9 +19,6 @@ from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
-sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
-sns.set(style="whitegrid", palette='pastel', color_codes=True)
-
 
 UGC_WHITELIST = [
     'wikipedia.org',
@@ -35,9 +32,6 @@ UGC_WHITELIST = [
     'pinterest.com',
     'tripadvisor.com',
     'KnowledgePanel',
-    'MapsPlaces',
-    'MapsLocations',
-    'NewsCarousel',
 ]
 
 
@@ -647,10 +641,7 @@ def main(args, db, category):
     # ANCHOR: plotting
     ugc_ret_cols = []
     big_ret_cols = []
-    # TODO: consider adding something to w/ codes here
-    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + [
-        'NewsCarousel', 'MapsPlaces', 'MapsLocations'
-    ])
+    cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST)
     cols_with_nonzero_mean = [
         x for x in cols if serp_df[x].mean() != 0
     ]
@@ -764,15 +755,15 @@ def main(args, db, category):
         # SERPS that have NO TWEETS or NO NEWS (etc)
         # will have nan values for any related calculations (e.g. avg_jacc of Tweets)
         if link_type == 'results':
-            cols_to_fillna = [
+            cols_to_fill = [
                 'has_knowledge_panel',
                 'has_top_ads',
                 'has_bottom_ads',
             ]
             serp_df = serp_df.fillna({
-                col: 0 for col in cols_to_fillna
+                col: 0 for col in cols_to_fill
             })
-            for col in cols_to_fillna:
+            for col in cols_to_fill:
                 cols_to_compare.append(col)
 
         comparisons = []
@@ -918,6 +909,12 @@ def parse():
                 cat, tmp - tic, tmp - start 
             ))
             tic = tmp
+
+
+    # this code does a customized "melt" and "clean" on the data
+    # that is, it makes the wide-form dataframe long-form
+    # and it separates the complicated column names into multiple columns
+    # e.g. link_type, subset, metric, 
     row_dicts = []
     for col in df.columns.values:
         is_ugc_col = False
