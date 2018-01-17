@@ -1,0 +1,34 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Target Corporation,urban
+1,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,rural,urban,,Toyota,
+2,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,rural,urban,,McDonald's,
+3,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Domino's Pizza,urban
+4,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Walmart,urban
+5,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Chase Bank,urban
+6,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Bank of America,urban
+7,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Pizza Hut,urban
+8,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Wells Fargo,urban
+9,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Chevrolet,urban
+10,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,rural,urban,,Honda,urban
+11,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Target Corporation,low-income
+12,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,low-income,high-income,,Toyota,
+13,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,low-income,high-income,,McDonald's,
+14,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Domino's Pizza,low-income
+15,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Walmart,low-income
+16,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Chase Bank,low-income
+17,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Bank of America,low-income
+18,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Pizza Hut,low-income
+19,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Wells Fargo,low-income
+20,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Chevrolet,low-income
+21,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,1.0,0.0,inf,2,low-income,high-income,,Honda,low-income
+22,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Target Corporation,DEM
+23,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,GOP,DEM,,Toyota,
+24,0.0,results_full_domain_appears_MapsLocations,1,1,1.0,1.0,1.0,1.0,2,GOP,DEM,,McDonald's,
+25,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Domino's Pizza,DEM
+26,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Walmart,DEM
+27,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Chase Bank,DEM
+28,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Bank of America,DEM
+29,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Pizza Hut,DEM
+30,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Wells Fargo,DEM
+31,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Chevrolet,DEM
+32,1.0,results_full_domain_appears_MapsLocations,1,1,0.5,0.0,1.0,inf,2,GOP,DEM,,Honda,DEM

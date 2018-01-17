@@ -1,5 +1,7 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_top_domain_frac_youtube.com,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
-1,0.0,results_top_domain_frac_wikipedia.org,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
-2,0.0,results_top_domain_frac_UserTweetCarousel,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
-3,0.0,results_top_domain_frac_facebook.com,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
+0,0.0,results_top_domain_appears_UserTweetCarousel,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
+1,0.073,results_top_domain_appears_MapsLocations,94,100,0.15463917525773196,0.117,0.19,1.62,194,low-income,high-income,0.15915408541854445,high-income
+2,0.0,results_top_domain_appears_youtube.com,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
+3,0.0,results_top_domain_appears_wikipedia.org,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
+4,0.0,results_top_domain_appears_NewsCarousel,94,100,0.0,0.0,0.0,,194,low-income,high-income,,
+5,0.0,results_top_domain_appears_facebook.com,94,100,0.0,0.0,0.0,,194,low-income,high-income,,

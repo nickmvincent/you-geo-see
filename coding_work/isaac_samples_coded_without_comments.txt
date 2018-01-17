@@ -1,0 +1,303 @@
+Sample produced on 2018-01-14 00:27:27.787656
+Samples come from the following dbs: ['dbs\\urban-rural_10_extra.db', 'dbs\\urban-rural_10_all.db']
+
+FACEBOOK.COM
+10 sampled out of 17
+**********
+===
+https://www.facebook.com/McDonalds/
+Snippet: McDonald's, Oak Brook, IL. 75M likes. Learn about McDonald's history, our food, our people & news from around the world. http://twitter.com/mcdonaldscorp...
+Code: tfo$
+===
+https://www.facebook.com/barackobama/
+Snippet: Barack Obama, Washington, DC. 55M likes. Dad, husband, former President, citizen.
+Code: tfip
+===
+https://www.facebook.com/hillaryclinton/
+Snippet: Hillary Clinton. 9.9M likes. Wife, mom, grandma, women+kids advocate, FLOTUS, Senator, SecState, hair icon, pantsuit aficionado, presidential candidate.
+Code: tfip
+===
+https://www.facebook.com/EaglesBand/
+Snippet: The Eagles – Don Henley, Joe Walsh & Timothy B. Schmit, with Vince Gill and Deacon Frey - have added four more “An Evening with the Eagles” concerts: Thursday, May 3 in Salt Lake City, Utah at the Vivint Smart Home Arena; Saturday, May 5 in Portland, Oregon at the Moda Center; Tuesday, May 8 in Spokane, ...
+Code: tfoc
+===
+https://www.facebook.com/Dominos/
+Snippet: Domino's Pizza. 18552243 likes · 61237 talking about this · 486587 were here. Domino's is the recognized world leader in pizza delivery. Need help?...
+Code: tfo$
+===
+https://www.facebook.com/BankofAmerica/
+Snippet: Bank of America. 2850012 likes · 5573 talking about this. Community. News. Service and support. Before joining the conversation, please review our...
+Code: tfo$
+===
+https://www.facebook.com/geico/
+Snippet: GEICO. 542K likes. GEICO provides car insurance to millions of drivers across the United States. Please read our Mission description for terms.
+Code: tfo$
+===
+https://www.facebook.com/walmart/
+Snippet: Walmart, Bentonville, AR. 33M likes. “If we work together, we'll lower the cost of living for everyone…we'll give the world an opportunity to see what...
+Code: tfo$
+===
+https://www.facebook.com/wellsfargo/
+Snippet: Wells Fargo. 1M likes. For customer support 7 days/week, please message us. View our Social Media Community Guidelines at...
+Code: tfo$
+===
+https://www.facebook.com/QuickenLoans/
+Snippet: Quicken Loans. 349K likes. Call (888) 728-4702 or text “AMAZE” to 26293 www.QuickenLoans.com NMLS #3030 | NMLS Access: http://po.st/NMLS.
+Code: tfo$
+===
+YOUTUBE.COM
+9 sampled out of 9
+**********
+===
+https://www.youtube.com/watch?v=64JQMlDzQx0
+Snippet: Facts about who, why and when women get abortions Credits: https://www.buzzfeed.com/bfmp/videos/17704 ...
+Code: tfoj
+===
+https://www.youtube.com/watch?v=fvyTYU8dMAs
+Snippet: Are you trying to lose weight? There are many things that help weight loss besides a fad diet and exercising ...
+Code: tfoz
+===
+https://www.youtube.com/watch?v=dwgGtH7oPhQ
+Snippet: Sialolithiasis (also termed salivary calculi, or salivary stones), is a condition where a calcified mass or sialolith ...
+Code: tfoz
+===
+https://www.youtube.com/watch?v=e9MfWH9mwhk
+Snippet: This is a video of me removing a salivary gland stone, or a sialolith, from my submandibular salivary gland ...
+Code: ttiz
+===
+https://www.youtube.com/watch?v=aPX1J9HmfeM
+Snippet: A 17-year-old has become the first minor to die by euthanasia in Belgium. It is the first application of rules ...
+Code: tfoj
+===
+https://www.youtube.com/channel/UCHxcqJWQQcoVmVh5eHVqVxg
+Snippet: We know you came for the Gecko, but we're sure you'll stay for everything else. Welcome to GEICO's official YouTube Channel presenting all of our latest comm...
+Code: tfo$
+===
+https://www.youtube.com/watch?v=TR3LpriSmxM
+Snippet: In this Season 1 episode (The Feudin' Pyles), Sgt. Carter (Frank Sutton)does his best to teach the art of ...
+Code: ftiz
+===
+https://www.youtube.com/watch?v=vWKqeJxzeBc
+Snippet: Regardless of politics, what ACTUALLY happens? Video on Plan B: https://youtu.be/7Vozr9vHeMo Subscribe ...
+Code: tfo$
+===
+https://www.youtube.com/watch?v=lRDnVSMr5j0
+Snippet: Former abortionist, Dr. Anthony Levatino, explains "the abortion pill," a non-surgical medical abortion ...
+Code: tfon
+===
+INSTAGRAM.COM
+1 sampled out of 1
+**********
+===
+https://www.instagram.com/barackobama/?hl=en
+Snippet: 16.1m Followers, 14 Following, 238 Posts - See Instagram photos and videos from Barack Obama (@barackobama)
+Code: tfip
+===
+LINKEDIN.COM
+4 sampled out of 4
+**********
+===
+https://www.linkedin.com/in/mike-flynn-49500b9
+Snippet: View Mike Flynn's profile on LinkedIn, the world's largest professional community. Mike has 1 job listed on their profile. See the complete profile on LinkedIn and discover Mike's connections and jobs at similar companies.
+Code: ttiz
+===
+https://www.linkedin.com/company/department-of-veterans-affairs
+Snippet: The U.S. Department of Veterans Affairs (VA) was established on March 15, 1989, succeeding the Veterans Administration. It is responsible for providing federal benefits to veterans and their families. Headed by the Secretary of Veterans Affairs, VA is the second-largest of the Cabinet departments and operates nationwide ...
+Code: tfoz
+===
+https://www.linkedin.com/in/michael-flynn-01790712
+Snippet: View Michael Flynn's profile on LinkedIn, the world's largest professional community. Michael has 3 jobs listed on their profile. See the complete profile on LinkedIn and discover Michael's connections and jobs at similar companies.
+Code: ttiz
+===
+https://www.linkedin.com/company/bank-of-america
+Snippet: Bank of America is one of the world's largest financial institutions, serving individuals, small- and middle-market businesses and large corporations with a full range of banking, investing, asset management and other financial and risk management products and services. The company serves approximately 56 million U.S. ...
+Code: tfo$
+===
+YELP.COM
+10 sampled out of 38
+**********
+===
+https://www.yelp.com/biz/dominos-pizza-san-jose
+Snippet: 141 reviews of Domino's Pizza "~ QUEST FOR THE BEST: PIZZA EDITION ~ #6 out of 12 in Fast Food Pizza This location of Domino's is terribly hit or miss. When they're on it, they've got their garlicky crust, the cheese-to-sauce ratio is perfect,…
+Code: ttiz
+===
+https://www.yelp.com/search?find_desc=super+wal-mart&find_loc=Snoqualmie%2C+WA
+Snippet: Search instead for: super wal-mart. ... Issaquah, WA 98027 Phone number (425) 657-0411. ... Wal mart or fredmeyer or literally any super store in the area.
+Code: ttiz
+===
+https://www.yelp.com/biz/dominos-pizza-west-hartford-3
+Snippet: 10 reviews of Domino's Pizza "Best Domino's in the area. Overall it's average. Usually gets the order right. Frustrating that it doesn't deliver to all of West Hartford. Not the best Domino's, but certainly not the worst. Friendly staff if you…
+Code: ttiz
+===
+https://www.yelp.com/biz/mcdonalds-orlando-10
+Snippet: 207 reviews of McDonald's "Yes, I know what you're thinking! Rating a McDonald's! Mmhm. That's right! I thought the one in Vegas on the strip was nice, but nah. This one right here takes the cake. Being from up North, you'll never see one like…
+Code: ttiz
+===
+https://www.yelp.com/biz/pizza-hut-fort-worth-3
+Snippet: 10 reviews of Pizza Hut "Meh. This is the closest pizza hut to my boyfriends house so we usually order for pick up here. The ordering process is simple since we do it online but the quality is typically inconsistent. Like when we order spinach…
+Code: ttiz
+===
+https://www.yelp.com/biz/dominos-pizza-snoqualmie
+Snippet: 16 reviews of Domino's Pizza "Update: I was contacted by owner and we had a nice series of emails about their decision to eliminate packets of peppers. See below for that. This review is for the food and online app. The food was great and online…
+Code: ttiz
+===
+https://www.yelp.com/biz/pizza-hut-fairmont-2
+Snippet: Pizza Hut - CLOSED in Fairmont, reviews by real people. Yelp is a fun and easy way to find, recommend and talk about what's great and not so great in Fairmont and beyond.
+Code: tfo$
+===
+https://www.yelp.com/biz/pizza-hut-charlotte-12
+Snippet: 10 reviews of Pizza Hut "Service service service is the name of the game. Service is apparently something they don't teach at pizza hut univ. This is the second time I ordered online and scheduled a timed pickup. For the second time, they are…
+Code: ttiz
+===
+https://www.yelp.com/biz/pizza-hut-grand-rapids-9
+Snippet: 8 reviews of Pizza Hut "This was a little disappointing. Got seated right away, or we sat ourselves as there was only one other couple there. Or at least I thought that was the reason. More people kept coming and were told to sit wherever also.…
+Code: ttiz
+===
+https://www.yelp.com/biz/progressive-car-insurance-indianapolis
+Snippet: 3 reviews of Progressive Car Insurance "On line auto quote was cheap. Renters insurance: not so much. Flo needs to market both or give it up. Easy to use on line system (for auto only)"
+Code: ttiz
+===
+PINTEREST.COM
+0 sampled out of 0
+**********
+===
+TRIPADVISOR.COM
+10 sampled out of 16
+**********
+===
+https://www.tripadvisor.com/Restaurant_Review-g50226-d4245653-Reviews-McDonald_s-Columbus_Ohio.html
+Snippet: McDonald's, Columbus: See 4 unbiased reviews of McDonald's, rated 4 of 5 on TripAdvisor and ranked #1277 of 2292 restaurants in Columbus.
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g39037-d4478165-Reviews-Pizza_Hut-Russell_Kansas.html
+Snippet: Pizza Hut, Russell: See 9 unbiased reviews of Pizza Hut, rated 4 of 5 on TripAdvisor and ranked #8 of 19 restaurants in Russell.
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g55857-d4245942-Reviews-Pizza_Hut-Fort_Worth_Texas.html
+Snippet: Pizza Hut, Fort Worth: See 4 unbiased reviews of Pizza Hut, rated 4.5 of 5 on TripAdvisor and ranked #668 of 1610 restaurants in Fort Worth.
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g34515-d1382174-Reviews-Pizza_Hut-Orlando_Florida.html
+Snippet: 9100 International Dr, Orlando, FL 32819-8112. ... Can I place an delivery to the my hotel the Rosen inn at pointe Orlando ? ... Hi , just wondering if the pizza hut at 9100 international drive still does buffets ?
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g50226-d4730689-Reviews-Pizza_Hut-Columbus_Ohio.html
+Snippet: Pizza Hut, Columbus: See 2 unbiased reviews of Pizza Hut, rated 4 of 5 on TripAdvisor and ranked #1120 of 2292 restaurants in Columbus.
+Code: ttiz
+===
+https://www.tripadvisor.com/Attraction_Review-g34515-d2196464-Reviews-World_s_Largest_Entertainment_McDonald_s_PlayPlace-Orlando_Florida.html
+Snippet: World's Largest Entertainment McDonald's & PlayPlace, Orlando: Address, Phone Number, Playground Reviews. ... 6875 W Sand Lake Rd, Orlando, FL 32819-9349. ... Let the kids run off some of that energy in the World's Largest PlayPlace which is Kid's Club Tree House themed and features a ...
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g34515-d4365763-Reviews-Pizza_Hut-Orlando_Florida.html
+Snippet: 7060 International Dr, Orlando, FL 32819-8222. ... “Typical US Pizza Hut”. ... Get quick answers from Pizza Hut staff and past visitors.
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g33970-d4159470-Reviews-Pizza_Hut-West_Hartford_Connecticut.html
+Snippet: Jul 5, 2013 - Pizza Hut, West Hartford: See 2 unbiased reviews of Pizza Hut, rated 3 of 5 on TripAdvisor and ranked #147 of 183 restaurants in West Hartford.
+Code: ttiz
+===
+https://www.tripadvisor.com/ShowUserReviews-g39054-d1169919-r448053061-Pizza_Hut-Sedan_Kansas.html
+Snippet: Dec 31, 2016 - Pizza Hut: Nothing bad nothing great - See traveler reviews, candid photos, and great deals for Sedan, KS, at TripAdvisor.
+Code: ttiz
+===
+https://www.tripadvisor.com/Restaurant_Review-g60898-d4192692-Reviews-McDonald_s-Atlanta_Georgia.html
+Snippet: McDonald's, Atlanta: See 6 unbiased reviews of McDonald's, rated 3 of 5 on TripAdvisor and ranked #2549 of 4024 restaurants in Atlanta.
+Code: ttiz
+===
+TWITTER.COM
+10 sampled out of 144
+**********
+===
+https://twitter.com/Honda/status/947928855909515264?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: Today we celebrated 58 years of bringing entertainment and tradition to people around the world. pic.twitter.com/ftqmFSx…3 days ago · Twitter
+Bio: Official news & information from Honda's Social team at American Honda HQ in Torrance, Calif. For Customer Service ?'s tweet @HondaCustSvc
+Location: 
+Torrance, CA
+Verified: True
+Follower Count: 896761
+Code: tfo$
+===
+https://twitter.com/dominos/status/947482496253550593?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: We’ve got New Year's Eve dinner covered. Say goodbye to 2017 with 20% off EVERYTHING Domino’s using code NYE20!
+Online only, valid through 12/31.
+
+RT if you're staying 🏡 tonight with 🍕! pic.twitter.com/O31gtXP…4 days ago · Twitter
+Bio: The home of Domino's Pizza on Twitter. Hosted by the crew at Domino's HQ.
+Location: 
+Ann Arbor, MI
+Verified: True
+Follower Count: 1246586
+Code: tfo$
+===
+https://twitter.com/pizzahut/status/947920361663946757?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: 🍕, couch and 🏈 all day long. pic.twitter.com/EYIpW5H…3 days ago · Twitter
+Bio: The official Twitter handle of Pizza Hut US. Proud Partner of the NCAA®.
+Location: 
+United States
+Verified: True
+Follower Count: 1593594
+Code: tfo$
+===
+https://twitter.com/GEICO/status/950774173571387393?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: Check out these smart tips for saving money on #ShopForTravelDay:  on.gei.co/2Cl2Kn2 pic.twitter.com/gOD1jnd…2 days ago · Twitter
+Bio: Come for the commercials and savings, stay for so much more! Get a free quote at https://t.co/SaB0ti289M. For service, tweet to @geico_service.
+Location: 
+Chevy Chase, MD
+Verified: True
+Follower Count: 60459
+Code: tfo$
+===
+https://twitter.com/RyanShazier?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
+Bio: The Official Twitter of Ryan Shazier | 
+IG @shazier | FB https://t.co/mRJXPggBIs
+Location: 
+Pittsburgh, PA
+Verified: True
+Follower Count: 209632
+Code: tfic
+===
+https://twitter.com/Walmart/status/947281658503315456?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: We got to celebrate this lil’ spark’s bday today w/ @100activas 🎉🎈 Feliz Cumpleaños a Amanda! twitter.com/100activas/…4 days ago · Twitter
+Bio: Save Money, Live Better. Follow us to learn about tips, solutions & limited time specials! If you need customer support please tweet us @walmarthelp.
+Location: 
+Bentonville, Arkansas
+Verified: True
+Follower Count: 916857
+Code: tfo$
+===
+https://twitter.com/DPInfoCtr/status/948183176635125761?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: Former Death-Row Prisoner #GabrielSolache Exonerated in #Illinois, Seized by ICE. deathpenaltyinfo.org/no… @DPInfoCtr2 days ago · Twitter
+Bio: Death Penalty Information Center, serving the media and public with analysis & information concerning capital punishment. Learn more: http://t.co/uGEWCpDKqY
+Location: 
+Washington, DC
+Verified: False
+Follower Count: 9588
+Code: tfon
+===
+https://twitter.com/QuickenLoans/status/951438547843772417?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: Have you seen the new @HGTV dream home yet? Absolutely stunning. Click here to check it out! spr.ly/6018DKDL416 hours ago · Twitter
+Bio: Your money is worth saving! Let us help! https://t.co/iInV5iai89 | Call today! 888-728-4702 │Quicken Loans NMLS #3030. | NMLS Access: https://t.co/3LYoAYMkMh
+Location: 
+Detroit, MI
+Verified: True
+Follower Count: 41616
+Code: tfo$
+===
+https://twitter.com/DPInfoCtr/status/948631571904565249?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: What's New: #Virginia Governor Commutes Death Sentence of Mentally Incompetent Death-Row Prisoner, #WilliamBurns. deathpenaltyinfo.org/no…11 hours ago · Twitter
+Bio: Death Penalty Information Center, serving the media and public with analysis & information concerning capital punishment. Learn more: http://t.co/uGEWCpDKqY
+Location: 
+Washington, DC
+Verified: False
+Follower Count: 9588
+Code: tfbn
+===
+https://twitter.com/realDonaldTrump/status/948739073237311488?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet
+Snippet: MAKE AMERICA GREAT AGAIN!14 hours ago · Twitter
+Bio: 45th President of the United States of America🇺🇸
+Location: 
+Washington, DC
+Verified: True
+Follower Count: 46628005
+Code: tfip

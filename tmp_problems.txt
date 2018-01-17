@@ -1,0 +1,3 @@
+table 2 (comparison table) shows as DOMAIN APPEARS!
+
+I think this is wrong...

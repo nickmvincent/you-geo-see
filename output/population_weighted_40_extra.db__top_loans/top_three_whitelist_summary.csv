@@ -1,4 +1,10 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.001,results_top_three_domain_frac_wikipedia.org,230,70,0.05333333333333333,0.054,0.052,1.02,300,rural,urban,0.9408218416717692,rural
-1,0.001,results_top_three_domain_frac_wikipedia.org,190,207,0.05373635600335853,0.054,0.053,1.02,397,low-income,high-income,0.9197040420268683,low-income
-2,0.008,results_top_three_domain_frac_wikipedia.org,340,57,0.05373635600335853,0.055,0.047,1.17,397,GOP,DEM,0.6316219135454464,GOP
+0,0.0,results_top_three_domain_appears_NewsCarousel,230,70,0.2,0.2,0.2,1.0,300,rural,urban,1.0,
+1,0.004,results_top_three_domain_appears_wikipedia.org,230,70,0.16,0.161,0.157,1.02,300,rural,urban,0.94082184167177,rural
+2,0.034,results_top_three_domain_appears_MapsLocations,230,70,0.21666666666666667,0.209,0.243,1.16,300,rural,urban,0.5583697585290023,urban
+3,0.002,results_top_three_domain_appears_NewsCarousel,190,207,0.19899244332493704,0.2,0.198,1.01,397,low-income,high-income,0.9617044990390016,low-income
+4,0.004,results_top_three_domain_appears_wikipedia.org,190,207,0.16120906801007556,0.163,0.159,1.02,397,low-income,high-income,0.9197040420268675,low-income
+5,0.014,results_top_three_domain_appears_MapsLocations,190,207,0.22418136020151133,0.232,0.217,1.07,397,low-income,high-income,0.7359409657370609,low-income
+6,0.007,results_top_three_domain_appears_NewsCarousel,340,57,0.19899244332493704,0.2,0.193,1.04,397,GOP,DEM,0.9024006227438744,GOP
+7,0.024,results_top_three_domain_appears_wikipedia.org,340,57,0.16120906801007556,0.165,0.14,1.17,397,GOP,DEM,0.6316219135454461,GOP
+8,0.046,results_top_three_domain_appears_MapsLocations,340,57,0.22418136020151133,0.218,0.263,1.21,397,GOP,DEM,0.47212632880132455,DEM

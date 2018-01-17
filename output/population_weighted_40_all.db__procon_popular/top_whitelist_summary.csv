@@ -1,7 +1,10 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_top_domain_frac_youtube.com,220,80,0.0,0.0,0.0,,300,rural,urban,,
-1,0.0,results_top_domain_frac_wikipedia.org,220,80,0.2,0.2,0.2,1.0,300,rural,urban,1.0,
-2,0.0,results_top_domain_frac_youtube.com,130,270,0.0,0.0,0.0,,400,low-income,high-income,,
-3,0.0,results_top_domain_frac_wikipedia.org,130,270,0.2,0.2,0.2,1.0,400,low-income,high-income,1.0,
-4,0.0,results_top_domain_frac_youtube.com,340,60,0.0,0.0,0.0,,400,GOP,DEM,,
-5,0.0,results_top_domain_frac_wikipedia.org,340,60,0.2,0.2,0.2,1.0,400,GOP,DEM,1.0,
+0,0.018,results_top_domain_appears_NewsCarousel,220,80,0.36333333333333334,0.368,0.35,1.05,300,rural,urban,0.7725561153254588,rural
+1,0.0,results_top_domain_appears_wikipedia.org,220,80,0.2,0.2,0.2,1.0,300,rural,urban,1.0,
+2,0.0,results_top_domain_appears_youtube.com,220,80,0.0,0.0,0.0,,300,rural,urban,,
+3,0.006,results_top_domain_appears_NewsCarousel,130,270,0.365,0.369,0.363,1.02,400,low-income,high-income,0.9034593262345727,low-income
+4,0.0,results_top_domain_appears_wikipedia.org,130,270,0.2,0.2,0.2,1.0,400,low-income,high-income,1.0,
+5,0.0,results_top_domain_appears_youtube.com,130,270,0.0,0.0,0.0,,400,low-income,high-income,,
+6,0.018,results_top_domain_appears_NewsCarousel,340,60,0.365,0.368,0.35,1.05,400,GOP,DEM,0.7940941223100024,GOP
+7,0.0,results_top_domain_appears_wikipedia.org,340,60,0.2,0.2,0.2,1.0,400,GOP,DEM,1.0,
+8,0.0,results_top_domain_appears_youtube.com,340,60,0.0,0.0,0.0,,400,GOP,DEM,,

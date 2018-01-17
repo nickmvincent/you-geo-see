@@ -1,9 +1,9 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.003,results_full_domain_frac_MapsLocations,9,10,0.08971291866028708,0.088,0.091,1.03,19,low-income,high-income,0.08051623795726393,bank loans,high-income
-1,0.073,**results_full_domain_frac_MapsLocations,10,10,0.045454545454545456,0.009,0.082,9.0,20,low-income,high-income,2.292887199440008e-05,home loans,high-income
-2,0.036,*results_full_domain_frac_MapsLocations,10,10,0.01818181818181818,0.0,0.036,inf,20,low-income,high-income,0.03678749787978613,loans bad credit,high-income
-3,0.031,results_full_domain_frac_MapsLocations,9,10,0.07456140350877193,0.058,0.089,1.54,19,low-income,high-income,0.06392378020464952,personal loans,high-income
-4,0.055,results_full_domain_frac_MapsLocations,10,10,0.05624999999999999,0.029,0.084,2.94,20,low-income,high-income,0.08013215618919872,quicken loans,high-income
-5,0.002,results_full_domain_frac_MapsLocations,10,10,0.07788461538461537,0.077,0.079,1.02,20,low-income,high-income,0.0811261888458412,payday loans,high-income
-6,0.0,results_full_domain_frac_MapsLocations,10,10,0.07692307692307691,0.077,0.077,1.0,20,low-income,high-income,1.0,loan,
-7,0.012,results_full_domain_frac_MapsLocations,10,10,0.00625,0.0,0.012,inf,20,low-income,high-income,0.34343639613791355,quicken,high-income
+0,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,loan,
+1,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,payday loans,
+2,0.0,results_full_domain_appears_MapsLocations,9,10,1.0,1.0,1.0,1.0,19,low-income,high-income,,bank loans,
+3,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,low-income,high-income,2.2928871994400028e-05,home loans,high-income
+4,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.34343639613791355,quicken,high-income
+5,0.333,results_full_domain_appears_MapsLocations,9,10,0.8421052631578947,0.667,1.0,1.5,19,low-income,high-income,0.08051623795726251,personal loans,high-income
+6,0.4,results_full_domain_appears_MapsLocations,10,10,0.4,0.2,0.6,3.0,20,low-income,high-income,0.07459169984478176,quicken loans,high-income
+7,0.4,*results_full_domain_appears_MapsLocations,10,10,0.2,0.0,0.4,inf,20,low-income,high-income,0.03678749787978613,loans bad credit,high-income

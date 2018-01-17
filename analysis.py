@@ -3,23 +3,24 @@ import os
 from string import ascii_lowercase
 import csv
 import argparse
+import time
 
-from constants import POPULAR_CATEGORIES
+from constants import POPULAR_CATEGORIES, FULL, TOP_THREE, TOP, RESULT_SUBSETS
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data, set_or_concat
 from qual_code import TWITTER_DOMAIN, strip_twitter_screename
+from plotters import plot_comparison, plot_importance
 
 import pandas as pd
 import numpy as np
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
-FULL = 'full'
-TOP_THREE = 'top_three'
-TOP = 'top'
-RESULT_SUBSETS = [FULL, TOP_THREE, TOP]
+sns.set_context("paper", rc={"font.size":8, "font.family": "Times New Roman", "axes.titlesize":8,"axes.labelsize":5}) 
+
 
 UGC_WHITELIST = [
     'wikipedia.org',
@@ -681,7 +682,7 @@ def main(args, db, category):
         if results_domain_fracs_cols_nz_subset:
             serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
                 kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
-            ret_cols += results_domain_appears_cols_nz_subset
+            ret_cols += results_domain_fracs_cols_nz_subset
         if results_domain_appears_cols_nz_subset:
             serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
                 kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
@@ -692,7 +693,7 @@ def main(args, db, category):
     serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
         kind='barh', ax=axes2[3], title='Domain Ranks')
 
-    sns.set(style="whitegrid", palette="colorblind", color_codes=True)
+    sns.set(style="whitegrid", palette='pastel', color_codes=True)
     
     wp_vals = serp_df[
         'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
@@ -739,8 +740,10 @@ def main(args, db, category):
             # tweets all have the same domain - twitter.com!
             for top_domain in set(link_type_to_domains[link_type]):
                 for prefix in [
-                        '_full_domain_appears_', '_top_three_domain_appears_',
-                        '_top_domain_appears_',
+                        # '_full_domain_appears_', '_top_three_domain_appears_',
+                        # '_top_domain_appears_',
+                        '_full_domain_frac_', '_top_three_domain_frac_',
+                        '_top_domain_frac_',
                 ]:
                     cols_to_compare.append(link_type + prefix + top_domain)
         for col in [
@@ -849,21 +852,6 @@ def main(args, db, category):
     return comparison_df, importance_df
 
 
-
-def strip_domain_strings_wrapper(subset):
-    """wraps a function to strip results_type, subset, and domain_frac text"""
-
-    def strip_domain_strings(x):
-        """Strip the string"""
-        x = x.strip('*')
-        x = x.replace('results_', '')
-        x = x.replace(subset, '')
-        x = x.replace('domain_frac_', '')
-        x = x.strip('_')
-        return x
-    return strip_domain_strings
-
-
 def parse():
     """parse args"""
     parser = argparse.ArgumentParser(description='Perform anlysis.')
@@ -887,9 +875,11 @@ def parse():
     df = None
     for db in args.db:
         if args.category == 'each':
-            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', ]
+            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all']
         else:
             cats = [args.category]
+        start = time.time()
+        tic = time.time()
         for cat in cats:
             comparisons_for_cat, df_for_cat = main(args, db, cat)
             # about to write unintuitive code that overuses None...
@@ -899,13 +889,23 @@ def parse():
             if df_for_cat is not None:
                 df = set_or_concat(
                     df, df_for_cat)
-        row_dicts = []
+            tmp = time.time()
+            print('Benchmark: Category {} took {} seconds. A total of {} seconds have passed.'.format(
+                cat, tmp - tic, tmp - start 
+            ))
+            tic = tmp
+    row_dicts = []
     for col in df.columns.values:
         if col:
-            if '_domain_appears_' in col:
+            if '_domain_appears_' in col or '_domain_frac_' in col:
                 # tmp is of the form resulttype_subset
                 # e.g. results_top_three
-                tmp, domain = col.split('_domain_appears_')
+                if  '_domain_appears_' in col:
+                    metric = 'domain_appears'
+                    tmp, domain = col.split('_domain_appears_')
+                elif '_domain_frac_' in col:
+                    metric = 'domain_frac'
+                    tmp, domain = col.split('_domain_frac_')
                 link_type, subset = None, None
                 for key in RESULT_SUBSETS:
                     if key + '_domain' in col:
@@ -915,7 +915,7 @@ def parse():
                     row_dict = {
                         'link_type': link_type,
                         'subset': subset,
-                        'metric': 'domain_appears',
+                        'metric': metric,
                         'domain': domain,
                         'val':  row[col],
                         'category': row['category'],
@@ -923,64 +923,10 @@ def parse():
                     row_dicts.append(row_dict)
     df2 = pd.DataFrame(row_dicts)
     plt.close('all')
-    _, axes = plt.subplots(ncols=2)
-    mask1 = (df2.metric == 'domain_appears') & (df2.subset == FULL)
-    mask2 = (df2.metric == 'domain_appears') & (df2.subset == TOP_THREE)
-    tmpdf = df2[df2.subset == FULL][['domain', 'val']]
-    order = list(
-        tmpdf.groupby('domain').mean().sort_values(
-            'val', ascending=False).index)
-    for subset in [FULL, TOP_THREE]:
-        df2.loc[:, 'domain'] = df2['domain'].apply(strip_domain_strings_wrapper(subset))
-    sns.barplot(x='val', y='domain', hue='category', order=order,
-                data=df2[mask1], ax=axes[0], ci=None)
-    sns.barplot(x='val', y='domain', hue='category', order=order,
-                data=df2[mask2], ax=axes[1], ci=None)
-    axes[0].set_title('Full Domain Fractions')
-    axes[0].set_xlabel('Fraction of Full Results')
-    axes[0].legend(ncol=2, loc = 'lower right', frameon=True)
-
-
-    axes[1].set_title('Domain Appears')    
-    axes[1].set_xlabel('Domain Appears in Top 3')
-    for axis in [axes[0], axes[1]]:
-        axis.set_ylabel('')
-        sns.despine(ax=axis, bottom=True, left=False)
-        # axis.set(xlim=(0, 0.15))
-
+    plot_importance(df2)
     if comparison_df is not None:
         comparison_df.to_csv('comparison_df.csv')
-        # comparison_df = pd.melt(
-        #     comparison_df, id_vars=['column', 'category', 'subset', ], value_vars=['add', 'mean_b',])
-        _, comparison_axes = plt.subplots(nrows=2, ncols=1)
-        for location_groups in [['urban', 'rural']]:
-            title = 'Domain Fractions Differences: {0} (left) vs {1} (right)'.format(*location_groups)
-            for x, subset in enumerate([FULL, TOP_THREE]):
-                row_mask = comparison_df.subset == subset
-                data = comparison_df[row_mask]
-
-                def invert_add_inc(downwards):
-                    def func(x):
-                        if x.winner == downwards:
-                            return x.add_inc * -1
-                        return x.add_inc
-                    return func
-                data.loc[:, 'add_inc'] = data.apply(invert_add_inc(location_groups[0]), axis=1)
-                data.loc[:, 'add_inc'] = data.add_inc.astype(float)
-                data.loc[:, 'column'] = data['column'].apply(strip_domain_strings_wrapper(subset))
-                ax = comparison_axes[x]
-                if not data.empty:
-                    sns.barplot(
-                        x='add_inc', y='column', hue='category',
-                        data=data,
-                        ax=ax, ci=None)
-                    ax.set_title(title)
-                    ax.set_xlabel('Domain')
-                    ax.set_ylabel('Increase in fraction')
-                    ax.axvline(0, color='black')
-                    sns.despine(ax=ax, bottom=True, left=False)
-
-
+        plot_comparison(comparison_df)
     else:
         print('found no comparisons...')
 

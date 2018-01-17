@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.263,*results_full_domain_appears_MapsLocations,38,38,0.18421052631578946,0.053,0.316,6.0,76,rural,urban,0.003055192304197968,urban
+1,0.263,*results_full_domain_appears_MapsLocations,38,38,0.18421052631578946,0.316,0.053,6.0,76,low-income,high-income,0.003055192304197968,low-income
+2,0.263,*results_full_domain_appears_MapsLocations,38,38,0.18421052631578946,0.053,0.316,6.0,76,GOP,DEM,0.003055192304197968,DEM
