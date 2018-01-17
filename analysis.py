@@ -19,7 +19,8 @@ from scipy.stats import ttest_ind
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
-sns.set_context("paper", rc={"font.size":8, "font.family": "Times New Roman", "axes.titlesize":8,"axes.labelsize":5}) 
+sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
+sns.set(style="whitegrid", palette='pastel', color_codes=True)
 
 
 UGC_WHITELIST = [
@@ -486,7 +487,7 @@ def main(args, db, category):
     categories = list(data['category'].drop_duplicates()) + ['all']
     if category not in categories:
         # 'Skipping category {}'.format(category))
-        return None, None
+        return None
     if 'dbs' in db:
         shortened_db = db[4:]
     else:
@@ -644,7 +645,8 @@ def main(args, db, category):
     serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
 
     # ANCHOR: plotting
-    ret_cols = []
+    ugc_ret_cols = []
+    big_ret_cols = []
     # TODO: consider adding something to w/ codes here
     cols = get_matching_columns(list(serp_df.columns.values), UGC_WHITELIST + [
         'NewsCarousel', 'MapsPlaces', 'MapsLocations'
@@ -666,9 +668,10 @@ def main(args, db, category):
     ]
     _, domain_fracs_ax = plt.subplots(nrows=3)
     _, axes2 = plt.subplots(nrows=4)
-    _, big_fracs_ax = plt.subplots(nrows=3)
+    _, big_ax = plt.subplots(nrows=3)
     _, dist_axes = plt.subplots(nrows=2)
     _, personalization_ax = plt.subplots(nrows=2)
+
     for index, subset in enumerate(RESULT_SUBSETS):
         results_domain_fracs_cols_nz_subset = [
             x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
@@ -676,57 +679,62 @@ def main(args, db, category):
         results_domain_appears_cols_nz_subset = [
             x for x in results_domain_appears_cols_nz if subset + '_domain_appears' in x
         ]
-        big_fraction_cols = [
-            x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_frac' in x and serp_df[x].mean() > 0.01
-        ]
-        if results_domain_fracs_cols_nz_subset:
-            serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
-                kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
-            ret_cols += results_domain_fracs_cols_nz_subset
-        if results_domain_appears_cols_nz_subset:
-            serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
-                kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
-            ret_cols += results_domain_appears_cols_nz_subset
-        if big_fraction_cols:
-            serp_df[big_fraction_cols].mean().sort_values().plot(
-                kind='barh', ax=big_fracs_ax[index], title='Big Fractions: {}'.format(subset))
-    serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
-        kind='barh', ax=axes2[3], title='Domain Ranks')
 
-    sns.set(style="whitegrid", palette='pastel', color_codes=True)
-    
-    wp_vals = serp_df[
-        'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
-    sns.distplot(
-        wp_vals, bins=list(range(1, 13)), norm_hist=True,
-        kde=False, color="b", ax=dist_axes[0])
-    dist_axes[0].axvline(wp_vals.mean(), color='b',
-                         linestyle='dashed', linewidth=2)
-    try:
-        tw_vals = serp_df[
-            'results_full_domain_rank_UserTweetCarousel'][serp_df['results_full_domain_rank_UserTweetCarousel'].notnull() == True]
+        big_candidate_cols = [
+            x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_appears' in x
+        ]
+        big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:10]
+
+        if results_domain_fracs_cols_nz_subset:
+            if args.plot_detailed:
+                serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
+                    kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
+            ugc_ret_cols += results_domain_fracs_cols_nz_subset
+        if results_domain_appears_cols_nz_subset:
+            if args.plot_detailed:
+                serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
+                    kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
+            ugc_ret_cols += results_domain_appears_cols_nz_subset
+        if big_appears_cols:
+            if args.plot_detailed:
+                serp_df[big_appears_cols].mean().sort_values().plot(
+                    kind='barh', ax=big_ax[index], title='Big Appears: {}'.format(subset))
+            big_ret_cols += big_appears_cols
+    if args.plot_detailed:
+        serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
+            kind='barh', ax=axes2[3], title='Domain Ranks')
+        wp_vals = serp_df[
+            'results_full_domain_rank_wikipedia.org'][serp_df['results_full_domain_rank_wikipedia.org'].notnull() == True]
         sns.distplot(
-            tw_vals, bins=list(range(1, 13)), norm_hist=True,
-            kde=False, color="g", ax=dist_axes[1])
-        dist_axes[1].axvline(tw_vals.mean(), color='g',
-                             linestyle='dashed', linewidth=2)
-    except:
-        pass
-    # PERSONALIZATION
-    jacc_vals = serp_df[serp_df['results_avg_jacc'].notnull()
-                        == True]['results_avg_jacc']
-    sns.distplot(
-        jacc_vals, norm_hist=True,
-        kde=False, color="b", ax=personalization_ax[0])
-    personalization_ax[0].axvline(
-        jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
-    edit_vals = serp_df[serp_df['results_avg_edit'].notnull()
-                        == True]['results_avg_edit']
-    sns.distplot(
-        edit_vals, norm_hist=True,
-        kde=False, color="g", ax=personalization_ax[1])
-    personalization_ax[1].axvline(
-        edit_vals.mean(), color='g', linestyle='dashed', linewidth=2)
+            wp_vals, bins=list(range(1, 13)), norm_hist=True,
+            kde=False, color="b", ax=dist_axes[0])
+        dist_axes[0].axvline(wp_vals.mean(), color='b',
+                            linestyle='dashed', linewidth=2)
+        try:
+            tw_vals = serp_df[
+                'results_full_domain_rank_UserTweetCarousel'][serp_df['results_full_domain_rank_UserTweetCarousel'].notnull() == True]
+            sns.distplot(
+                tw_vals, bins=list(range(1, 13)), norm_hist=True,
+                kde=False, color="g", ax=dist_axes[1])
+            dist_axes[1].axvline(tw_vals.mean(), color='g',
+                                linestyle='dashed', linewidth=2)
+        except:
+            pass
+        # PERSONALIZATION
+        jacc_vals = serp_df[serp_df['results_avg_jacc'].notnull()
+                            == True]['results_avg_jacc']
+        sns.distplot(
+            jacc_vals, norm_hist=True,
+            kde=False, color="b", ax=personalization_ax[0])
+        personalization_ax[0].axvline(
+            jacc_vals.mean(), color='b', linestyle='dashed', linewidth=2)
+        edit_vals = serp_df[serp_df['results_avg_edit'].notnull()
+                            == True]['results_avg_edit']
+        sns.distplot(
+            edit_vals, norm_hist=True,
+            kde=False, color="g", ax=personalization_ax[1])
+        personalization_ax[1].axvline(
+            edit_vals.mean(), color='g', linestyle='dashed', linewidth=2)
 
     outputs, errors = [], []
     pval_summaries = {key: [] for key in RESULT_SUBSETS}
@@ -844,17 +852,21 @@ def main(args, db, category):
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
-    importance_df = serp_df[list(set(ret_cols)) + ['category']]
+    importance_df = serp_df[list(set(ugc_ret_cols + big_ret_cols)) + ['category']]
     if category == 'all':
         importance_df.loc[:, 'category'] = 'all'
     if comparison_df is not None:
         comparison_df.loc[:, 'category'] = category
-    return comparison_df, importance_df
-
+    return {
+        'comparison_df': comparison_df, 
+        'importance_df': importance_df,
+        'ugc_ret_cols': ugc_ret_cols,
+        'big_ret_cols': big_ret_cols
+    }
 
 def parse():
     """parse args"""
-    parser = argparse.ArgumentParser(description='Perform anlysis.')
+    parser = argparse.ArgumentParser(description='Perform analysis.')
     parser.add_argument(
         '--comparison', help='What comparison to do', default='all')
     parser.add_argument(
@@ -866,6 +878,8 @@ def parse():
     parser.add_argument(
         '--plot', dest='plot', help='Whether to plot', action='store_true')
     parser.add_argument(
+        '--plot_detailed', dest='plot_detailed', help='Whether to plot', action='store_true', default=False)
+    parser.add_argument(
         '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
 
@@ -873,6 +887,8 @@ def parse():
     print(args.db)
     comparison_df = None
     df = None
+    ugc_cols = []
+    big_cols = []
     for db in args.db:
         if args.category == 'each':
             cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all']
@@ -881,7 +897,15 @@ def parse():
         start = time.time()
         tic = time.time()
         for cat in cats:
-            comparisons_for_cat, df_for_cat = main(args, db, cat)
+            results = main(args, db, cat)
+            if results:
+                comparisons_for_cat = results['comparison_df']
+                df_for_cat = results['importance_df']
+                ugc_cols += results['ugc_ret_cols']
+                big_cols += results['big_ret_cols']
+            else:
+                comparisons_for_cat =  df_for_cat = None
+
             # about to write unintuitive code that overuses None...
             if comparisons_for_cat is not None:
                 comparison_df = set_or_concat(
@@ -896,10 +920,16 @@ def parse():
             tic = tmp
     row_dicts = []
     for col in df.columns.values:
+        is_ugc_col = False
+        is_big_col = False
         if col:
             if '_domain_appears_' in col or '_domain_frac_' in col:
                 # tmp is of the form resulttype_subset
                 # e.g. results_top_three
+                if col in ugc_cols:
+                    is_ugc_col = True
+                if col in big_cols:
+                    is_big_col = True
                 if  '_domain_appears_' in col:
                     metric = 'domain_appears'
                     tmp, domain = col.split('_domain_appears_')
@@ -919,11 +949,14 @@ def parse():
                         'domain': domain,
                         'val':  row[col],
                         'category': row['category'],
+                        'is_big_col': is_big_col,
+                        'is_ugc_col': is_ugc_col,
                     }
                     row_dicts.append(row_dict)
-    df2 = pd.DataFrame(row_dicts)
+    importance_df = pd.DataFrame(row_dicts)
     plt.close('all')
-    plot_importance(df2)
+    importance_df.to_csv('importance_df.csv')
+    plot_importance(importance_df)
     if comparison_df is not None:
         comparison_df.to_csv('comparison_df.csv')
         plot_comparison(comparison_df)

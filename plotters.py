@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from constants import FULL, TOP_THREE
 
+ALL_SUBSET_STRING = 'considering all results'
+TOP_THREE_SUBSET_STRING = 'considering only top three results'
+
+AGGREGATE_STRING = 'aggregated'
+QUERYSET_BREAKDOWN_STRING = 'broken down by query set'
+
 sns.set_context(
     "paper",
     rc={"font.size": 8, "font.family": "Times New Roman", "axes.titlesize": 8, "axes.labelsize": 5})
@@ -28,86 +34,86 @@ def plot_importance(df):
     """
     Plot the importance of each domain.
 
-    2 rows x 3 cols
     """
-    _, axes = plt.subplots(nrows=2, ncols=3)
+    _, axes = plt.subplots(nrows=2, ncols=4)
+    
+
     tmpdf = df[
         (df.subset == FULL) & (df.category == 'all') & (df.metric == 'domain_frac')][['domain', 'val']]
-    order = list(
+    ugc_order = list(
         tmpdf.groupby('domain').mean().sort_values(
             'val', ascending=False).index)
-
+    title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
     pal = 'pastel'
     pal_lower = 'muted'
 
     # placeholder for qual coded values
     df['fake_val'] = df['val'].map(lambda x: x / 2)
+    aggregate = df[df.category == 'all']
     categorized = df[df.category != 'all']
-    for x, subdf in enumerate([df[df.category == 'all'], categorized]):
-        mask1 = (subdf.metric == 'domain_appears') & (subdf.subset == FULL)
-        mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)
+    for colnum, subdf in enumerate([aggregate, aggregate, categorized, categorized]):
+        if colnum == 0:
+            subdf = subdf[subdf.is_big_col == True]
+            order = ugc_order
+        else:
+            subdf = subdf[subdf.is_ugc_col == True]
+            order = ugc_order
+        title_kwargs = {}
         for subset in [FULL, TOP_THREE]:
             subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
-        sns.barplot(x='val', y='domain', hue='category', order=order,
-                    data=subdf[mask1], ax=axes[0,x], ci=None, palette=pal)
-        sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                    data=subdf[mask1], ax=axes[0,x], ci=None, palette=pal_lower)
-        # else:
-        #     sns.barplot(x='val', y='domain', label='platform-centric', order=order,
-        #                 data=subdf[mask1], ax=axes[0,x], ci=None, palette=pal)
-        #     sns.barplot(x='fake_val', y='domain', label='platform-centric', order=order,
-        #                 data=subdf[mask1], ax=axes[0,x], ci=None, palette=pal_lower)
+        if colnum in [0, 1, 2]:
+            mask1 = (subdf.metric == 'domain_appears') & (subdf.subset == FULL)
+            mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)
+            sns.barplot(x='val', y='domain', hue='category', order=order,
+                        data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal)
+            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+                        data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal_lower)
+            sns.barplot(x='val', y='domain', hue='category', order=order,
+                        data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal)
 
-        sns.barplot(x='val', y='domain', hue='category', order=order,
-                    data=subdf[mask2], ax=axes[1, x], ci=None, palette=pal)
-        sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                    data=subdf[mask2], ax=axes[1, x], ci=None, palette=pal_lower)
-        if x == 0:
-            axes[0, x].set_title('UGC Appears (all categories)')
+            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+                        data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal_lower)
+            if colnum == 0:
+                title_kwargs['metric'] = 'Fraction of pages where domain appears, Top 10 domains, '
+            else:
+                title_kwargs['metric'] = 'Fraction of pages where domain appears, UGC Platforms, '
         else:
-            axes[0, x].set_title('UGC Appears (by category)')
-        
-
-        if x == 0:
-            axes[1, x].set_title('UGC Appears in Top 3 (all categories)')
-        else:
-            axes[1, x].set_title('UGC Appears in Top 3 (by category)')
-        axes[1, x].set_xlabel('Fraction of pages')
-    colnum = 2
-    subdf = categorized
-    mask1 = (subdf.metric == 'domain_frac') & (subdf.subset == FULL)
-    mask2 = (subdf.metric == 'domain_frac') & (subdf.subset == TOP_THREE)
-    for subset in [FULL, TOP_THREE]:
-        subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
-    sns.barplot(x='val', y='domain', hue='category', order=order,
-                data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal)
-    sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal_lower)
-    sns.barplot(x='val', y='domain', hue='category', order=order,
-                data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal)
-    sns.barplot(x='val', y='domain', hue='category', order=order,
-                data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal_lower)
-
-    axes[0, colnum].set_title('Fraction of total results (by category)')
-    axes[1, colnum].set_title('Fraction of top 3 results (by category)')
-    axes[1, colnum].set_xlabel('Fraction of results')
-
-    for colnum in [0, 1, 2]:
+            mask1 = (subdf.metric == 'domain_frac') & (subdf.subset == FULL)
+            mask2 = (subdf.metric == 'domain_frac') & (subdf.subset == TOP_THREE)
+            sns.barplot(x='val', y='domain', hue='category', order=order,
+                        data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal)
+            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+                        data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal_lower)
+            sns.barplot(x='val', y='domain', hue='category', order=order,
+                        data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal)
+            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+                        data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal_lower)
+            title_kwargs['metric'] = 'Fraction of results domain comprises'
         for rownum in [0, 1]:
             ax = axes[rownum, colnum]
-            # ax.grid(True, 'both')
-            if rownum == 0:
-                ax.set(xticklabels=[], xlabel='')
-            if colnum == 2:
-                ax.set_xlim([0, 0.2])
-            else:
+            if colnum in [0, 1, 2]: # appears
                 ax.set_xlim([0, 1])
+                ax.set_xlabel('fraction of pages')
+            else:
+                # ax.set_xlim([0, 0.2])
+                ax.set_xlabel('fraction of results')
+            if rownum == 0:
+                # ax.set(xticklabels=[], xlabel='')
+                title_kwargs['subset'] = ALL_SUBSET_STRING
+            elif rownum == 1:
+                title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
+
+            if colnum in [2, 3]:
+                title_kwargs['type'] = QUERYSET_BREAKDOWN_STRING
+            else:
+                title_kwargs['type'] = AGGREGATE_STRING
             #ax.legend().set_visible(False)
             ax.legend(ncol=2, loc='lower right')
             sns.despine(ax=ax, bottom=True, left=True)
             if colnum != 0:
                 ax.set_ylabel('')
+            ax.set_title(title_template.format(**title_kwargs))
 
 
 def plot_comparison(df, groups=['urban', 'rural']):
@@ -127,18 +133,18 @@ def plot_comparison(df, groups=['urban', 'rural']):
         }
         if is_aggregate:
             col_mask = df.category == 'all'
-            title_kwargs['type'] = 'aggregated'
+            title_kwargs['type'] = AGGREGATE_STRING
         else:
             col_mask = df.category != 'all'
-            title_kwargs['type'] = 'broken down by query set'
+            title_kwargs['type'] = QUERYSET_BREAKDOWN_STRING
         coldf = df[col_mask]
         for rownum, subset in enumerate([FULL, TOP_THREE]):
             row_mask = coldf.subset == subset
             rowdf = coldf[row_mask]
             if subset == FULL:
-                title_kwargs['subset'] = 'considering all results'
+                title_kwargs['subset'] = ALL_SUBSET_STRING
             elif subset == TOP_THREE:
-                title_kwargs['subset'] = 'considering only top three results'
+                title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
 
             def invert_add_inc(neg):
                 """
