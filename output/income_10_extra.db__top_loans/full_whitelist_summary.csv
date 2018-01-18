@@ -1,5 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.006,results_full_domain_appears_UserTweetCarousel,97,100,0.20304568527918782,0.206,0.2,1.03,197,low-income,high-income,0.9146341840498933,low-income
-1,0.208,*results_full_domain_appears_MapsLocations,97,100,0.49746192893401014,0.392,0.6,1.53,197,low-income,high-income,0.003320782623798673,high-income
-2,0.042,results_full_domain_appears_wikipedia.org,97,100,0.29949238578680204,0.278,0.32,1.15,197,low-income,high-income,0.5256136070774671,high-income
-3,0.004,results_full_domain_appears_NewsCarousel,97,100,0.19796954314720813,0.196,0.2,1.02,197,low-income,high-income,0.9424704776593107,high-income

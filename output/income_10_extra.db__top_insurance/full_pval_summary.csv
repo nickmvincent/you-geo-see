@@ -1,2 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.257,**results_full_domain_appears_MapsLocations,94,100,0.6855670103092784,0.553,0.81,1.46,194,low-income,high-income,0.00010982956648316442,high-income

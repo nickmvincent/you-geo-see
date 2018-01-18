@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.002,results_top_three_domain_frac_UserTweetCarousel,95,100,0.034188034188034185,0.035,0.033,1.05,195,GOP,DEM,0.9042954143135878,GOP
-1,0.002,results_top_three_domain_frac_wikipedia.org,95,100,0.034188034188034185,0.035,0.033,1.05,195,GOP,DEM,0.9042954143135878,GOP

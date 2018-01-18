@@ -1,4 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_top_three_domain_appears_youtube.com,191,200,0.0,0.0,0.0,,391,low-income,high-income,,
-1,0.002,results_top_three_domain_appears_wikipedia.org,191,200,0.14578005115089515,0.147,0.145,1.01,391,low-income,high-income,0.9644423913644503,low-income
-2,0.0,results_top_three_domain_appears_NewsCarousel,191,200,0.0,0.0,0.0,,391,low-income,high-income,,

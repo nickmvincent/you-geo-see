@@ -1,8 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.011,*results_full_domain_frac_people also ask,100,100,0.0525420412920413,0.058,0.047,1.24,200,rural,urban,0.033051281035050006,rural
-1,0.0,results_full_domain_frac_wikipedia.org,100,100,0.08763070263070262,0.088,0.087,1.0,200,rural,urban,0.9459551889439933,rural
-2,0.0,results_full_domain_frac_youtube.com,100,100,0.02,0.02,0.02,1.0,200,rural,urban,1.0,
-3,0.0,results_top_three_domain_frac_wikipedia.org,100,100,0.16666666666666663,0.167,0.167,1.0,200,rural,urban,1.0,
-4,0.0,results_top_three_domain_frac_youtube.com,100,100,0.0,0.0,0.0,,200,rural,urban,,
-5,0.0,results_top_domain_frac_wikipedia.org,100,100,0.3,0.3,0.3,1.0,200,rural,urban,1.0,
-6,0.0,results_top_domain_frac_youtube.com,100,100,0.0,0.0,0.0,,200,rural,urban,,

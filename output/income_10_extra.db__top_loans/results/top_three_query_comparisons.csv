@@ -1,2 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.8,**results_top_three_domain_appears_santanderbank.com,9,10,0.5789473684210527,1.0,0.2,5.0,19,low-income,high-income,0.0002024993220676408,bank loans,low-income

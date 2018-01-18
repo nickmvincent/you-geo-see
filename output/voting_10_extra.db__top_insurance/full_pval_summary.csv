@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.05,**results_full_domain_frac_MapsLocations,97,100,0.0553272869262717,0.03,0.08,2.67,197,GOP,DEM,1.5336504669667308e-13,DEM
-1,0.014,*results_full_domain_frac_foragentsonly.com,97,100,0.02003263234227701,0.027,0.013,2.09,197,GOP,DEM,0.04044795317270431,GOP

@@ -700,6 +700,7 @@ def main(args, db, category):
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
+    serp_df = serp_df.fillna(0)
     serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
 
 
@@ -739,7 +740,7 @@ def main(args, db, category):
         big_candidate_cols = [
             x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_appears' in x
         ]
-        big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:20]
+        big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:10]
         print(big_appears_cols)
 
         if results_domain_fracs_cols_nz_subset:

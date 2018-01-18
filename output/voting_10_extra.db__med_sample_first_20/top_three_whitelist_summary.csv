@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_top_three_domain_frac_youtube.com,195,199,0.0,0.0,0.0,,394,GOP,DEM,,
-1,0.001,results_top_three_domain_frac_wikipedia.org,195,199,0.050761421319796954,0.051,0.05,1.02,394,GOP,DEM,0.9492111126703565,GOP

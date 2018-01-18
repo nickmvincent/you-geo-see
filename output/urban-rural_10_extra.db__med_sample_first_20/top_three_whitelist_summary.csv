@@ -1,4 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.001,results_top_three_domain_appears_wikipedia.org,200,192,0.09948979591836735,0.1,0.099,1.01,392,rural,urban,0.9726079982609758,rural
-1,0.0,results_top_three_domain_appears_NewsCarousel,200,192,0.0,0.0,0.0,,392,rural,urban,,
-2,0.0,results_top_three_domain_appears_youtube.com,200,192,0.0,0.0,0.0,,392,rural,urban,,
