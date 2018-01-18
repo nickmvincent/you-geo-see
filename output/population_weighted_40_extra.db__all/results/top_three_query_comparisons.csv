@@ -1,3 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.039,*results_top_three_domain_frac_libertymutual.com,34,6,0.03333333333333333,0.039,0.0,inf,40,GOP,DEM,0.04367879138429159,insurance companies,GOP
-1,0.01,results_top_three_domain_frac_libertymutual.com,34,6,0.008333333333333333,0.01,0.0,inf,40,GOP,DEM,0.32458712748885143,home insurance,GOP
+""

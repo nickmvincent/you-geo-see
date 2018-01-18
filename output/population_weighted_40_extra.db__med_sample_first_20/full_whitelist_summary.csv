@@ -1,7 +1,7 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.001,results_full_domain_frac_youtube.com,460,140,0.017149378399378398,0.017,0.016,1.06,600,rural,urban,0.8094773170145486,rural
-1,0.001,results_full_domain_frac_wikipedia.org,460,140,0.04115125615125616,0.041,0.042,1.03,600,rural,urban,0.785035921397722,urban
-2,0.0,results_full_domain_frac_youtube.com,380,413,0.01722751817329371,0.017,0.017,1.01,793,low-income,high-income,0.9373615037052949,high-income
-3,0.001,results_full_domain_frac_wikipedia.org,380,413,0.04149899421021742,0.041,0.042,1.02,793,low-income,high-income,0.801747701046608,high-income
-4,0.001,results_full_domain_frac_youtube.com,680,113,0.01722751817329371,0.017,0.018,1.06,793,GOP,DEM,0.808807385187881,DEM
-5,0.002,results_full_domain_frac_wikipedia.org,680,113,0.04149899421021742,0.041,0.044,1.06,793,GOP,DEM,0.6452580411199533,DEM
+0,0.0,results_full_domain_appears_wikipedia.org,195,62,1.0,1.0,1.0,1.0,257,rural,urban,,
+1,0.0,results_full_domain_appears_youtube.com,69,21,1.0,1.0,1.0,1.0,90,rural,urban,,
+2,0.0,results_full_domain_appears_wikipedia.org,162,180,1.0,1.0,1.0,1.0,342,low-income,high-income,,
+3,0.0,results_full_domain_appears_youtube.com,57,63,1.0,1.0,1.0,1.0,120,low-income,high-income,,
+4,0.0,results_full_domain_appears_wikipedia.org,291,51,1.0,1.0,1.0,1.0,342,GOP,DEM,,
+5,0.0,results_full_domain_appears_youtube.com,102,18,1.0,1.0,1.0,1.0,120,GOP,DEM,,

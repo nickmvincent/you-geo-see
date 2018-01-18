@@ -1,3 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.136,*results_top_three_domain_frac_cnn.com,22,8,0.1,0.136,0.0,inf,30,rural,urban,0.0010152263109035494,california fires,rural
-1,0.039,*results_top_three_domain_frac_independent.co.uk,34,6,0.03333333333333333,0.039,0.0,inf,40,GOP,DEM,0.04367879138429159,gertrude jekyll,GOP
+""

@@ -112,7 +112,9 @@ def prep_data(data):
     data = data.rename(index=str, columns={"domain": "raw_domain"})
     data = data.assign(domain = process_each_domain)
     data.raw_domain = data.raw_domain.astype('category')
+    data.domain = data.domain.astype('str')
     data.domain = data.domain.astype('category')
+
     return data
 
 

@@ -1,3 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.016,*results_full_domain_frac_MapsLocations,230,70,0.03677447552447552,0.033,0.049,1.48,300,rural,urban,0.010362260925184389,urban
-1,0.009,*results_full_domain_frac_debt.org,230,70,0.011771561771561773,0.014,0.005,2.65,300,rural,urban,0.010273141408076152,rural
+""

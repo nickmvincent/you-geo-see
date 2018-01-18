@@ -1,12 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.052,**results_full_domain_frac_MapsLocations,23,7,0.051262626262626246,0.039,0.091,2.32,30,rural,urban,1.897605778721186e-05,personal loans,urban
-1,0.007,results_full_domain_frac_MapsLocations,23,7,0.0717948717948718,0.07,0.077,1.1,30,rural,urban,0.16185962330719664,payday loans,urban
-2,0.017,results_full_domain_frac_MapsLocations,23,7,0.03333333333333333,0.037,0.02,1.83,30,rural,urban,0.5031121097830298,quicken loans,rural
-3,0.018,results_full_domain_frac_MapsLocations,23,7,0.004166666666666667,0.0,0.018,inf,30,rural,urban,0.35591768374958205,quicken,urban
-4,0.003,results_full_domain_frac_MapsLocations,23,7,0.07435897435897437,0.074,0.077,1.05,30,rural,urban,0.32818326188066704,loan,urban
-5,0.019,*results_full_domain_frac_MapsLocations,23,7,0.07525252525252525,0.071,0.09,1.27,30,rural,urban,0.026916922317966115,bank loans,urban
-6,0.022,results_full_domain_frac_MapsLocations,23,7,0.00909090909090909,0.004,0.026,6.57,30,rural,urban,0.2437306879531327,loans bad credit,urban
-7,0.055,**results_full_domain_frac_MapsLocations,23,7,0.04848484848484847,0.036,0.091,2.56,30,rural,urban,6.9224866032977075e-06,home loans,urban
-8,0.047,**results_full_domain_frac_debt.org,23,7,0.03636363636363636,0.047,0.0,inf,30,rural,urban,2.2980483248989575e-05,personal loans,rural
-9,0.003,results_full_domain_frac_debt.org,23,7,0.002564102564102564,0.003,0.0,inf,30,rural,urban,0.3281832618806706,loan,rural
-10,0.035,results_full_domain_frac_debt.org,23,7,0.07878787878787878,0.087,0.052,1.67,30,rural,urban,0.10747178025524662,loans bad credit,rural
+""

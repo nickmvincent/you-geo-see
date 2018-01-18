@@ -34,7 +34,6 @@ def plot_importance(df):
     Plot the importance of each domain.
 
     """
-    
     df = df.fillna(0)
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
@@ -48,14 +47,12 @@ def plot_importance(df):
     _, axes = plt.subplots(nrows=2, ncols=len(plot_col_dfs))
     for colnum, subdf in enumerate(plot_col_dfs):
         # adding caching to save a second or two?
-        # risky code. needs to be double checked
         tmpdf = subdf[
             (subdf.subset == FULL) & (subdf.metric == 'domain_appears')
         ][['domain', 'val', 'is_ugc_col']]
         grouped_and_sorted = tmpdf.groupby('domain').mean().sort_values(
                 'val', ascending=False)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
-        print(grouped_and_sorted)
         order = list(grouped_and_sorted.index)[:10]
         for col in ugc_cols:
             if col not in order:

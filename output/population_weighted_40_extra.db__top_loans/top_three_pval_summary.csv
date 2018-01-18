@@ -1,4 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.017,**results_top_three_domain_frac_debt.org,230,70,0.013333333333333334,0.017,0.0,inf,300,rural,urban,0.0004667192985173523,rural
-1,0.019,**results_top_three_domain_frac_rocketloans.com,230,70,0.014444444444444444,0.019,0.0,inf,300,rural,urban,0.0002661503783764722,rural
-2,0.014,*results_top_three_domain_frac_avant.com,190,207,0.014273719563392106,0.007,0.021,2.98,397,low-income,high-income,0.03635449333381716,high-income
+""
