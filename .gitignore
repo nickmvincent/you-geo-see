@@ -1,4 +1,6 @@
 tmp/screenshots/
+outputs/
+dbs/
 importance_df.csv
 *.db
 *.html
