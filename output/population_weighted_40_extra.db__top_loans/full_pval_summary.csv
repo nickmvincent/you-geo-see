@@ -1,1 +1,2 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.179,*results_full_domain_appears_MapsLocations,230,70,0.42,0.378,0.557,1.47,300,rural,urban,0.009566346678060195,urban

@@ -59,9 +59,9 @@ def parse():
     row_dicts = []
     count = 0
     for path in paths:
-        components = path.split('_')
-        comparison = components[0][7:]
-        category = components[-1]
+        print(path)
+        pre, category = path.split('__')
+        comparison = pre.split('_')[0][7:]
 
         print(comparison, category)
         full = path + '/full_pval_summary.csv'

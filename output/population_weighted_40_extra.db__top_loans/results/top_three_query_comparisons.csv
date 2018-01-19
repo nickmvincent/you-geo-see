@@ -1,1 +1,2 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.409,*results_top_three_domain_appears_avant.com,19,21,0.425,0.211,0.619,2.94,40,low-income,high-income,0.007655251559493045,personal loans,high-income

@@ -1,1 +1,19 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.714,*results_full_domain_appears_MapsLocations,23,7,0.16666666666666666,0.0,0.714,inf,30,rural,urban,0.008237354145108088,geico insurance,urban
+1,0.609,**results_full_domain_appears_MapsLocations,23,7,0.5333333333333333,0.391,1.0,2.56,30,rural,urban,6.922486603297733e-06,home loans,urban
+2,0.043,results_full_domain_appears_MapsLocations,23,7,0.9666666666666667,0.957,1.0,1.05,30,rural,urban,0.32818326188067115,loan,urban
+3,0.0,results_full_domain_appears_MapsLocations,23,7,1.0,1.0,1.0,1.0,30,rural,urban,,car insurance,
+4,0.118,results_full_domain_appears_MapsLocations,23,7,0.23333333333333334,0.261,0.143,1.83,30,rural,urban,0.5031121097830296,quicken loans,rural
+5,0.0,results_full_domain_appears_MapsLocations,23,7,1.0,1.0,1.0,1.0,30,rural,urban,,insurance companies,
+6,0.043,results_full_domain_appears_MapsLocations,23,7,0.9666666666666667,0.957,1.0,1.05,30,rural,urban,0.32818326188067115,auto insurance,urban
+7,0.087,results_full_domain_appears_MapsLocations,23,7,0.9333333333333333,0.913,1.0,1.1,30,rural,urban,0.16185962330719772,home insurance,urban
+8,0.565,**results_full_domain_appears_MapsLocations,23,7,0.5666666666666667,0.435,1.0,2.3,30,rural,urban,2.2785535363600537e-05,personal loans,urban
+9,0.13,results_full_domain_appears_MapsLocations,23,7,0.9,0.87,1.0,1.15,30,rural,urban,0.08293087317322734,life insurance,urban
+10,0.292,results_full_domain_appears_MapsLocations,23,7,0.6333333333333333,0.565,0.857,1.52,30,rural,urban,0.12388568596893729,progressive insurance,urban
+11,0.149,results_full_domain_appears_MapsLocations,23,7,0.6,0.565,0.714,1.26,30,rural,urban,0.49868556582261125,progressive,urban
+12,0.286,results_full_domain_appears_MapsLocations,23,7,0.06666666666666667,0.0,0.286,inf,30,rural,urban,0.17230829673040018,health insurance,urban
+13,0.143,results_full_domain_appears_MapsLocations,23,7,0.03333333333333333,0.0,0.143,inf,30,rural,urban,0.35591768374958205,quicken,urban
+14,0.497,*results_full_domain_appears_MapsLocations,23,7,0.3333333333333333,0.217,0.714,3.29,30,rural,urban,0.03811175673763451,geico,urban
+15,0.087,results_full_domain_appears_MapsLocations,23,7,0.9333333333333333,0.913,1.0,1.1,30,rural,urban,0.16185962330719772,payday loans,urban
+16,0.217,*results_full_domain_appears_MapsLocations,23,7,0.8333333333333334,0.783,1.0,1.28,30,rural,urban,0.021645539948687058,bank loans,urban
+17,0.242,results_full_domain_appears_MapsLocations,23,7,0.1,0.043,0.286,6.57,30,rural,urban,0.24373068795313294,loans bad credit,urban

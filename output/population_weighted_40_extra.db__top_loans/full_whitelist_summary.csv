@@ -1,4 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_full_domain_appears_wikipedia.org,54,13,1.0,1.0,1.0,1.0,67,rural,urban,,
-1,0.0,results_full_domain_appears_wikipedia.org,44,40,1.0,1.0,1.0,1.0,84,low-income,high-income,,
-2,0.0,results_full_domain_appears_wikipedia.org,73,11,1.0,1.0,1.0,1.0,84,GOP,DEM,,
+0,0.049,results_full_domain_appears_wikipedia.org,230,70,0.22333333333333333,0.235,0.186,1.26,300,rural,urban,0.37018504858405843,rural
+1,0.038,results_full_domain_appears_wikipedia.org,190,207,0.21158690176322417,0.232,0.193,1.2,397,low-income,high-income,0.3527467254743537,low-income
+2,0.022,results_full_domain_appears_wikipedia.org,340,57,0.21158690176322417,0.215,0.193,1.11,397,GOP,DEM,0.7054313990084214,GOP

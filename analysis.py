@@ -724,9 +724,11 @@ def main(args, db, category):
             x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
         ]
         results_domain_appears_cols_nz_subset = [
-            x for x in results_domain_appears_cols_nz if subset + '_domain_appears' in x
+            x.replace('_domain_frac', '_domain_appears') for x in results_domain_fracs_cols_nz_subset
         ]
-
+        results_domain_rank_cols_nz_subset = [
+            x.replace('_domain_frac', '_domain_rank') for x in results_domain_fracs_cols_nz_subset
+        ] if subset == FULL else []
         big_candidate_cols = [
             x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_appears' in x
         ]
@@ -734,22 +736,29 @@ def main(args, db, category):
             x: 0 for x in big_candidate_cols
         })
         big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:10]
+        big_frac_cols = [
+            x.replace('_domain_appears', '_domain_frac') for x in big_appears_cols
+        ]
+        big_rank_cols = [
+            x.replace('_domain_appears', '_domain_rank') for x in big_appears_cols
+        ] if subset == FULL else []
 
         if results_domain_fracs_cols_nz_subset:
             if args.plot_detailed:
                 serp_df[results_domain_fracs_cols_nz_subset].mean().sort_values().plot(
                     kind='barh', ax=domain_fracs_ax[index], title='Category: {}, Domain Fractions: {}'.format(category, subset))
-            ugc_ret_cols += results_domain_fracs_cols_nz_subset
-        if results_domain_appears_cols_nz_subset:
-            if args.plot_detailed:
                 serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
                     kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
+            ugc_ret_cols += results_domain_fracs_cols_nz_subset
             ugc_ret_cols += results_domain_appears_cols_nz_subset
+            ugc_ret_cols += results_domain_rank_cols_nz_subset
         if big_appears_cols:
             if args.plot_detailed:
                 serp_df[big_appears_cols].mean().sort_values().plot(
                     kind='barh', ax=big_ax[index], title='Big Appears: {}'.format(subset))
             big_ret_cols += big_appears_cols
+            big_ret_cols += big_frac_cols
+            big_ret_cols += big_rank_cols
     if args.plot_detailed:
         serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
             kind='barh', ax=axes2[3], title='Domain Ranks')
@@ -903,6 +912,8 @@ def main(args, db, category):
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
+    print(ugc_ret_cols)
+    print(big_ret_cols)
     importance_df = serp_df[list(set(ugc_ret_cols + big_ret_cols)) + ['category']]
     if category == 'all':
         importance_df.loc[:, 'category'] = 'all'
@@ -983,7 +994,7 @@ def parse():
         is_ugc_col = False
         is_big_col = False
         if col:
-            if 'domain_appears' in col or 'domain_frac' in col or 'domain_rank' in col:
+            if '_domain_appears' in col or '_domain_frac' in col or '_domain_rank' in col:
                 # tmp is of the form resulttype_subset
                 # e.g. results_top_three
                 if col in ugc_cols:

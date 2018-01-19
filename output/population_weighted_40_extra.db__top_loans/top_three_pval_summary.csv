@@ -1,1 +1,2 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.042,*results_top_three_domain_appears_avant.com,190,207,0.042821158690176324,0.021,0.063,2.98,397,low-income,high-income,0.03635449333381708,high-income

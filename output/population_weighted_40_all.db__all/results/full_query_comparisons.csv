@@ -1,1 +1,16 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.023,results_full_domain_appears_MapsLocations,22,8,0.7333333333333333,0.727,0.75,1.03,30,rural,urban,0.9068860733523367,Wells Fargo,urban
+1,0.352,results_full_domain_appears_MapsLocations,22,8,0.36666666666666664,0.273,0.625,2.29,30,rural,urban,0.11663059773945712,Bank of America,urban
+2,0.08,results_full_domain_appears_MapsLocations,22,8,0.5666666666666667,0.545,0.625,1.15,30,rural,urban,0.7149294527841176,Chevrolet,urban
+3,0.182,results_full_domain_appears_MapsLocations,22,8,0.6333333333333333,0.682,0.5,1.36,30,rural,urban,0.4143739416951898,Honda,rural
+4,0.148,results_full_domain_appears_MapsLocations,22,8,0.7333333333333333,0.773,0.625,1.24,30,rural,urban,0.4856588557351934,Toyota,rural
+5,0.0,results_full_domain_appears_MapsLocations,22,8,0.5,0.5,0.5,1.0,30,rural,urban,1.0,United States Department of Veterans Affairs,
+6,0.057,results_full_domain_appears_MapsLocations,22,8,0.8333333333333334,0.818,0.875,1.07,30,rural,urban,0.7118613045441046,Domino's Pizza,urban
+7,0.284,results_full_domain_appears_MapsLocations,22,8,0.16666666666666666,0.091,0.375,4.12,30,rural,urban,0.1771230945483606,medical marijuana,urban
+8,0.568,*results_full_domain_appears_MapsLocations,22,8,0.3333333333333333,0.182,0.75,4.12,30,rural,urban,0.010400589739562236,abortion,urban
+9,0.455,**results_full_domain_appears_MapsLocations,22,8,0.6666666666666666,0.545,1.0,1.83,30,rural,urban,0.0004191806949137578,McDonald's,urban
+10,0.466,*results_full_domain_appears_MapsLocations,22,8,0.5333333333333333,0.409,0.875,2.14,30,rural,urban,0.011191223956716146,Chase Bank,urban
+11,0.102,results_full_domain_appears_MapsLocations,22,8,0.7,0.727,0.625,1.16,30,rural,urban,0.6311035407697533,Target Corporation,rural
+12,0.136,results_full_domain_appears_MapsLocations,22,8,0.6,0.636,0.5,1.27,30,rural,urban,0.5403896213647031,Walmart,rural
+13,0.364,*results_full_domain_appears_MapsLocations,22,8,0.7333333333333333,0.636,1.0,1.57,30,rural,urban,0.0023205861477215177,Pizza Hut,urban
+14,0.125,results_full_domain_appears_MapsLocations,22,8,0.03333333333333333,0.0,0.125,inf,30,rural,urban,0.3506166628202075,Hillary Clinton,urban

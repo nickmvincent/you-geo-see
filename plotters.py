@@ -22,6 +22,7 @@ def plot_importance(df):
     Plot the importance of each domain.
 
     """
+
     df = df.fillna(0)
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
@@ -43,9 +44,17 @@ def plot_importance(df):
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
         print(grouped_and_sorted)
         order = list(grouped_and_sorted.index)[:10]
-        for col in ugc_cols:
-            if col not in order:
-                order.append(col)
+        for domain in ugc_cols:
+            if domain not in order:
+                order.append(domain)
+        for domain in order[:3]:
+            ranks = subdf[(subdf.metric == 'domain_rank') & (subdf.domain == domain)]
+            ranks = ranks[ranks.val != 0].val
+            _, histax = plt.subplots()
+            sns.distplot(
+                ranks.dropna(), rug=True, bins=list(range(1, 13)), 
+                kde=False, color="b", ax=histax)
+            histax.set_title('Histogram for {}'.format(domain))
         title_kwargs = {}
         # for subset in [FULL, TOP_THREE]:
         #     subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
