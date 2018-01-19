@@ -17,8 +17,6 @@ QUERYSET_BREAKDOWN_STRING = 'broken down by query set'
 
 
 
-
-
 def plot_importance(df):
     """
     Plot the importance of each domain.
@@ -43,11 +41,11 @@ def plot_importance(df):
         grouped_and_sorted = tmpdf.groupby('domain').mean().sort_values(
                 'val', ascending=False)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
+        print(grouped_and_sorted)
         order = list(grouped_and_sorted.index)[:10]
         for col in ugc_cols:
             if col not in order:
                 order.append(col)
-        print(order)
         title_kwargs = {}
         # for subset in [FULL, TOP_THREE]:
         #     subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
@@ -91,7 +89,7 @@ def plot_comparison(df, groups=['urban', 'rural']):
 
     """
     _, comparison_axes = plt.subplots(nrows=2, ncols=2)
-    title_template = 'Differences in Domain Fractions, {subset}, {type}: {left} (left) vs {right} (right)'
+    title_template = 'Differences in Domain Appears, {subset}, {type}: {left} (left) vs {right} (right)'
     for colnum, is_aggregate in enumerate([True, False]):
         title_kwargs = {
             'left': groups[0],
@@ -134,7 +132,7 @@ def plot_comparison(df, groups=['urban', 'rural']):
                     data=rowdf,
                     ax=ax, ci=None)
                 ax.set_title(title_template.format(**title_kwargs))
-                ax.set_xlabel('Difference in domain fraction')
+                ax.set_xlabel('Difference in domain appears')
                 ax.set_ylabel('Domain')
                 ax.axvline(0, color='black')
                 sns.despine(ax=ax, bottom=True, left=False)

@@ -1,37 +1,19 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.0,results_full_domain_appears_MapsLocations,11,9,1.0,1.0,1.0,1.0,20,rural,urban,,auto insurance,
-1,0.727,**results_full_domain_appears_MapsLocations,11,9,0.6,0.273,1.0,3.67,20,rural,urban,0.00042278119360601854,geico,urban
-2,0.111,results_full_domain_appears_MapsLocations,11,9,0.95,1.0,0.889,1.12,20,rural,urban,0.3465935070873341,payday loans,rural
-3,0.0,results_full_domain_appears_MapsLocations,11,9,1.0,1.0,1.0,1.0,20,rural,urban,,car insurance,
-4,0.0,results_full_domain_appears_MapsLocations,11,9,1.0,1.0,1.0,1.0,20,rural,urban,,insurance companies,
-5,0.444,*results_full_domain_appears_MapsLocations,11,9,0.2,0.0,0.444,inf,20,rural,urban,0.03526520347508,loans bad credit,urban
-6,0.414,results_full_domain_appears_MapsLocations,11,9,0.55,0.364,0.778,2.14,20,rural,urban,0.06603152053696086,progressive insurance,urban
-7,0.485,*results_full_domain_appears_MapsLocations,11,9,0.4,0.182,0.667,3.67,20,rural,urban,0.0326925956884308,quicken loans,urban
-8,0.434,*results_full_domain_appears_MapsLocations,11,9,0.65,0.455,0.889,1.96,20,rural,urban,0.03759001120440829,progressive,urban
-9,0.364,*results_full_domain_appears_MapsLocations,11,9,0.8,0.636,1.0,1.57,20,rural,urban,0.037928971445557756,life insurance,urban
-10,0.111,results_full_domain_appears_MapsLocations,11,9,0.05,0.0,0.111,inf,20,rural,urban,0.34659350708733416,quicken,urban
-11,0.667,*results_full_domain_appears_MapsLocations,11,9,0.3,0.0,0.667,inf,20,rural,urban,0.003949772803445322,hairloss,urban
-12,0.798,**results_full_domain_appears_MapsLocations,11,9,0.45,0.091,0.889,9.78,20,rural,urban,3.940474584836773e-05,home loans,urban
-13,0.0,results_full_domain_appears_MapsLocations,11,9,1.0,1.0,1.0,1.0,20,rural,urban,,loan,
-14,0.091,results_full_domain_appears_MapsLocations,11,9,0.95,0.909,1.0,1.1,20,rural,urban,0.34089313230205986,home insurance,urban
-15,0.0,results_full_domain_appears_MapsLocations,11,9,1.0,1.0,1.0,1.0,20,rural,urban,,bank loans,
-16,1.0,**results_full_domain_appears_MapsLocations,11,9,0.45,0.0,1.0,inf,20,rural,urban,0.0,geico insurance,urban
-17,0.364,*results_full_domain_appears_MapsLocations,11,9,0.8,0.636,1.0,1.57,20,rural,urban,0.037928971445557756,personal loans,urban
-18,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,auto insurance,
-19,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,low-income,high-income,0.00481102818085497,geico,high-income
-20,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,low-income,high-income,0.34343639613791366,payday loans,low-income
-21,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,car insurance,
-22,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,insurance companies,
-23,0.4,*results_full_domain_appears_MapsLocations,10,10,0.2,0.0,0.4,inf,20,low-income,high-income,0.03678749787978613,loans bad credit,high-income
-24,0.3,results_full_domain_appears_MapsLocations,10,10,0.55,0.4,0.7,1.75,20,low-income,high-income,0.1964675160349241,progressive insurance,high-income
-25,0.4,results_full_domain_appears_MapsLocations,10,10,0.4,0.2,0.6,3.0,20,low-income,high-income,0.07459169984478176,quicken loans,high-income
-26,0.3,results_full_domain_appears_MapsLocations,10,10,0.65,0.5,0.8,1.6,20,low-income,high-income,0.1776880165605986,progressive,high-income
-27,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,life insurance,high-income
-28,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.34343639613791355,quicken,high-income
-29,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,low-income,high-income,0.005121072764272635,hairloss,high-income
-30,0.7,**results_full_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,low-income,high-income,0.000623745701199474,home loans,high-income
-31,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,loan,
-32,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,low-income,high-income,0.34343639613791366,home insurance,high-income
-33,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,bank loans,
-34,0.9,**results_full_domain_appears_MapsLocations,10,10,0.45,0.0,0.9,inf,20,low-income,high-income,8.538051223166285e-06,geico insurance,high-income
-35,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,personal loans,high-income
+0,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,bank loans,
+1,0.9,**results_full_domain_appears_MapsLocations,10,10,0.45,0.0,0.9,inf,20,low-income,high-income,8.538051223166285e-06,geico insurance,high-income
+2,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,low-income,high-income,0.34343639613791366,payday loans,low-income
+3,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.34343639613791355,quicken,high-income
+4,0.4,results_full_domain_appears_MapsLocations,10,10,0.4,0.2,0.6,3.0,20,low-income,high-income,0.07459169984478176,quicken loans,high-income
+5,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,car insurance,
+6,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,low-income,high-income,0.34343639613791366,home insurance,high-income
+7,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,insurance companies,
+8,0.3,results_full_domain_appears_MapsLocations,10,10,0.65,0.5,0.8,1.6,20,low-income,high-income,0.1776880165605986,progressive,high-income
+9,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,low-income,high-income,0.005121072764272635,hairloss,high-income
+10,0.4,*results_full_domain_appears_MapsLocations,10,10,0.2,0.0,0.4,inf,20,low-income,high-income,0.03678749787978613,loans bad credit,high-income
+11,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,life insurance,high-income
+12,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,loan,
+13,0.3,results_full_domain_appears_MapsLocations,10,10,0.55,0.4,0.7,1.75,20,low-income,high-income,0.1964675160349241,progressive insurance,high-income
+14,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,personal loans,high-income
+15,0.7,**results_full_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,low-income,high-income,0.000623745701199474,home loans,high-income
+16,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,auto insurance,
+17,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,low-income,high-income,0.00481102818085497,geico,high-income

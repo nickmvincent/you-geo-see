@@ -252,67 +252,58 @@ class MetricCalculator():
         self.finders = finders
         self.sid = sid
 
-    def calc_domain_fracs(self, domains_col, control_domains_col):
+    def calc_domain_fracs(self, cols):
         """
         This is specific to a given SERP
         Figure out how many domains of interest appear in search results
 
+
+        Currently using control queries is deprecated.
         return a dict
         """
-        domains_dict, control_dict = defaultdict(int), defaultdict(int)
-        for series in [domains_col, control_domains_col]:
-            if not series.empty:
-                for domain in list(domains_col):
+        domains_to_count = defaultdict(int)
+        domains_to_ranksum = defaultdict(int)
+        for df in [cols]:
+            if not df.empty:
+                for _, row in df.iterrows():
+                    domain = row.domain
+                    rank = row['rank']
                     if isinstance(domain, float) and np.isnan(domain):
-                        domains_dict['none'] += 1
+                        domains_to_count['none'] += 1
+                        domains_to_ranksum['none'] += rank
                     elif domain == 'NewsCarousel' or 'TweetCarousel' in domain:
                         if domain == 'NewsCarousel':
                             df = self.finders['news'](self.sid).iloc[:3]
                         else: # must be tweets
                             df = self.finders['tweets'](self.sid).iloc[:3]
-                        for _, row in df.iloc[:3].iterrows():
-                            domains_dict[row.domain] += 1
+                        for _, subrow in df.iloc[:3].iterrows():
+                            domains_to_count[subrow.domain] += 1
+                            domains_to_ranksum[subrow.domain] += rank
+                        domains_to_count[domain] += 1
+                        domains_to_ranksum[domain] += rank
                     else:
-                        domains_dict[domain] += 1
-        ret = {}
-        num_counted = sum(domains_dict.values())
-        for key, val in domains_dict.items():
-            ret[key] = val / num_counted
-        num_counted_control = sum(control_dict.values())
+                        domains_to_count[domain] += 1
+                        domains_to_ranksum[domain] += rank
+        frac_ret = {}
+        rank_ret = {}
+        num_counted = sum(domains_to_count.values())
+        for key, val in domains_to_count.items():
+            frac_ret[key] = val / num_counted
+        for key, val in domains_to_ranksum.items():
+            rank_ret[key] = val / domains_to_count[key]
 
-        # basically there's two pages to account for here.
-        for key, val in control_dict.items():
-            ret[key] = (ret.get(key, 0) + val / num_counted_control) / 2
-        return ret
-
-
-    def calc_domain_ranks(self, cols):
-        """
-        average rank of a given domain
-
-        danger
-        if you ever use this with control_domains you should probably double check it
-        """
-        ret = {}
-        domains_dict = cols.domain.value_counts().to_dict()
-        for key, val in domains_dict.items():
-            if val == 0:
-                ret[key] = None
-                continue
-            matching_rows = cols[cols.domain == key]
-            total_rank = sum(matching_rows['rank'])
-            ret[key] = total_rank / val
-        return ret
+        return frac_ret, rank_ret
 
 
-    def calc_coded_ugc_frac(self, code_col, control_code_col):
-        """
-        This is specific to a given SERP
-        Figure out how many domains of interest appear in search results
+    # 1/18 deprecated.
+    # def calc_coded_ugc_frac(self, code_col, control_code_col):
+    #     """
+    #     This is specific to a given SERP
+    #     Figure out how many domains of interest appear in search results
 
-        return a dict
-        """
-        return self.calc_domain_fracs(code_col, control_code_col)
+    #     return a dict
+    #     """
+    #     return self.calc_domain_fracs(code_col)
 
 
 def compute_serp_features(
@@ -345,20 +336,18 @@ def compute_serp_features(
         ret['control_edit'] = damerau_levenshtein_distance(
             string, control_string
         )
-
-    
+    fracs, ranks =  metric_calculator.calc_domain_fracs(cols)
     ret[FULL] = {
-        'domain_fracs': metric_calculator.calc_domain_fracs(cols.domain, control_cols.domain),
+        'domain_fracs': fracs,
+        'domain_ranks': ranks,
     }
-    ret[FULL]['domain_ranks'] = metric_calculator.calc_domain_ranks(cols)
-
+    top3_fracs, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3])
     ret[TOP_THREE] = {
-        'domain_fracs': metric_calculator.calc_domain_fracs(
-            cols.iloc[:3].domain, control_cols.iloc[:3].domain)
+        'domain_fracs':top3_fracs
     }
+    top_fracs, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1])
     ret[TOP] = {
-        'domain_fracs': metric_calculator.calc_domain_fracs(
-            cols.iloc[:1].domain, control_cols.iloc[:1].domain)
+        'domain_fracs': top_fracs
     }
     for subset in RESULT_SUBSETS:
         ret[subset]['domain_appears'] = {}
@@ -367,19 +356,19 @@ def compute_serp_features(
                 ret[subset]['domain_appears'][key] = 1
             else:
                 ret[subset]['domain_appears'][key] = 0
-    ret[FULL]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-        cols.code, control_cols.code)
-    ret[TOP_THREE]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-        cols.iloc[:3].code, control_cols.iloc[:3].code)
-    ret[TOP]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-        cols.iloc[:1].code, control_cols.iloc[:1].code)
+    # ret[FULL]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
+    #     cols.code, control_cols.code)
+    # ret[TOP_THREE]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
+    #     cols.iloc[:3].code, control_cols.iloc[:3].code)
+    # ret[TOP]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
+    #     cols.iloc[:1].code, control_cols.iloc[:1].code)
 
-    ret[FULL]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-        cols.domains_plus_codes, control_cols.domains_plus_codes))
-    ret[TOP_THREE]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-        cols.iloc[:3].domains_plus_codes, control_cols.iloc[:3].domains_plus_codes))
-    ret[TOP]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-        cols.iloc[:1].domains_plus_codes, control_cols.iloc[:1].domains_plus_codes))
+    # ret[FULL]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
+    #     cols.domains_plus_codes, control_cols.domains_plus_codes))
+    # ret[TOP_THREE]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
+    #     cols.iloc[:3].domains_plus_codes, control_cols.iloc[:3].domains_plus_codes))
+    # ret[TOP]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
+    #     cols.iloc[:1].domains_plus_codes, control_cols.iloc[:1].domains_plus_codes))
     return ret
 
 
@@ -649,7 +638,7 @@ def main(args, db, category):
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
-                    coded_ugc_fracs = tmp[comp_key]['coded_ugc_fracs']
+                    # coded_ugc_fracs = tmp[comp_key]['coded_ugc_fracs']
                     for domain_string, frac in domain_fracs.items():
                         for top_domain in top_domains:
                             if domain_string == top_domain:
@@ -684,11 +673,11 @@ def main(args, db, category):
                                     domain_ranks_concat_key = concat_key.replace(
                                         '_frac', '_rank')
                                     serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
-                    for code, frac in coded_ugc_fracs.items():
-                        concat_key = '_'.join(
-                            [link_type, comp_key, 'coded_ugc_frac', str(code)]
-                        )
-                        serp_comps[sid][concat_key] = frac
+                    # for code, frac in coded_ugc_fracs.items():
+                    #     concat_key = '_'.join(
+                    #         [link_type, comp_key, 'coded_ugc_frac', str(code)]
+                    #     )
+                    #     serp_comps[sid][concat_key] = frac
                     for textcol in ['snippet', 'title']:
                         pol_key = '_'.join(
                             [link_type, comp_key, textcol, 'mean_polarity'])
@@ -700,7 +689,7 @@ def main(args, db, category):
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
-    serp_df = serp_df.apply(lambda x: x.fillna(0) if x.dtype.kind in 'biufc' else x)
+    
     serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
 
 
@@ -723,11 +712,12 @@ def main(args, db, category):
     results_domain_appears_cols_nz = [
         x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_appears' in x
     ]
-    _, domain_fracs_ax = plt.subplots(nrows=3)
-    _, axes2 = plt.subplots(nrows=4)
-    _, big_ax = plt.subplots(nrows=3)
-    _, dist_axes = plt.subplots(nrows=2)
-    _, personalization_ax = plt.subplots(nrows=2)
+    if args.plot_detailed:
+        _, domain_fracs_ax = plt.subplots(nrows=3)
+        _, axes2 = plt.subplots(nrows=4)
+        _, big_ax = plt.subplots(nrows=3)
+        _, dist_axes = plt.subplots(nrows=2)
+        _, personalization_ax = plt.subplots(nrows=2)
 
     for index, subset in enumerate(RESULT_SUBSETS):
         results_domain_fracs_cols_nz_subset = [
@@ -740,6 +730,9 @@ def main(args, db, category):
         big_candidate_cols = [
             x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_appears' in x
         ]
+        serp_df = serp_df.fillna({
+            x: 0 for x in big_candidate_cols
+        })
         big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:10]
 
         if results_domain_fracs_cols_nz_subset:
@@ -962,7 +955,7 @@ def parse():
                 ugc_cols += results['ugc_ret_cols']
                 big_cols += results['big_ret_cols']
             else:
-                comparisons_for_cat =  df_for_cat = None
+                comparisons_for_cat = df_for_cat = None
 
             # about to write unintuitive code that overuses None...
             if comparisons_for_cat is not None:
@@ -982,24 +975,29 @@ def parse():
     # that is, it makes the wide-form dataframe long-form
     # and it separates the complicated column names into multiple columns
     # e.g. link_type, subset, metric, 
+
+    # ANCHOR: MELT
     row_dicts = []
+    print(df.columns.values)
     for col in df.columns.values:
         is_ugc_col = False
         is_big_col = False
         if col:
-            if '_domain_appears_' in col or '_domain_frac_' in col:
+            if 'domain_appears' in col or 'domain_frac' in col or 'domain_rank' in col:
                 # tmp is of the form resulttype_subset
                 # e.g. results_top_three
                 if col in ugc_cols:
                     is_ugc_col = True
                 if col in big_cols:
                     is_big_col = True
-                if  '_domain_appears_' in col:
-                    metric = 'domain_appears'
-                    tmp, domain = col.split('_domain_appears_')
-                elif '_domain_frac_' in col:
-                    metric = 'domain_frac'
-                    tmp, domain = col.split('_domain_frac_')
+                for col_component in [
+                    'domain_appears',
+                    'domain_frac',
+                    'domain_rank',
+                ]:
+                    if col_component in col:
+                        metric = col_component
+                        tmp, domain = col.split('_' + col_component + '_')
                 link_type, subset = None, None
                 for key in RESULT_SUBSETS:
                     if key + '_domain' in col:
@@ -1018,7 +1016,6 @@ def parse():
                     }
                     row_dicts.append(row_dict)
     importance_df = pd.DataFrame(row_dicts)
-    plt.close('all')
     importance_df.to_csv('importance_df.csv')
     plot_importance(importance_df)
     if comparison_df is not None:
