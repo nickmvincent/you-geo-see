@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.07,*results_top_three_domain_appears_MapsLocations,440,360,0.13625,0.105,0.175,1.67,800,rural,urban,0.004644581732333745,urban
+1,0.022,*results_top_three_domain_appears_nerdwallet.com,440,360,0.015,0.025,0.003,9.0,800,rural,urban,0.005378600709873077,rural
+2,0.072,*results_top_three_domain_appears_MapsLocations,400,400,0.13625,0.1,0.172,1.72,800,low-income,high-income,0.0027716682312564815,high-income
+3,0.02,*results_top_three_domain_appears_nerdwallet.com,400,400,0.015,0.025,0.005,5.0,800,low-income,high-income,0.02006185624814587,low-income

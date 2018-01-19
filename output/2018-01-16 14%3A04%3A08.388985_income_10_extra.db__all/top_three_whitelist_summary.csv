@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.007,results_top_three_domain_appears_wikipedia.org,440,360,0.10375,0.107,0.1,1.07,800,rural,urban,0.7527238478635465,rural
+1,0.003,results_top_three_domain_appears_wikipedia.org,400,400,0.10375,0.105,0.102,1.02,800,low-income,high-income,0.907840628437187,low-income
+2,0.002,results_top_three_domain_appears_wikipedia.org,200,600,0.10375,0.105,0.103,1.02,800,GOP,DEM,0.9469676826685475,GOP

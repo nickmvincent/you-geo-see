@@ -124,3 +124,18 @@ def set_or_concat(df, newdf):
     else:
         ret = pd.concat([df, newdf])
     return ret
+
+
+def strip_domain_strings_wrapper(subset):
+    """wraps a function to strip results_type, subset, and domain_frac text"""
+
+    def strip_domain_strings(text):
+        """Strip the string"""
+        text = text.strip('*')
+        text = text.replace('results_', '')
+        text = text.replace(subset, '')
+        text = text.replace('domain_frac_', '')
+        text = text.replace('domain_appears_', '')
+        text = text.strip('_')
+        return text
+    return strip_domain_strings

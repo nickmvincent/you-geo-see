@@ -4,6 +4,7 @@ Does plots for paper
 import matplotlib.pyplot as plt
 import seaborn as sns
 from constants import FULL, TOP_THREE
+from data_helpers import strip_domain_strings_wrapper
 
 sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
 sns.set(style="whitegrid", palette='pastel', color_codes=True)
@@ -15,18 +16,7 @@ AGGREGATE_STRING = 'aggregated'
 QUERYSET_BREAKDOWN_STRING = 'broken down by query set'
 
 
-def strip_domain_strings_wrapper(subset):
-    """wraps a function to strip results_type, subset, and domain_frac text"""
 
-    def strip_domain_strings(text):
-        """Strip the string"""
-        text = text.strip('*')
-        text = text.replace('results_', '')
-        text = text.replace(subset, '')
-        text = text.replace('domain_frac_', '')
-        text = text.strip('_')
-        return text
-    return strip_domain_strings
 
 
 def plot_importance(df):

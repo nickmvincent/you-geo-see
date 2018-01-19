@@ -1,0 +1,2 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.108,**results_top_three_domain_appears_MapsLocations,400,400,0.13625,0.082,0.19,2.3,800,rural,urban,8.632617569094504e-06,urban

@@ -1,0 +1,5 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.006,results_full_domain_appears_twitter.com,180,180,0.6694444444444444,0.672,0.667,1.01,360,low-income,high-income,0.9111006631602466,low-income
+1,0.122,*results_full_domain_appears_wikipedia.org,180,180,0.7666666666666667,0.828,0.706,1.17,360,low-income,high-income,0.006036847434910191,low-income
+2,0.156,**results_full_domain_appears_yelp.com,180,180,0.09444444444444444,0.017,0.172,10.33,360,low-income,high-income,4.137042351931239e-07,high-income
+3,0.117,*results_full_domain_appears_facebook.com,180,180,0.5694444444444444,0.628,0.511,1.23,360,low-income,high-income,0.02540005323072196,low-income

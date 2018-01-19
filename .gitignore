@@ -1,5 +1,5 @@
 tmp/screenshots/
-outputs/
+output/
 dbs/
 importance_df.csv
 *.db

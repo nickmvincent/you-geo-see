@@ -9,8 +9,8 @@ import argparse
 import os
 from datetime import datetime
 
-import tweepy
 import pandas as pd
+import tweepy
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data
 
 # axes 1: creative effort?
@@ -71,7 +71,7 @@ def strip_twitter_screename(link):
         username_ends = len(link)
     return link[username_starts:username_ends]
 
-def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
+def code_item(domain, link=None, screen_name=None, api=None):
     """
     This function helps a qualitative coder apply a code to a single link
     or twitter screen name
@@ -82,10 +82,6 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
         print('Location', user_obj.location)
         print('Verified?', user_obj.verified)
     code = input()
-    if code == 'snippet':
-        print('Showing snippet!')
-        print('Snippet:', snippet)
-        code = input()
     while (
         len(code) != 4 or
         code[0] not in SHORTHAND['creative'].keys() or
@@ -100,8 +96,8 @@ def code_item(domain, link=None, screen_name=None, snippet=None, api=None):
         print('Fourth character: j (journalistic), c (corporate), p (political), n (nonprofit), or z (other)')
         print(link)
         code = input()
-    code_str = SHORTHAND[code[0]] + '-' + SHORTHAND[code[1]]
-    return code_str
+    
+    return code
     
 
 def quote(x):
@@ -149,7 +145,7 @@ def main(args):
                 else:
                     domain_to_df[domain] = pd.concat([domain_to_df[domain], deduped_on_link])
                 continue
-            for row in deduped_on_link:
+            for _, row in deduped_on_link.iterrows():
                 link = row.link
                 print(link)
                 if domain == TWITTER_DOMAIN:
@@ -171,9 +167,10 @@ def main(args):
                     else:
                         continue
                 snippet = row.snippet
+                print('Snippet:', snippet)
                 code_str = code_item(
                     domain, link=link, screen_name=screen_name,
-                    snippet=snippet, api=api)
+                    api=api)
                 data.loc[data.link == link, 'code'] = code_str
                 if domain == TWITTER_DOMAIN:
                     twitter_user_codes[screen_name] = code_str

@@ -1,0 +1,4 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.011,results_top_three_domain_appears_wikipedia.org,380,380,0.33421052631578946,0.339,0.329,1.03,760,GOP,DEM,0.7587710612690091,GOP
+1,0.013,results_top_three_domain_appears_twitter.com,380,380,0.31973684210526315,0.313,0.326,1.04,760,GOP,DEM,0.6978157618223596,DEM
+2,0.016,results_top_three_domain_appears_facebook.com,380,380,0.013157894736842105,0.021,0.005,4.0,760,GOP,DEM,0.05637940365615335,GOP

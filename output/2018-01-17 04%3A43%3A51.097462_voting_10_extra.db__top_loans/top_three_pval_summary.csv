@@ -1,0 +1,6 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.071,*results_top_three_domain_appears_bankrate.com,120,80,0.055,0.083,0.012,6.67,200,rural,urban,0.013113605659767817,rural
+1,0.242,**results_top_three_domain_appears_MapsLocations,120,80,0.205,0.108,0.35,3.23,200,rural,urban,0.00011792356715440364,urban
+2,0.09,*results_top_three_domain_appears_bankrate.com,100,100,0.055,0.1,0.01,10.0,200,GOP,DEM,0.005404011728395354,GOP
+3,0.08,*results_top_three_domain_appears_citizensbank.com,100,100,0.05,0.01,0.09,9.0,200,GOP,DEM,0.009709356067740446,DEM
+4,0.23,**results_top_three_domain_appears_MapsLocations,100,100,0.205,0.09,0.32,3.56,200,GOP,DEM,4.6970828129752814e-05,DEM

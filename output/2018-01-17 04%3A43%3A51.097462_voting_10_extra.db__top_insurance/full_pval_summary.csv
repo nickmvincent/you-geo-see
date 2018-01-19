@@ -1,0 +1,3 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.433,**results_full_domain_appears_MapsLocations,120,80,0.59,0.417,0.85,2.04,200,rural,urban,1.517631811595169e-11,urban
+1,0.4,**results_full_domain_appears_MapsLocations,100,100,0.59,0.39,0.79,2.03,200,GOP,DEM,2.421787052786398e-09,DEM

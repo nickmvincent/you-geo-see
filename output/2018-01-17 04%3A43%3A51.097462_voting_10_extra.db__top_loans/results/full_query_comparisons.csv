@@ -1,0 +1,17 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.833,**results_full_domain_appears_MapsLocations,12,8,0.5,0.167,1.0,6.0,20,rural,urban,1.3325045262573097e-05,home loans,urban
+1,0.5,*results_full_domain_appears_MapsLocations,12,8,0.7,0.5,1.0,2.0,20,rural,urban,0.006872303308921115,loan,urban
+2,1.0,**results_full_domain_appears_MapsLocations,12,8,0.4,0.0,1.0,inf,20,rural,urban,0.0,personal loans,urban
+3,0.25,results_full_domain_appears_MapsLocations,12,8,0.1,0.0,0.25,inf,20,rural,urban,0.17047066078705375,quicken,urban
+4,0.625,*results_full_domain_appears_MapsLocations,12,8,0.25,0.0,0.625,inf,20,rural,urban,0.011201432554090134,quicken loans,urban
+5,0.333,*results_full_domain_appears_MapsLocations,12,8,0.8,0.667,1.0,1.5,20,rural,urban,0.03881409182311228,payday loans,urban
+6,0.625,*results_full_domain_appears_MapsLocations,12,8,0.5,0.25,0.875,3.5,20,rural,urban,0.0029204669879343815,bank loans,urban
+7,0.625,*results_full_domain_appears_MapsLocations,12,8,0.25,0.0,0.625,inf,20,rural,urban,0.011201432554090134,loans bad credit,urban
+8,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.0051629256736767945,home loans,DEM
+9,0.6,*results_full_domain_appears_MapsLocations,10,10,0.7,0.4,1.0,2.5,20,GOP,DEM,0.005121072764272635,loan,DEM
+10,0.8,**results_full_domain_appears_MapsLocations,10,10,0.4,0.0,0.8,inf,20,GOP,DEM,0.0002024993220676408,personal loans,DEM
+11,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,GOP,DEM,0.16785065605707492,quicken,DEM
+12,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,quicken loans,DEM
+13,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,GOP,DEM,0.03678749787978613,payday loans,DEM
+14,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,DEM
+15,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,loans bad credit,DEM

@@ -1,0 +1,12 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.15,*results_full_domain_appears_facebook.com,180,180,0.4361111111111111,0.511,0.361,1.42,360,rural,urban,0.004025903285860688,rural
+1,0.139,*results_full_domain_appears_wikipedia.org,180,180,0.7583333333333333,0.828,0.689,1.2,360,rural,urban,0.0020237104689886987,rural
+2,0.128,*results_full_domain_appears_MapsLocations,180,180,0.5416666666666666,0.478,0.606,1.27,360,rural,urban,0.01491379214365675,urban
+3,0.15,*results_full_domain_appears_facebook.com,180,180,0.4361111111111111,0.511,0.361,1.42,360,rural,urban,0.004025903285860688,rural
+4,0.139,*results_full_domain_appears_wikipedia.org,180,180,0.7583333333333333,0.828,0.689,1.2,360,rural,urban,0.0020237104689886987,rural
+5,0.0,results_full_domain_appears_twitter.com,180,180,0.6666666666666666,0.667,0.667,1.0,360,rural,urban,1.0,
+6,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
+7,0.178,**results_top_three_domain_appears_MapsLocations,180,180,0.5111111111111111,0.422,0.6,1.42,360,rural,urban,0.0007008568867849128,urban
+8,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
+9,0.044,results_top_three_domain_appears_wikipedia.org,180,180,0.2388888888888889,0.261,0.217,1.21,360,rural,urban,0.32411123168545064,rural
+10,0.061,results_top_three_domain_appears_twitter.com,180,180,0.4583333333333333,0.428,0.489,1.14,360,rural,urban,0.24580672693069072,urban

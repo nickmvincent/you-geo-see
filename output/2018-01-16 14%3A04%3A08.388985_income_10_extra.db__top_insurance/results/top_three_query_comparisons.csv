@@ -1,0 +1,11 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
+0,0.4,*results_top_three_domain_appears_safeauto.com,10,10,0.2,0.4,0.0,inf,20,low-income,high-income,0.03678749787978613,auto insurance,low-income
+1,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.15,0.0,0.3,inf,20,low-income,high-income,0.0811261888458405,geico insurance,high-income
+2,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.34343639613791355,home insurance,high-income
+3,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,low-income,high-income,0.014956363910414203,progressive insurance,high-income
+4,0.0,results_top_three_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,insurance companies,
+5,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.4,0.3,0.5,1.67,20,low-income,high-income,0.38809613338586924,progressive,high-income
+6,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.5,0.4,0.6,1.5,20,low-income,high-income,0.39787297935196175,auto insurance,high-income
+7,0.4,results_top_three_domain_appears_MapsLocations,10,10,0.5,0.3,0.7,2.33,20,low-income,high-income,0.08055387210850919,car insurance,high-income
+8,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,low-income,high-income,0.005121072764272635,geico,high-income
+9,0.8,**results_top_three_domain_appears_nerdwallet.com,10,10,0.6,1.0,0.2,5.0,20,low-income,high-income,0.0002024993220676408,geico insurance,low-income

@@ -1,0 +1,15 @@
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.122,*results_full_domain_appears_wikipedia.org,180,180,0.7666666666666667,0.828,0.706,1.17,360,low-income,high-income,0.006036847434910191,low-income
+1,0.156,**results_full_domain_appears_yelp.com,180,180,0.09444444444444444,0.017,0.172,10.33,360,low-income,high-income,4.137042351931239e-07,high-income
+2,0.117,*results_full_domain_appears_facebook.com,180,180,0.5694444444444444,0.628,0.511,1.23,360,low-income,high-income,0.02540005323072196,low-income
+3,0.117,*results_full_domain_appears_google.com,180,180,0.20833333333333334,0.267,0.15,1.78,360,low-income,high-income,0.006346877083107014,low-income
+4,0.006,results_full_domain_appears_twitter.com,180,180,0.6694444444444444,0.672,0.667,1.01,360,low-income,high-income,0.9111006631602466,low-income
+5,0.122,*results_full_domain_appears_wikipedia.org,180,180,0.7666666666666667,0.828,0.706,1.17,360,low-income,high-income,0.006036847434910191,low-income
+6,0.156,**results_full_domain_appears_yelp.com,180,180,0.09444444444444444,0.017,0.172,10.33,360,low-income,high-income,4.137042351931239e-07,high-income
+7,0.117,*results_full_domain_appears_facebook.com,180,180,0.5694444444444444,0.628,0.511,1.23,360,low-income,high-income,0.02540005323072196,low-income
+8,0.139,*results_top_three_domain_appears_twitter.com,180,180,0.4638888888888889,0.394,0.533,1.35,360,low-income,high-income,0.008148858112492859,high-income
+9,0.05,*results_top_three_domain_appears_facebook.com,180,180,0.025,0.05,0.0,inf,360,low-income,high-income,0.002479040577973099,low-income
+10,0.139,*results_top_three_domain_appears_twitter.com,180,180,0.4638888888888889,0.394,0.533,1.35,360,low-income,high-income,0.008148858112492859,high-income
+11,0.061,results_top_three_domain_appears_wikipedia.org,180,180,0.20833333333333334,0.239,0.178,1.34,360,low-income,high-income,0.15428207545626826,low-income
+12,0.0,results_top_three_domain_appears_yelp.com,180,180,0.005555555555555556,0.006,0.006,1.0,360,low-income,high-income,1.0,
+13,0.05,*results_top_three_domain_appears_facebook.com,180,180,0.025,0.05,0.0,inf,360,low-income,high-income,0.002479040577973099,low-income
