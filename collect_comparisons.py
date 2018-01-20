@@ -7,6 +7,10 @@ Then it formats these into a nice CSV for publication!
 
 import argparse
 
+import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt
+
 import pandas as pd
 from data_helpers import strip_domain_strings_wrapper
 from constants import FULL, TOP_THREE
@@ -26,7 +30,7 @@ def parse():
 
     args = parser.parse_args()
 
-    if  args.output_dirs:
+    if args.output_dirs:
         paths = args.output_dirs
     else:
         comparisons_and_queries = [
@@ -57,13 +61,13 @@ def parse():
                 paths.append(path)
 
     row_dicts = []
+    ugc_row_dicts = []
     count = 0
     for path in paths:
-        print(path)
         pre, category = path.split('__')
         comparison = pre.split('_')[0][7:]
 
-        print(comparison, category)
+        print(path, comparison, category)
         full = path + '/full_pval_summary.csv'
         top3 = path + '/top_three_pval_summary.csv'
 
@@ -80,29 +84,102 @@ def parse():
         for _, row in full_df.iterrows():
             row_dict = {}
             row_dict['domain'] = strip_full(row['column'])
-            row_dict['increase'] = row.add_inc
+            row_dict['increase'] = round(row.add_inc, 2)
             row_dict['winner'] = row.winner
             row_dict['subset'] = FULL
             row_dict['category'] = category
             row_dicts.append(row_dict)
+            # row_dict['ratio'] = row.mult_inc
             if row_dict['domain'] in UGC_WHITELIST:
-                count +=1 
+                count += 1
+            if row_dict['domain'] in UGC_WHITELIST + ['MapsLocations']:
+                ugc_row_dicts.append(row_dict)
         for _, row in top3_df.iterrows():
             row_dict = {}
             row_dict['domain'] = strip_top3(row['column'])
-            row_dict['increase'] = row.add_inc
+            row_dict['increase'] = round(row.add_inc, 2)
             row_dict['winner'] = row.winner
             row_dict['subset'] = TOP_THREE
             row_dict['category'] = category
+            # row_dict['ratio'] = row.mult_inc
             row_dicts.append(row_dict)
-
             if row_dict['domain'] in UGC_WHITELIST:
-                count +=1 
+                count += 1
+            if row_dict['domain'] in UGC_WHITELIST + ['MapsLocations']:
+                ugc_row_dicts.append(row_dict)
     outdf = pd.DataFrame(row_dicts)
     print(outdf)
     outdf.to_csv('collect_comparisons.csv')
+    ugc_outdf = pd.DataFrame(ugc_row_dicts)
 
-    print(count)
+    domains_plus_winners = [
+        str(x) + '\n' + str(y) for x, y in zip(
+            list(ugc_outdf.domain),
+            list(ugc_outdf.winner)
+        )
+    ]
+    ugc_outdf = ugc_outdf.assign(domains_plus_winners=domains_plus_winners)
+
+    sorted_ugc_outdf = ugc_outdf.sort_values(['domain', 'category', 'winner'])
+    sorted_ugc_outdf[['category', 'domain', 'winner', 'subset', 'increase']].to_csv('PUB_comparisons.csv', index=False)
+    row1_df = ugc_outdf[(ugc_outdf.winner == 'urban') | (ugc_outdf.winner == 'DEM') | (ugc_outdf.winner == 'high-income')]
+    order1 = sorted(row1_df.domains_plus_winners.drop_duplicates())
+    row2_df = ugc_outdf[(ugc_outdf.winner == 'rural') | (ugc_outdf.winner == 'GOP') | (ugc_outdf.winner == 'low-income')]
+    order2 = sorted(row2_df.domains_plus_winners.drop_duplicates())
+
+    orders = [order1, order2]
+
+    matplotlib.rcParams.update({
+        'font.family': 'Times New Roman',
+        'xtick.labelsize': 8,
+        'ytick.labelsize': 8,
+        'axes.labelsize': 8,
+        'axes.titlesize': 10,
+        'legend.fontsize': 8,
+    })
+    fig, axes = plt.subplots(2, 2, figsize=(7.5, 8))
+
+    for rownum, row_df in enumerate([row1_df, row2_df]):
+        col1_df = row_df[row_df.subset == FULL]
+        col2_df = row_df[row_df.subset == TOP_THREE]
+        sns.barplot(x='increase', y='domains_plus_winners', hue='category', order=orders[rownum],
+                            data=col1_df, ax=axes[rownum, 0], ci=None,)
+        sns.barplot(x='increase', y='domains_plus_winners', hue='category', order=orders[rownum],
+                            data=col2_df, ax=axes[rownum, 1], ci=None,)
+        axes[rownum, 0].set(ylabel='', xlabel='')
+        axes[rownum, 0].legend(loc='lower right', frameon=True)
+        axes[rownum, 1].set(ylabel='', xlabel='', yticks=[])
+        axes[rownum, 1].legend(loc='lower right', frameon=True)
+        axes[rownum, 0].set(xlabel='Increase in domain appearance')
+        axes[rownum, 1].set(xlabel='Increase in domain appearance')
+    title_template = 'Domains that appear more, considering {subset_str}\nIn {locations_str}'
+    axes[0, 0].set_title(
+        title_template.format(**{
+            'subset_str': 'full results',
+            'locations_str': 'urban, higher-income, and Democratic-voting areas',
+        })
+    )
+    axes[0, 1].set_title(
+        title_template.format(**{
+            'subset_str': 'top three results',
+            'locations_str': 'urban, higher-income, and Democratic-voting areas',
+        })
+    )
+    axes[1, 0].set_title(
+        title_template.format(**{
+            'subset_str': 'full results',
+            'locations_str': 'rural, lower-income, and GOP-voting areas',
+        })
+    )
+    axes[1, 1].set_title(
+        title_template.format(**{
+            'subset_str': 'top three results',
+            'locations_str': 'rural, lower-income, and GOP-voting areas',
+        })
+    )
+    plt.tight_layout()
+    fig.savefig('comparisons.png')
+    plt.show()
 
 
 if __name__ == '__main__':

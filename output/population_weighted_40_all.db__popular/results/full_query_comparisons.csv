@@ -1,17 +1,1 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,US Senate,
-1,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Chase Bank,
-2,0.159,results_full_domain_appears_wikipedia.org,22,8,0.36666666666666664,0.409,0.25,1.64,30,rural,urban,0.430372500141192,Domino's Pizza,rural
-3,0.034,results_full_domain_appears_wikipedia.org,22,8,0.9,0.909,0.875,1.04,30,rural,urban,0.8120145477554517,Wells Fargo,rural
-4,0.364,results_full_domain_appears_wikipedia.org,22,8,0.7666666666666667,0.864,0.5,1.73,30,rural,urban,0.1062060142216567,Bank of America,rural
-5,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Target Corporation,
-6,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Chevrolet,
-7,0.5,*results_full_domain_appears_wikipedia.org,22,8,0.8666666666666667,1.0,0.5,2.0,30,rural,urban,0.03314550026377367,Honda,rural
-8,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Donald Trump,
-9,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,US Supreme Court,
-10,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Barack Obama,
-11,0.068,results_full_domain_appears_wikipedia.org,22,8,0.7,0.682,0.75,1.1,30,rural,urban,0.7291691896171288,McDonald's,urban
-12,0.625,*results_full_domain_appears_wikipedia.org,22,8,0.8333333333333334,1.0,0.375,2.67,30,rural,urban,0.011201432554090134,Toyota,rural
-13,0.477,*results_full_domain_appears_wikipedia.org,22,8,0.6,0.727,0.25,2.91,30,rural,urban,0.02712128015304318,Pizza Hut,rural
-14,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,Hillary Clinton,
-15,0.0,results_full_domain_appears_wikipedia.org,22,8,1.0,1.0,1.0,1.0,30,rural,urban,,United States Department of Veterans Affairs,
+""

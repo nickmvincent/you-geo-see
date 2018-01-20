@@ -1,4 +1,7 @@
-"""Data Analysis"""
+"""
+Data Analysis
+
+"""
 import os
 from string import ascii_lowercase
 import csv
@@ -10,6 +13,7 @@ from constants import POPULAR_CATEGORIES, FULL, TOP_THREE, TOP, RESULT_SUBSETS
 from data_helpers import get_dataframes, load_coded_as_dicts, prep_data, set_or_concat
 from qual_code import TWITTER_DOMAIN, strip_twitter_screename
 from plotters import plot_comparison, plot_importance
+from profiles_in_kp import queries as queries_to_kp_profiles
 
 import pandas as pd
 import numpy as np
@@ -23,16 +27,15 @@ from pyxdameraulevenshtein import damerau_levenshtein_distance
 
 UGC_WHITELIST = [
     'wikipedia.org',
-    'TweetCarousel',
+    'UserTweetCarousel',
+    'SearchTweetCarousel',
     'facebook.com',
     'twitter.com',
     'youtube.com',
     'instagram.com',
     'linkedin.com',
     'yelp.com',
-    'pinterest.com',
     'tripadvisor.com',
-    'KnowledgePanel',
 ]
 
 
@@ -247,6 +250,7 @@ class MetricCalculator():
     domain_fracs
     domain_appears
     domain_ranks
+    domain_counts
     """
     def __init__(self, finders, sid):
         self.finders = finders
@@ -292,7 +296,7 @@ class MetricCalculator():
         for key, val in domains_to_ranksum.items():
             rank_ret[key] = val / domains_to_count[key]
 
-        return frac_ret, rank_ret
+        return frac_ret, rank_ret, domains_to_count
 
 
     # 1/18 deprecated.
@@ -336,16 +340,17 @@ def compute_serp_features(
         ret['control_edit'] = damerau_levenshtein_distance(
             string, control_string
         )
-    fracs, ranks =  metric_calculator.calc_domain_fracs(cols)
+    fracs, ranks, counts =  metric_calculator.calc_domain_fracs(cols)
     ret[FULL] = {
         'domain_fracs': fracs,
         'domain_ranks': ranks,
+        'domain_counts': counts,
     }
-    top3_fracs, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3])
+    top3_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3])
     ret[TOP_THREE] = {
         'domain_fracs':top3_fracs
     }
-    top_fracs, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1])
+    top_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1])
     ret[TOP] = {
         'domain_fracs': top_fracs
     }
@@ -558,7 +563,7 @@ def main(args, db, category):
     link_types = [
         'results',
         #'top_ads',
-        #'knowledge_panel',
+        'knowledge_panel',
         # ['results', 'tweets'],
         # ['results', 'knowledge_panel']
     ]
@@ -672,7 +677,10 @@ def main(args, db, category):
                                 if comp_key == FULL:
                                     domain_ranks_concat_key = concat_key.replace(
                                         '_frac', '_rank')
+                                    domain_counts_concat_key = concat_key.replace(
+                                        '_frac', '_count')
                                     serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
+                                    serp_comps[sid][domain_counts_concat_key] = tmp[comp_key]['domain_counts'][domain_string]
                     # for code, frac in coded_ugc_fracs.items():
                     #     concat_key = '_'.join(
                     #         [link_type, comp_key, 'coded_ugc_frac', str(code)]
@@ -689,6 +697,25 @@ def main(args, db, category):
     serp_comps_df.index.name = 'id'
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
+
+
+    # ANCHOR: fix KP SOCIAL MEDIA
+    if args.include_kp:
+        kp_finder = wrap_finder(data, 'knowledge_panel')
+        for key, val in queries_to_kp_profiles.items():
+            relevant_row_mask = (serp_df['query'] == key) & (serp_df.has_knowledge_panel == True)
+            for domain in val:
+                serp_df.loc[relevant_row_mask, 'results_full_domain_appears_' + domain] = 1
+        indices = []
+        for index, row in serp_df[serp_df.has_knowledge_panel == True].iterrows():
+            kp_item = kp_finder(row['id']).iloc[0]
+            if kp_item.domain == 'wikipedia.org':
+                indices.append(index)
+            has_it_already = serp_df[serp_df['id'] == row['id']].iloc[0]['results_full_domain_appears_wikipedia.org']
+            if not has_it_already == 1:
+                serp_df.loc[serp_df['id'] == row['id'], 'results_full_domain_appears_wikipedia.org'] = 1
+            
+
     
     serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
 
@@ -701,7 +728,8 @@ def main(args, db, category):
         x for x in cols if serp_df[x].mean() != 0
     ]
     serp_df[cols_with_nonzero_mean].describe().to_csv(
-        path2 + '/ugcin_serp_df.csv')
+        path2 + '/nz_ugcin_serp_df.csv')
+
     # nz for non-zero (variable name was too long)
     results_domain_fracs_cols_nz = [
         x for x in cols_with_nonzero_mean if 'results_' in x and 'domain_frac' in x
@@ -724,10 +752,13 @@ def main(args, db, category):
             x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
         ]
         results_domain_appears_cols_nz_subset = [
-            x.replace('_domain_frac', '_domain_appears') for x in results_domain_fracs_cols_nz_subset
+            x for x in results_domain_appears_cols_nz if subset + '_domain_frac' in x
         ]
         results_domain_rank_cols_nz_subset = [
             x.replace('_domain_frac', '_domain_rank') for x in results_domain_fracs_cols_nz_subset
+        ] if subset == FULL else []
+        results_domain_count_cols_nz_subset = [
+            x.replace('_domain_frac', '_domain_count') for x in results_domain_fracs_cols_nz_subset
         ] if subset == FULL else []
         big_candidate_cols = [
             x for x in list(serp_df.columns.values) if 'results_' + subset + '_domain_appears' in x
@@ -742,6 +773,9 @@ def main(args, db, category):
         big_rank_cols = [
             x.replace('_domain_appears', '_domain_rank') for x in big_appears_cols
         ] if subset == FULL else []
+        big_count_cols = [
+            x.replace('_domain_appears', '_domain_count') for x in big_appears_cols
+        ] if subset == FULL else []
 
         if results_domain_fracs_cols_nz_subset:
             if args.plot_detailed:
@@ -750,8 +784,13 @@ def main(args, db, category):
                 serp_df[results_domain_appears_cols_nz_subset].mean().sort_values().plot(
                     kind='barh', ax=axes2[index], title='Domain Appears: {}'.format(subset))
             ugc_ret_cols += results_domain_fracs_cols_nz_subset
-            ugc_ret_cols += results_domain_appears_cols_nz_subset
             ugc_ret_cols += results_domain_rank_cols_nz_subset
+            ugc_ret_cols += results_domain_count_cols_nz_subset
+        # why does this have special handling?
+        # It is possible that the domain_appears column is marked 1
+        # because the domain appeared only in the KP Profiles section
+        if results_domain_appears_cols_nz_subset:
+            ugc_ret_cols += results_domain_appears_cols_nz_subset
         if big_appears_cols:
             if args.plot_detailed:
                 serp_df[big_appears_cols].mean().sort_values().plot(
@@ -759,6 +798,7 @@ def main(args, db, category):
             big_ret_cols += big_appears_cols
             big_ret_cols += big_frac_cols
             big_ret_cols += big_rank_cols
+            big_ret_cols += big_count_cols
     if args.plot_detailed:
         serp_df[results_domain_ranks_cols_nz].mean().sort_values().plot(
             kind='barh', ax=axes2[3], title='Domain Ranks')
@@ -912,8 +952,12 @@ def main(args, db, category):
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
-    print(ugc_ret_cols)
-    print(big_ret_cols)
+    ugc_ret_cols = [
+        x for x in ugc_ret_cols if x in list(serp_df.columns.values)
+    ]
+    big_ret_cols = [
+        x for x in big_ret_cols if x in list(serp_df.columns.values)
+    ]
     importance_df = serp_df[list(set(ugc_ret_cols + big_ret_cols)) + ['category']]
     if category == 'all':
         importance_df.loc[:, 'category'] = 'all'
@@ -941,6 +985,8 @@ def parse():
         '--plot', dest='plot', help='Whether to plot', action='store_true')
     parser.add_argument(
         '--plot_detailed', dest='plot_detailed', help='Whether to plot', action='store_true', default=False)
+    parser.add_argument(
+        '--include_kp', dest='include_kp', help='Whether to include_kp', action='store_true', default=False)
     parser.add_argument(
         '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
@@ -994,18 +1040,22 @@ def parse():
         is_ugc_col = False
         is_big_col = False
         if col:
-            if '_domain_appears' in col or '_domain_frac' in col or '_domain_rank' in col:
-                # tmp is of the form resulttype_subset
-                # e.g. results_top_three
+            col_components = [
+                'domain_appears',
+                'domain_frac',
+                'domain_rank',
+                'domain_count',
+            ]
+            valid = False
+            for col_component in col_components:
+                if '_' + col_component in col:
+                    valid = True
+            if valid:
                 if col in ugc_cols:
                     is_ugc_col = True
                 if col in big_cols:
                     is_big_col = True
-                for col_component in [
-                    'domain_appears',
-                    'domain_frac',
-                    'domain_rank',
-                ]:
+                for col_component in col_components:
                     if col_component in col:
                         metric = col_component
                         tmp, domain = col.split('_' + col_component + '_')

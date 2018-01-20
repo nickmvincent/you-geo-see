@@ -1,20 +1,11 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.083,results_top_three_domain_appears_bankrate.com,12,8,0.05,0.083,0.0,inf,20,rural,urban,0.3388006961962018,personal loans,rural
-1,0.625,*results_top_three_domain_appears_bankrate.com,12,8,0.5,0.75,0.125,6.0,20,rural,urban,0.0029204669879343815,bank loans,rural
-2,0.125,results_top_three_domain_appears_MapsLocations,12,8,0.05,0.0,0.125,inf,20,rural,urban,0.3506166628202075,home loans,urban
-3,0.458,*results_top_three_domain_appears_MapsLocations,12,8,0.6,0.417,0.875,2.1,20,rural,urban,0.02980739988632587,loan,urban
-4,0.875,**results_top_three_domain_appears_MapsLocations,12,8,0.35,0.0,0.875,inf,20,rural,urban,0.00021155485194587255,personal loans,urban
-5,0.125,results_top_three_domain_appears_MapsLocations,12,8,0.05,0.0,0.125,inf,20,rural,urban,0.3506166628202075,quicken loans,urban
-6,0.333,*results_top_three_domain_appears_MapsLocations,12,8,0.8,0.667,1.0,1.5,20,rural,urban,0.03881409182311228,payday loans,urban
-7,0.125,results_top_three_domain_appears_MapsLocations,12,8,0.05,0.0,0.125,inf,20,rural,urban,0.3506166628202075,bank loans,urban
-8,0.375,results_top_three_domain_appears_MapsLocations,12,8,0.15,0.0,0.375,inf,20,rural,urban,0.07960201245519757,loans bad credit,urban
-9,0.1,results_top_three_domain_appears_bankrate.com,10,10,0.05,0.1,0.0,inf,20,GOP,DEM,0.34343639613791355,personal loans,GOP
-10,0.8,**results_top_three_domain_appears_bankrate.com,10,10,0.5,0.9,0.1,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,GOP
-11,0.8,**results_top_three_domain_appears_citizensbank.com,10,10,0.5,0.1,0.9,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,DEM
-12,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,home loans,DEM
-13,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,GOP,DEM,0.00481102818085497,loan,DEM
-14,0.7,*results_top_three_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,personal loans,DEM
-15,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,quicken loans,DEM
-16,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,GOP,DEM,0.03678749787978613,payday loans,DEM
-17,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,bank loans,DEM
-18,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.15,0.0,0.3,inf,20,GOP,DEM,0.0811261888458405,loans bad credit,DEM
+0,0.1,results_top_three_domain_appears_bankrate.com,10,10,0.05,0.1,0.0,inf,20,GOP,DEM,0.34343639613791355,personal loans,GOP
+1,0.8,**results_top_three_domain_appears_bankrate.com,10,10,0.5,0.9,0.1,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,GOP
+2,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,home loans,DEM
+3,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,GOP,DEM,0.00481102818085497,loan,DEM
+4,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,GOP,DEM,0.03678749787978613,payday loans,DEM
+5,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,quicken loans,DEM
+6,0.7,*results_top_three_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,personal loans,DEM
+7,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,bank loans,DEM
+8,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.15,0.0,0.3,inf,20,GOP,DEM,0.0811261888458405,loans bad credit,DEM
+9,0.8,**results_top_three_domain_appears_citizensbank.com,10,10,0.5,0.1,0.9,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,DEM

@@ -1,3 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.011,*results_top_three_domain_appears_facebook.com,380,380,0.005263157894736842,0.011,0.0,inf,760,rural,urban,0.04535644132133777,rural
-1,0.097,*results_top_three_domain_appears_MapsLocations,380,380,0.24868421052631579,0.2,0.297,1.49,760,rural,urban,0.0018735176138192232,urban
+0,0.097,*results_top_three_domain_appears_MapsLocations,380,380,0.24868421052631579,0.2,0.297,1.49,760,rural,urban,0.0018735176138192232,urban
+1,0.011,*results_top_three_domain_appears_facebook.com,380,380,0.005263157894736842,0.011,0.0,inf,760,rural,urban,0.04535644132133777,rural
+2,0.074,*results_top_three_domain_appears_NewsCarousel,380,380,0.6710526315789473,0.708,0.634,1.12,760,rural,urban,0.030654510054233784,rural

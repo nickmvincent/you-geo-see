@@ -2,3 +2,6 @@
 0,0.005,results_top_three_domain_appears_wikipedia.org,220,80,0.5033333333333333,0.505,0.5,1.01,300,rural,urban,0.9448744657820309,rural
 1,0.007,results_top_three_domain_appears_wikipedia.org,130,270,0.505,0.5,0.507,1.01,400,low-income,high-income,0.8900828576721561,high-income
 2,0.006,results_top_three_domain_appears_wikipedia.org,340,60,0.505,0.506,0.5,1.01,400,GOP,DEM,0.933738946313065,GOP
+3,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,197,71,1.0,1.0,1.0,1.0,268,rural,urban,,
+4,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,117,240,1.0,1.0,1.0,1.0,357,low-income,high-income,,
+5,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,303,54,1.0,1.0,1.0,1.0,357,GOP,DEM,,

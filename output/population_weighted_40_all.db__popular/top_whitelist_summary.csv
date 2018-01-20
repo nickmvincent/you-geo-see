@@ -1,1 +1,4 @@
-""
+,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.0,knowledge_panel_top_domain_appears_wikipedia.org,318,113,1.0,1.0,1.0,1.0,431,rural,urban,,
+1,0.0,knowledge_panel_top_domain_appears_wikipedia.org,194,371,1.0,1.0,1.0,1.0,565,low-income,high-income,,
+2,0.0,knowledge_panel_top_domain_appears_wikipedia.org,488,77,1.0,1.0,1.0,1.0,565,GOP,DEM,,

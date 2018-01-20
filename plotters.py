@@ -6,7 +6,9 @@ import seaborn as sns
 from constants import FULL, TOP_THREE
 from data_helpers import strip_domain_strings_wrapper
 
-sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
+sns.set_context(
+    "paper",
+    rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10, "axes.labelsize":10})
 sns.set(style="whitegrid", palette='pastel', color_codes=True)
 
 ALL_SUBSET_STRING = 'considering all results'
@@ -23,6 +25,7 @@ def plot_importance(df):
 
     """
 
+    counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
     df = df.fillna(0)
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
@@ -33,6 +36,8 @@ def plot_importance(df):
     df['fake_val'] = df['val'].map(lambda x: x / 2)
     categorized = df[df.category != 'all']
     plot_col_dfs = [categorized]
+    sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
+
     _, axes = plt.subplots(nrows=2, ncols=len(plot_col_dfs))
     for colnum, subdf in enumerate(plot_col_dfs):
         # adding caching to save a second or two?
@@ -42,7 +47,6 @@ def plot_importance(df):
         grouped_and_sorted = tmpdf.groupby('domain').mean().sort_values(
                 'val', ascending=False)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
-        print(grouped_and_sorted)
         order = list(grouped_and_sorted.index)[:10]
         for domain in ugc_cols:
             if domain not in order:
@@ -50,6 +54,9 @@ def plot_importance(df):
         for domain in order[:3]:
             ranks = subdf[(subdf.metric == 'domain_rank') & (subdf.domain == domain)]
             ranks = ranks[ranks.val != 0].val
+            print('rank', domain, ranks.mean())
+            counts = counts_copy[(subdf.domain == domain)].val
+            print('count', domain, counts.mean())
             _, histax = plt.subplots()
             sns.distplot(
                 ranks.dropna(), rug=True, bins=list(range(1, 13)), 

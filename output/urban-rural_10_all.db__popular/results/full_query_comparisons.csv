@@ -1,41 +1,41 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.1,results_full_domain_appears_facebook.com,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Bank of America,rural
-1,0.5,*results_full_domain_appears_facebook.com,10,10,0.45,0.7,0.2,3.5,20,rural,urban,0.024143272996065546,Chevrolet,rural
-2,0.2,results_full_domain_appears_facebook.com,10,10,0.8,0.9,0.7,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,rural
-3,0.4,*results_full_domain_appears_facebook.com,10,10,0.2,0.4,0.0,inf,20,rural,urban,0.03678749787978613,Toyota,rural
-4,0.1,results_full_domain_appears_facebook.com,10,10,0.05,0.0,0.1,inf,20,rural,urban,0.34343639613791355,Hillary Clinton,urban
-5,0.9,**results_full_domain_appears_facebook.com,10,10,0.55,1.0,0.1,10.0,20,rural,urban,8.538051223166285e-06,Honda,rural
-6,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
-7,0.1,results_full_domain_appears_facebook.com,10,10,0.15,0.2,0.1,2.0,20,rural,urban,0.5565650165675332,McDonald's,rural
-8,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Walmart,
-9,0.1,results_full_domain_appears_facebook.com,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Pizza Hut,rural
-10,0.5,*results_full_domain_appears_facebook.com,10,10,0.75,1.0,0.5,2.0,20,rural,urban,0.014956363910414203,Domino's Pizza,rural
-11,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
-12,0.1,results_full_domain_appears_wikipedia.org,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Bank of America,rural
-13,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Chevrolet,
-14,0.2,results_full_domain_appears_wikipedia.org,10,10,0.9,1.0,0.8,1.25,20,rural,urban,0.16785065605707503,Chase Bank,rural
-15,0.2,results_full_domain_appears_wikipedia.org,10,10,0.8,0.9,0.7,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,rural
-16,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Target Corporation,
-17,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Supreme Court,
-18,0.5,*results_full_domain_appears_wikipedia.org,10,10,0.75,1.0,0.5,2.0,20,rural,urban,0.014956363910414203,Toyota,rural
-19,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Hillary Clinton,
-20,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,United States Department of Veterans Affairs,
-21,0.6,*results_full_domain_appears_wikipedia.org,10,10,0.7,1.0,0.4,2.5,20,rural,urban,0.005121072764272635,Honda,rural
-22,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
-23,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Senate,
-24,0.3,results_full_domain_appears_wikipedia.org,10,10,0.85,0.7,1.0,1.43,20,rural,urban,0.0811261888458405,McDonald's,urban
-25,0.5,*results_full_domain_appears_wikipedia.org,10,10,0.35,0.6,0.1,6.0,20,rural,urban,0.019723632218659942,Pizza Hut,rural
-26,0.7,*results_full_domain_appears_wikipedia.org,10,10,0.35,0.7,0.0,inf,20,rural,urban,0.0013229505842674947,Domino's Pizza,rural
-27,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
-28,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707492,Bank of America,urban
-29,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Chevrolet,urban
-30,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,rural,urban,2.2928871994400028e-05,Chase Bank,urban
-31,0.2,results_full_domain_appears_MapsLocations,10,10,0.8,0.7,0.9,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,urban
-32,0.3,results_full_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,rural,urban,0.08112618884584044,Target Corporation,urban
-33,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Toyota,urban
-34,0.5,*results_full_domain_appears_MapsLocations,10,10,0.65,0.9,0.4,2.25,20,rural,urban,0.01972363221865996,United States Department of Veterans Affairs,rural
-35,0.0,results_full_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Honda,
-36,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,McDonald's,urban
-37,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Walmart,urban
-38,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,Pizza Hut,urban
-39,0.0,results_full_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Domino's Pizza,
+0,0.2,results_full_domain_appears_wikipedia.org,10,10,0.9,1.0,0.8,1.25,20,rural,urban,0.16785065605707503,Chase Bank,rural
+1,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Chevrolet,
+2,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
+3,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Senate,
+4,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Target Corporation,
+5,0.7,*results_full_domain_appears_wikipedia.org,10,10,0.35,0.7,0.0,inf,20,rural,urban,0.0013229505842674947,Domino's Pizza,rural
+6,0.2,results_full_domain_appears_wikipedia.org,10,10,0.8,0.9,0.7,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,rural
+7,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,United States Department of Veterans Affairs,
+8,0.6,*results_full_domain_appears_wikipedia.org,10,10,0.7,1.0,0.4,2.5,20,rural,urban,0.005121072764272635,Honda,rural
+9,0.5,*results_full_domain_appears_wikipedia.org,10,10,0.75,1.0,0.5,2.0,20,rural,urban,0.014956363910414203,Toyota,rural
+10,0.1,results_full_domain_appears_wikipedia.org,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Bank of America,rural
+11,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Hillary Clinton,
+12,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Supreme Court,
+13,0.3,results_full_domain_appears_wikipedia.org,10,10,0.85,0.7,1.0,1.43,20,rural,urban,0.0811261888458405,McDonald's,urban
+14,0.0,results_full_domain_appears_wikipedia.org,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
+15,0.5,*results_full_domain_appears_wikipedia.org,10,10,0.35,0.6,0.1,6.0,20,rural,urban,0.019723632218659942,Pizza Hut,rural
+16,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,rural,urban,2.2928871994400028e-05,Chase Bank,urban
+17,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Chevrolet,urban
+18,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Walmart,urban
+19,0.3,results_full_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,rural,urban,0.08112618884584044,Target Corporation,urban
+20,0.0,results_full_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Domino's Pizza,
+21,0.2,results_full_domain_appears_MapsLocations,10,10,0.8,0.7,0.9,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,urban
+22,0.5,*results_full_domain_appears_MapsLocations,10,10,0.65,0.9,0.4,2.25,20,rural,urban,0.01972363221865996,United States Department of Veterans Affairs,rural
+23,0.0,results_full_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Honda,
+24,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Toyota,urban
+25,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707492,Bank of America,urban
+26,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,McDonald's,urban
+27,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,Pizza Hut,urban
+28,0.5,*results_full_domain_appears_facebook.com,10,10,0.45,0.7,0.2,3.5,20,rural,urban,0.024143272996065546,Chevrolet,rural
+29,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Walmart,
+30,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
+31,0.5,*results_full_domain_appears_facebook.com,10,10,0.75,1.0,0.5,2.0,20,rural,urban,0.014956363910414203,Domino's Pizza,rural
+32,0.2,results_full_domain_appears_facebook.com,10,10,0.8,0.9,0.7,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,rural
+33,0.9,**results_full_domain_appears_facebook.com,10,10,0.55,1.0,0.1,10.0,20,rural,urban,8.538051223166285e-06,Honda,rural
+34,0.4,*results_full_domain_appears_facebook.com,10,10,0.2,0.4,0.0,inf,20,rural,urban,0.03678749787978613,Toyota,rural
+35,0.1,results_full_domain_appears_facebook.com,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Bank of America,rural
+36,0.1,results_full_domain_appears_facebook.com,10,10,0.05,0.0,0.1,inf,20,rural,urban,0.34343639613791355,Hillary Clinton,urban
+37,0.1,results_full_domain_appears_facebook.com,10,10,0.15,0.2,0.1,2.0,20,rural,urban,0.5565650165675332,McDonald's,rural
+38,0.0,results_full_domain_appears_facebook.com,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
+39,0.1,results_full_domain_appears_facebook.com,10,10,0.95,1.0,0.9,1.11,20,rural,urban,0.34343639613791366,Pizza Hut,rural

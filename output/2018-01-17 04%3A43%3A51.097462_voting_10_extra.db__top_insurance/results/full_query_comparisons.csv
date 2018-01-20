@@ -1,21 +1,11 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.042,results_full_domain_appears_MapsLocations,12,8,0.85,0.833,0.875,1.05,20,rural,urban,0.8073359440434065,car insurance,urban
-1,0.75,**results_full_domain_appears_MapsLocations,12,8,0.55,0.25,1.0,4.0,20,rural,urban,0.00012940169548043986,progressive,urban
-2,0.625,*results_full_domain_appears_MapsLocations,12,8,0.5,0.25,0.875,3.5,20,rural,urban,0.0029204669879343815,life insurance,urban
-3,0.417,*results_full_domain_appears_MapsLocations,12,8,0.75,0.583,1.0,1.71,20,rural,urban,0.017180487343013178,home insurance,urban
-4,0.125,results_full_domain_appears_MapsLocations,12,8,0.05,0.0,0.125,inf,20,rural,urban,0.3506166628202075,health insurance,urban
-5,0.75,*results_full_domain_appears_MapsLocations,12,8,0.3,0.0,0.75,inf,20,rural,urban,0.002535996080258101,geico,urban
-6,0.167,results_full_domain_appears_MapsLocations,12,8,0.9,0.833,1.0,1.2,20,rural,urban,0.16608681351829563,auto insurance,urban
-7,0.5,*results_full_domain_appears_MapsLocations,12,8,0.7,0.5,1.0,2.0,20,rural,urban,0.006872303308921115,progressive insurance,urban
-8,0.083,results_full_domain_appears_MapsLocations,12,8,0.95,0.917,1.0,1.09,20,rural,urban,0.33880069619620157,insurance companies,urban
-9,0.875,**results_full_domain_appears_MapsLocations,12,8,0.35,0.0,0.875,inf,20,rural,urban,0.00021155485194587255,geico insurance,urban
-10,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,car insurance,DEM
-11,0.9,**results_full_domain_appears_MapsLocations,10,10,0.55,0.1,1.0,10.0,20,GOP,DEM,8.538051223166285e-06,progressive,DEM
-12,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.005162925673676795,life insurance,DEM
-13,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,GOP,DEM,0.014956363910414203,home insurance,DEM
-14,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,health insurance,DEM
-15,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,geico,DEM
-16,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,GOP,DEM,0.16785065605707492,auto insurance,DEM
-17,0.2,results_full_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,progressive insurance,DEM
-18,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,GOP,DEM,0.34343639613791366,insurance companies,DEM
-19,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,geico insurance,DEM
+0,0.2,results_full_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,progressive insurance,DEM
+1,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,geico,DEM
+2,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,geico insurance,DEM
+3,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,health insurance,DEM
+4,0.9,**results_full_domain_appears_MapsLocations,10,10,0.55,0.1,1.0,10.0,20,GOP,DEM,8.538051223166285e-06,progressive,DEM
+5,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,GOP,DEM,0.34343639613791366,insurance companies,DEM
+6,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,car insurance,DEM
+7,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,GOP,DEM,0.014956363910414203,home insurance,DEM
+8,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.005162925673676795,life insurance,DEM
+9,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,GOP,DEM,0.16785065605707492,auto insurance,DEM

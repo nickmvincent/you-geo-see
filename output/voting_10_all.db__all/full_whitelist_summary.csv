@@ -1,5 +1,6 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.076,*results_full_domain_appears_wikipedia.org,380,380,0.8223684210526315,0.861,0.784,1.1,760,GOP,DEM,0.005879210998603316,GOP
-1,0.005,results_full_domain_appears_twitter.com,380,380,0.45263157894736844,0.45,0.455,1.01,760,GOP,DEM,0.884306721300487,DEM
-2,0.005,results_full_domain_appears_youtube.com,380,380,0.07105263157894737,0.074,0.068,1.08,760,GOP,DEM,0.7780011417499482,GOP
-3,0.108,**results_full_domain_appears_facebook.com,380,380,0.25394736842105264,0.308,0.2,1.54,760,GOP,DEM,0.0006168278300838967,GOP
+0,0.005,results_full_domain_appears_twitter.com,380,380,0.45263157894736844,0.45,0.455,1.01,760,GOP,DEM,0.884306721300487,DEM
+1,0.076,*results_full_domain_appears_wikipedia.org,380,380,0.8223684210526315,0.861,0.784,1.1,760,GOP,DEM,0.005879210998603316,GOP
+2,0.108,**results_full_domain_appears_facebook.com,380,380,0.25394736842105264,0.308,0.2,1.54,760,GOP,DEM,0.0006168278300838967,GOP
+3,0.005,results_full_domain_appears_youtube.com,380,380,0.07105263157894737,0.074,0.068,1.08,760,GOP,DEM,0.7780011417499482,GOP
+4,0.003,results_full_domain_appears_UserTweetCarousel,380,380,0.2381578947368421,0.239,0.237,1.01,760,GOP,DEM,0.9322466220305176,GOP

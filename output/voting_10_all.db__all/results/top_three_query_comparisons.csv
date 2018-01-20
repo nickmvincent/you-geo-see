@@ -1,15 +1,15 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,GOP,DEM,0.34343639613791366,Pizza Hut,GOP
-1,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,GOP,DEM,0.34343639613791366,Chevrolet,GOP
-2,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,McDonald's,DEM
-3,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,United States Department of Veterans Affairs,DEM
-4,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.4,0.1,0.7,7.0,20,GOP,DEM,0.00481102818085498,Target Corporation,DEM
-5,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Domino's Pizza,DEM
-6,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,medical marijuana,DEM
-7,0.7,**results_top_three_domain_appears_MapsLocations,10,10,0.55,0.2,0.9,4.5,20,GOP,DEM,0.0006237457011994752,Chase Bank,DEM
-8,0.7,**results_top_three_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,GOP,DEM,0.000623745701199474,Bank of America,DEM
-9,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.65,0.4,0.9,2.25,20,GOP,DEM,0.01972363221865996,Honda,DEM
-10,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Walmart,DEM
-11,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,Toyota,DEM
-12,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,abortion,DEM
-13,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Wells Fargo,DEM
+0,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,Toyota,DEM
+1,0.7,**results_top_three_domain_appears_MapsLocations,10,10,0.55,0.2,0.9,4.5,20,GOP,DEM,0.0006237457011994752,Chase Bank,DEM
+2,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,medical marijuana,DEM
+3,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,McDonald's,DEM
+4,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,GOP,DEM,0.34343639613791366,Pizza Hut,GOP
+5,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,GOP,DEM,0.34343639613791366,Chevrolet,GOP
+6,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Wells Fargo,DEM
+7,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.4,0.1,0.7,7.0,20,GOP,DEM,0.00481102818085498,Target Corporation,DEM
+8,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.65,0.4,0.9,2.25,20,GOP,DEM,0.01972363221865996,Honda,DEM
+9,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Walmart,DEM
+10,0.7,**results_top_three_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,GOP,DEM,0.000623745701199474,Bank of America,DEM
+11,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.7,1.0,1.43,20,GOP,DEM,0.08112618884584044,Domino's Pizza,DEM
+12,0.6,*results_top_three_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,United States Department of Veterans Affairs,DEM
+13,0.5,*results_top_three_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,abortion,DEM

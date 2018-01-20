@@ -1,39 +1,20 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.75,**results_full_domain_appears_MapsLocations,12,8,0.55,0.25,1.0,4.0,20,rural,urban,0.00012940169548043986,progressive,urban
-1,0.833,**results_full_domain_appears_MapsLocations,12,8,0.5,0.167,1.0,6.0,20,rural,urban,1.3325045262573097e-05,home loans,urban
-2,1.0,**results_full_domain_appears_MapsLocations,12,8,0.4,0.0,1.0,inf,20,rural,urban,0.0,personal loans,urban
-3,0.875,**results_full_domain_appears_MapsLocations,12,8,0.35,0.0,0.875,inf,20,rural,urban,0.00021155485194587255,geico insurance,urban
-4,0.625,*results_full_domain_appears_MapsLocations,12,8,0.5,0.25,0.875,3.5,20,rural,urban,0.0029204669879343815,bank loans,urban
-5,0.625,*results_full_domain_appears_MapsLocations,12,8,0.25,0.0,0.625,inf,20,rural,urban,0.011201432554090134,loans bad credit,urban
-6,0.625,*results_full_domain_appears_MapsLocations,12,8,0.5,0.25,0.875,3.5,20,rural,urban,0.0029204669879343815,life insurance,urban
-7,0.417,*results_full_domain_appears_MapsLocations,12,8,0.75,0.583,1.0,1.71,20,rural,urban,0.017180487343013178,home insurance,urban
-8,0.125,results_full_domain_appears_MapsLocations,12,8,0.05,0.0,0.125,inf,20,rural,urban,0.3506166628202075,health insurance,urban
-9,0.625,*results_full_domain_appears_MapsLocations,12,8,0.25,0.0,0.625,inf,20,rural,urban,0.011201432554090134,quicken loans,urban
-10,0.042,results_full_domain_appears_MapsLocations,12,8,0.85,0.833,0.875,1.05,20,rural,urban,0.8073359440434065,car insurance,urban
-11,0.5,*results_full_domain_appears_MapsLocations,12,8,0.7,0.5,1.0,2.0,20,rural,urban,0.006872303308921115,loan,urban
-12,0.375,results_full_domain_appears_MapsLocations,12,8,0.15,0.0,0.375,inf,20,rural,urban,0.07960201245519757,hairloss,urban
-13,0.167,results_full_domain_appears_MapsLocations,12,8,0.9,0.833,1.0,1.2,20,rural,urban,0.16608681351829563,auto insurance,urban
-14,0.5,*results_full_domain_appears_MapsLocations,12,8,0.7,0.5,1.0,2.0,20,rural,urban,0.006872303308921115,progressive insurance,urban
-15,0.333,*results_full_domain_appears_MapsLocations,12,8,0.8,0.667,1.0,1.5,20,rural,urban,0.03881409182311228,payday loans,urban
-16,0.25,results_full_domain_appears_MapsLocations,12,8,0.1,0.0,0.25,inf,20,rural,urban,0.17047066078705375,quicken,urban
-17,0.75,*results_full_domain_appears_MapsLocations,12,8,0.3,0.0,0.75,inf,20,rural,urban,0.002535996080258101,geico,urban
-18,0.083,results_full_domain_appears_MapsLocations,12,8,0.95,0.917,1.0,1.09,20,rural,urban,0.33880069619620157,insurance companies,urban
-19,0.9,**results_full_domain_appears_MapsLocations,10,10,0.55,0.1,1.0,10.0,20,GOP,DEM,8.538051223166285e-06,progressive,DEM
-20,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.0051629256736767945,home loans,DEM
-21,0.8,**results_full_domain_appears_MapsLocations,10,10,0.4,0.0,0.8,inf,20,GOP,DEM,0.0002024993220676408,personal loans,DEM
-22,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,geico insurance,DEM
-23,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,DEM
-24,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,loans bad credit,DEM
-25,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.005162925673676795,life insurance,DEM
-26,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,GOP,DEM,0.014956363910414203,home insurance,DEM
-27,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,health insurance,DEM
-28,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,quicken loans,DEM
-29,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,car insurance,DEM
-30,0.6,*results_full_domain_appears_MapsLocations,10,10,0.7,0.4,1.0,2.5,20,GOP,DEM,0.005121072764272635,loan,DEM
-31,0.3,results_full_domain_appears_MapsLocations,10,10,0.15,0.0,0.3,inf,20,GOP,DEM,0.0811261888458405,hairloss,DEM
-32,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,GOP,DEM,0.16785065605707492,auto insurance,DEM
-33,0.2,results_full_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,progressive insurance,DEM
-34,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,GOP,DEM,0.03678749787978613,payday loans,DEM
-35,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,GOP,DEM,0.16785065605707492,quicken,DEM
-36,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,geico,DEM
-37,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,GOP,DEM,0.34343639613791366,insurance companies,DEM
+0,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,geico insurance,DEM
+1,0.1,results_full_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,GOP,DEM,0.5565650165675333,car insurance,DEM
+2,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,GOP,DEM,0.34343639613791366,insurance companies,DEM
+3,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,GOP,DEM,0.014956363910414203,home insurance,DEM
+4,0.8,**results_full_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,GOP,DEM,2.2928871994400028e-05,bank loans,DEM
+5,0.2,results_full_domain_appears_MapsLocations,10,10,0.7,0.6,0.8,1.33,20,GOP,DEM,0.35584114604163886,progressive insurance,DEM
+6,0.9,**results_full_domain_appears_MapsLocations,10,10,0.55,0.1,1.0,10.0,20,GOP,DEM,8.538051223166285e-06,progressive,DEM
+7,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,loans bad credit,DEM
+8,0.6,*results_full_domain_appears_MapsLocations,10,10,0.3,0.0,0.6,inf,20,GOP,DEM,0.005121072764272635,geico,DEM
+9,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,GOP,DEM,0.34343639613791355,health insurance,DEM
+10,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.0051629256736767945,home loans,DEM
+11,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,GOP,DEM,0.03678749787978613,payday loans,DEM
+12,0.5,*results_full_domain_appears_MapsLocations,10,10,0.25,0.0,0.5,inf,20,GOP,DEM,0.014956363910414203,quicken loans,DEM
+13,0.3,results_full_domain_appears_MapsLocations,10,10,0.15,0.0,0.3,inf,20,GOP,DEM,0.0811261888458405,hairloss,DEM
+14,0.6,*results_full_domain_appears_MapsLocations,10,10,0.5,0.2,0.8,4.0,20,GOP,DEM,0.005162925673676795,life insurance,DEM
+15,0.6,*results_full_domain_appears_MapsLocations,10,10,0.7,0.4,1.0,2.5,20,GOP,DEM,0.005121072764272635,loan,DEM
+16,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,GOP,DEM,0.16785065605707492,quicken,DEM
+17,0.8,**results_full_domain_appears_MapsLocations,10,10,0.4,0.0,0.8,inf,20,GOP,DEM,0.0002024993220676408,personal loans,DEM
+18,0.2,results_full_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,GOP,DEM,0.16785065605707492,auto insurance,DEM

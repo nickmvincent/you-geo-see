@@ -1,3 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.03,results_full_domain_appears_wikipedia.org,100,100,0.285,0.3,0.27,1.11,200,low-income,high-income,0.6404210210258102,low-income
 1,0.04,results_full_domain_appears_facebook.com,100,100,0.18,0.2,0.16,1.25,200,low-income,high-income,0.46411887116792394,low-income
+2,0.0,results_full_domain_appears_UserTweetCarousel,100,100,0.4,0.4,0.4,1.0,200,low-income,high-income,1.0,

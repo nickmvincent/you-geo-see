@@ -1,10 +1,10 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.9,**results_full_domain_appears_MapsLocations,10,10,0.45,0.0,0.9,inf,20,low-income,high-income,8.538051223166285e-06,geico insurance,high-income
-1,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,low-income,high-income,0.34343639613791366,home insurance,high-income
-2,0.3,results_full_domain_appears_MapsLocations,10,10,0.55,0.4,0.7,1.75,20,low-income,high-income,0.1964675160349241,progressive insurance,high-income
-3,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,insurance companies,
-4,0.3,results_full_domain_appears_MapsLocations,10,10,0.65,0.5,0.8,1.6,20,low-income,high-income,0.1776880165605986,progressive,high-income
-5,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,life insurance,high-income
-6,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,auto insurance,
-7,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,car insurance,
-8,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,low-income,high-income,0.00481102818085497,geico,high-income
+0,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,insurance companies,
+1,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,life insurance,high-income
+2,0.9,**results_full_domain_appears_MapsLocations,10,10,0.45,0.0,0.9,inf,20,low-income,high-income,8.538051223166285e-06,geico insurance,high-income
+3,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,low-income,high-income,0.00481102818085497,geico,high-income
+4,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,low-income,high-income,0.34343639613791366,home insurance,high-income
+5,0.3,results_full_domain_appears_MapsLocations,10,10,0.55,0.4,0.7,1.75,20,low-income,high-income,0.1964675160349241,progressive insurance,high-income
+6,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,car insurance,
+7,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,auto insurance,
+8,0.3,results_full_domain_appears_MapsLocations,10,10,0.65,0.5,0.8,1.6,20,low-income,high-income,0.1776880165605986,progressive,high-income

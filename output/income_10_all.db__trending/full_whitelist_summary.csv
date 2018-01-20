@@ -1,10 +1,4 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.064,results_full_domain_appears_wikipedia.org,110,90,0.735,0.764,0.7,1.09,200,rural,urban,0.3165837512278834,rural
-1,0.0,results_full_domain_appears_twitter.com,110,90,0.6,0.6,0.6,1.0,200,rural,urban,1.0,
-2,0.022,results_full_domain_appears_SearchTweetCarousel,110,90,0.29,0.3,0.278,1.08,200,rural,urban,0.7314592824743459,rural
-3,0.07,results_full_domain_appears_wikipedia.org,100,100,0.735,0.77,0.7,1.1,200,low-income,high-income,0.2643148563513578,low-income
-4,0.0,results_full_domain_appears_twitter.com,100,100,0.6,0.6,0.6,1.0,200,low-income,high-income,1.0,
-5,0.02,results_full_domain_appears_SearchTweetCarousel,100,100,0.29,0.3,0.28,1.07,200,low-income,high-income,0.7567525569717783,low-income
-6,0.007,results_full_domain_appears_wikipedia.org,50,150,0.735,0.74,0.733,1.01,200,GOP,DEM,0.9268332224109027,GOP
-7,0.0,results_full_domain_appears_twitter.com,50,150,0.6,0.6,0.6,1.0,200,GOP,DEM,1.0,
-8,0.013,results_full_domain_appears_SearchTweetCarousel,50,150,0.29,0.28,0.293,1.05,200,GOP,DEM,0.8578203361498105,DEM
+0,0.0,results_full_domain_appears_twitter.com,100,100,0.6,0.6,0.6,1.0,200,low-income,high-income,1.0,
+1,0.07,results_full_domain_appears_wikipedia.org,100,100,0.735,0.77,0.7,1.1,200,low-income,high-income,0.2643148563513578,low-income
+2,0.02,results_full_domain_appears_SearchTweetCarousel,100,100,0.29,0.3,0.28,1.07,200,low-income,high-income,0.7567525569717783,low-income

@@ -1,2 +1,3 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.01,results_top_three_domain_appears_wikipedia.org,100,100,0.015,0.02,0.01,2.0,200,low-income,high-income,0.5631136383346664,low-income
+1,0.0,results_top_three_domain_appears_UserTweetCarousel,100,100,0.4,0.4,0.4,1.0,200,low-income,high-income,1.0,

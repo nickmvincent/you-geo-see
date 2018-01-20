@@ -1,3 +1,3 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.02,*results_top_three_domain_appears_nerdwallet.com,400,400,0.015,0.025,0.005,5.0,800,low-income,high-income,0.02006185624814587,low-income
-1,0.072,*results_top_three_domain_appears_MapsLocations,400,400,0.13625,0.1,0.172,1.72,800,low-income,high-income,0.0027716682312564815,high-income
+0,0.072,*results_top_three_domain_appears_MapsLocations,400,400,0.13625,0.1,0.172,1.72,800,low-income,high-income,0.0027716682312564815,high-income
+1,0.02,*results_top_three_domain_appears_nerdwallet.com,400,400,0.015,0.025,0.005,5.0,800,low-income,high-income,0.02006185624814587,low-income

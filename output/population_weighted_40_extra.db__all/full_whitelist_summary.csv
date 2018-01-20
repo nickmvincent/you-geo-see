@@ -1,10 +1,10 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.005,results_full_domain_appears_wikipedia.org,920,280,0.3466666666666667,0.348,0.343,1.01,1200,rural,urban,0.8784447520534042,rural
-1,0.003,results_full_domain_appears_UserTweetCarousel,920,280,0.11916666666666667,0.118,0.121,1.02,1200,rural,urban,0.8946712393700069,urban
-2,0.0,results_full_domain_appears_youtube.com,920,280,0.125,0.125,0.125,1.0,1200,rural,urban,1.0,
+1,0.0,results_full_domain_appears_youtube.com,920,280,0.125,0.125,0.125,1.0,1200,rural,urban,1.0,
+2,0.003,results_full_domain_appears_UserTweetCarousel,920,280,0.11916666666666667,0.118,0.121,1.02,1200,rural,urban,0.8946712393700069,urban
 3,0.005,results_full_domain_appears_wikipedia.org,760,826,0.34489281210592687,0.347,0.343,1.01,1586,low-income,high-income,0.8424422972824195,low-income
-4,0.008,results_full_domain_appears_UserTweetCarousel,760,826,0.11664564943253468,0.121,0.113,1.08,1586,low-income,high-income,0.6007126920458423,low-income
-5,0.003,results_full_domain_appears_youtube.com,760,826,0.1235813366960908,0.125,0.122,1.02,1586,low-income,high-income,0.8693565723773672,low-income
+4,0.003,results_full_domain_appears_youtube.com,760,826,0.1235813366960908,0.125,0.122,1.02,1586,low-income,high-income,0.8693565723773672,low-income
+5,0.008,results_full_domain_appears_UserTweetCarousel,760,826,0.11664564943253468,0.121,0.113,1.08,1586,low-income,high-income,0.6007126920458423,low-income
 6,0.0,results_full_domain_appears_wikipedia.org,1360,226,0.34489281210592687,0.345,0.345,1.0,1586,GOP,DEM,0.993480789874379,DEM
-7,0.007,results_full_domain_appears_UserTweetCarousel,1360,226,0.11664564943253468,0.118,0.111,1.06,1586,GOP,DEM,0.7567077190425502,GOP
-8,0.006,results_full_domain_appears_youtube.com,1360,226,0.1235813366960908,0.123,0.128,1.04,1586,GOP,DEM,0.8181631276241832,DEM
+7,0.006,results_full_domain_appears_youtube.com,1360,226,0.1235813366960908,0.123,0.128,1.04,1586,GOP,DEM,0.8181631276241832,DEM
+8,0.007,results_full_domain_appears_UserTweetCarousel,1360,226,0.11664564943253468,0.118,0.111,1.06,1586,GOP,DEM,0.7567077190425502,GOP
