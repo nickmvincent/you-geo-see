@@ -63,6 +63,12 @@ def parse():
     row_dicts = []
     ugc_row_dicts = []
     count = 0
+
+
+    sub_to_domain = {
+        FULL: {},
+        TOP_THREE: {}
+    }
     for path in paths:
         pre, category = path.split('__')
         comparison = pre.split('_')[0][7:]
@@ -81,36 +87,51 @@ def parse():
         strip_full = strip_domain_strings_wrapper(FULL)
         strip_top3 = strip_domain_strings_wrapper(TOP_THREE)
 
-        for _, row in full_df.iterrows():
-            row_dict = {}
-            row_dict['domain'] = strip_full(row['column'])
-            row_dict['increase'] = round(row.add_inc, 2)
-            row_dict['winner'] = row.winner
-            row_dict['subset'] = FULL
-            row_dict['category'] = category
-            row_dicts.append(row_dict)
-            # row_dict['ratio'] = row.mult_inc
-            if row_dict['domain'] in UGC_WHITELIST:
-                count += 1
-            if row_dict['domain'] in UGC_WHITELIST + ['MapsLocations']:
-                ugc_row_dicts.append(row_dict)
-        for _, row in top3_df.iterrows():
-            row_dict = {}
-            row_dict['domain'] = strip_top3(row['column'])
-            row_dict['increase'] = round(row.add_inc, 2)
-            row_dict['winner'] = row.winner
-            row_dict['subset'] = TOP_THREE
-            row_dict['category'] = category
-            # row_dict['ratio'] = row.mult_inc
-            row_dicts.append(row_dict)
-            if row_dict['domain'] in UGC_WHITELIST:
-                count += 1
-            if row_dict['domain'] in UGC_WHITELIST + ['MapsLocations']:
-                ugc_row_dicts.append(row_dict)
+        for (df, subset, strip_func) in [
+            (full_df, FULL, strip_full),
+            (top3_df, TOP_THREE, strip_top3)
+        ]:
+            for _, row in df.iterrows():
+                row_dict = {}
+                domain = strip_func(row['column'])
+
+                
+                row_dict['domain'] = domain
+                row_dict['increase'] = round(row.add_inc, 2)
+                row_dict['winner'] = row.winner
+                row_dict['subset'] = subset
+                row_dict['category'] = category
+                row_dicts.append(row_dict)
+                # row_dict['ratio'] = row.mult_inc
+                if row_dict['domain'] in UGC_WHITELIST:
+                    count += 1
+                if row_dict['domain'] in UGC_WHITELIST + ['MapsLocations']:
+                    ugc_row_dicts.append(row_dict)
+                    if domain not in sub_to_domain[subset]:
+                        sub_to_domain[subset][domain] = {
+                            'categories': [],
+                            'locations': [],
+                            'max': 0,
+                        }
+
+                    if round(row.add_inc, 2) > sub_to_domain[subset][domain]['max']:
+                        sub_to_domain[subset][domain]['max'] = round(row.add_inc, 2)
+                    if category not in sub_to_domain[subset][domain]['categories']:
+                        sub_to_domain[subset][domain]['categories'].append(category) 
+                    if row.winner not in sub_to_domain[subset][domain]['locations']:
+                        sub_to_domain[subset][domain]['locations'].append(row.winner)
     outdf = pd.DataFrame(row_dicts)
     print(outdf)
     outdf.to_csv('collect_comparisons.csv')
     ugc_outdf = pd.DataFrame(ugc_row_dicts)
+
+    for subset, domain_to_vals in sub_to_domain.items():
+        for domain, vals in domain_to_vals.items():
+            vals['categories'] = ', '.join(vals['categories'])
+            vals['locations'] = ', '.join(vals['locations'])
+    max_full_df, max_top3_df = pd.DataFrame(sub_to_domain[FULL]).transpose(), pd.DataFrame(sub_to_domain[TOP_THREE]).transpose()
+    max_full_df.to_csv('max_full_comparisons.csv')
+    max_top3_df.to_csv('max_top3_comparisons.csv')
 
     domains_plus_winners = [
         str(x) + '\n' + str(y) for x, y in zip(
@@ -121,6 +142,10 @@ def parse():
     ugc_outdf = ugc_outdf.assign(domains_plus_winners=domains_plus_winners)
 
     sorted_ugc_outdf = ugc_outdf.sort_values(['domain', 'category', 'winner'])
+
+
+    # visualize it
+    
     sorted_ugc_outdf[['category', 'domain', 'winner', 'subset', 'increase']].to_csv('PUB_comparisons.csv', index=False)
     row1_df = ugc_outdf[(ugc_outdf.winner == 'urban') | (ugc_outdf.winner == 'DEM') | (ugc_outdf.winner == 'high-income')]
     order1 = sorted(row1_df.domains_plus_winners.drop_duplicates())
@@ -128,6 +153,8 @@ def parse():
     order2 = sorted(row2_df.domains_plus_winners.drop_duplicates())
 
     orders = [order1, order2]
+
+
 
     matplotlib.rcParams.update({
         'font.family': 'Times New Roman',

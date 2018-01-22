@@ -1,0 +1,6 @@
+,categories,locations,max
+MapsLocations,"popular, top_insurance, top_loans","urban, DEM, high-income",0.31
+UserTweetCarousel,popular,"urban, high-income",0.14
+facebook.com,popular,"rural, low-income",0.05
+twitter.com,popular,high-income,0.14
+wikipedia.org,top_insurance,GOP,0.07
