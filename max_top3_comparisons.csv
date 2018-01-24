@@ -1,6 +1,6 @@
-,categories,locations,max
-MapsLocations,"popular, top_insurance, top_loans","urban, DEM, high-income",0.31
-UserTweetCarousel,popular,"urban, high-income",0.14
-facebook.com,popular,"rural, low-income",0.05
-twitter.com,popular,high-income,0.14
-wikipedia.org,top_insurance,GOP,0.07
+,categories,category_in_location,locations,max
+twitter.com,popular,popular in high-income,high-income,0.14
+facebook.com,popular,"popular in rural, popular in low-income","rural, low-income",0.05
+MapsLocations,"popular, top_insurance, top_loans","popular in urban, popular in DEM, top_insurance in high-income, top_insurance in DEM, top_loans in DEM, top_insurance in urban, top_loans in urban","urban, DEM, high-income",0.31
+UserTweetCarousel,popular,"popular in urban, popular in high-income","urban, high-income",0.14
+wikipedia.org,top_insurance,top_insurance in GOP,GOP,0.07

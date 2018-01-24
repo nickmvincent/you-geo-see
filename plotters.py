@@ -3,13 +3,11 @@ Does plots for paper
 """
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 from constants import FULL, TOP_THREE
 from data_helpers import strip_domain_strings_wrapper
 
-sns.set_context(
-    "paper",
-    rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10, "axes.labelsize":10})
-sns.set(style="whitegrid", palette='pastel', color_codes=True)
+sns.set(style="whitegrid", palette='colorblind', color_codes=True)
 
 ALL_SUBSET_STRING = 'considering all results'
 TOP_THREE_SUBSET_STRING = 'considering only top three results'
@@ -18,18 +16,16 @@ AGGREGATE_STRING = 'aggregated'
 QUERYSET_BREAKDOWN_STRING = 'broken down by query set'
 
 
-
 def plot_importance(df):
     """
     Plot the importance of each domain.
 
     """
-
     counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
     df = df.fillna(0)
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
-    pal = 'pastel'
+    pal = 'colorblind'
     pal_lower = 'muted'
 
     # placeholder for qual coded values
@@ -38,62 +34,106 @@ def plot_importance(df):
     plot_col_dfs = [categorized]
     sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
 
-    _, axes = plt.subplots(nrows=2, ncols=len(plot_col_dfs))
+    width, height = 5, 5
+    fig, axes = plt.subplots(ncols=2, nrows=len(plot_col_dfs), figsize=(width, height), dpi=300)
+
+    # this is currently wrong! There are two columns and only one row.
+    # this seems terribly confusing...
+    # is there an easy fix?
     for colnum, subdf in enumerate(plot_col_dfs):
-        # adding caching to save a second or two?
         tmpdf = subdf[
             (subdf.subset == FULL) & (subdf.metric == 'domain_appears')
         ][['domain', 'val', 'is_ugc_col']]
         grouped_and_sorted = tmpdf.groupby('domain').mean().sort_values(
                 'val', ascending=False)
+        order = list(grouped_and_sorted.index)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
-        order = list(grouped_and_sorted.index)[:10]
-        for domain in ugc_cols:
-            if domain not in order:
-                order.append(domain)
-        for domain in order[:3]:
+        print(ugc_cols)
+        nonugc_count = 0
+        selected_order = []
+        for domain in order:
+            if domain in ugc_cols:
+                selected_order.append(domain)
+            else:
+                nonugc_count += 1
+                if nonugc_count <= 5:
+                    selected_order.append(domain)
+        
+        # for domain in ugc_cols:
+        #     if domain not in order:
+        #         order.append(domain)
+        ranks_and_counts = []
+        for domain in selected_order:
             ranks = subdf[(subdf.metric == 'domain_rank') & (subdf.domain == domain)]
             ranks = ranks[ranks.val != 0].val
             print('rank', domain, ranks.mean())
             counts = counts_copy[(subdf.domain == domain)].val
             print('count', domain, counts.mean())
-            _, histax = plt.subplots()
-            sns.distplot(
-                ranks.dropna(), rug=True, bins=list(range(1, 13)), 
-                kde=False, color="b", ax=histax)
-            histax.set_title('Histogram for {}'.format(domain))
+            ranks_and_counts.append({
+                'domain': domain,
+                'average rank': round(ranks.mean(), 1),
+                'average count': round(counts.mean(), 1)
+            })
+            # _, histax = plt.subplots()
+            # sns.distplot(
+            #     ranks.dropna(), rug=True, bins=list(range(1, 13)), 
+            #     kde=False, color="b", ax=histax)
+            # histax.set_title('Histogram for {}'.format(domain))
+        ranks_and_counts_df = pd.DataFrame(ranks_and_counts)
+        ranks_and_counts_df.to_csv('ranks_and_counts.csv')
         title_kwargs = {}
         # for subset in [FULL, TOP_THREE]:
         #     subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
         if colnum in [0]:
             mask1 = (subdf.metric == 'domain_appears') & (subdf.subset == FULL)
             mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)
-            sns.barplot(x='val', y='domain', hue='category', order=order,
+            sns.barplot(x='val', y='domain', hue='category', order=selected_order,
                         data=subdf[mask1], ax=axes[0], ci=None, palette=pal)
-            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                        data=subdf[mask1], ax=axes[0], ci=None, palette=pal_lower)
-            sns.barplot(x='val', y='domain', hue='category', order=order,
+            # sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+            #             data=subdf[mask1], ax=axes[0], ci=None, palette=pal_lower)
+            sns.barplot(x='val', y='domain', hue='category', order=selected_order,
                         data=subdf[mask2], ax=axes[1], ci=None, palette=pal)
 
-            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                        data=subdf[mask2], ax=axes[1], ci=None, palette=pal_lower)
+            # sns.barplot(x='fake_val', y='domain', hue='category', order=order,
+            #             data=subdf[mask2], ax=axes[1], ci=None, palette=pal_lower)
             title_kwargs['metric'] = 'Fraction of pages where domain appears'
+
+        # might be swapped.
         for rownum in [0, 1]:
             ax = axes[rownum]
             ax.set_xlim([0, 1])
-            ax.set_xlabel('fraction of pages')
+            ax.legend(loc='lower right', frameon=True)
+            
             if rownum == 0:
-                # ax.set(xticklabels=[], xlabel='')
                 title_kwargs['subset'] = ALL_SUBSET_STRING
+                ax.set_xlabel('incidence rate\n all ranked results')
+                ax.legend().set_visible(False)
             elif rownum == 1:
                 title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
+                ax.set_xlabel('incidence rate\n top three ranked results')
+                ax.set(yticklabels=[], ylabel='')
+                num_rows = len(selected_order)
+                the_table = plt.table(cellText=ranks_and_counts_df.as_matrix(columns=['average rank', 'average count']),
+                    bbox=(1,0,1,1))
+                the_labels = plt.table(cellText=[['avg rank', 'avg count']],
+                    bbox=(1,-1/num_rows,1,1/num_rows))
+                for key, cell in the_table.get_celld().items():
+                    # cell.set_linewidth(0)
+                    cell.set_linestyle('--')
+                    cell.set_linewidth(1.5)
+                    cell.set_edgecolor('lightgray')
+                for key, cell in the_labels.get_celld().items():
+                    cell.set_linewidth(0)
+                ax.add_table(the_table)
+                ax.add_table(the_labels)
 
             title_kwargs['type'] = QUERYSET_BREAKDOWN_STRING
-            ax.legend(ncol=2, loc='lower right')
             sns.despine(ax=ax, bottom=True, left=True)
-            if colnum != 0:
-                ax.set_ylabel('')
-            ax.set_title(title_template.format(**title_kwargs))
+            ax.set_ylabel('')
+            ax.hlines([x + 0.5 for x in range(len(order))], *ax.get_xlim(), linestyle='--', color='lightgray')
+            # ax.set_title(title_template.format(**title_kwargs))
+    fig.savefig('importance.png', bbox_inches='tight')
+
 
 
 def plot_comparison(df, groups=['urban', 'rural']):

@@ -1,3 +1,6 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.0,results_full_domain_appears_wikipedia.org,100,100,0.9,0.9,0.9,1.0,200,GOP,DEM,1.0,
+0,0.02,results_full_domain_appears_yelp.com,100,100,0.01,0.0,0.02,inf,200,GOP,DEM,0.15833990565972564,DEM
 1,0.02,results_full_domain_appears_youtube.com,100,100,0.17,0.18,0.16,1.12,200,GOP,DEM,0.7082602743017581,GOP
+2,0.0,results_full_domain_appears_wikipedia.org,100,100,0.9,0.9,0.9,1.0,200,GOP,DEM,1.0,
+3,0.04,results_full_domain_appears_twitter.com,100,100,0.03,0.01,0.05,5.0,200,GOP,DEM,0.09893473612100663,DEM
+4,0.0,knowledge_panel_full_domain_appears_wikipedia.org,86,90,1.0,1.0,1.0,1.0,176,GOP,DEM,,

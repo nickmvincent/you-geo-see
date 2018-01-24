@@ -1,11 +1,15 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.7,**results_full_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,rural,urban,0.000623745701199474,progressive,urban
-1,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,insurance companies,
-2,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,rural,urban,0.00481102818085497,progressive insurance,urban
-3,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,car insurance,
+0,0.3,results_full_domain_appears_MapsLocations,10,10,0.75,0.6,0.9,1.5,20,rural,urban,0.13814824935619235,life insurance,urban
+1,0.6,*results_full_domain_appears_MapsLocations,10,10,0.6,0.3,0.9,3.0,20,rural,urban,0.00481102818085497,progressive insurance,urban
+2,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,home insurance,
+3,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,auto insurance,
 4,0.4,*results_full_domain_appears_MapsLocations,10,10,0.2,0.0,0.4,inf,20,rural,urban,0.03678749787978613,geico insurance,urban
-5,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,home insurance,
-6,0.0,results_full_domain_appears_MapsLocations,10,10,0.4,0.4,0.4,1.0,20,rural,urban,1.0,geico,
-7,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,health insurance,urban
-8,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,auto insurance,
-9,0.3,results_full_domain_appears_MapsLocations,10,10,0.75,0.6,0.9,1.5,20,rural,urban,0.13814824935619235,life insurance,urban
+5,0.0,results_full_domain_appears_MapsLocations,10,10,0.4,0.4,0.4,1.0,20,rural,urban,1.0,geico,
+6,0.7,**results_full_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,rural,urban,0.000623745701199474,progressive,urban
+7,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,insurance companies,
+8,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,car insurance,
+9,0.2,results_full_domain_appears_MapsLocations,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,health insurance,urban
+10,0.2,results_full_domain_appears_yelp.com,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,progressive insurance,urban
+11,0.2,results_full_domain_appears_yelp.com,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,geico insurance,urban
+12,0.2,results_full_domain_appears_yelp.com,10,10,0.1,0.0,0.2,inf,20,rural,urban,0.16785065605707492,geico,urban
+13,0.1,results_full_domain_appears_yelp.com,10,10,0.05,0.0,0.1,inf,20,rural,urban,0.34343639613791355,progressive,urban

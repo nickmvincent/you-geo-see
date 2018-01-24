@@ -256,7 +256,7 @@ class MetricCalculator():
         self.finders = finders
         self.sid = sid
 
-    def calc_domain_fracs(self, cols):
+    def calc_domain_fracs(self, cols, use_codes=False):
         """
         This is specific to a given SERP
         Figure out how many domains of interest appear in search results
@@ -270,7 +270,10 @@ class MetricCalculator():
         for df in [cols]:
             if not df.empty:
                 for _, row in df.iterrows():
-                    domain = row.domain
+                    if not use_codes:
+                        domain = row.domain
+                    else:
+                        domain = str(row.domain) + str(row['code'])
                     rank = row['rank']
                     if isinstance(domain, float) and np.isnan(domain):
                         domains_to_count['none'] += 1
@@ -361,19 +364,25 @@ def compute_serp_features(
                 ret[subset]['domain_appears'][key] = 1
             else:
                 ret[subset]['domain_appears'][key] = 0
-    # ret[FULL]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-    #     cols.code, control_cols.code)
-    # ret[TOP_THREE]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-    #     cols.iloc[:3].code, control_cols.iloc[:3].code)
-    # ret[TOP]['coded_ugc_fracs'] = metric_calculator.calc_coded_ugc_frac(
-    #     cols.iloc[:1].code, control_cols.iloc[:1].code)
 
-    # ret[FULL]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-    #     cols.domains_plus_codes, control_cols.domains_plus_codes))
-    # ret[TOP_THREE]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-    #     cols.iloc[:3].domains_plus_codes, control_cols.iloc[:3].domains_plus_codes))
-    # ret[TOP]['coded_ugc_fracs'].update(metric_calculator.calc_coded_ugc_frac(
-    #     cols.iloc[:1].domains_plus_codes, control_cols.iloc[:1].domains_plus_codes))
+    code_fracs, code_ranks, code_counts = metric_calculator.calc_domain_fracs(cols, use_codes=True)
+    ret[FULL]['code_fracs'] = code_fracs
+    ret[FULL]['code_ranks'] = code_ranks
+    ret[FULL]['code_counts'] = code_counts
+    
+    top3_code_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3], use_codes=True)
+    ret[TOP_THREE]['code_fracs'] = top3_code_fracs
+
+    top_code_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1], use_codes=True)
+    ret[TOP]['code_fracs'] = top_code_fracs
+
+    for subset in RESULT_SUBSETS:
+        ret[subset]['code_appears'] = {}
+        for key, val in ret[subset]['code_fracs'].items():
+            if val > 0:
+                ret[subset]['code_appears'][key] = 1
+            else:
+                ret[subset]['code_appears'][key] = 0
     return ret
 
 
@@ -603,7 +612,8 @@ def main(args, db, category):
             path3 + '/values_counts_domain.csv')
 
         top_domains = list(
-            link_type_specific_data.domain.value_counts().to_dict().keys())[:20]
+            link_type_specific_data.domain.value_counts().to_dict().keys())[:30] + UGC_WHITELIST
+        top_domains = list(set(top_domains))
         top_domains = [
             domain for domain in top_domains if isinstance(domain, str)]
         link_type_to_domains[link_type] = top_domains
@@ -643,7 +653,7 @@ def main(args, db, category):
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
-                    # coded_ugc_fracs = tmp[comp_key]['coded_ugc_fracs']
+                    
                     for domain_string, frac in domain_fracs.items():
                         for top_domain in top_domains:
                             if domain_string == top_domain:
@@ -656,24 +666,6 @@ def main(args, db, category):
                                     '_frac', '_appears')
                                 did_it_appear = tmp[comp_key]['domain_appears'][domain_string]
                                 serp_comps[sid][domain_appears_concat_key] = did_it_appear
-
-                                # not necessary if the domain fracs replacement code works properly
-                                # if 'TweetCarousel' in domain_string and did_it_appear:
-                                #     twitter_appears_key = domain_appears_concat_key.replace(domain_string, 'twitter.com')
-                                #     serp_comps[sid][twitter_appears_key] = did_it_appear
-                                #     print(domain_string, domain_appears_concat_key)
-                                #     print(twitter_appears_key, serp_comps[sid][twitter_appears_key])
-                                #     input()
-                                # if domain_string == 'NewsCarousel' and did_it_appear:
-                                #     linked_news = data[(data.serp_id == sid) & (data.link_type == 'news')]
-                                #     print(linked_news)
-                                #     for _, row in linked_news.iterrows():
-                                #         news_domain = row.domain
-                                #         print(news_domain)
-                                #         news_appears_key = domain_appears_concat_key.replace(domain_string, news_domain)
-                                #         serp_comps[sid][news_appears_key] = did_it_appear
-                                #         print(news_appears_key, serp_comps[sid][news_appears_key])
-                                #     input()
                                 if comp_key == FULL:
                                     domain_ranks_concat_key = concat_key.replace(
                                         '_frac', '_rank')
@@ -681,11 +673,13 @@ def main(args, db, category):
                                         '_frac', '_count')
                                     serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
                                     serp_comps[sid][domain_counts_concat_key] = tmp[comp_key]['domain_counts'][domain_string]
-                    # for code, frac in coded_ugc_fracs.items():
-                    #     concat_key = '_'.join(
-                    #         [link_type, comp_key, 'coded_ugc_frac', str(code)]
-                    #     )
-                    #     serp_comps[sid][concat_key] = frac
+                    if args.coded_metrics:
+                        code_appears = tmp[comp_key]['code_appears']
+                        for code, appears in code_appears.items():
+                            concat_key = '_'.join(
+                                [link_type, comp_key, 'code_appears', str(code)]
+                            )
+                            serp_comps[sid][concat_key] = appears
                     for textcol in ['snippet', 'title']:
                         pol_key = '_'.join(
                             [link_type, comp_key, textcol, 'mean_polarity'])
@@ -727,6 +721,7 @@ def main(args, db, category):
     cols_with_nonzero_mean = [
         x for x in cols if serp_df[x].mean() != 0
     ]
+
     serp_df[cols_with_nonzero_mean].describe().to_csv(
         path2 + '/nz_ugcin_serp_df.csv')
 
@@ -752,7 +747,7 @@ def main(args, db, category):
             x for x in results_domain_fracs_cols_nz if subset + '_domain_frac' in x
         ]
         results_domain_appears_cols_nz_subset = [
-            x for x in results_domain_appears_cols_nz if subset + '_domain_frac' in x
+            x for x in results_domain_appears_cols_nz if subset + '_domain_appears' in x
         ]
         results_domain_rank_cols_nz_subset = [
             x.replace('_domain_frac', '_domain_rank') for x in results_domain_fracs_cols_nz_subset
@@ -840,25 +835,31 @@ def main(args, db, category):
     whitelist_summaries = {key: [] for key in RESULT_SUBSETS}
     query_comparison_listss = {key: [] for key in RESULT_SUBSETS}
     comparison_df = None
+
+    ugc_ret_cols = [
+        x for x in ugc_ret_cols if x in list(serp_df.columns.values)
+    ]
+    big_ret_cols = [
+        x for x in big_ret_cols if x in list(serp_df.columns.values)
+    ]
+    all_cols = list(serp_df.columns.values)
+
     for link_type in link_types:
         path3 = '{}/{}'.format(path2, link_type)
         cols_to_compare = []
-        if link_type != 'tweets':
-            # tweets all have the same domain - twitter.com!
-            for top_domain in set(link_type_to_domains[link_type]):
-                for prefix in [
-                        '_full_domain_appears_', '_top_three_domain_appears_',
-                        '_top_domain_appears_',
-                        # '_full_domain_frac_', '_top_three_domain_frac_',
-                        # '_top_domain_frac_',
-                ]:
-                    cols_to_compare.append(link_type + prefix + top_domain)
-        for col in [
-            '_full_snippet_mean_polarity', '_top_three_snippet_mean_polarity', '_top_snippet_mean_polarity',
-            '_full_snippet_mean_polarity', '_top_three_snippet_mean_polarity', '_top_snippet_mean_polarity',
-            '_avg_jacc', '_avg_edit'
-        ]:
-            cols_to_compare.append(link_type + col)
+        link_type_cols = [
+            x for x in all_cols if link_type + '_' in x
+        ]
+        cols_must_include = ['full_domain_appears', 'top_three_domain_appears', 'code_appears', 'top_three_code_appears']
+        cols_to_compare = [
+            x for x in link_type_cols if (
+                cols_must_include[0] in x or cols_must_include[1] in x or cols_must_include[2] in x or cols_must_include[3] in x
+            )
+        ]
+
+        cols_to_compare = [
+            x for x in cols_to_compare if x[-3:] != 'nan'
+        ]
 
         # SERPS that have NO TWEETS or NO NEWS (etc)
         # will have nan values for any related calculations (e.g. avg_jacc of Tweets)
@@ -952,13 +953,8 @@ def main(args, db, category):
             writer = csv.writer(outfile)
             for row in errors:
                 writer.writerow([row])
-    ugc_ret_cols = [
-        x for x in ugc_ret_cols if x in list(serp_df.columns.values)
-    ]
-    big_ret_cols = [
-        x for x in big_ret_cols if x in list(serp_df.columns.values)
-    ]
-    importance_df = serp_df[list(set(ugc_ret_cols + big_ret_cols)) + ['category']]
+    
+    importance_df = serp_df[all_cols]
     if category == 'all':
         importance_df.loc[:, 'category'] = 'all'
     if comparison_df is not None:
@@ -987,6 +983,8 @@ def parse():
         '--plot_detailed', dest='plot_detailed', help='Whether to plot', action='store_true', default=False)
     parser.add_argument(
         '--include_kp', dest='include_kp', help='Whether to include_kp', action='store_true', default=False)
+    parser.add_argument(
+        '--coded_metrics', dest='coded_metrics', help='Whether to coded_ugc_fracs in analysis output', action='store_true', default=False)
     parser.add_argument(
         '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
@@ -1035,7 +1033,6 @@ def parse():
 
     # ANCHOR: MELT
     row_dicts = []
-    print(df.columns.values)
     for col in df.columns.values:
         is_ugc_col = False
         is_big_col = False

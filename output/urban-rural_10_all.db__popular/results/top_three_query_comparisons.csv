@@ -1,39 +1,39 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.8,**results_top_three_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,rural,urban,2.2928871994400028e-05,Chase Bank,urban
-1,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Chevrolet,urban
-2,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Walmart,urban
+0,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,Pizza Hut,urban
+1,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.75,0.6,0.9,1.5,20,rural,urban,0.13814824935619235,Bank of America,urban
+2,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Chevrolet,urban
 3,0.7,*results_top_three_domain_appears_MapsLocations,10,10,0.65,0.3,1.0,3.33,20,rural,urban,0.0013229505842674947,Target Corporation,urban
-4,0.0,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Domino's Pizza,
-5,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.8,0.7,0.9,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,urban
-6,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.5,0.6,0.4,1.5,20,rural,urban,0.39787297935196175,United States Department of Veterans Affairs,rural
-7,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Honda,urban
+4,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.8,1.0,1.25,20,rural,urban,0.16785065605707503,Walmart,urban
+5,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.5,0.6,0.4,1.5,20,rural,urban,0.39787297935196175,United States Department of Veterans Affairs,rural
+6,0.2,results_top_three_domain_appears_MapsLocations,10,10,0.8,0.7,0.9,1.29,20,rural,urban,0.29003341600144805,Wells Fargo,urban
+7,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,McDonald's,urban
 8,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Toyota,urban
-9,0.3,results_top_three_domain_appears_MapsLocations,10,10,0.75,0.6,0.9,1.5,20,rural,urban,0.13814824935619235,Bank of America,urban
-10,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,McDonald's,urban
-11,0.4,*results_top_three_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,rural,urban,0.03678749787978613,Pizza Hut,urban
-12,0.4,*results_top_three_domain_appears_facebook.com,10,10,0.2,0.4,0.0,inf,20,rural,urban,0.03678749787978613,Bank of America,rural
-13,0.4,results_top_three_domain_appears_UserTweetCarousel,10,10,0.6,0.4,0.8,2.0,20,rural,urban,0.07459169984478174,Chevrolet,urban
-14,0.3,results_top_three_domain_appears_UserTweetCarousel,10,10,0.25,0.4,0.1,4.0,20,rural,urban,0.13814824935619238,Walmart,rural
-15,0.1,results_top_three_domain_appears_UserTweetCarousel,10,10,0.75,0.7,0.8,1.14,20,rural,urban,0.6279443565915093,Donald Trump,urban
-16,0.6,*results_top_three_domain_appears_UserTweetCarousel,10,10,0.7,0.4,1.0,2.5,20,rural,urban,0.005121072764272635,Domino's Pizza,urban
-17,0.7,*results_top_three_domain_appears_UserTweetCarousel,10,10,0.65,0.3,1.0,3.33,20,rural,urban,0.0013229505842674947,Honda,urban
-18,0.0,results_top_three_domain_appears_UserTweetCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Toyota,
-19,0.3,results_top_three_domain_appears_UserTweetCarousel,10,10,0.65,0.5,0.8,1.6,20,rural,urban,0.1776880165605986,Pizza Hut,urban
-20,0.0,results_top_three_domain_appears_UserTweetCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Amazon,
-21,0.3,results_top_three_domain_appears_NewsCarousel,10,10,0.85,1.0,0.7,1.43,20,rural,urban,0.08112618884584044,Chase Bank,rural
-22,0.6,*results_top_three_domain_appears_NewsCarousel,10,10,0.5,0.8,0.2,4.0,20,rural,urban,0.0051629256736767945,Chevrolet,rural
-23,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Walmart,urban
-24,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
-25,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Senate,
-26,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.05,0.1,0.0,inf,20,rural,urban,0.34343639613791355,Target Corporation,rural
-27,0.7,*results_top_three_domain_appears_NewsCarousel,10,10,0.35,0.7,0.0,inf,20,rural,urban,0.0013229505842674947,Domino's Pizza,rural
-28,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Wells Fargo,
-29,0.7,**results_top_three_domain_appears_NewsCarousel,10,10,0.45,0.8,0.1,8.0,20,rural,urban,0.000623745701199474,Honda,rural
-30,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.05,0.1,0.0,inf,20,rural,urban,0.34343639613791355,Toyota,rural
-31,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Bank of America,
-32,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Hillary Clinton,
-33,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Supreme Court,
-34,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,McDonald's,
-35,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
-36,0.4,results_top_three_domain_appears_NewsCarousel,10,10,0.4,0.6,0.2,3.0,20,rural,urban,0.07459169984478176,Pizza Hut,rural
-37,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Amazon,
+9,0.8,**results_top_three_domain_appears_MapsLocations,10,10,0.5,0.1,0.9,9.0,20,rural,urban,2.2928871994400028e-05,Chase Bank,urban
+10,0.0,results_top_three_domain_appears_MapsLocations,10,10,0.9,0.9,0.9,1.0,20,rural,urban,1.0,Domino's Pizza,
+11,0.1,results_top_three_domain_appears_MapsLocations,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Honda,urban
+12,0.0,results_top_three_domain_appears_UserTweetCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Amazon,
+13,0.3,results_top_three_domain_appears_UserTweetCarousel,10,10,0.65,0.5,0.8,1.6,20,rural,urban,0.1776880165605986,Pizza Hut,urban
+14,0.4,results_top_three_domain_appears_UserTweetCarousel,10,10,0.6,0.4,0.8,2.0,20,rural,urban,0.07459169984478174,Chevrolet,urban
+15,0.3,results_top_three_domain_appears_UserTweetCarousel,10,10,0.25,0.4,0.1,4.0,20,rural,urban,0.13814824935619238,Walmart,rural
+16,0.1,results_top_three_domain_appears_UserTweetCarousel,10,10,0.75,0.7,0.8,1.14,20,rural,urban,0.6279443565915093,Donald Trump,urban
+17,0.0,results_top_three_domain_appears_UserTweetCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Toyota,
+18,0.6,*results_top_three_domain_appears_UserTweetCarousel,10,10,0.7,0.4,1.0,2.5,20,rural,urban,0.005121072764272635,Domino's Pizza,urban
+19,0.7,*results_top_three_domain_appears_UserTweetCarousel,10,10,0.65,0.3,1.0,3.33,20,rural,urban,0.0013229505842674947,Honda,urban
+20,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Amazon,
+21,0.4,results_top_three_domain_appears_NewsCarousel,10,10,0.4,0.6,0.2,3.0,20,rural,urban,0.07459169984478176,Pizza Hut,rural
+22,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Bank of America,
+23,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Hillary Clinton,
+24,0.6,*results_top_three_domain_appears_NewsCarousel,10,10,0.5,0.8,0.2,4.0,20,rural,urban,0.0051629256736767945,Chevrolet,rural
+25,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.05,0.1,0.0,inf,20,rural,urban,0.34343639613791355,Target Corporation,rural
+26,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.85,0.8,0.9,1.12,20,rural,urban,0.5565650165675333,Walmart,urban
+27,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Barack Obama,
+28,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Donald Trump,
+29,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,Wells Fargo,
+30,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,McDonald's,
+31,0.1,results_top_three_domain_appears_NewsCarousel,10,10,0.05,0.1,0.0,inf,20,rural,urban,0.34343639613791355,Toyota,rural
+32,0.3,results_top_three_domain_appears_NewsCarousel,10,10,0.85,1.0,0.7,1.43,20,rural,urban,0.08112618884584044,Chase Bank,rural
+33,0.7,*results_top_three_domain_appears_NewsCarousel,10,10,0.35,0.7,0.0,inf,20,rural,urban,0.0013229505842674947,Domino's Pizza,rural
+34,0.7,**results_top_three_domain_appears_NewsCarousel,10,10,0.45,0.8,0.1,8.0,20,rural,urban,0.000623745701199474,Honda,rural
+35,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Senate,
+36,0.0,results_top_three_domain_appears_NewsCarousel,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,US Supreme Court,
+37,0.4,*results_top_three_domain_appears_facebook.com,10,10,0.2,0.4,0.0,inf,20,rural,urban,0.03678749787978613,Bank of America,rural

@@ -1,5 +1,5 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.178,**results_top_three_domain_appears_MapsLocations,180,180,0.5111111111111111,0.422,0.6,1.42,360,rural,urban,0.0007008568867849128,urban
-1,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
-2,0.1,*results_top_three_domain_appears_UserTweetCarousel,180,180,0.3111111111111111,0.261,0.361,1.38,360,rural,urban,0.04055703351760732,urban
-3,0.156,*results_top_three_domain_appears_NewsCarousel,180,180,0.6944444444444444,0.772,0.617,1.25,360,rural,urban,0.00130414322327539,rural
+1,0.1,*results_top_three_domain_appears_UserTweetCarousel,180,180,0.3111111111111111,0.261,0.361,1.38,360,rural,urban,0.04055703351760732,urban
+2,0.156,*results_top_three_domain_appears_NewsCarousel,180,180,0.6944444444444444,0.772,0.617,1.25,360,rural,urban,0.00130414322327539,rural
+3,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural

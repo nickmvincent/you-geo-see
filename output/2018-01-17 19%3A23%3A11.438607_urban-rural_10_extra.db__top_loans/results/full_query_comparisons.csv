@@ -1,8 +1,9 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,payday loans,
-1,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,bank loans,urban
-2,0.3,results_full_domain_appears_MapsLocations,10,10,0.15,0.3,0.0,inf,20,rural,urban,0.0811261888458405,quicken loans,rural
-3,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,rural,urban,0.014956363910414203,personal loans,urban
-4,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,rural,urban,0.0013229505842674947,loans bad credit,urban
-5,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,loan,urban
-6,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,rural,urban,0.014956363910414203,home loans,urban
+0,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,bank loans,urban
+1,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,0.9,1.0,1.11,20,rural,urban,0.34343639613791366,loan,urban
+2,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,rural,urban,0.014956363910414203,home loans,urban
+3,0.7,*results_full_domain_appears_MapsLocations,10,10,0.35,0.0,0.7,inf,20,rural,urban,0.0013229505842674947,loans bad credit,urban
+4,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,rural,urban,,payday loans,
+5,0.5,*results_full_domain_appears_MapsLocations,10,10,0.75,0.5,1.0,2.0,20,rural,urban,0.014956363910414203,personal loans,urban
+6,0.3,results_full_domain_appears_MapsLocations,10,10,0.15,0.3,0.0,inf,20,rural,urban,0.0811261888458405,quicken loans,rural
+7,0.6,*results_full_domain_appears_youtube.com,10,10,0.3,0.0,0.6,inf,20,rural,urban,0.005121072764272635,quicken loans,urban

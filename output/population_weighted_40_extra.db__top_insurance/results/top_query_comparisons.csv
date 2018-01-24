@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.598,*results_top_domain_appears_allstate.com,34,6,0.675,0.765,0.167,4.59,40,GOP,DEM,0.013169888548595852,auto insurance,GOP
-1,0.48,*results_top_domain_appears_allstate.com,34,6,0.575,0.647,0.167,3.88,40,GOP,DEM,0.03360662852141837,car insurance,GOP

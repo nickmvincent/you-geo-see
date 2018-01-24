@@ -8,6 +8,7 @@ and save the results to csv.
 import argparse
 import os
 from datetime import datetime
+from collections import defaultdict
 
 import pandas as pd
 import tweepy
@@ -49,7 +50,6 @@ DOMAINS_TO_CODE = [
     'instagram.com',
     'linkedin.com',
     'yelp.com',
-    'pinterest.com',
     'tripadvisor.com',
 ]
 TWITTER_DOMAIN = 'twitter.com'
@@ -108,6 +108,7 @@ def main(args):
     ret = []
     sources = args.db if args.db else [args.csv]
     domain_to_df = {}
+    code_to_count = defaultdict(int)
     for source in sources:
         if args.db:            
             data, _ = get_dataframes(source)
@@ -131,6 +132,10 @@ def main(args):
 
         for domain in DOMAINS_TO_CODE:
             df_in_domain = data[data.domain == domain]
+            counts = df_in_domain.groupby(['link']).size().to_dict()
+            if args.count:
+                print(counts)
+            
             deduped_on_link = df_in_domain.drop_duplicates(subset='link')
             # filter twitter searches (Can't code those...)
             deduped_on_link = deduped_on_link[~deduped_on_link.link.str.contains('twitter.com/search')]
@@ -156,6 +161,10 @@ def main(args):
                     screen_name = None
                     cached_val = link_codes.get(link)
                 if cached_val:
+                    if args.count:
+                        print(counts[link])
+                        code_to_count[cached_val] += counts[link]
+                        continue
                     if args.double_check_cached:
                         print('Cached val is {}, want to keep it? (y/n)'.format(cached_val))
                         choice = input()
@@ -215,7 +224,7 @@ def main(args):
                     entry['verified'] = quote(str(user_obj.verified))
                     entry['follower_count'] = quote(str(user_obj.followers_count))
                 ret.append(entry)
-    return ret
+    return ret, code_to_count
 
 
 def parse():
@@ -237,10 +246,28 @@ def parse():
         '--produce_reliability_doc', action='store_true',
         help='write out a txt file for another coder to fill in'
     )
+    parser.add_argument(
+        '--count', action='store_true',
+        help='just print out the counts'
+    )
 
 
     args = parser.parse_args()
-    samples = main(args)
+    samples, code_to_count = main(args)
+    if code_to_count:
+        print(code_to_count)
+        n = sum(code_to_count.values())
+        num_ugc = sum([v for k, v in code_to_count.items() if k[0] == 't' and k[1] == 't'])
+        num_corp = sum([v for k, v in code_to_count.items() if k[3] == '$'])
+        num_pol = sum([v for k, v in code_to_count.items() if k[3] == 'p'])
+        num_journ = sum([v for k, v in code_to_count.items() if k[3] == 'j'])
+        print(n)
+        print('ugc', num_ugc, num_ugc / n)
+        print('corp', num_corp, num_corp / n)
+        print('pol', num_pol, num_pol / n)
+        print('journ', num_journ, num_journ / n)
+    if samples is None:
+        return
     with open('coding_samples.csv','wb') as outfile:
         top_lines = '\n'.join([
             'Sample produced on {}'.format(datetime.now()),

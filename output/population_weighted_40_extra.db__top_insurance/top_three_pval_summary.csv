@@ -1,4 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.032,**results_top_three_domain_appears_safeauto.com,340,56,0.027777777777777776,0.032,0.0,inf,396,GOP,DEM,0.0008482360358870106,GOP
-1,0.038,**results_top_three_domain_appears_thegeneral.com,340,56,0.03282828282828283,0.038,0.0,inf,396,GOP,DEM,0.00028044976236394156,GOP
-2,0.015,*results_top_three_domain_appears_libertymutual.com,340,56,0.012626262626262626,0.015,0.0,inf,396,GOP,DEM,0.02512977373078558,GOP

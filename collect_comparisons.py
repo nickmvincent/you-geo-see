@@ -18,6 +18,9 @@ from analysis import UGC_WHITELIST
 
 
 
+sns.set(style="whitegrid", palette='colorblind', color_codes=True)
+
+
 
 def parse():
     """
@@ -111,6 +114,7 @@ def parse():
                         sub_to_domain[subset][domain] = {
                             'categories': [],
                             'locations': [],
+                            'category_in_location': [],
                             'max': 0,
                         }
 
@@ -120,21 +124,26 @@ def parse():
                         sub_to_domain[subset][domain]['categories'].append(category) 
                     if row.winner not in sub_to_domain[subset][domain]['locations']:
                         sub_to_domain[subset][domain]['locations'].append(row.winner)
+                    tmp = category + ' in ' + row.winner
+                    if tmp not in sub_to_domain[subset][domain]['category_in_location']:
+                        sub_to_domain[subset][domain]['category_in_location'].append(tmp)
     outdf = pd.DataFrame(row_dicts)
     print(outdf)
     outdf.to_csv('collect_comparisons.csv')
     ugc_outdf = pd.DataFrame(ugc_row_dicts)
+    
 
     for subset, domain_to_vals in sub_to_domain.items():
         for domain, vals in domain_to_vals.items():
             vals['categories'] = ', '.join(vals['categories'])
             vals['locations'] = ', '.join(vals['locations'])
+            vals['category_in_location'] = ', '.join(vals['category_in_location'])
     max_full_df, max_top3_df = pd.DataFrame(sub_to_domain[FULL]).transpose(), pd.DataFrame(sub_to_domain[TOP_THREE]).transpose()
-    max_full_df.to_csv('max_full_comparisons.csv')
-    max_top3_df.to_csv('max_top3_comparisons.csv')
+    max_full_df.sort_values(['category_in_location']).to_csv('max_full_comparisons.csv')
+    max_top3_df.sort_values(['category_in_location']).to_csv('max_top3_comparisons.csv')
 
     domains_plus_winners = [
-        str(x) + '\n' + str(y) for x, y in zip(
+        str(x) + ' (' + str(y) + ')' for x, y in zip(
             list(ugc_outdf.domain),
             list(ugc_outdf.winner)
         )
@@ -152,19 +161,22 @@ def parse():
     row2_df = ugc_outdf[(ugc_outdf.winner == 'rural') | (ugc_outdf.winner == 'GOP') | (ugc_outdf.winner == 'low-income')]
     order2 = sorted(row2_df.domains_plus_winners.drop_duplicates())
 
+    ugc_outdf.loc[ugc_outdf.winner == 'high-income', 'winner'] = 'top SES'
+    ugc_outdf.loc[ugc_outdf.winner == 'low-income', 'winner'] = 'bottom SES'
+    ugc_outdf.loc[ugc_outdf.winner == 'GOP', 'winner'] = 'top GOP'
+    ugc_outdf.loc[ugc_outdf.winner == 'DEM', 'winner'] = 'top DEM'
     orders = [order1, order2]
 
-
-
-    matplotlib.rcParams.update({
-        'font.family': 'Times New Roman',
-        'xtick.labelsize': 8,
-        'ytick.labelsize': 8,
-        'axes.labelsize': 8,
-        'axes.titlesize': 10,
-        'legend.fontsize': 8,
-    })
-    fig, axes = plt.subplots(2, 2, figsize=(7.5, 8))
+    # matplotlib.rcParams.update({
+    #     'font.family': 'Times New Roman',
+    #     'xtick.labelsize': 8,
+    #     'ytick.labelsize': 8,
+    #     'axes.labelsize': 8,
+    #     'axes.titlesize': 10,
+    #     'legend.fontsize': 8,
+    # })
+    sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
+    fig, axes = plt.subplots(2, 2, figsize=(6.5, 4.5), dpi=300)
 
     for rownum, row_df in enumerate([row1_df, row2_df]):
         col1_df = row_df[row_df.subset == FULL]
@@ -177,31 +189,34 @@ def parse():
         axes[rownum, 0].legend(loc='lower right', frameon=True)
         axes[rownum, 1].set(ylabel='', xlabel='', yticks=[])
         axes[rownum, 1].legend(loc='lower right', frameon=True)
-        axes[rownum, 0].set(xlabel='Increase in domain appearance')
-        axes[rownum, 1].set(xlabel='Increase in domain appearance')
-    title_template = 'Domains that appear more, considering {subset_str}\nIn {locations_str}'
+        for colnum in [0, 1]:
+            ax = axes[rownum, colnum]
+            sns.despine(ax=ax, bottom=True, left=True)
+            ax.set(xlabel='Increase in incidence rate')
+            ax.hlines([x + 0.5 for x in range(len(orders[rownum]))], *ax.get_xlim(), linestyle='--', color='lightgray')
+    title_template = 'Differences in incidence rate\nIn {locations_str}\nConsidering {subset_str}'
     axes[0, 0].set_title(
         title_template.format(**{
             'subset_str': 'full results',
-            'locations_str': 'urban, higher-income, and Democratic-voting areas',
+            'locations_str': 'urban/high-income/DEM areas',
         })
     )
     axes[0, 1].set_title(
         title_template.format(**{
             'subset_str': 'top three results',
-            'locations_str': 'urban, higher-income, and Democratic-voting areas',
+            'locations_str': 'urban/high-income/DEM areas',
         })
     )
     axes[1, 0].set_title(
         title_template.format(**{
             'subset_str': 'full results',
-            'locations_str': 'rural, lower-income, and GOP-voting areas',
+            'locations_str': 'rural/low-income/GOP areas',
         })
     )
     axes[1, 1].set_title(
         title_template.format(**{
             'subset_str': 'top three results',
-            'locations_str': 'rural, lower-income, and GOP-voting areas',
+            'locations_str': 'rural/low-income/GOP areas',
         })
     )
     plt.tight_layout()

@@ -1,4 +1,5 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.01,results_top_three_domain_appears_twitter.com,100,100,0.385,0.39,0.38,1.03,200,GOP,DEM,0.8851765853789573,GOP
+0,0.01,results_top_three_domain_appears_SearchTweetCarousel,100,100,0.185,0.19,0.18,1.06,200,GOP,DEM,0.856390875342562,GOP
 1,0.0,results_top_three_domain_appears_wikipedia.org,100,100,0.4,0.4,0.4,1.0,200,GOP,DEM,1.0,
-2,0.01,results_top_three_domain_appears_SearchTweetCarousel,100,100,0.185,0.19,0.18,1.06,200,GOP,DEM,0.856390875342562,GOP
+2,0.01,results_top_three_domain_appears_twitter.com,100,100,0.385,0.39,0.38,1.03,200,GOP,DEM,0.8851765853789573,GOP
+3,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,70,70,1.0,1.0,1.0,1.0,140,GOP,DEM,,

@@ -1,2 +1,7 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.01,results_full_domain_appears_wikipedia.org,100,100,0.215,0.21,0.22,1.05,200,rural,urban,0.8641866051422665,urban
+1,0.02,results_full_domain_appears_yelp.com,100,100,0.01,0.0,0.02,inf,200,rural,urban,0.15833990565972564,urban
+2,0.04,results_full_domain_appears_twitter.com,100,100,0.18,0.2,0.16,1.25,200,rural,urban,0.46411887116792394,rural
+3,0.04,results_full_domain_appears_UserTweetCarousel,100,100,0.08,0.1,0.06,1.67,200,rural,urban,0.29959310787243704,rural
+4,0.06,*results_full_domain_appears_youtube.com,100,100,0.03,0.0,0.06,inf,200,rural,urban,0.013556758919315062,urban
+5,0.0,knowledge_panel_full_domain_appears_wikipedia.org,31,26,1.0,1.0,1.0,1.0,57,rural,urban,,

@@ -1,8 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.118,*results_top_three_domain_appears_safeauto.com,34,6,0.1,0.118,0.0,inf,40,GOP,DEM,0.04367879138429159,auto insurance,GOP
-1,0.059,results_top_three_domain_appears_safeauto.com,34,6,0.05,0.059,0.0,inf,40,GOP,DEM,0.16037503271416545,car insurance,GOP
-2,0.147,*results_top_three_domain_appears_safeauto.com,34,6,0.125,0.147,0.0,inf,40,GOP,DEM,0.022963457496424082,insurance companies,GOP
-3,0.176,*results_top_three_domain_appears_thegeneral.com,34,6,0.15,0.176,0.0,inf,40,GOP,DEM,0.011989739036742518,auto insurance,GOP
-4,0.206,*results_top_three_domain_appears_thegeneral.com,34,6,0.175,0.206,0.0,inf,40,GOP,DEM,0.00618665298478326,car insurance,GOP
-5,0.029,results_top_three_domain_appears_libertymutual.com,34,6,0.025,0.029,0.0,inf,40,GOP,DEM,0.32458712748885143,home insurance,GOP
-6,0.118,*results_top_three_domain_appears_libertymutual.com,34,6,0.1,0.118,0.0,inf,40,GOP,DEM,0.04367879138429159,insurance companies,GOP

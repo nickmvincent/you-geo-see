@@ -1,5 +1,7 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.033,results_top_three_domain_appears_twitter.com,180,180,0.46111111111111114,0.444,0.478,1.08,360,GOP,DEM,0.5271596261968678,DEM
-1,0.022,results_top_three_domain_appears_wikipedia.org,180,180,0.19444444444444445,0.206,0.183,1.12,360,GOP,DEM,0.5954691231218754,GOP
-2,0.033,results_top_three_domain_appears_facebook.com,180,180,0.027777777777777776,0.044,0.011,4.0,360,GOP,DEM,0.054811174809654216,GOP
+0,0.006,results_top_three_domain_appears_SearchTweetCarousel,180,180,0.04722222222222222,0.044,0.05,1.12,360,GOP,DEM,0.8044290459659503,DEM
+1,0.033,results_top_three_domain_appears_facebook.com,180,180,0.027777777777777776,0.044,0.011,4.0,360,GOP,DEM,0.054811174809654216,GOP
+2,0.022,results_top_three_domain_appears_wikipedia.org,180,180,0.19444444444444445,0.206,0.183,1.12,360,GOP,DEM,0.5954691231218754,GOP
 3,0.061,results_top_three_domain_appears_UserTweetCarousel,180,180,0.325,0.294,0.356,1.21,360,GOP,DEM,0.216905574777705,DEM
+4,0.033,results_top_three_domain_appears_twitter.com,180,180,0.46111111111111114,0.444,0.478,1.08,360,GOP,DEM,0.5271596261968678,DEM
+5,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,174,172,1.0,1.0,1.0,1.0,346,GOP,DEM,,
