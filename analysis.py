@@ -130,7 +130,7 @@ class Comparison():
                     is_in_whitelist = True
             key = None
             for result_subset in RESULT_SUBSETS:
-                if result_subset + '_domain' in col:
+                if result_subset + '_domain' in col or result_subset + '_code' in col:
                     key = result_subset
             if key:
                 if is_in_whitelist:
@@ -861,6 +861,10 @@ def main(args, db, category):
             x for x in cols_to_compare if x[-3:] != 'nan'
         ]
 
+        serp_df = serp_df.fillna({
+            col: 0 for col in cols_to_compare
+        })
+
         # SERPS that have NO TWEETS or NO NEWS (etc)
         # will have nan values for any related calculations (e.g. avg_jacc of Tweets)
         if link_type == 'results':
@@ -872,6 +876,7 @@ def main(args, db, category):
             serp_df = serp_df.fillna({
                 col: 0 for col in cols_to_fill
             })
+            
             for col in cols_to_fill:
                 cols_to_compare.append(col)
 

@@ -1,2 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.6,*results_top_three_domain_appears_drugabuse.gov,10,10,0.3,0.6,0.0,inf,20,low-income,high-income,0.005121072764272635,medical marijuana,low-income

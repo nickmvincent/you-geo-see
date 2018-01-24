@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.228,**results_top_three_domain_appears_MapsLocations,180,180,0.4638888888888889,0.35,0.578,1.65,360,GOP,DEM,1.2092390377347346e-05,DEM
-1,0.122,*results_top_three_domain_appears_NewsCarousel,180,180,0.7111111111111111,0.772,0.65,1.19,360,GOP,DEM,0.010443037791173766,GOP

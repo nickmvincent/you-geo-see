@@ -1,5 +1,7 @@
 ,categories,category_in_location,locations,max
-yelp.com,popular,popular in high-income,high-income,0.16
 facebook.com,popular,"popular in rural, popular in low-income, popular in GOP","rural, low-income, GOP",0.23
 wikipedia.org,popular,"popular in rural, popular in low-income, popular in GOP","rural, low-income, GOP",0.16
+tripadvisor.com,popular,"popular in urban, popular in DEM","urban, DEM",0.04
 MapsLocations,"popular, top_insurance, top_loans","popular in urban, popular in DEM, top_insurance in high-income, top_loans in high-income, top_insurance in DEM, top_loans in DEM, top_insurance in urban, top_loans in urban","urban, DEM, high-income",0.44
+yelp.com,"popular, top_insurance, top_loans","popular in urban, popular in high-income, popular in DEM, top_insurance in high-income, top_insurance in DEM, top_loans in DEM, top_insurance in urban","urban, high-income, DEM",0.16
+youtube.com,top_loans,top_loans in urban,urban,0.06

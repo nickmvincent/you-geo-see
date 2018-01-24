@@ -40,9 +40,9 @@ def parse():
             ('urban-rural', 'all',),
             ('income', 'all'),
             ('voting', 'all'),
-            ('2018-01-16 14%3A04%3A08.388985_income', 'extra'),
-            ('2018-01-17 04%3A43%3A51.097462_voting', 'extra'),
-            ('2018-01-17 19%3A23%3A11.438607_urban-rural', 'extra'),
+            ('2018-01-16_income', 'extra'),
+            ('2018-01-17_voting', 'extra'),
+            ('2018-01-17_urban-rural', 'extra'),
         ]
         categories = [
             'popular',

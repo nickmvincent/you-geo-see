@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.01,results_top_domain_appears_wikipedia.org,100,100,0.205,0.21,0.2,1.05,200,GOP,DEM,0.8618147638740548,GOP
-1,0.0,knowledge_panel_top_domain_appears_wikipedia.org,86,90,1.0,1.0,1.0,1.0,176,GOP,DEM,,

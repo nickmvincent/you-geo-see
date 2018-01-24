@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.075,**results_top_domain_appears_MapsLocations,400,400,0.0725,0.035,0.11,3.14,800,GOP,DEM,4.130445913677047e-05,DEM
-1,0.018,*results_top_domain_appears_statefarm.com,400,400,0.00875,0.0,0.018,inf,800,GOP,DEM,0.0079909104867295,DEM

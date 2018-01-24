@@ -1,9 +1,0 @@
-,results_full_domain_frac_wikipedia.org,results_full_domain_appears_wikipedia.org,results_full_domain_rank_wikipedia.org,results_top_three_domain_frac_wikipedia.org,results_top_three_domain_appears_wikipedia.org,results_top_domain_frac_wikipedia.org,results_top_domain_appears_wikipedia.org,results_full_domain_frac_youtube.com,results_full_domain_appears_youtube.com,results_full_domain_rank_youtube.com
-count,180.0,180.0,180.0,81.0,81.0,20.0,20.0,32.0,32.0,32.0
-mean,0.07383804455205373,1.0,3.9305555555555554,0.29012345679012375,1.0,1.0,1.0,0.10081129807692306,1.0,8.484375
-std,0.02048746217193927,0.0,1.714841466106875,0.0734930919740164,0.0,0.0,0.0,0.04206315337516285,0.0,0.6658050547778546
-min,0.05263157894736842,1.0,1.0,0.16666666666666666,1.0,1.0,1.0,0.0625,1.0,8.0
-25%,0.0625,1.0,3.0,0.16666666666666666,1.0,1.0,1.0,0.07692307692307693,1.0,8.0
-50%,0.0625,1.0,4.0,0.3333333333333333,1.0,1.0,1.0,0.07692307692307693,1.0,8.0
-75%,0.07692307692307693,1.0,5.0,0.3333333333333333,1.0,1.0,1.0,0.125,1.0,9.0
-max,0.11764705882352941,1.0,8.0,0.3333333333333333,1.0,1.0,1.0,0.1875,1.0,10.0

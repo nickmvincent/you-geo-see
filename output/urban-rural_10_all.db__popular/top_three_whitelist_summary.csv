@@ -1,8 +1,12 @@
 ,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
 0,0.061,results_top_three_domain_appears_twitter.com,180,180,0.4583333333333333,0.428,0.489,1.14,360,rural,urban,0.24580672693069072,urban
 1,0.1,*results_top_three_domain_appears_UserTweetCarousel,180,180,0.3111111111111111,0.261,0.361,1.38,360,rural,urban,0.04055703351760732,urban
-2,0.044,results_top_three_domain_appears_wikipedia.org,180,180,0.2388888888888889,0.261,0.217,1.21,360,rural,urban,0.32411123168545064,rural
-3,0.006,results_top_three_domain_appears_yelp.com,180,180,0.002777777777777778,0.0,0.006,inf,360,rural,urban,0.3186604098872004,urban
-4,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
-5,0.011,results_top_three_domain_appears_SearchTweetCarousel,180,180,0.06111111111111111,0.067,0.056,1.2,360,rural,urban,0.6609618418794074,rural
-6,0.0,knowledge_panel_top_three_domain_appears_wikipedia.org,162,175,1.0,1.0,1.0,1.0,337,rural,urban,,
+2,0.089,results_top_three_code_appears_twitter.com,180,180,0.37222222222222223,0.328,0.417,1.27,360,rural,urban,0.08149315644497734,urban
+3,0.033,*results_top_three_code_appears_twitter.comtfo$,180,180,0.022222222222222223,0.039,0.006,7.0,360,rural,urban,0.03234522930547699,rural
+4,0.044,results_top_three_domain_appears_wikipedia.org,180,180,0.2388888888888889,0.261,0.217,1.21,360,rural,urban,0.32411123168545064,rural
+5,0.006,results_top_three_domain_appears_yelp.com,180,180,0.002777777777777778,0.0,0.006,inf,360,rural,urban,0.3186604098872004,urban
+6,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
+7,0.022,*results_top_three_code_appears_facebook.comtfo$,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
+8,0.011,results_top_three_domain_appears_SearchTweetCarousel,180,180,0.06111111111111111,0.067,0.056,1.2,360,rural,urban,0.6609618418794074,rural
+9,0.006,results_top_three_code_appears_twitter.comtfip,180,180,0.06388888888888888,0.061,0.067,1.09,360,rural,urban,0.8299469363786387,urban
+10,0.072,*knowledge_panel_top_three_domain_appears_wikipedia.org,180,180,0.9361111111111111,0.9,0.972,1.08,360,rural,urban,0.0050736295059105995,urban

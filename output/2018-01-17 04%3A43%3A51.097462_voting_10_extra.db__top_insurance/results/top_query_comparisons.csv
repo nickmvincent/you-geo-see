@@ -1,5 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.7,*results_top_domain_appears_statefarm.com,10,10,0.35,0.0,0.7,inf,20,GOP,DEM,0.0013229505842674947,life insurance,DEM
-1,0.2,results_top_domain_appears_allstate.com,10,10,0.1,0.2,0.0,inf,20,GOP,DEM,0.16785065605707492,insurance companies,GOP
-2,0.4,*results_top_domain_appears_allstate.com,10,10,0.8,1.0,0.6,1.67,20,GOP,DEM,0.03678749787978613,car insurance,GOP
-3,0.6,*results_top_domain_appears_allstate.com,10,10,0.7,1.0,0.4,2.5,20,GOP,DEM,0.005121072764272635,auto insurance,GOP

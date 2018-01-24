@@ -5,7 +5,7 @@ import argparse
 from pprint import pprint
 import time
 import os
-from datetime import datetime
+from datetime import datetime, date
 
 import pandas as pd
 from querysets import (
@@ -27,11 +27,15 @@ if platform.system() == 'Windows':
     sys.path.append("C:/Users/Nick/Documents/GitHub/SerpScrap")
     CHROME_PATH = 'C:/Users/Nick/Desktop/chromedriver.exe'
     PHANT_PATH = 'C:/Users/Nick/Desktop/phantomjs-2.1.1-windows/bin/phantomjs.exe'
+    CHROMEDRIVER_LOG = 'C:/Users/Nick/Desktop/chromedriver.log'
+    # cant include spaces in path for Windows...
+    NOW = date.today()
 else:
     sys.path.append("../SerpScrap")
     CHROME_PATH = '../chromedriver'
     CHROMEDRIVER_LOG = '../cd.log'
     PHANT_PATH = '../phantomjs'
+    NOW = datetime.now()
 import serpscrap
 
 
@@ -74,7 +78,7 @@ def main(args):
     """main driver"""
     test = False
     dbname = './tmp/{}_{}_{}_{}'.format(
-        datetime.now(),
+        NOW,
         args.comparison, args.num_locations, args.query_source)
     if args.query_source == 'trends':
         keyword_objs = from_trends_top_query_by_category()
@@ -84,6 +88,15 @@ def main(args):
         test = True
         keyword_objs = [{
             'keyword': 'pizza',
+            'category': args.query_source,
+        }, {
+            'keyword': 'coffee',
+            'category': args.query_source,
+        },{
+            'keyword': 'trump',
+            'category': args.query_source,
+        }, {
+            'keyword': 'football',
             'category': args.query_source,
         },]
     elif args.query_source == 'all':
@@ -145,6 +158,7 @@ def main(args):
     config.set('num_results_per_page', 30)  # overshoots actual number of results per page
     config.set('screenshot', False)
     # config.set('mobile_emulation', True)
+    print(dbname)
     config.set('database_name', dbname)
     if args.save_html:
         config.set('save_html', True)
@@ -157,8 +171,8 @@ def main(args):
     if args.comparison == 'test':
         locations.append({
             'engine': 'google',
-            'latitude': 40.7095,
-            'longitude': -73.9563,
+            'latitude': 34.063,
+            'longitude': -118.44,
             'urban_rural_code': 1,
             'median_income': 0,
             'percent_dem': 0,

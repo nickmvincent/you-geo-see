@@ -1,9 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,query,winner
-0,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,loan,
-1,0.1,results_full_domain_appears_MapsLocations,10,10,0.05,0.0,0.1,inf,20,low-income,high-income,0.34343639613791355,quicken,high-income
-2,0.4,*results_full_domain_appears_MapsLocations,10,10,0.8,0.6,1.0,1.67,20,low-income,high-income,0.03678749787978613,personal loans,high-income
-3,0.4,results_full_domain_appears_MapsLocations,10,10,0.4,0.2,0.6,3.0,20,low-income,high-income,0.07459169984478176,quicken loans,high-income
-4,0.7,**results_full_domain_appears_MapsLocations,10,10,0.45,0.1,0.8,8.0,20,low-income,high-income,0.000623745701199474,home loans,high-income
-5,0.4,*results_full_domain_appears_MapsLocations,10,10,0.2,0.0,0.4,inf,20,low-income,high-income,0.03678749787978613,loans bad credit,high-income
-6,0.1,results_full_domain_appears_MapsLocations,10,10,0.95,1.0,0.9,1.11,20,low-income,high-income,0.34343639613791366,payday loans,low-income
-7,0.0,results_full_domain_appears_MapsLocations,10,10,1.0,1.0,1.0,1.0,20,low-income,high-income,,bank loans,

@@ -1,3 +1,0 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.07,*results_top_domain_appears_statefarm.com,100,100,0.035,0.0,0.07,inf,200,GOP,DEM,0.007502567538609626,DEM
-1,0.12,*results_top_domain_appears_allstate.com,100,100,0.16,0.22,0.1,2.2,200,GOP,DEM,0.020674174697753206,GOP
