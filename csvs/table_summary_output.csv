@@ -1,0 +1,63 @@
+category popular
+full domain_appears 0.77
+full domain_count 1.0
+full domain_frac 0.06
+full domain_rank 4.93
+top domain_appears 0.0
+top domain_frac 0.0
+top_three domain_appears 0.28
+top_three domain_frac 0.06
+category trending
+full domain_appears 0.81
+full domain_count 1.12
+full domain_frac 0.07
+full domain_rank 3.85
+top domain_appears 0.2
+top domain_frac 0.2
+top_three domain_appears 0.5
+top_three domain_frac 0.15
+category procon_popular
+full domain_appears 0.9
+full domain_count 1.22
+full domain_frac 0.08
+full domain_rank 3.41
+top domain_appears 0.2
+top domain_frac 0.2
+top_three domain_appears 0.51
+top_three domain_frac 0.13
+category all
+full domain_appears 0.58
+full domain_count 1.07
+full domain_frac 0.05
+full domain_rank 4.55
+top domain_appears 0.05
+top domain_frac 0.05
+top_three domain_appears 0.24
+top_three domain_frac 0.06
+category top_insurance
+full domain_appears 0.29
+full domain_count 1.0
+full domain_frac 0.03
+full domain_rank 5.97
+top domain_appears 0.0
+top domain_frac 0.0
+top_three domain_appears 0.08
+top_three domain_frac 0.01
+category top_loans
+full domain_appears 0.25
+full domain_count 1.0
+full domain_frac 0.02
+full domain_rank 5.93
+top domain_appears 0.0
+top domain_frac 0.0
+top_three domain_appears 0.0
+top_three domain_frac 0.0
+category med_sample_first_20
+full domain_appears 0.45
+full domain_count 1.0
+full domain_frac 0.04
+full domain_rank 4.87
+top domain_appears 0.0
+top domain_frac 0.0
+top_three domain_appears 0.15
+top_three domain_frac 0.05

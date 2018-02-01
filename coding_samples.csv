@@ -1,4 +1,4 @@
-Sample produced on 2018-01-22 15:49:27.464233
-Samples come from the following dbs: ['dbs\\population_weighted_40_all.db', 'dbs\\2018-01-18 10%3A48%3A37.140889_population_weighted_40_extra.db']
+Sample produced on 2018-01-24 15:00:50.442824
+Samples come from the following dbs: ['dbs\\urban-rural_10_all.db', 'dbs\\2018-01-17_urban-rural_10_extra.db', 'dbs\\income_10_all.db', 'dbs\\2018-01-16_income_10_extra.db', 'dbs\\voting_10_all.db', 'dbs\\2018-01-17_voting_10_extra.db']
 
 link,snippet,bio,location,verified,follower_count,Shows Creative Effort (t),No Creative Effort (f),Created outside professional practice (t),Not created outside professional practice (f),,individual (i),organization (o),bot (b),,nonprofit (n),celebrity (c),corporate ($),journalistic (j),political (p),other (z)

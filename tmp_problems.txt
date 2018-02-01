@@ -1,3 +1,2 @@
-table 2 (comparison table) shows as DOMAIN APPEARS!
-
-I think this is wrong...
+Analysis only includes the top three Tweets.
+But the distribution of tweets from qual_code.py includes all tweets, which would include those w/ rank 4 or 5.

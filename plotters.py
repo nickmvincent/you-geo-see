@@ -21,20 +21,29 @@ def plot_importance(df):
     Plot the importance of each domain.
 
     """
+    df = df[df.link_type == 'results']
+
     counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
     df = df.fillna(0)
+    df.loc[df.category == 'top_insurance', 'category'] = 'insurance'
+    df.loc[df.category == 'top_loans', 'category'] = 'loans'
+    df.loc[df.category == 'med_sample_first_20', 'category'] = 'medical'
+    df.loc[df.category == 'procon_popular', 'category'] = 'controversial'
+    df.loc[df.domain == 'people also ask', 'domain'] = 'PeopleAlsoAsk'
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
     pal = 'colorblind'
     pal_lower = 'muted'
 
     # placeholder for qual coded values
-    df['fake_val'] = df['val'].map(lambda x: x / 2)
+    # df['fake_val'] = df['val'].map(lambda x: x / 2)
     categorized = df[df.category != 'all']
     plot_col_dfs = [categorized]
-    sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
+    sns.set_context("paper", rc={
+        "font.size":10, "font.family": "Times New Roman", 
+        "axes.titlesize":10,"axes.labelsize":10})
 
-    width, height = 5, 5
+    width, height = 5, 4.5
     fig, axes = plt.subplots(ncols=2, nrows=len(plot_col_dfs), figsize=(width, height), dpi=300)
 
     # this is currently wrong! There are two columns and only one row.
@@ -91,6 +100,7 @@ def plot_importance(df):
                         data=subdf[mask1], ax=axes[0], ci=None, palette=pal)
             # sns.barplot(x='fake_val', y='domain', hue='category', order=order,
             #             data=subdf[mask1], ax=axes[0], ci=None, palette=pal_lower)
+
             sns.barplot(x='val', y='domain', hue='category', order=selected_order,
                         data=subdf[mask2], ax=axes[1], ci=None, palette=pal)
 
@@ -106,17 +116,17 @@ def plot_importance(df):
             
             if rownum == 0:
                 title_kwargs['subset'] = ALL_SUBSET_STRING
-                ax.set_xlabel('incidence rate\n all ranked results')
+                ax.set_xlabel('Full-page incidence rate', fontname = "Times New Roman")
                 ax.legend().set_visible(False)
             elif rownum == 1:
                 title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
-                ax.set_xlabel('incidence rate\n top three ranked results')
+                ax.set_xlabel('Top-three incidence rate', fontname = "Times New Roman")
                 ax.set(yticklabels=[], ylabel='')
                 num_rows = len(selected_order)
                 the_table = plt.table(cellText=ranks_and_counts_df.as_matrix(columns=['average rank', 'average count']),
-                    bbox=(1,0,1,1))
-                the_labels = plt.table(cellText=[['avg rank', 'avg count']],
-                    bbox=(1,-1/num_rows,1,1/num_rows))
+                    bbox=(1.2,0,1,1))
+                the_labels = plt.table(cellText=[['average\nrank', 'average\ncount']],
+                    bbox=(1.2,-1.1/num_rows,1,1/num_rows))
                 for key, cell in the_table.get_celld().items():
                     # cell.set_linewidth(0)
                     cell.set_linestyle('--')

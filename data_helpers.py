@@ -136,6 +136,7 @@ def strip_domain_strings_wrapper(subset):
         text = text.replace(subset, '')
         text = text.replace('domain_frac_', '')
         text = text.replace('domain_appears_', '')
+        text = text.replace('code_appears', '')
         text = text.strip('_')
         return text
     return strip_domain_strings

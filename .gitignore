@@ -2,6 +2,7 @@ tmp/screenshots/
 output/
 dbs/
 importance_df.csv
+main_importance_df.csv
 *.db
 *.html
 

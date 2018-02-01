@@ -78,13 +78,13 @@ def plot_importance(df):
             mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)
             sns.barplot(x='val', y='domain', hue='category', order=order,
                         data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal)
-            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                        data=subdf[mask1], ax=axes[0, colnum], ci=None, palette=pal_lower)
+            for p in axes[0, colnum].patches:
+                print(p.get_width())
             sns.barplot(x='val', y='domain', hue='category', order=order,
                         data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal)
+            for p in axes[1, colnum].patches:
+                print(p.get_width())
 
-            sns.barplot(x='fake_val', y='domain', hue='category', order=order,
-                        data=subdf[mask2], ax=axes[1, colnum], ci=None, palette=pal_lower)
             if colnum == 0:
                 title_kwargs['metric'] = 'Fraction of pages where domain appears, Top 10 domains, '
             else:

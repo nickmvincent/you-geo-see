@@ -123,7 +123,7 @@ Code: ttiz
 ===
 https://www.yelp.com/search?find_desc=super+wal-mart&find_loc=Snoqualmie%2C+WA
 Snippet: Search instead for: super wal-mart. ... Issaquah, WA 98027 Phone number (425) 657-0411. ... Wal mart or fredmeyer or literally any super store in the area.
-Code: tfoc
+Code: ttiz
 ===
 https://www.yelp.com/biz/dominos-pizza-west-hartford-3
 Snippet: 10 reviews of Domino's Pizza "Best Domino's in the area. Overall it's average. Usually gets the order right. Frustrating that it doesn't deliver to all of West Hartford. Not the best Domino's, but certainly not the worst. Friendly staff if you…

@@ -273,7 +273,7 @@ class MetricCalculator():
                     if not use_codes:
                         domain = row.domain
                     else:
-                        domain = str(row.domain) + str(row['code'])
+                        domain = str(row.domain) + ':' + str(row['code'])
                     rank = row['rank']
                     if isinstance(domain, float) and np.isnan(domain):
                         domains_to_count['none'] += 1
@@ -543,8 +543,8 @@ def main(args, db, category):
         screen_name = strip_twitter_screename(link)
         code = twitter_user_codes.get(screen_name)
         if not code:
-            # 'Could not get code for screen_name {}'.format(screen_name))
-            pass
+            print('Could not get code for screen_name {}'.format(screen_name))
+            # pass
         data.loc[data.link == link, 'code'] = code
     data.code = data.code.astype('category')
     domains_plus_codes = [
@@ -761,7 +761,7 @@ def main(args, db, category):
         serp_df = serp_df.fillna({
             x: 0 for x in big_candidate_cols
         })
-        big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:10]
+        big_appears_cols = list(serp_df[big_candidate_cols].mean().sort_values(ascending=False).index)[:30]
         big_frac_cols = [
             x.replace('_domain_appears', '_domain_frac') for x in big_appears_cols
         ]
