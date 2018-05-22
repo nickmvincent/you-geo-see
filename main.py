@@ -99,17 +99,27 @@ def main(args):
             'keyword': 'football',
             'category': args.query_source,
         },]
-    elif args.query_source == 'all':
+    elif args.query_source in ['all', 'all6', 'extra']:
         keyword_objs = []
-        for query_source in ['procon_popular', 'trending', ]:
-            keywords = CURATED[query_source]
-            keyword_objs += [
-                {
-                    'keyword': keyword,
-                    'category': query_source,
-                } for keyword in keywords
-            ]
-        keyword_objs += CURATED['popular']
+        if args.query_source in ['all', 'all6']:
+            for query_source in ['procon_popular', 'trending', ]:
+                keywords = CURATED[query_source]
+                keyword_objs += [
+                    {
+                        'keyword': keyword,
+                        'category': query_source,
+                    } for keyword in keywords
+                ]
+            keyword_objs += CURATED['popular']
+        elif args.query_source in ['all6', 'extra']:
+            for query_source in ['top_insurance', 'top_loans', 'med_sample_first_20', ]:
+                keywords = CURATED[query_source] 
+                keyword_objs += [
+                    {
+                        'keyword': keyword,
+                        'category': query_source,
+                    } for keyword in keywords
+                ]
     elif args.query_source == 'expanded':
         keyword_objs = []
         keywords = CURATED['procon_a_to_z']
@@ -120,16 +130,6 @@ def main(args):
             } for keyword in keywords
         ]
         keyword_objs += from_trends_top_query_by_category(15)
-    elif args.query_source == 'extra':
-        keyword_objs = []
-        for query_source in ['top_insurance', 'top_loans', 'med_sample_first_20', ]:
-            keywords = CURATED[query_source] 
-            keyword_objs += [
-                {
-                    'keyword': keyword,
-                    'category': query_source,
-                } for keyword in keywords
-            ]
     else:
         keywords = CURATED[args.query_source]
         keyword_objs = [

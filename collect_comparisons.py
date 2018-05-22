@@ -110,7 +110,6 @@ def parse():
                     ':' in domain # domaiin was coded
                 )
                 if should_plot:
-                    
                     code_index = domain.find(':')
                     if code_index != -1:
                         code = domain[domain.find(':')+1:]
@@ -145,7 +144,6 @@ def parse():
     outdf.to_csv('collect_comparisons.csv')
     ugc_outdf = pd.DataFrame(ugc_row_dicts)
     
-
     for subset, domain_to_vals in sub_to_domain.items():
         for domain, vals in domain_to_vals.items():
             vals['categories'] = ', '.join(vals['categories'])
