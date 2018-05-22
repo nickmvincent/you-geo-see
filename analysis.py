@@ -653,8 +653,8 @@ def main(args, db, category):
                 serp_comps[sid][has_type_key] = d[loc].get(has_type_key, 0)
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
-                    
                     for domain_string, frac in domain_fracs.items():
+                        # TODO: why isn't this just "domain_string in top_domains" 
                         for top_domain in top_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
@@ -708,11 +708,7 @@ def main(args, db, category):
             has_it_already = serp_df[serp_df['id'] == row['id']].iloc[0]['results_full_domain_appears_wikipedia.org']
             if not has_it_already == 1:
                 serp_df.loc[serp_df['id'] == row['id'], 'results_full_domain_appears_wikipedia.org'] = 1
-            
-
-    
     serp_df.describe(include='all').to_csv(path2 + '/serp_df.describe().csv')
-
 
     # ANCHOR: plotting
     ugc_ret_cols = []

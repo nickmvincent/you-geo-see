@@ -34,5 +34,5 @@ def main():
         score = cohen_kappa_score(y_1, y_2)
         print(domain, score)
 
-print('called)')
+print('called')
 main()

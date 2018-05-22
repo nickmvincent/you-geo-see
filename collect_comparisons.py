@@ -165,10 +165,7 @@ def parse():
 
     sorted_ugc_outdf = ugc_outdf.sort_values(['domain', 'category', 'winner'])
 
-
     # visualize it
-    
-
     ugc_outdf.loc[ugc_outdf.category == 'top_insurance', 'category'] = 'insurance'
     ugc_outdf.loc[ugc_outdf.category == 'top_loans', 'category'] = 'loans'
 
@@ -177,7 +174,6 @@ def parse():
     order1 = sorted(row1_df.domains_plus_winners.drop_duplicates())
     row2_df = ugc_outdf[(ugc_outdf.winner == 'rural') | (ugc_outdf.winner == 'GOP') | (ugc_outdf.winner == 'low-income')]
     order2 = sorted(row2_df.domains_plus_winners.drop_duplicates())
-
 
     # ugc_outdf.loc[ugc_outdf.winner == 'high-income', 'winner'] = 'top SES'
     # ugc_outdf.loc[ugc_outdf.winner == 'low-income', 'winner'] = 'bottom SES'
@@ -195,7 +191,6 @@ def parse():
     # })
     sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
     fig, axes = plt.subplots(2, 2, figsize=(6.5, 3.5), gridspec_kw = {'height_ratios':[8, 3]}, dpi=300)
-
 
     for rownum, row_df in enumerate([row1_df, row2_df]):
         col1_df = row_df[row_df.subset == FULL]

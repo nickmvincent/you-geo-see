@@ -1,3 +1,5 @@
+// For testing basic functionality of .getCurrentPosition
+
 window.navigator.geolocation.getCurrentPosition=function(success){
     console.log('getCurrentPositionCalled');
     var position = {

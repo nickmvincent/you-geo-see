@@ -54,6 +54,7 @@ def process_domain(x):
         else:
             return 'UserTweetCarousel'
     try:
+        # TODO: mention that this throws an error if theres 5 periods...
         if x.raw_domain.count('.') > 1:
             first_period = x.raw_domain.find('.')
             stripped = x.raw_domain[first_period+1:]
@@ -101,10 +102,6 @@ def prep_data(data):
 
     data.loc[maps_places_mask, 'link'] = 'MapsPlaces' 
     data.loc[maps_places_mask, 'domain'] = 'MapsPlaces' 
-
-
-
-    
     
     def process_each_domain(df):
         return df.apply(process_domain, axis=1)
