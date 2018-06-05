@@ -111,7 +111,7 @@ def main(args):
                     } for keyword in keywords
                 ]
             keyword_objs += CURATED['popular']
-        elif args.query_source in ['all6', 'extra']:
+        if args.query_source in ['all6', 'extra']:
             for query_source in ['top_insurance', 'top_loans', 'med_sample_first_20', ]:
                 keywords = CURATED[query_source] 
                 keyword_objs += [
@@ -160,10 +160,7 @@ def main(args):
     # config.set('mobile_emulation', True)
     print(dbname)
     config.set('database_name', dbname)
-    if args.save_html:
-        config.set('save_html', True)
-    else:
-        config.set('save_html', False)
+    config.set('save_html', True)
     config.set('use_control', False)
     location_df = load_locations()
     locations = []
@@ -269,10 +266,10 @@ def parse():
         Queries to search
         check out querysets.py for more info
         """, default='trends')
-    parser.add_argument(
-        '--save_html', help="""
-        To save html or not.
-        """, action='store_true')
+    # parser.add_argument(
+    #     '--save_html', help="""
+    #     To save html or not.
+    #     """, action='store_true')
     args = parser.parse_args()
     main(args)
 

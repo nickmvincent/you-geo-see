@@ -21,7 +21,8 @@ def plot_importance(df):
     Plot the importance of each domain.
 
     """
-    df = df[df.link_type == 'results']
+    #TODO: parametrize
+    df = df[df.link_type == 'news']
 
     counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
     df = df.fillna(0)
@@ -33,11 +34,11 @@ def plot_importance(df):
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
     pal = 'colorblind'
-    pal_lower = 'muted'
 
     # placeholder for qual coded values
     # df['fake_val'] = df['val'].map(lambda x: x / 2)
     categorized = df[df.category != 'all']
+    print('df head', df.head())
     plot_col_dfs = [categorized]
     sns.set_context("paper", rc={
         "font.size":10, "font.family": "Times New Roman", 
@@ -50,6 +51,9 @@ def plot_importance(df):
     # this seems terribly confusing...
     # is there an easy fix?
     for colnum, subdf in enumerate(plot_col_dfs):
+        if subdf.empty:
+            print('empty')
+            continue
         tmpdf = subdf[
             (subdf.subset == FULL) & (subdf.metric == 'domain_appears')
         ][['domain', 'val', 'is_ugc_col']]
@@ -57,7 +61,7 @@ def plot_importance(df):
                 'val', ascending=False)
         order = list(grouped_and_sorted.index)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
-        print(ugc_cols)
+        print('ugc_cols', ugc_cols)
         nonugc_count = 0
         selected_order = []
         for domain in order:
@@ -65,7 +69,7 @@ def plot_importance(df):
                 selected_order.append(domain)
             else:
                 nonugc_count += 1
-                if nonugc_count <= 5:
+                if nonugc_count <= 20: #TODO
                     selected_order.append(domain)
         
         # for domain in ugc_cols:
@@ -93,6 +97,7 @@ def plot_importance(df):
         title_kwargs = {}
         # for subset in [FULL, TOP_THREE]:
         #     subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
+        print(subdf)
         if colnum in [0]:
             mask1 = (subdf.metric == 'domain_appears') & (subdf.subset == FULL)
             mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)

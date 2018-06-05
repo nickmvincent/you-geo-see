@@ -570,9 +570,9 @@ def main(args, db, category):
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
-        'results',
-        #'top_ads',
-        'knowledge_panel',
+        #'results',
+        #'knowledge_panel',
+        'news'
         # ['results', 'tweets'],
         # ['results', 'knowledge_panel']
     ]
@@ -718,8 +718,9 @@ def main(args, db, category):
         x for x in cols if serp_df[x].mean() != 0
     ]
 
-    serp_df[cols_with_nonzero_mean].describe().to_csv(
-        path2 + '/nz_ugcin_serp_df.csv')
+    if cols_with_nonzero_mean:
+        serp_df[cols_with_nonzero_mean].describe().to_csv(
+            path2 + '/nz_ugcin_serp_df.csv')
 
     # nz for non-zero (variable name was too long)
     results_domain_fracs_cols_nz = [
@@ -956,6 +957,7 @@ def main(args, db, category):
                 writer.writerow([row])
     
     importance_df = serp_df[all_cols]
+    #print('importance_df', importance_df)
     if category == 'all':
         importance_df.loc[:, 'category'] = 'all'
     if comparison_df is not None:
@@ -985,20 +987,20 @@ def parse():
     parser.add_argument(
         '--include_kp', dest='include_kp', help='Whether to include_kp', action='store_true', default=False)
     parser.add_argument(
-        '--coded_metrics', dest='coded_metrics', help='Whether to coded_ugc_fracs in analysis output', action='store_true', default=False)
+        '--coded_metrics', dest='coded_metrics', help='Whether to include coded_ugc_fracs in analysis output', action='store_true', default=False)
     parser.add_argument(
         '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
-    print(args.db)
+    print('args.db', args.db)
     comparison_df = None
     df = None
     ugc_cols = []
     big_cols = []
     for db in args.db:
         if args.category == 'each':
-            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all']
+            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all'] #TODO: why 'all'
         else:
             cats = [args.category]
         start = time.time()
