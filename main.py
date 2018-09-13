@@ -41,18 +41,19 @@ import serpscrap
 
 VERSION = 'chrome'
 LOCATIONFILENAME = '2017_gaz_counties_all.csv'
-# Source: 
+# Source: https://www.census.gov/geo/maps-data/data/gazetteer.html
+
 CODE_FILENAME = 'NCHSURCodes2013.csv'
 URBAN_RURAL_COL = '2013 urban-rural code'
+# Source: https://www.cdc.gov/nchs/data_access/urban_rural.htm
 
-# Source:
 INCOME_FILENAME = '2015_household_median_incomes_by_county.csv'
 MEDIAN_INCOME_COL = 'HC01_EST_VC13'
-# Source:
+# Source: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk
 
 POLITICAL_FILENAME = '2016_US_County_Level_Presidential_Results.csv'
 VOTING_COL = 'per_dem'
-# Source:
+# Source: https://github.com/tonmcg/US_County_Level_Election_Results_08-16/blob/master/2016_US_County_Level_Presidential_Results.csv
 POPULATION_FILENAME = '2016_estimated_population.csv'
 POPULATION_COL = 'POP_ESTIMATE_2016'
 # Source: https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/
