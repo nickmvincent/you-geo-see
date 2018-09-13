@@ -26,3 +26,9 @@ There are 5353921 rows.
 # Warnings relate to running comparisons
 Don't run ALL comparisons for ALL databses - for instance running a high-income vs. low-income test on the urban-rural database.
 Use collect_comparisons.py to get a manageable summary of all the tests
+
+# Sanity Checking Analysis
+There's a lot of data manipulating going in analysis.py and then plotters.py
+One easy to sanity check some results is to manually inspect the serp_df.csv file that's written in the subdirectories of outputs/
+
+For instance, if we want to double check the fact that our "importance_plot" suggets that medical queries appear in about 45% of all first-page results, we can open serp_df.describe().csv in `2018-01-18_population_weighted_40_extra.db__med_sample_first_20/` and verify that indeed, Wikipedia appeared in 360/800 = 0.45 of all pages.

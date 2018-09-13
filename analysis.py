@@ -279,11 +279,12 @@ class MetricCalculator():
                         domains_to_count['none'] += 1
                         domains_to_ranksum['none'] += rank
                     elif domain == 'NewsCarousel' or 'TweetCarousel' in domain:
+                        # was re-using "domain" here, looked sketchy
                         if domain == 'NewsCarousel':
-                            df = self.finders['news'](self.sid).iloc[:3]
+                            subdf = self.finders['news'](self.sid).iloc[:3]
                         else: # must be tweets
-                            df = self.finders['tweets'](self.sid).iloc[:3]
-                        for _, subrow in df.iloc[:3].iterrows():
+                            subdf = self.finders['tweets'](self.sid).iloc[:3]
+                        for _, subrow in subdf.iloc[:3].iterrows():
                             domains_to_count[subrow.domain] += 1
                             domains_to_ranksum[subrow.domain] += rank
                         domains_to_count[domain] += 1
@@ -998,7 +999,9 @@ def parse():
     big_cols = []
     for db in args.db:
         if args.category == 'each':
-            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all'] #TODO (minor): why 'all'
+            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all']
+            # in addition to doing indivdual categories, it's helpful to do all. This means when manually inspecting results, we can easily browse through the output/ folder to look at specific categories OR all at once
+            # furthermore, we can easily discard the "all" results from importance_df.csv
         else:
             cats = [args.category]
         start = time.time()

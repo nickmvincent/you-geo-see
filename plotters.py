@@ -7,7 +7,7 @@ import pandas as pd
 from constants import FULL, TOP_THREE
 from data_helpers import strip_domain_strings_wrapper
 
-sns.set(style="whitegrid", palette='colorblind', color_codes=True)
+sns.set(style="whitegrid", color_codes=True)
 
 ALL_SUBSET_STRING = 'considering all results'
 TOP_THREE_SUBSET_STRING = 'considering only top three results'
@@ -86,8 +86,8 @@ def plot_importance(df):
             print('count', domain, counts.mean())
             ranks_and_counts.append({
                 'domain': domain,
-                'average rank': round(ranks.mean(), 2),
-                'average count': round(counts.mean(), 2)
+                'average rank': round(ranks.mean(), 1),
+                'average count': round(counts.mean(), 1)
             })
             # _, histax = plt.subplots()
             # sns.distplot(
@@ -133,7 +133,9 @@ def plot_importance(df):
                 the_table = plt.table(cellText=ranks_and_counts_df[['average rank', 'average count']].values,
                     bbox=(1.2,0,1,1))
                 the_labels = plt.table(cellText=[['average\nrank', 'average\ncount']],
-                    bbox=(1.2,-1.1/num_rows,1,1/num_rows))
+                    bbox=(1.2,-1.2/num_rows,1,1/num_rows))
+                the_labels.auto_set_font_size(False)
+                the_labels.set_fontsize(8)
                 for key, cell in the_table.get_celld().items():
                     # cell.set_linewidth(0)
                     cell.set_linestyle('--')

@@ -3,6 +3,7 @@ output/
 dbs/
 importance_df.csv
 main_importance_df.csv
+importance_df_geo.csv
 *.db
 *.html
 
