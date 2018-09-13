@@ -4,3 +4,25 @@ In addition to providing automated processing of key components of the SERP (e.g
 # Warnings
 CAreful about urban-rural vs urban_rural in main.py
 Doing urban_rural throws NO ERROR - it just randomly samples from the whole distribution. OK for testing but not for the experiments!
+
+
+# To Run all Analyses
+set link_types = ['results']
+python analysis.py --db dbs\population_weighted_40_all.db "dbs\2018-01-18_population_weighted_40_extra.db" --plot
+
+# What's up with importance_df.csv? Why so large?
+`importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form
+This means there is there is one row for every SERP we looked at, for every domain we observed, for every metric we looked at
+If you check at `analysis.py` under the `# ANCHOR: MELT` comment, you can see how it's created.
+There four metrics of interest, "domain_appears" (true or false), "domain_frac" (a fraction), "domain_rank" (int), and "domain_count" (int)
+Each of these metrics is repeated for the FULL_PAGE and the TOP_THREE subset.
+Furthermore, each row must be duplicated for each query category.
+
+There are 5353921 rows.
+
+# How can I see the geographic comparisons?
+
+
+# Warnings relate to running comparisons
+Don't run ALL comparisons for ALL databses - for instance running a high-income vs. low-income test on the urban-rural database.
+Use collect_comparisons.py to get a manageable summary of all the tests

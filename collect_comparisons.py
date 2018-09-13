@@ -18,11 +18,11 @@ from analysis import UGC_WHITELIST
 
 
 
-sns.set(style="whitegrid", palette='colorblind', color_codes=True)
+sns.set(style="whitegrid", palette='muted', color_codes=True)
 
 def parse():
     """
-    todo
+    Collects comparisons
     """
     parser = argparse.ArgumentParser(description='see file.')
     parser.add_argument(

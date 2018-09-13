@@ -5,5 +5,10 @@ Eventually, it would be ideal to incorporate an automated method of verifying th
 
 1. When Google Maps results are returned on a page, they are ALWAYS first. Therefore, maps results do not have a "Rank" - they are "Rank 0", overpowering other ranked results.
 ^^ This is not true. We need to update code to account for this issue.
+NMV 9/9/2018: upon inspecting DB, this is fixed. MapsLocations are ranked, e.g. they might be rank 5 on the page.
 
 2. There will at most be one "Tweet carousel" per page, and it will appear on the first page.
+
+
+Analysis only includes the top three Tweets.
+But the distribution of tweets from qual_code.py includes all tweets, which would include those w/ rank 4 or 5.

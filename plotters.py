@@ -22,18 +22,21 @@ def plot_importance(df):
 
     """
     #TODO: parametrize
-    df = df[df.link_type == 'news']
+    df = df[df.link_type == 'results']
 
-    counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
-    df = df.fillna(0)
     df.loc[df.category == 'top_insurance', 'category'] = 'insurance'
     df.loc[df.category == 'top_loans', 'category'] = 'loans'
     df.loc[df.category == 'med_sample_first_20', 'category'] = 'medical'
     df.loc[df.category == 'procon_popular', 'category'] = 'controversial'
     df.loc[df.domain == 'people also ask', 'domain'] = 'PeopleAlsoAsk'
+    counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
+
+    df = df.fillna(0)
+
+
     title_template = '{metric}\n {subset}, {type}'
     # color palettes that will be overlayed.
-    pal = 'colorblind'
+    pal = 'muted'
 
     # placeholder for qual coded values
     # df['fake_val'] = df['val'].map(lambda x: x / 2)
@@ -47,12 +50,9 @@ def plot_importance(df):
     width, height = 5, 4.5
     fig, axes = plt.subplots(ncols=2, nrows=len(plot_col_dfs), figsize=(width, height), dpi=300)
 
-    # this is currently wrong! There are two columns and only one row.
-    # this seems terribly confusing...
-    # is there an easy fix?
     for colnum, subdf in enumerate(plot_col_dfs):
         if subdf.empty:
-            print('empty')
+            print('sub empty')
             continue
         tmpdf = subdf[
             (subdf.subset == FULL) & (subdf.metric == 'domain_appears')
@@ -64,28 +64,30 @@ def plot_importance(df):
         print('ugc_cols', ugc_cols)
         nonugc_count = 0
         selected_order = []
+
+        # add all UGC cols and up to num_nonugc non-ugc cols
+        num_nonugc = 5
         for domain in order:
             if domain in ugc_cols:
                 selected_order.append(domain)
             else:
                 nonugc_count += 1
-                if nonugc_count <= 20: #TODO
+                if nonugc_count <= num_nonugc:
                     selected_order.append(domain)
         
-        # for domain in ugc_cols:
-        #     if domain not in order:
-        #         order.append(domain)
         ranks_and_counts = []
         for domain in selected_order:
             ranks = subdf[(subdf.metric == 'domain_rank') & (subdf.domain == domain)]
             ranks = ranks[ranks.val != 0].val
             print('rank', domain, ranks.mean())
-            counts = counts_copy[(subdf.domain == domain)].val
+
+            # will be a Series
+            counts = counts_copy[counts_copy.domain == domain].val
             print('count', domain, counts.mean())
             ranks_and_counts.append({
                 'domain': domain,
-                'average rank': round(ranks.mean(), 1),
-                'average count': round(counts.mean(), 1)
+                'average rank': round(ranks.mean(), 2),
+                'average count': round(counts.mean(), 2)
             })
             # _, histax = plt.subplots()
             # sns.distplot(
@@ -97,7 +99,7 @@ def plot_importance(df):
         title_kwargs = {}
         # for subset in [FULL, TOP_THREE]:
         #     subdf.loc[:, 'domain'] = subdf['domain'].apply(strip_domain_strings_wrapper(subset))
-        print(subdf)
+        #print(subdf)
         if colnum in [0]:
             mask1 = (subdf.metric == 'domain_appears') & (subdf.subset == FULL)
             mask2 = (subdf.metric == 'domain_appears') & (subdf.subset == TOP_THREE)
@@ -128,7 +130,7 @@ def plot_importance(df):
                 ax.set_xlabel('Top-three incidence rate', fontname = "Times New Roman")
                 ax.set(yticklabels=[], ylabel='')
                 num_rows = len(selected_order)
-                the_table = plt.table(cellText=ranks_and_counts_df.as_matrix(columns=['average rank', 'average count']),
+                the_table = plt.table(cellText=ranks_and_counts_df[['average rank', 'average count']].values,
                     bbox=(1.2,0,1,1))
                 the_labels = plt.table(cellText=[['average\nrank', 'average\ncount']],
                     bbox=(1.2,-1.1/num_rows,1,1/num_rows))
@@ -145,8 +147,10 @@ def plot_importance(df):
             title_kwargs['type'] = QUERYSET_BREAKDOWN_STRING
             sns.despine(ax=ax, bottom=True, left=True)
             ax.set_ylabel('')
-            ax.hlines([x + 0.5 for x in range(len(order))], *ax.get_xlim(), linestyle='--', color='lightgray')
-            # ax.set_title(title_template.format(**title_kwargs))
+            print('line y values')
+            print([x + 0.5 for x in range(len(selected_order))])
+            ax.hlines([x + 0.5 for x in range(len(selected_order))], *ax.get_xlim(), linestyle='--', color='lightgray')
+            #ax.set_title(title_template.format(**title_kwargs))
     fig.savefig('importance.png', bbox_inches='tight')
 
 

@@ -522,7 +522,6 @@ def main(args, db, category):
         data.loc[pop_mask, 'category'] = 'popular'
     categories = list(data['category'].drop_duplicates()) + ['all']
     if category not in categories:
-        # 'Skipping category {}'.format(category))
         return None
     if 'dbs' in db:
         shortened_db = db[4:]
@@ -563,17 +562,16 @@ def main(args, db, category):
         'news': news_finder,
     }
 
-
     serp_df.reported_location.value_counts().to_csv(
         path2 + '/values_counts_reported_location.csv')
     serp_df['query'].value_counts().to_csv(path2 + '/values_counts_query.csv')
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
-        #'results',
+        'results',
         #'knowledge_panel',
-        'news'
-        # ['results', 'tweets'],
+        #'news'
+        #['results', 'tweets'],
         # ['results', 'knowledge_panel']
     ]
 
@@ -654,7 +652,7 @@ def main(args, db, category):
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac in domain_fracs.items():
-                        # TODO: why isn't this just "domain_string in top_domains" 
+                        # TODO (minor): why isn't this just "domain_string in top_domains" 
                         for top_domain in top_domains:
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
@@ -1000,7 +998,7 @@ def parse():
     big_cols = []
     for db in args.db:
         if args.category == 'each':
-            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all'] #TODO: why 'all'
+            cats = ['popular', 'trending', 'procon_popular', 'top_insurance', 'top_loans', 'med_sample_first_20', 'all'] #TODO (minor): why 'all'
         else:
             cats = [args.category]
         start = time.time()
@@ -1036,6 +1034,8 @@ def parse():
 
     # ANCHOR: MELT
     row_dicts = []
+    print('len df index')
+    print(len(df.index))
     for col in df.columns.values:
         is_ugc_col = False
         is_big_col = False
@@ -1046,11 +1046,14 @@ def parse():
                 'domain_rank',
                 'domain_count',
             ]
+
+            # we only want to include the columns specified in "col_components" in the long-form data
             valid = False
             for col_component in col_components:
                 if '_' + col_component in col:
                     valid = True
             if valid:
+                # useful to mark down if this column made is (1) UGC or (2) a "big player"
                 if col in ugc_cols:
                     is_ugc_col = True
                 if col in big_cols:
@@ -1064,8 +1067,11 @@ def parse():
                     if key + '_domain' in col:
                         subset = key
                         link_type = tmp.replace(key, '').strip('_')
-                for _, row in df.iterrows():
+
+                # here we iterate through every row of df...
+                for i_row, row in df.iterrows():
                     row_dict = {
+                        'index_in_concat_df': i_row,
                         'link_type': link_type,
                         'subset': subset,
                         'metric': metric,

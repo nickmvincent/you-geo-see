@@ -68,8 +68,3 @@
 66,0.0,results_top_three_domain_appears_washingtonpost.com,180,180,0.05555555555555555,0.056,0.056,1.0,360,rural,urban,1.0,
 67,0.0,results_full_domain_appears_supremecourt.gov,180,180,0.05555555555555555,0.056,0.056,1.0,360,rural,urban,1.0,
 68,0.0,results_top_three_domain_appears_supremecourt.gov,180,180,0.05555555555555555,0.056,0.056,1.0,360,rural,urban,1.0,
-69,0.0,has_knowledge_panel,180,180,1.0,1.0,1.0,1.0,360,rural,urban,,
-70,0.072,*knowledge_panel_full_domain_appears_wikipedia.org,180,180,0.9361111111111111,0.9,0.972,1.08,360,rural,urban,0.0050736295059105995,urban
-71,0.072,*knowledge_panel_top_three_domain_appears_wikipedia.org,180,180,0.9361111111111111,0.9,0.972,1.08,360,rural,urban,0.0050736295059105995,urban
-72,0.061,*knowledge_panel_full_domain_appears_b'',180,180,0.08055555555555556,0.111,0.05,2.22,360,rural,urban,0.03328959993721765,rural
-73,0.061,*knowledge_panel_top_three_domain_appears_b'',180,180,0.08055555555555556,0.111,0.05,2.22,360,rural,urban,0.03328959993721765,rural

@@ -7,6 +7,7 @@ def main():
     df = pd.read_csv('importance_df.csv')
     df = df[df.link_type == 'results']
     df = df.fillna(0)
+    print(df.head())
 
 
     cat_to_rate = defaultdict(list)
@@ -36,5 +37,5 @@ def main():
             newlist[i]['rank'] = i+1
         print('Category', key)
         print(newlist)
-
-main()
+if __name__ == '__main__':
+    main()
