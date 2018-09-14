@@ -25,7 +25,9 @@ def main():
                         val = np.mean(filt_metric['val'])
                         if domain == 'wikipedia.org':
                             print(subset, metric, round(val, 2))
-                        if metric == 'domain_appears' and subset == 'top_three' and val > 0.1:
+                        #if metric == 'domain_appears' and subset == 'top_three' and val > 0.1:
+                        if metric == 'domain_appears' and subset == 'full' and val > 0.1:
+
                             cat_to_rate[category].append({
                                 'domain':domain,
                                 'val': val

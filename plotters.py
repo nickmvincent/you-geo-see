@@ -47,7 +47,7 @@ def plot_importance(df):
         "font.size":10, "font.family": "Times New Roman", 
         "axes.titlesize":10,"axes.labelsize":10})
 
-    width, height = 5, 4.5
+    width, height = 5.5, 5
     fig, axes = plt.subplots(ncols=2, nrows=len(plot_col_dfs), figsize=(width, height), dpi=300)
 
     for colnum, subdf in enumerate(plot_col_dfs):
@@ -130,10 +130,14 @@ def plot_importance(df):
                 ax.set_xlabel('Top-three incidence rate', fontname = "Times New Roman")
                 ax.set(yticklabels=[], ylabel='')
                 num_rows = len(selected_order)
+                start_y = 0.6 * 1/num_rows
+                y_size = 1 - 1.1 * 1/num_rows
                 the_table = plt.table(cellText=ranks_and_counts_df[['average rank', 'average count']].values,
-                    bbox=(1.2,0,1,1))
+                    bbox=(1.1, start_y, 0.7, y_size))
+                the_table.auto_set_font_size(False)
+                the_table.set_fontsize(8)
                 the_labels = plt.table(cellText=[['average\nrank', 'average\ncount']],
-                    bbox=(1.2,-1.2/num_rows,1,1/num_rows))
+                    bbox=(1.1,-1.2/num_rows,0.7,1/num_rows))
                 the_labels.auto_set_font_size(False)
                 the_labels.set_fontsize(8)
                 for key, cell in the_table.get_celld().items():
@@ -153,7 +157,14 @@ def plot_importance(df):
             print([x + 0.5 for x in range(len(selected_order))])
             ax.hlines([x + 0.5 for x in range(len(selected_order))], *ax.get_xlim(), linestyle='--', color='lightgray')
             #ax.set_title(title_template.format(**title_kwargs))
-    fig.savefig('importance.png', bbox_inches='tight')
+    fig.savefig(
+        'importance.svg', 
+        bbox_inches='tight'
+    )
+    # fig.savefig(
+    #     'importance.svg', 
+    #     bbox_inches='tight'
+    # )
 
 
 
