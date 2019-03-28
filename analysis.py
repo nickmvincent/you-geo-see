@@ -103,7 +103,10 @@ class Comparison():
             else:
                 larger, smaller = mean_b, mean_a
                 winner = self.name_b
-            mult_increase = round(larger / smaller, 2)
+            if smaller > 0:
+                mult_increase = round(larger / smaller, 2)
+            else:
+                mult_increase = float('nan')
             marker = ''
             if pval <= 0.001:
                 marker = '**'
@@ -988,7 +991,7 @@ def parse():
     parser.add_argument(
         '--coded_metrics', dest='coded_metrics', help='Whether to include coded_ugc_fracs in analysis output', action='store_true', default=False)
     parser.add_argument(
-        '--group_popular', dest='group_popular', help='treat all popular queries as once group for the purposes of plotting', action='store_true', default=True)
+        '--group_popular', dest='group_popular', help='treat all popular queries as one group for the purposes of plotting', action='store_true', default=True)
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()

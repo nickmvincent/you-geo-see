@@ -5,6 +5,9 @@ li = 'linkedin.com'
 ig = 'instagram.com'
 pin = 'pinterest.com'
 
+# this is a list I prepared of which UGC platforms appeared in the knowledge panel for various queries.
+# this is the result of looking at one page per query only, i.e. this is not systematic.
+
 queries = {
     'al franken': [tw, yt, fb],
     'Bank of America': [fb, li, tw],
@@ -23,7 +26,6 @@ queries = {
     'United States Department of Veterans Affairs': [fb, yt, tw],
     'Walmart': [fb, tw, pin],
     'Wells Fargo': [fb, li, tw],
-
     # extra,
     'geico': [fb, tw, yt],
     'geico insurance': [yt, fb, li],

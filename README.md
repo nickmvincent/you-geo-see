@@ -1,21 +1,21 @@
+# You-Geo-See, or the analysis code for "Measuring the Importance of User-Generated Content to Search Engines"
+
 In addition to providing automated processing of key components of the SERP (e.g. the links, their position, and their destination) our software is also designed to save the raw HTML of the SERPs. This allowed for more detailed human verficiation, i.e. we make sure that the representation of each SERP in the database matches how a human interprets the SERP. This is an important feature, as there is no guarantee that SERPs will keep the same content format or styles, which the software uses to distinguish different types of results. Therefore, it is important that human validation is performed when exploring new queries or after substantial time has passed, even after the software has been extensively validated for other queries.”
 
 # Notes for potential readers
-Before using this software, please consider reading through the following resources relating to algorthmic auditing:
+Before doing any scraping, please consider reading through the following resources relating to algorthmic auditing:
 
-"Auditing Algorithms:
+["Auditing Algorithms:
 Research Methods for Detecting Discrimination
-on Internet Platforms"
-
-Christian Sandvig, Kevin Hamilton, Karrie Karahalios. & Cedric Langbort
-
-http://www-personal.umich.edu/~csandvig/research/Auditing%20Algorithms%20--%20Sandvig%20--%20ICA%202014%20Data%20and%20Discrimination%20Preconference.pdf
+on Internet Platforms" - Christian Sandvig, Kevin Hamilton, Karrie Karahalios. & Cedric Langbort](http://www-personal.umich.edu/~csandvig/research/Auditing%20Algorithms%20--%20Sandvig%20--%20ICA%202014%20Data%20and%20Discrimination%20Preconference.pdf)
 
 https://en.wikipedia.org/wiki/Web_scraping
 
+As mentioned in the paper, you may also want to consider using a headless browser-based scraping software.
+
 # To Run all Analyses
-set link_types = ['results']
-python analysis.py --db dbs\population_weighted_40_all.db "dbs\2018-01-18_population_weighted_40_extra.db" --plot
+in analysis.py, ensure that `link_types = ['results']` (note to self: why isn't this a command line option?)
+python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --plot
 
 # What's up with importance_df.csv? Why so large?
 `importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form

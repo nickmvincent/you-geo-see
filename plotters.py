@@ -158,7 +158,7 @@ def plot_importance(df):
             ax.hlines([x + 0.5 for x in range(len(selected_order))], *ax.get_xlim(), linestyle='--', color='lightgray')
             #ax.set_title(title_template.format(**title_kwargs))
     fig.savefig(
-        'importance.svg', 
+        'figures/importance.svg', 
         bbox_inches='tight'
     )
     # fig.savefig(

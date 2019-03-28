@@ -1,3 +1,0 @@
-Sample produced on 2018-01-15 17:11:40.522027
-Samples come from the following dbs: ['dbs\\urban-rural_10_all.db', 'dbs\\urban-rural_10_extra.db']
-
