@@ -4,7 +4,6 @@ importance_df.csv
 comparison_df.csv
 main_importance_df.csv
 importance_df_geo.csv
-*.db
 *.html
 .DS_Store
 

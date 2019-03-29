@@ -155,7 +155,7 @@ def plot_importance(df):
                 the_table.auto_set_font_size(False)
                 the_table.set_fontsize(8)
                 
-                the_labels = plt.table(cellText=[['average\nfull\npage\nincidence\nrate', 'average\ntop\nthreeincidence\nrate', 'average\nrank\non\npage']],
+                the_labels = plt.table(cellText=[['average\nfull\npage\nrate', 'average\ntop\nthree\nrate', 'average\nrank']],
                     bbox=(1.1,-1.2/num_rows,0.7,1/num_rows))
                 for cell in the_labels._cells.values():
                     cell.set_text_props(fontname="Times New Roman")
