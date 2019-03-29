@@ -6,6 +6,7 @@ Then it formats these into a nice CSV for publication!
 """
 
 import argparse
+import json
 
 import seaborn as sns
 import matplotlib
@@ -27,6 +28,8 @@ def parse():
     parser = argparse.ArgumentParser(description='see file.')
     parser.add_argument(
         '--output_dirs', help='Where are the outputs', nargs='+', required=False)
+    parser.add_argument(
+        '--criteria', help='how are we identifying the significant comparisons', default='ttest')
     parser.set_defaults(print_all=False)
 
     args = parser.parse_args()
@@ -63,7 +66,9 @@ def parse():
 
     row_dicts = []
     ugc_row_dicts = []
-    count = 0
+    n_ugc_diffs = 0
+    n_tests = 0
+    n_ugc_diffs_strict = 0
 
 
     sub_to_domain = {
@@ -75,15 +80,26 @@ def parse():
         comparison = pre.split('_')[0][7:]
 
         print(path, comparison, category)
-        full = path + '/full_pval_summary.csv'
-        top3 = path + '/top_three_pval_summary.csv'
+        if args.criteria == 'ttest':
+            full = path + '/full_pval_summary.csv'
+            top3 = path + '/top_three_pval_summary.csv'
+            
+        elif args.criteria == 'fisher':
+            full = path + '/full_fisher_summary.csv'
+            top3 = path + '/top_three_fisher_summary.csv'
+        
+        all_tests = path + '/comparisons.csv'
+            
 
         try:
             full_df = pd.read_csv(full)
             top3_df = pd.read_csv(top3)
+            all_tests_df = pd.read_csv(all_tests)
         except:
             print('Not found: {}'.format(full))
             continue
+        n_tests += len(all_tests_df.index)
+        
 
         strip_full = strip_domain_strings_wrapper(FULL)
         strip_top3 = strip_domain_strings_wrapper(TOP_THREE)
@@ -102,6 +118,7 @@ def parse():
                 row_dict['winner'] = row.winner
                 row_dict['subset'] = subset
                 row_dict['category'] = category
+                row_dict['fisher_pval'] = row.fisher_pval
                 row_dicts.append(row_dict)
                 # row_dict['ratio'] = row.mult_inc
                 should_plot = (
@@ -120,7 +137,10 @@ def parse():
                         else:
                             row_dict['domain'] = domain = domain.replace(':'+code, '')
                     if domain != 'MapsLocations':
-                        count += 1
+                        n_ugc_diffs += 1
+                        if row['fisher_pval'] < 0.05 / 288:
+                            n_ugc_diffs_strict += 1
+                            print(domain)
                     ugc_row_dicts.append(row_dict)
                     if domain not in sub_to_domain[subset]:
                         sub_to_domain[subset][domain] = {
@@ -167,7 +187,14 @@ def parse():
     ugc_outdf.loc[ugc_outdf.category == 'top_insurance', 'category'] = 'insurance'
     ugc_outdf.loc[ugc_outdf.category == 'top_loans', 'category'] = 'loans'
 
-    sorted_ugc_outdf[['category', 'domain', 'winner', 'subset', 'increase']].to_csv('PUB_comparisons.csv', index=False)
+    sorted_ugc_outdf[['category', 'domain', 'winner', 'subset', 'increase', 'fisher_pval']].to_csv('{}_comparisons.csv'.format(args.criteria), index=False)
+    with open('{}_comparison_deets.json'.format(args.criteria), 'w') as f:
+        json.dump({
+            'n_ugc_diffs': n_ugc_diffs,
+            'n_tests': n_tests,
+            'n_ugc_diffs_strict': n_ugc_diffs_strict,
+        }, f)
+        
     row1_df = ugc_outdf[(ugc_outdf.winner == 'urban') | (ugc_outdf.winner == 'DEM') | (ugc_outdf.winner == 'high-income')]
     order1 = sorted(row1_df.domains_plus_winners.drop_duplicates())
     row2_df = ugc_outdf[(ugc_outdf.winner == 'rural') | (ugc_outdf.winner == 'GOP') | (ugc_outdf.winner == 'low-income')]
@@ -179,14 +206,6 @@ def parse():
     # ugc_outdf.loc[ugc_outdf.winner == 'DEM', 'winner'] = 'top DEM'
     orders = [order1, order2]
 
-    # matplotlib.rcParams.update({
-    #     'font.family': 'Times New Roman',
-    #     'xtick.labelsize': 8,
-    #     'ytick.labelsize': 8,
-    #     'axes.labelsize': 8,
-    #     'axes.titlesize': 10,
-    #     'legend.fontsize': 8,
-    # })
     sns.set_context("paper", rc={"font.size":10, "font.family": "Times New Roman", "axes.titlesize":10,"axes.labelsize":10})
     fig, axes = plt.subplots(2, 2, figsize=(6.5, 3.5), gridspec_kw = {'height_ratios':[8, 3]}, dpi=300)
 
@@ -232,7 +251,7 @@ def parse():
             'locations_str': 'rural/low-income/GOP areas',
         })
     )
-    print(count)
+   
     plt.tight_layout()
     fig.savefig('comparisons.png')
     plt.show()

@@ -1,1 +1,0 @@
-python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --plot

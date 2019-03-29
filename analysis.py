@@ -20,7 +20,8 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import ttest_ind
+from scipy.stats import ttest_ind, fisher_exact
+from statsmodels.stats.proportion import proportions_ztest
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
@@ -42,7 +43,9 @@ UGC_WHITELIST = [
 class Comparison():
     """
     A comparison entity
-    For comparing two groups of results within a set of results
+    For comparing two groups within a set of results
+    e.g. urban vs. rural wikipedia incidence rate
+    urban vs. rural map incidence rate
     """
 
     def __init__(
@@ -67,6 +70,7 @@ class Comparison():
         query_comparison_lists = {key: [] for key in RESULT_SUBSETS}
         pval_summary = {key: [] for key in RESULT_SUBSETS}
         whitelist_summary = {key: [] for key in RESULT_SUBSETS}
+        fisher_summary = {key: [] for key in RESULT_SUBSETS}
         for col in self.cols_to_compare:
             try:
                 filtered_df_a = self.df_a[self.df_a[col].notnull()]
@@ -93,7 +97,22 @@ class Comparison():
             mean_b = np.mean(b)
             n = len(a) + len(b)
 
+            df = pd.DataFrame({'a': a, 'b': b}).melt()
             _, pval = ttest_ind(a, b, equal_var=False)
+            #_, ztest_pval = proportions_ztest()
+            try:
+                tab = pd.crosstab(df.variable, df.value)
+                _, fisher_pval = fisher_exact(tab)
+                # print(col, 'mean_a', mean_a, 'mean_b', mean_b, 'pval', pval)
+                #print(tab)
+                # print(fisher_pval)
+                # input()
+            except Exception as ex:
+                fisher_pval = 1
+            
+            
+            
+
             if mean_a == mean_b:
                 larger, smaller = mean_a, mean_b
                 winner = None
@@ -112,7 +131,8 @@ class Comparison():
                 marker = '**'
             elif pval <= 0.05:
                 marker = '*'
-            ret.append({
+
+            row_dict = {
                 'column': marker + col,
                 'winner': winner,
                 'mult_inc': mult_increase,
@@ -122,52 +142,31 @@ class Comparison():
                 'name_a': self.name_a,
                 'name_b': self.name_b,
                 'pval': pval,
+                'fisher_pval': fisher_pval,
                 'len(a)': len(a),
                 'len(b)': len(b),
                 'n': n,
                 'mean': mean,
-            })
+            }
+            ret.append(row_dict)
             is_in_whitelist = False
             for domain in UGC_WHITELIST:
                 if domain in col:
                     is_in_whitelist = True
+
+
             key = None
             for result_subset in RESULT_SUBSETS:
                 if result_subset + '_domain' in col or result_subset + '_code' in col:
                     key = result_subset
+                    break
             if key:
                 if is_in_whitelist:
-                    whitelist_summary[key].append({
-                        'column': marker + col,
-                        'winner': winner,
-                        'mult_inc': mult_increase,
-                        'add_inc': round(larger - smaller, 3),
-                        'mean_a': round(mean_a, 3),
-                        'mean_b': round(mean_b, 3),
-                        'name_a': self.name_a,
-                        'name_b': self.name_b,
-                        'pval': pval,
-                        'len(a)': len(a),
-                        'len(b)': len(b),
-                        'n': n,
-                        'mean': mean,
-                    })
+                    whitelist_summary[key].append(row_dict)
+                if fisher_pval < 0.05:
+                    fisher_summary[key].append(row_dict)
                 if marker:
-                    pval_summary[key].append({
-                        'column': marker + col,
-                        'winner': winner,
-                        'mult_inc': mult_increase,
-                        'add_inc': round(larger - smaller, 3),
-                        'mean_a': round(mean_a, 3),
-                        'mean_b': round(mean_b, 3),
-                        'name_a': self.name_a,
-                        'name_b': self.name_b,
-                        'pval': pval,
-                        'len(a)': len(a),
-                        'len(b)': len(b),
-                        'n': n,
-                        'mean': mean,
-                    })
+                    pval_summary[key].append(row_dict)
                     if self.recurse_on_queries:
                         # now mark all the comparisons
                         queries = set(
@@ -195,7 +194,8 @@ class Comparison():
                             query_comparison_lists[key] += comparison_dicts
         summary = {
             'pval': pval_summary,
-            'whitelist': whitelist_summary
+            'whitelist': whitelist_summary,
+            'fisher': fisher_summary,
         }
         return ret, summary, err, query_comparison_lists
 
@@ -832,6 +832,7 @@ def main(args, db, category):
     outputs, errors = [], []
     pval_summaries = {key: [] for key in RESULT_SUBSETS}
     whitelist_summaries = {key: [] for key in RESULT_SUBSETS}
+    fisher_summaries = {key: [] for key in RESULT_SUBSETS}
     query_comparison_listss = {key: [] for key in RESULT_SUBSETS}
     comparison_df = None
 
@@ -918,6 +919,7 @@ def main(args, db, category):
             for key in RESULT_SUBSETS:
                 pval_summaries[key] += summary['pval'][key]
                 whitelist_summaries[key] += summary['whitelist'][key]
+                fisher_summaries[key] += summary['fisher'][key]
                 query_comparison_listss[key] += query_comparison_lists[key]
             outputs += out
             errors += error
@@ -933,6 +935,10 @@ def main(args, db, category):
             paper_table_list += whitelist_summaries[key]
             pval_summary_df = pd.DataFrame(pval_summaries[key])
             pval_summary_df.to_csv(path2 + '/' + key + '_pval_summary.csv')
+            
+            fisher_summary_df = pd.DataFrame(fisher_summaries[key])
+            fisher_summary_df.to_csv(path2 + '/' + key + '_fisher_summary.csv')
+            
             whitelist_summary_df = pd.DataFrame(whitelist_summaries[key])
             whitelist_summary_df.to_csv(
                 path2 + '/' + key + '_whitelist_summary.csv')
@@ -975,7 +981,7 @@ def parse():
     """parse args"""
     parser = argparse.ArgumentParser(description='Perform analysis.')
     parser.add_argument(
-        '--comparison', help='What comparison to do', default='all')
+        '--comparison', help='What comparison to do', default=[])
     parser.add_argument(
         '--category', help='Which category to include in the analysis', default='each')
     parser.add_argument(
@@ -984,6 +990,8 @@ def parse():
         '--print_all', dest='print_all', help='Whether to print ALL comparisons', action='store_true')
     parser.add_argument(
         '--plot', dest='plot', help='Whether to plot', action='store_true')
+    parser.add_argument(
+        '--write_long', dest='write_long', help='Whether to write the longform importance df', action='store_true')
     parser.add_argument(
         '--plot_detailed', dest='plot_detailed', help='Whether to plot', action='store_true', default=False)
     parser.add_argument(
@@ -1038,59 +1046,63 @@ def parse():
     # and it separates the complicated column names into multiple columns
     # e.g. link_type, subset, metric, 
 
-    # ANCHOR: MELT
-    row_dicts = []
-    print('len df index')
-    print(len(df.index))
-    for col in df.columns.values:
-        is_ugc_col = False
-        is_big_col = False
-        if col:
-            col_components = [
-                'domain_appears',
-                'domain_frac',
-                'domain_rank',
-                'domain_count',
-            ]
 
-            # we only want to include the columns specified in "col_components" in the long-form data
-            valid = False
-            for col_component in col_components:
-                if '_' + col_component in col:
-                    valid = True
-            if valid:
-                # useful to mark down if this column made is (1) UGC or (2) a "big player"
-                if col in ugc_cols:
-                    is_ugc_col = True
-                if col in big_cols:
-                    is_big_col = True
+    if args.write_long:
+        # ANCHOR: MELT
+        row_dicts = []
+        print('len df index')
+        print(len(df.index))
+        print(df.columns.values)
+        for col in df.columns.values:
+            is_ugc_col = False
+            is_big_col = False
+            if col:
+                col_components = [
+                    'domain_appears',
+                    'domain_frac',
+                    'domain_rank',
+                    'domain_count',
+                ]
+
+                # we only want to include the columns specified in "col_components" in the long-form data
+                valid = False
                 for col_component in col_components:
-                    if col_component in col:
-                        metric = col_component
-                        tmp, domain = col.split('_' + col_component + '_')
-                link_type, subset = None, None
-                for key in RESULT_SUBSETS:
-                    if key + '_domain' in col:
-                        subset = key
-                        link_type = tmp.replace(key, '').strip('_')
+                    if '_' + col_component in col:
+                        valid = True
+                        break
+                if valid:
+                    # useful to mark down if this column made is (1) UGC or (2) a "big player"
+                    if col in ugc_cols:
+                        is_ugc_col = True
+                    if col in big_cols:
+                        is_big_col = True
+                    for col_component in col_components:
+                        if col_component in col:
+                            metric = col_component
+                            tmp, domain = col.split('_' + col_component + '_')
+                    link_type, subset = None, None
+                    for key in RESULT_SUBSETS:
+                        if key + '_domain' in col:
+                            subset = key
+                            link_type = tmp.replace(key, '').strip('_')
 
-                # here we iterate through every row of df...
-                for i_row, row in df.iterrows():
-                    row_dict = {
-                        'index_in_concat_df': i_row,
-                        'link_type': link_type,
-                        'subset': subset,
-                        'metric': metric,
-                        'domain': domain,
-                        'val':  row[col],
-                        'category': row['category'],
-                        'is_big_col': is_big_col,
-                        'is_ugc_col': is_ugc_col,
-                    }
-                    row_dicts.append(row_dict)
-    importance_df = pd.DataFrame(row_dicts)
-    importance_df.to_csv('importance_df.csv')
-    plot_importance(importance_df)
+                    # here we iterate through every row of df...
+                    for i_row, row in df.iterrows():
+                        row_dict = {
+                            'index_in_concat_df': i_row,
+                            'link_type': link_type,
+                            'subset': subset,
+                            'metric': metric,
+                            'domain': domain,
+                            'val':  row[col],
+                            'category': row['category'],
+                            'is_big_col': is_big_col,
+                            'is_ugc_col': is_ugc_col,
+                        }
+                        row_dicts.append(row_dict)
+        importance_df = pd.DataFrame(row_dicts)
+        importance_df.to_csv('importance_df.csv')
+        plot_importance(importance_df)
     if comparison_df is not None:
         comparison_df.to_csv('comparison_df.csv')
         plot_comparison(comparison_df)

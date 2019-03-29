@@ -84,7 +84,6 @@ def prep_data(data):
     data.loc[data.link.isnull(), 'link'] = ''
     tweet_mask = data.isTweetCarousel == True 
     news_mask = data.isNewsCarousel == True
-    kp_mask = data.link_type == 'knowledge_panel'
     maps_location_mask = data.isMapsLocations == True
     maps_places_mask = data.isMapsPlaces == True
 
@@ -94,6 +93,7 @@ def prep_data(data):
     data.loc[tweet_mask, 'domain'] = 'TweetCarousel'
     data.loc[news_mask, 'link'] = 'NewsCarousel'
     data.loc[news_mask, 'domain'] = 'NewsCarousel'
+    #kp_mask = data.link_type == 'knowledge_panel'
     # data.loc[kp_mask, 'link'] = 'KnowledgePanel' 
     # data.loc[kp_mask, 'domain'] = 'KnowledgePanel' 
 
@@ -119,7 +119,7 @@ def set_or_concat(df, newdf):
     if df is None:
         ret = newdf
     else:
-        ret = pd.concat([df, newdf])
+        ret = pd.concat([df, newdf], sort=True)
     return ret
 
 

@@ -1,4 +1,2 @@
 ,categories,category_in_location,locations,max
 MapsLocations,"popular, top_insurance, top_loans","popular in urban, popular in DEM, top_insurance in high-income, top_insurance in DEM, top_loans in DEM, top_insurance in urban, top_loans in urban","urban, DEM, high-income",0.31
-yelp.com,top_insurance,top_insurance in DEM,DEM,0.04
-wikipedia.org,top_insurance,top_insurance in GOP,GOP,0.07

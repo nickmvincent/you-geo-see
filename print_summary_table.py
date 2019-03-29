@@ -9,7 +9,6 @@ def main():
     df = df.fillna(0)
     print(df.head())
 
-
     cat_to_rate = defaultdict(list)
     for category in list(df['category'].drop_duplicates()):
         print('category', category)

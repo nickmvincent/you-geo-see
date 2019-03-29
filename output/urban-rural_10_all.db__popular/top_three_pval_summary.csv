@@ -1,7 +1,7 @@
-,add_inc,column,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
-0,0.178,**results_top_three_domain_appears_MapsLocations,180,180,0.5111111111111111,0.422,0.6,1.42,360,rural,urban,0.0007008568867849128,urban
-1,0.1,*results_top_three_domain_appears_UserTweetCarousel,180,180,0.3111111111111111,0.261,0.361,1.38,360,rural,urban,0.04055703351760732,urban
-2,0.156,*results_top_three_domain_appears_NewsCarousel,180,180,0.6944444444444444,0.772,0.617,1.25,360,rural,urban,0.00130414322327539,rural
-3,0.033,*results_top_three_code_appears_twitter.com:tfo$,180,180,0.022222222222222223,0.039,0.006,7.0,360,rural,urban,0.03234522930547699,rural
-4,0.022,*results_top_three_domain_appears_facebook.com,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
-5,0.022,*results_top_three_code_appears_facebook.com:tfo$,180,180,0.011111111111111112,0.022,0.0,inf,360,rural,urban,0.04519249527631052,rural
+,add_inc,column,fisher_pval,len(a),len(b),mean,mean_a,mean_b,mult_inc,n,name_a,name_b,pval,winner
+0,0.178,**results_top_three_domain_appears_MapsLocations,0.0010532543574193391,180,180,0.5111111111111111,0.422,0.6,1.42,360,rural,urban,0.0007008568867849128,urban
+1,0.1,*results_top_three_domain_appears_UserTweetCarousel,0.052693249836010383,180,180,0.3111111111111111,0.261,0.361,1.38,360,rural,urban,0.04055703351760732,urban
+2,0.156,*results_top_three_domain_appears_NewsCarousel,0.0019359624405780348,180,180,0.6944444444444444,0.772,0.617,1.25,360,rural,urban,0.00130414322327539,rural
+3,0.033,*results_top_three_code_appears_twitter.com:tfo$,0.0672788596985921,180,180,0.022222222222222223,0.039,0.006,7.0,360,rural,urban,0.03234522930547699,rural
+4,0.022,*results_top_three_domain_appears_facebook.com,0.1229137894712079,180,180,0.011111111111111112,0.022,0.0,,360,rural,urban,0.04519249527631052,rural
+5,0.022,*results_top_three_code_appears_facebook.com:tfo$,0.1229137894712079,180,180,0.011111111111111112,0.022,0.0,,360,rural,urban,0.04519249527631052,rural

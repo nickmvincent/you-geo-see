@@ -7,6 +7,10 @@ import pandas as pd
 from constants import FULL, TOP_THREE
 from data_helpers import strip_domain_strings_wrapper
 
+from matplotlib.patches import Rectangle
+from matplotlib.collections import PatchCollection
+
+
 sns.set(style="whitegrid", color_codes=True)
 
 ALL_SUBSET_STRING = 'considering all results'
@@ -29,13 +33,11 @@ def plot_importance(df):
     df.loc[df.category == 'med_sample_first_20', 'category'] = 'medical'
     df.loc[df.category == 'procon_popular', 'category'] = 'controversial'
     df.loc[df.domain == 'people also ask', 'domain'] = 'PeopleAlsoAsk'
-    counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
 
+    # make a copy before fillna
+    counts_copy = df[(df.metric == 'domain_count') & (df.category != 'all')]
     df = df.fillna(0)
 
-
-    title_template = '{metric}\n {subset}, {type}'
-    # color palettes that will be overlayed.
     pal = 'muted'
 
     # placeholder for qual coded values
@@ -52,7 +54,6 @@ def plot_importance(df):
 
     for colnum, subdf in enumerate(plot_col_dfs):
         if subdf.empty:
-            print('sub empty')
             continue
         tmpdf = subdf[
             (subdf.subset == FULL) & (subdf.metric == 'domain_appears')
@@ -61,34 +62,50 @@ def plot_importance(df):
                 'val', ascending=False)
         order = list(grouped_and_sorted.index)
         ugc_cols = list(grouped_and_sorted[grouped_and_sorted.is_ugc_col == True].index)
-        print('ugc_cols', ugc_cols)
+        #print('ugc_cols', ugc_cols)
         nonugc_count = 0
         selected_order = []
 
         # add all UGC cols and up to num_nonugc non-ugc cols
         num_nonugc = 5
-        for domain in order:
+        non_ugcs = []
+        for i_domain, domain in enumerate(order):
             if domain in ugc_cols:
                 selected_order.append(domain)
             else:
                 nonugc_count += 1
                 if nonugc_count <= num_nonugc:
                     selected_order.append(domain)
+                    non_ugcs.append(i_domain)
         
         ranks_and_counts = []
         for domain in selected_order:
             ranks = subdf[(subdf.metric == 'domain_rank') & (subdf.domain == domain)]
             ranks = ranks[ranks.val != 0].val
-            print('rank', domain, ranks.mean())
+            #print('rank', domain, ranks.mean())
 
             # will be a Series
             counts = counts_copy[counts_copy.domain == domain].val
-            print('count', domain, counts.mean())
+            #print('count', domain, counts.mean())
+
+            full_rates = subdf[(subdf.metric == 'domain_appears') & (subdf.domain == domain) & (subdf.subset == FULL)].val
+            top3_rates = subdf[(subdf.metric == 'domain_appears') & (subdf.domain == domain) & (subdf.subset == TOP_THREE)].val
+            if top3_rates.empty:
+                top3 = 0
+            else:
+                top3 = top3_rates.mean()
+            # print(full_rates)
+            if top3_rates.empty:
+                print(domain)
+                print(top3_rates)
             ranks_and_counts.append({
                 'domain': domain,
                 'average rank': round(ranks.mean(), 1),
-                'average count': round(counts.mean(), 1)
+                'average count': round(counts.mean(), 1),
+                'average full-page incidence': round(full_rates.mean(), 2),
+                'average top-three incidence': round(top3, 2),
             })
+
             # _, histax = plt.subplots()
             # sns.distplot(
             #     ranks.dropna(), rug=True, bins=list(range(1, 13)), 
@@ -116,6 +133,7 @@ def plot_importance(df):
             title_kwargs['metric'] = 'Fraction of pages where domain appears'
 
         # might be swapped.
+        num_rows = len(selected_order)
         for rownum in [0, 1]:
             ax = axes[rownum]
             ax.set_xlim([0, 1])
@@ -129,18 +147,21 @@ def plot_importance(df):
                 title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
                 ax.set_xlabel('Top-three incidence rate', fontname = "Times New Roman")
                 ax.set(yticklabels=[], ylabel='')
-                num_rows = len(selected_order)
+                
                 start_y = 0.6 * 1/num_rows
                 y_size = 1 - 1.1 * 1/num_rows
-                the_table = plt.table(cellText=ranks_and_counts_df[['average rank', 'average count']].values,
+                the_table = plt.table(cellText=ranks_and_counts_df[['average full-page incidence', 'average top-three incidence', 'average rank']].values,
                     bbox=(1.1, start_y, 0.7, y_size))
                 the_table.auto_set_font_size(False)
                 the_table.set_fontsize(8)
-                the_labels = plt.table(cellText=[['average\nrank', 'average\ncount']],
+                
+                the_labels = plt.table(cellText=[['average\nfull\npage\nincidence\nrate', 'average\ntop\nthreeincidence\nrate', 'average\nrank\non\npage']],
                     bbox=(1.1,-1.2/num_rows,0.7,1/num_rows))
+                for cell in the_labels._cells.values():
+                    cell.set_text_props(fontname="Times New Roman")
                 the_labels.auto_set_font_size(False)
                 the_labels.set_fontsize(8)
-                for key, cell in the_table.get_celld().items():
+                for _, cell in the_table.get_celld().items():
                     # cell.set_linewidth(0)
                     cell.set_linestyle('--')
                     cell.set_linewidth(1.5)
@@ -150,21 +171,32 @@ def plot_importance(df):
                 ax.add_table(the_table)
                 ax.add_table(the_labels)
 
+            
+            boxes = []
+                # Loop over data points; create box from errors at each point
+            for i_non_ugc in non_ugcs:
+                rect = Rectangle(xy=(0, i_non_ugc-0.5), width=1, height=1)
+                boxes.append(rect)
+                # if rownum == 1:
+                #     rect = Rectangle(xy=(1, i_non_ugc-0.5), width=1, height=1)
+
+            # Create patch collection with specified colour/alpha
+            pc = PatchCollection(boxes, facecolor='gray', alpha=0.1,
+                                    edgecolor=None)
+            ax.add_collection(pc)
+
+            
             title_kwargs['type'] = QUERYSET_BREAKDOWN_STRING
             sns.despine(ax=ax, bottom=True, left=True)
             ax.set_ylabel('')
-            print('line y values')
-            print([x + 0.5 for x in range(len(selected_order))])
+            #print('line y values')
+            #print([x + 0.5 for x in range(len(selected_order))])
             ax.hlines([x + 0.5 for x in range(len(selected_order))], *ax.get_xlim(), linestyle='--', color='lightgray')
             #ax.set_title(title_template.format(**title_kwargs))
     fig.savefig(
         'figures/importance.svg', 
         bbox_inches='tight'
     )
-    # fig.savefig(
-    #     'importance.svg', 
-    #     bbox_inches='tight'
-    # )
 
 
 
