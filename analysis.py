@@ -20,6 +20,8 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+from sklearn.metrics import average_precision_score
 from scipy.stats import ttest_ind, fisher_exact
 from statsmodels.stats.proportion import proportions_ztest
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -52,6 +54,7 @@ class Comparison():
         self, df_a, name_a, df_b, name_b, cols_to_compare,
         print_all=False, recurse_on_queries=False
     ):
+        #print('init new Comparison instance')
         self.df_a = df_a
         self.name_a = name_a
         self.df_b = df_b
@@ -92,6 +95,7 @@ class Comparison():
             if not a and not b:
                 err.append('Skipping {} bc Two empty lists'.format(col))
                 continue
+            assert len(a) == len(b)
             mean = np.mean(np.array(a + b), axis=0)
             mean_a = np.mean(a)
             mean_b = np.mean(b)
@@ -103,11 +107,18 @@ class Comparison():
             try:
                 tab = pd.crosstab(df.variable, df.value)
                 _, fisher_pval = fisher_exact(tab)
+                # some useful prints for looking at what's going on here
+
                 # print(col, 'mean_a', mean_a, 'mean_b', mean_b, 'pval', pval)
-                #print(tab)
+                # print(tab)
                 # print(fisher_pval)
-                # input()
+                # if len(a) < 100:
+                #     print(len(self.df_a), len(self.df_b))
+                #     print(self.name_a, self.name_b, col)
+                #     print(self.cols_to_compare)
+                #     input()
             except Exception as ex:
+                print(ex)
                 fisher_pval = 1
             
             
@@ -264,37 +275,38 @@ class MetricCalculator():
         This is specific to a given SERP
         Figure out how many domains of interest appear in search results
 
-
         Currently using control queries is deprecated.
         return a dict
         """
         domains_to_count = defaultdict(int)
         domains_to_ranksum = defaultdict(int)
-        for df in [cols]:
-            if not df.empty:
-                for _, row in df.iterrows():
-                    if not use_codes:
-                        domain = row.domain
-                    else:
-                        domain = str(row.domain) + ':' + str(row['code'])
-                    rank = row['rank']
-                    if isinstance(domain, float) and np.isnan(domain):
-                        domains_to_count['none'] += 1
-                        domains_to_ranksum['none'] += rank
-                    elif domain == 'NewsCarousel' or 'TweetCarousel' in domain:
-                        # was re-using "domain" here, looked sketchy
-                        if domain == 'NewsCarousel':
-                            subdf = self.finders['news'](self.sid).iloc[:3]
-                        else: # must be tweets
-                            subdf = self.finders['tweets'](self.sid).iloc[:3]
-                        for _, subrow in subdf.iloc[:3].iterrows():
-                            domains_to_count[subrow.domain] += 1
-                            domains_to_ranksum[subrow.domain] += rank
-                        domains_to_count[domain] += 1
-                        domains_to_ranksum[domain] += rank
-                    else:
-                        domains_to_count[domain] += 1
-                        domains_to_ranksum[domain] += rank
+
+        # this is strange.
+        df = cols
+        if not df.empty:
+            for _, row in df.iterrows():
+                if not use_codes:
+                    domain = row.domain
+                else:
+                    domain = str(row.domain) + ':' + str(row['code'])
+                rank = row['rank']
+                if isinstance(domain, float) and np.isnan(domain):
+                    domains_to_count['none'] += 1
+                    domains_to_ranksum['none'] += rank
+                elif domain == 'NewsCarousel' or 'TweetCarousel' in domain:
+                    # was re-using "domain" here, looked sketchy
+                    if domain == 'NewsCarousel':
+                        subdf = self.finders['news'](self.sid).iloc[:3]
+                    else: # must be tweets
+                        subdf = self.finders['tweets'](self.sid).iloc[:3]
+                    for _, subrow in subdf.iloc[:3].iterrows():
+                        domains_to_count[subrow.domain] += 1
+                        domains_to_ranksum[subrow.domain] += rank
+                    domains_to_count[domain] += 1
+                    domains_to_ranksum[domain] += rank
+                else:
+                    domains_to_count[domain] += 1
+                    domains_to_ranksum[domain] += rank
         frac_ret = {}
         rank_ret = {}
         num_counted = sum(domains_to_count.values())
@@ -303,18 +315,15 @@ class MetricCalculator():
         for key, val in domains_to_ranksum.items():
             rank_ret[key] = val / domains_to_count[key]
 
-        return frac_ret, rank_ret, domains_to_count
+        domains_to_map = {}
+        for key in domains_to_count.keys():
+            y_true = [x == key for x in cols.domain]
+            y_score = [1/(i+1) for i, x in enumerate(cols['rank'])]
+            # print(y_true)
+            # print(y_score)
+            domains_to_map[key] = average_precision_score(y_true, y_score)
 
-
-    # 1/18 deprecated.
-    # def calc_coded_ugc_frac(self, code_col, control_code_col):
-    #     """
-    #     This is specific to a given SERP
-    #     Figure out how many domains of interest appear in search results
-
-    #     return a dict
-    #     """
-    #     return self.calc_domain_fracs(code_col)
+        return frac_ret, rank_ret, domains_to_count, domains_to_map
 
 
 def compute_serp_features(
@@ -347,17 +356,27 @@ def compute_serp_features(
         ret['control_edit'] = damerau_levenshtein_distance(
             string, control_string
         )
-    fracs, ranks, counts =  metric_calculator.calc_domain_fracs(cols)
+    if 'knowledge_panel' in list(cols.link_type):
+        cols = cols.sort_values('link_type')
+
+    fracs, ranks, counts, maps =  metric_calculator.calc_domain_fracs(cols)
+    
+    # print(cols.domain)
+    # print('maps\n', maps)
+    # print(ranks)
+    # input()
     ret[FULL] = {
         'domain_fracs': fracs,
         'domain_ranks': ranks,
         'domain_counts': counts,
+        'domain_maps': maps,
     }
-    top3_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3])
+    
+    top3_fracs, _, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3])
     ret[TOP_THREE] = {
-        'domain_fracs':top3_fracs
+        'domain_fracs': top3_fracs
     }
-    top_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1])
+    top_fracs, _, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1])
     ret[TOP] = {
         'domain_fracs': top_fracs
     }
@@ -369,15 +388,16 @@ def compute_serp_features(
             else:
                 ret[subset]['domain_appears'][key] = 0
 
-    code_fracs, code_ranks, code_counts = metric_calculator.calc_domain_fracs(cols, use_codes=True)
+    code_fracs, code_ranks, code_counts, code_maps = metric_calculator.calc_domain_fracs(cols, use_codes=True)
     ret[FULL]['code_fracs'] = code_fracs
     ret[FULL]['code_ranks'] = code_ranks
     ret[FULL]['code_counts'] = code_counts
+    ret[FULL]['code_maps'] = code_maps
     
-    top3_code_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3], use_codes=True)
+    top3_code_fracs, _, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:3], use_codes=True)
     ret[TOP_THREE]['code_fracs'] = top3_code_fracs
 
-    top_code_fracs, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1], use_codes=True)
+    top_code_fracs, _, _, _ = metric_calculator.calc_domain_fracs(cols.iloc[:1], use_codes=True)
     ret[TOP]['code_fracs'] = top_code_fracs
 
     for subset in RESULT_SUBSETS:
@@ -398,7 +418,6 @@ def analyze_subset(data, location_set, config, finders):
         location_set - a set of strings corresponding to locations queried
     """
     # d holds the results and editdistances
-    # good variable naming was skipped for coding convenience. refactor later?
     d = {}
     for loc in location_set:
         results = data[data.reported_location == loc]
@@ -432,6 +451,7 @@ def analyze_subset(data, location_set, config, finders):
                     'code': [],
                     'rank': [],
                     'domains_plus_codes': [],
+                    'link_type': [],
                 }
             )
             control_links = []
@@ -446,9 +466,9 @@ def analyze_subset(data, location_set, config, finders):
         d[loc]['control_links'] = control_links
         d[loc]['computed'] = compute_serp_features(
             links, 
-            treatment[['domain', 'code', 'rank', 'domains_plus_codes']],
+            treatment[['domain', 'code', 'rank', 'domains_plus_codes', 'link_type']],
             control_links,
-            control[['domain', 'code', 'rank', 'domains_plus_codes']],
+            control[['domain', 'code', 'rank', 'domains_plus_codes', 'link_type']],
             sid, finders
         )
         d[loc]['serp_id'] = sid
@@ -546,8 +566,8 @@ def main(args, db, category):
         screen_name = strip_twitter_screename(link)
         code = twitter_user_codes.get(screen_name)
         if not code:
-            print('Could not get code for screen_name {}'.format(screen_name))
-            # pass
+            # print('Could not get code for screen_name {}'.format(screen_name))
+            pass
         data.loc[data.link == link, 'code'] = code
     data.code = data.code.astype('category')
     domains_plus_codes = [
@@ -572,11 +592,11 @@ def main(args, db, category):
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
-        'results',
+        #'results',
         #'knowledge_panel',
         #'news'
         #['results', 'tweets'],
-        # ['results', 'knowledge_panel']
+        ['results', 'knowledge_panel']
     ]
 
     serp_comps = {}
@@ -586,6 +606,7 @@ def main(args, db, category):
 
     link_type_to_domains = {}
 
+    # go through each link type specified above
     for i, link_type in enumerate(link_types):
         if isinstance(link_type, list):
             mask = data.link_type == link_type[0]
@@ -596,6 +617,8 @@ def main(args, db, category):
             link_types[i] = link_type  # carry this beyond the for loop
         else:
             link_type_specific_data = data[data.link_type == link_type]
+
+        # grab data from the given category, if applicable
         if category in [
             'trending', 'procon_popular', 'popular', 'top_insurance', 'top_loans',
             'med_sample_first_20'
@@ -619,6 +642,7 @@ def main(args, db, category):
         top_domains = [
             domain for domain in top_domains if isinstance(domain, str)]
         link_type_to_domains[link_type] = top_domains
+
         for scraper_search_id in scraper_search_id_set:
             filtered = link_type_specific_data[link_type_specific_data.scraper_search_id == scraper_search_id]
             if filtered.empty:
@@ -631,7 +655,10 @@ def main(args, db, category):
 
             for loc, vals in d.items():
                 sid = vals['serp_id']
+                
+                # we're gonna put stuff into a nested dict
                 tmp = d[loc]['computed']
+
                 dist_sum, jacc_sum, count = 0, 0, 0
                 for _, metrics in vals['comparisons'].items():
                     dist_sum += metrics['edit']
@@ -656,8 +683,8 @@ def main(args, db, category):
                 for comp_key in RESULT_SUBSETS:
                     domain_fracs = tmp[comp_key]['domain_fracs']
                     for domain_string, frac in domain_fracs.items():
-                        # TODO (minor): why isn't this just "domain_string in top_domains" 
                         for top_domain in top_domains:
+                            # only do it if domain_string is in the top_domains list
                             if domain_string == top_domain:
                                 concat_key = '_'.join(
                                     [link_type, comp_key, 'domain_frac',
@@ -668,20 +695,36 @@ def main(args, db, category):
                                     '_frac', '_appears')
                                 did_it_appear = tmp[comp_key]['domain_appears'][domain_string]
                                 serp_comps[sid][domain_appears_concat_key] = did_it_appear
+
+                                # puts ranks, counts, maps into serp_comps
                                 if comp_key == FULL:
                                     domain_ranks_concat_key = concat_key.replace(
                                         '_frac', '_rank')
                                     domain_counts_concat_key = concat_key.replace(
                                         '_frac', '_count')
-                                    serp_comps[sid][domain_ranks_concat_key] = tmp[comp_key]['domain_ranks'][domain_string]
-                                    serp_comps[sid][domain_counts_concat_key] = tmp[comp_key]['domain_counts'][domain_string]
+                                    domain_maps_concat_key = concat_key.replace(
+                                        '_frac', '_maps')                                    
+
+                                    serp_comps[
+                                        sid][domain_ranks_concat_key
+                                    ] = tmp[comp_key]['domain_ranks'][domain_string]
+                                    serp_comps[
+                                        sid][domain_counts_concat_key
+                                    ] = tmp[comp_key]['domain_counts'][domain_string]
+                                    serp_comps[
+                                        sid][domain_maps_concat_key
+                                    ] = tmp[comp_key]['domain_maps'][domain_string]
                     if args.coded_metrics:
+                        # we will include each code as a unique domain
+                        # so commercial facebook is different from journalist fb, etc.
                         code_appears = tmp[comp_key]['code_appears']
                         for code, appears in code_appears.items():
                             concat_key = '_'.join(
                                 [link_type, comp_key, 'code_appears', str(code)]
                             )
                             serp_comps[sid][concat_key] = appears
+
+                    # compute polarity. Not used in the paper right now, but it'll be in the data!
                     for textcol in ['snippet', 'title']:
                         pol_key = '_'.join(
                             [link_type, comp_key, textcol, 'mean_polarity'])
@@ -690,10 +733,12 @@ def main(args, db, category):
                         )
 
     serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
-    serp_comps_df.index.name = 'id'
+    #serp_comps_df.index.name = 'id'
+    # Future Warning here
+    print(serp_df.head())
+    print(serp_comps_df.head())
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
-
 
     # ANCHOR: fix KP SOCIAL MEDIA
     if args.include_kp:
@@ -995,7 +1040,7 @@ def parse():
     parser.add_argument(
         '--plot_detailed', dest='plot_detailed', help='Whether to plot', action='store_true', default=False)
     parser.add_argument(
-        '--include_kp', dest='include_kp', help='Whether to include_kp', action='store_true', default=False)
+        '--include_kp', dest='include_kp', help='Whether to include_kp directly into results. Works differently than setting link_types.', action='store_true', default=False)
     parser.add_argument(
         '--coded_metrics', dest='coded_metrics', help='Whether to include coded_ugc_fracs in analysis output', action='store_true', default=False)
     parser.add_argument(
@@ -1036,12 +1081,12 @@ def parse():
                     df, df_for_cat)
             tmp = time.time()
             print('Benchmark: Category {} took {} seconds. A total of {} seconds have passed.'.format(
-                cat, tmp - tic, tmp - start 
+                cat, round(tmp - tic, 2), round(tmp - start, 2)
             ))
             tic = tmp
 
 
-    # this code does a customized "melt" and "clean" on the data
+    # this code does a customized "melt" on the data
     # that is, it makes the wide-form dataframe long-form
     # and it separates the complicated column names into multiple columns
     # e.g. link_type, subset, metric, 
@@ -1059,9 +1104,10 @@ def parse():
             if col:
                 col_components = [
                     'domain_appears',
-                    'domain_frac',
+                   # 'domain_frac',
                     'domain_rank',
                     'domain_count',
+                    'domain_maps',
                 ]
 
                 # we only want to include the columns specified in "col_components" in the long-form data

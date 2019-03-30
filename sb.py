@@ -20,11 +20,24 @@ import matplotlib.pyplot as plt
 # ax.add_collection(pc)
 
 df = pd.read_csv('importance_df.csv')
+df.head()
 
 #%%
-full_rates = df[
-    (df.metric == 'domain_frac') & (df.subset == 'full')
-].val
-len(full_rates)
+full_appears = df[
+    (df.metric == 'domain_appears') & (df.subset == 'full')
+]
+len(full_appears)
+
+#%%
+set(full_appears.domain.value_counts())
+
+#%%
+top3_appears = df[
+    (df.metric == 'domain_appears') & (df.subset == 'top_three')
+]
+len(top3_appears)
+
+#%%
+set(top3_appears.domain.value_counts())
 
 #%%

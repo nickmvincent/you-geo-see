@@ -5,7 +5,7 @@ from collections import defaultdict
 
 def main():
     df = pd.read_csv('importance_df.csv')
-    df = df[df.link_type == 'results']
+    df = df[df.link_type == 'results_and_knowledge_panel']
     df = df.fillna(0)
     print(df.head())
 

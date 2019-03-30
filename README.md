@@ -15,7 +15,7 @@ As mentioned in the paper, you may also want to consider using a headless browse
 
 # To Run all Analyses
 in analysis.py, ensure that `link_types = ['results']` (note to self: why isn't this a command line option?)
-python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --plot
+python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --write_long
 
 # What's up with importance_df.csv? Why so large?
 `importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form
