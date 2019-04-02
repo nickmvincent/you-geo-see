@@ -119,12 +119,15 @@ def main(args):
             print('Please provide a --db or --csv to load data from')
 
         if args.twitter:
-            auth = tweepy.OAuthHandler(os.environ['twitter_consumer_key'], os.environ['twitter_consumer_secret'])
-            auth.set_access_token(os.environ['twitter_access_token_key'], os.environ['twitter_access_token_secret'])
-            api = tweepy.API(auth)
+            if not args.count:
+                auth = tweepy.OAuthHandler(os.environ['twitter_consumer_key'], os.environ['twitter_consumer_secret'])
+                auth.set_access_token(os.environ['twitter_access_token_key'], os.environ['twitter_access_token_secret'])
+                api = tweepy.API(auth)
             DOMAINS_TO_CODE.append(TWITTER_DOMAIN)
         else:
             api = None
+        print(DOMAINS_TO_CODE)
+        input()
         # we want to group items together to do coding all at once
         link_codes_file = 'link_codes.csv'
         twitter_user_codes_file = 'twitter_user_codes.csv'

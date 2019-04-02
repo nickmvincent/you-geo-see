@@ -592,7 +592,7 @@ def main(args, db, category):
     scraper_search_id_set = data.scraper_search_id.drop_duplicates()
 
     link_types = [
-        #'results',
+        'results',
         #'knowledge_panel',
         #'news'
         #['results', 'tweets'],

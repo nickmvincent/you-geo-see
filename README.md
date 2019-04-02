@@ -15,20 +15,25 @@ As mentioned in the paper, you may also want to consider using a headless browse
 
 # To Run all Analyses
 in analysis.py, ensure that `link_types = ['results']` (note to self: why isn't this a command line option?)
-python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --write_long
+
+`python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --write_long`
+This will produce the longform importance_df from which Figure 1 is produced. You can also load it up to do other analyses.
+
+To see counts of our qualitative codes (ugc, corporate, political, journalistic):
+`python qual_code.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --count`
 
 # What's up with importance_df.csv? Why so large?
 `importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form
 This means there is there is one row for every SERP we looked at, for every domain we observed, for every metric we looked at
 If you check at `analysis.py` under the `# ANCHOR: MELT` comment, you can see how it's created.
-There four metrics of interest, "domain_appears" (true or false), "domain_frac" (a fraction), "domain_rank" (int), and "domain_count" (int)
-Each of these metrics is repeated for the FULL_PAGE and the TOP_THREE subset.
-Furthermore, each row must be duplicated for each query category.
+The main metrics of interest are "domain_appears" (true or false), (a fraction), "domain_rank" (int), and "domain_count" (int).
+You can also compute "domain_frac" or "domain_maps" (mean average precisions) by editing analysis.py.
 
-There are 5353921 rows.
+Each of these metrics is repeated for the FULL_PAGE and the TOP_THREE subset.
+Furthermore, each row must be duplicated for each query category. We can verify the long-form df contains each link 6240 times, e.g. `df.domain.value_counts()`.
 
 # How can I see the geographic comparisons?
-
+The statistically significant comparisons are written to fisher_comparisons.csv or ttest_comparisons.csv. All UGC comparisons are in comparisons_df.csv. You can also go through the output/ folders to find a particular comparison, or a comparison for a specific query.
 
 # Warnings relate to running comparisons
 Don't run ALL comparisons for ALL databses - for instance running a high-income vs. low-income test on the urban-rural database.

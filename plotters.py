@@ -46,8 +46,12 @@ def plot_importance(df):
     print('df head', df.head())
     plot_col_dfs = [categorized]
     sns.set_context("paper", rc={
-        "font.size":10, "font.family": "Times New Roman", 
-        "axes.titlesize":10,"axes.labelsize":10})
+        # "font.size": 8, 
+        # "font.family": "Times New Roman", 
+        #"axes.titlesize": 8, 
+            "axes.labelsize": 9
+        }
+    )
 
     width, height = 5.5, 5
     fig, axes = plt.subplots(ncols=2, nrows=len(plot_col_dfs), figsize=(width, height), dpi=300)
@@ -141,11 +145,12 @@ def plot_importance(df):
             
             if rownum == 0:
                 title_kwargs['subset'] = ALL_SUBSET_STRING
-                ax.set_xlabel('Full-page incidence rate', fontname = "Times New Roman")
+                #ax.set_xlabel('Full-page incidence rate')
+                ax.set_xlabel('NewsCarousel')
                 ax.legend().set_visible(False)
             elif rownum == 1:
                 title_kwargs['subset'] = TOP_THREE_SUBSET_STRING
-                ax.set_xlabel('Top-three incidence rate', fontname = "Times New Roman")
+                ax.set_xlabel('Top-three incidence rate')
                 ax.set(yticklabels=[], ylabel='')
                 
                 start_y = 0.6 * 1/num_rows
@@ -157,16 +162,16 @@ def plot_importance(df):
                 
                 the_labels = plt.table(cellText=[['average\nfull\npage\nrate', 'average\ntop\nthree\nrate', 'average\nrank']],
                     bbox=(1.1,-1.2/num_rows,0.7,1/num_rows))
-                for cell in the_labels._cells.values():
-                    cell.set_text_props(fontname="Times New Roman")
+                # for cell in the_labels._cells.values():
+                #     cell.set_text_props(fontname="Times New Roman")
                 the_labels.auto_set_font_size(False)
-                the_labels.set_fontsize(8)
+                the_labels.set_fontsize(7)
                 for _, cell in the_table.get_celld().items():
                     # cell.set_linewidth(0)
                     cell.set_linestyle('--')
                     cell.set_linewidth(1.5)
                     cell.set_edgecolor('lightgray')
-                for key, cell in the_labels.get_celld().items():
+                for _, cell in the_labels.get_celld().items():
                     cell.set_linewidth(0)
                 ax.add_table(the_table)
                 ax.add_table(the_labels)
