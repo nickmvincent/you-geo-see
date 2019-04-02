@@ -44,3 +44,15 @@ There's a lot of data manipulating going in analysis.py and then plotters.py
 One easy to sanity check some results is to manually inspect the serp_df.csv file that's written in the subdirectories of outputs/
 
 For instance, if we want to double check the fact that our "importance_plot" suggets that medical queries appear in about 45% of all first-page results, we can open serp_df.describe().csv in `2018-01-18_population_weighted_40_extra.db__med_sample_first_20/` and verify that indeed, Wikipedia appeared in 360/800 = 0.45 of all pages.
+
+We might also want to check the SQL database directly:
+
+We could use this (probably inefficient, but easy to understand) query to get the # of pages with 1 Wikipedia article:
+
+select COUNT (DISTINCT link.serp_id) from serp 
+INNER JOIN link on serp.id = link.serp_id 
+where serp.category = 'trending' and link.domain = 'en.wikipedia.org' and link.link_type = 'results';
+
+select COUNT (DISTINCT link.serp_id) from serp 
+INNER JOIN link on serp.id = link.serp_id 
+where serp.category = 'trending' and link.link_type = 'results';
