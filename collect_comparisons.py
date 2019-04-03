@@ -77,9 +77,9 @@ def parse():
     }
     for path in paths:
         pre, category = path.split('__')
-        comparison = pre.split('_')[0][7:]
+        comparison = pre.split('__')[0][7:]
 
-        print(path, comparison, category)
+        print(path, '|', comparison, '|', category)
         if args.criteria == 'ttest':
             full = path + '/full_pval_summary.csv'
             top3 = path + '/top_three_pval_summary.csv'
@@ -169,7 +169,7 @@ def parse():
                     if tmp not in sub_to_domain[subset][domain]['category_in_location']:
                         sub_to_domain[subset][domain]['category_in_location'].append(tmp)
     outdf = pd.DataFrame(row_dicts)
-    print(outdf)
+    #print(outdf)
     outdf.to_csv('collect_comparisons.csv')
     all_tests_together.to_csv('all_tests_together.csv')
     ugc_outdf = pd.DataFrame(ugc_row_dicts)
