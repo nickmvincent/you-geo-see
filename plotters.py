@@ -145,8 +145,8 @@ def plot_importance(df):
             
             if rownum == 0:
                 title_kwargs['subset'] = ALL_SUBSET_STRING
-                #ax.set_xlabel('Full-page incidence rate')
-                ax.set_xlabel('NewsCarousel')
+                ax.set_xlabel('Full-page incidence rate')
+                #ax.set_xlabel('NewsCarousel')
                 ax.legend().set_visible(False)
             elif rownum == 1:
                 title_kwargs['subset'] = TOP_THREE_SUBSET_STRING

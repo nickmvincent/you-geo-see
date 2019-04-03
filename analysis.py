@@ -54,7 +54,6 @@ class Comparison():
         self, df_a, name_a, df_b, name_b, cols_to_compare,
         print_all=False, recurse_on_queries=False
     ):
-        #print('init new Comparison instance')
         self.df_a = df_a
         self.name_a = name_a
         self.df_b = df_b
@@ -75,6 +74,9 @@ class Comparison():
         whitelist_summary = {key: [] for key in RESULT_SUBSETS}
         fisher_summary = {key: [] for key in RESULT_SUBSETS}
         for col in self.cols_to_compare:
+            # a = list(self.df_a[col])
+            # b = list(self.df_b[col])
+
             try:
                 filtered_df_a = self.df_a[self.df_a[col].notnull()]
                 a = list(filtered_df_a[col])
@@ -93,7 +95,7 @@ class Comparison():
                 continue
 
             if not a and not b:
-                err.append('Skipping {} bc Two empty lists'.format(col))
+                err.append('Skipping {} b/c two empty lists'.format(col))
                 continue
             assert len(a) == len(b)
             mean = np.mean(np.array(a + b), axis=0)
@@ -107,22 +109,9 @@ class Comparison():
             try:
                 tab = pd.crosstab(df.variable, df.value)
                 _, fisher_pval = fisher_exact(tab)
-                # some useful prints for looking at what's going on here
-
-                # print(col, 'mean_a', mean_a, 'mean_b', mean_b, 'pval', pval)
-                # print(tab)
-                # print(fisher_pval)
-                # if len(a) < 100:
-                #     print(len(self.df_a), len(self.df_b))
-                #     print(self.name_a, self.name_b, col)
-                #     print(self.cols_to_compare)
-                #     input()
             except Exception as ex:
-                print(ex)
+                print('ex', ex)
                 fisher_pval = 1
-            
-            
-            
 
             if mean_a == mean_b:
                 larger, smaller = mean_a, mean_b
@@ -181,11 +170,14 @@ class Comparison():
                     if self.recurse_on_queries:
                         # now mark all the comparisons
                         queries = set(
-                            list(
-                                filtered_df_a['query'].drop_duplicates()) +
-                            list(filtered_df_b['query'].drop_duplicates()
-                                 )
+                            list(self.df_a['query']) + list(self.df_b['query'])
                         )
+                        # queries = set(
+                        #     list(
+                        #         filtered_df_a['query'].drop_duplicates()) +
+                        #     list(filtered_df_b['query'].drop_duplicates()
+                        #          )
+                        # )
                         for query in queries:
                             query_a = filtered_df_a[filtered_df_a['query'] == query]
                             query_b = filtered_df_b[filtered_df_b['query'] == query]
@@ -596,7 +588,7 @@ def main(args, db, category):
         #'knowledge_panel',
         #'news'
         #['results', 'tweets'],
-        ['results', 'knowledge_panel']
+        #['results', 'knowledge_panel']
     ]
 
     serp_comps = {}
@@ -735,8 +727,8 @@ def main(args, db, category):
     serp_comps_df = pd.DataFrame.from_dict(serp_comps, orient='index')
     #serp_comps_df.index.name = 'id'
     # Future Warning here
-    print(serp_df.head())
-    print(serp_comps_df.head())
+    # print(serp_df.head())
+    # print(serp_comps_df.head())
     serp_df = serp_df.merge(serp_comps_df, on='id')
     serp_df.reported_location = serp_df.reported_location.astype('category')
 
@@ -901,7 +893,6 @@ def main(args, db, category):
                 cols_must_include[0] in x or cols_must_include[1] in x or cols_must_include[2] in x or cols_must_include[3] in x
             )
         ]
-
         cols_to_compare = [
             x for x in cols_to_compare if x[-3:] != 'nan'
         ]
@@ -926,6 +917,7 @@ def main(args, db, category):
                 cols_to_compare.append(col)
 
         comparisons = []
+        rec = False
         if args.comparison in ['urban-rural', 'all']:
             comparisons.append(Comparison(
                 df_a=serp_df[(serp_df['urban_rural_code'] == 5) |
@@ -936,7 +928,7 @@ def main(args, db, category):
                 name_b='urban',
                 cols_to_compare=cols_to_compare,
                 print_all=args.print_all,
-                recurse_on_queries=True
+                recurse_on_queries=rec
             ))
         if args.comparison in ['income', 'all']:
             comparisons.append(Comparison(
@@ -946,7 +938,7 @@ def main(args, db, category):
                 name_b='high-income',
                 cols_to_compare=cols_to_compare,
                 print_all=args.print_all,
-                recurse_on_queries=True
+                recurse_on_queries=rec
             ))
         if args.comparison in ['voting', 'all']:
             comparisons.append(Comparison(
@@ -956,7 +948,7 @@ def main(args, db, category):
                 name_b='DEM',
                 cols_to_compare=cols_to_compare,
                 print_all=args.print_all,
-                recurse_on_queries=True
+                recurse_on_queries=rec
             ))
 
         for comparison in comparisons:
@@ -1095,9 +1087,7 @@ def parse():
     if args.write_long:
         # ANCHOR: MELT
         row_dicts = []
-        print('len df index')
-        print(len(df.index))
-        print(df.columns.values)
+        print('len(df.index)', len(df.index))
         for col in df.columns.values:
             is_ugc_col = False
             is_big_col = False

@@ -18,7 +18,6 @@ from constants import FULL, TOP_THREE
 from analysis import UGC_WHITELIST
 
 
-
 sns.set(style="whitegrid", palette='muted', color_codes=True)
 
 def parse():
@@ -65,6 +64,7 @@ def parse():
                 paths.append(path)
 
     row_dicts = []
+    all_tests_together = None
     ugc_row_dicts = []
     n_ugc_diffs = 0
     n_tests = 0
@@ -89,7 +89,6 @@ def parse():
             top3 = path + '/top_three_fisher_summary.csv'
         
         all_tests = path + '/comparisons.csv'
-            
 
         try:
             full_df = pd.read_csv(full)
@@ -99,6 +98,16 @@ def parse():
             print('Not found: {}'.format(full))
             continue
         n_tests += len(all_tests_df.index)
+
+
+        all_tests_df['category'] = category
+        all_tests_df['comparison'] = comparison
+        if all_tests_together is None:
+            all_tests_together = all_tests_df
+        else:
+            all_tests_together = pd.concat([
+                all_tests_together, all_tests_df
+            ])
         
 
         strip_full = strip_domain_strings_wrapper(FULL)
@@ -124,7 +133,7 @@ def parse():
                 should_plot = (
                     domain  == 'wikipedia.org' or
                     domain == 'MapsLocations' or
-                    ':' in domain # domaiin was coded
+                    ':' in domain # domain was coded
                 )
                 if should_plot:
                     code_index = domain.find(':')
@@ -138,7 +147,7 @@ def parse():
                             row_dict['domain'] = domain = domain.replace(':'+code, '')
                     if domain != 'MapsLocations':
                         n_ugc_diffs += 1
-                        if row['fisher_pval'] < 0.05 / 288:
+                        if row['fisher_pval'] < 0.05 / 115:
                             n_ugc_diffs_strict += 1
                             print(domain)
                     ugc_row_dicts.append(row_dict)
@@ -162,6 +171,7 @@ def parse():
     outdf = pd.DataFrame(row_dicts)
     print(outdf)
     outdf.to_csv('collect_comparisons.csv')
+    all_tests_together.to_csv('all_tests_together.csv')
     ugc_outdf = pd.DataFrame(ugc_row_dicts)
     
     for subset, domain_to_vals in sub_to_domain.items():
