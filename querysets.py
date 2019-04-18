@@ -19,10 +19,32 @@ def from_csv():
     ]
     return keyword_objs
 
+"""
+select DISTINCT query from serp where category != 'procon_popular' and category != 'trending';
+
+"Pizza Hut"
+"Domino's Pizza"
+"McDonald's"
+"Amazon"
+"Walmart"
+"Target Corporation"
+"Chevrolet"
+"Honda"
+"Toyota"
+"Wells Fargo"
+"Chase Bank"
+"Bank of America"
+"Donald Trump"
+"Hillary Clinton"
+"Barack Obama"
+"United States Department of Veterans Affairs"
+"US Senate"
+"US Supreme Court"
+"""
 
 def from_trends_top_query_by_category(n=NUM_KEYWORDS):
     """
-    Get a set of keyword objects by quering Google Trends
+    Get a set of keyword objects by querying Google Trends
     Each keyword obj is a dict with keys: keyword, category
     """
     
@@ -51,7 +73,7 @@ PROCON_POPULAR = [
     'abortion',
 ]
 
-# the top trending search from _ to _ (in paper)
+# the top trending search from Nov. 28 to Dec. 7 (in paper)
 TRENDING = [
     'bitcoin price',
     'al franken',
