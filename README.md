@@ -4,12 +4,15 @@ ICWSM 2019 paper: "Measuring the Importance of User-Generated Content to Search 
 # You-Geo-See, or the analysis code for "Measuring the Importance of User-Generated Content to Search Engines"
 This is the analysis code for the paper. This code is archival at this point and unlikely to undergo active development. We may slightly re-organize the code/files before the conference, but otherwise this will likely remain mostly static.
 
+The data collection code is a fork of SerpScrap by user ecoron and lives here: https://github.com/nickmvincent/SerpScrap.
+
 The data used for analyses is checked into this repo, in `dbs/`. Some of the scripts also save a copy in `csvs/` for even easier reading (in case you just want to check something out in a text editor quickly).
 
-The analysis is in analysis.py and the code that runs experiments is in main.py.
+The analysis is in `analysis.py` and the code that runs experiments is in `main.py` (requires forked SerpScrap library).
 
+As mentioned in the paper, you may also want to consider using a headless browser-based scraping software. For instance, see https://github.com/NikolaiT/se-scraper.
 
-In addition to providing automated processing of key components of the SERP (e.g. the links, their position, and their destination) our software is also designed to save the raw HTML of the SERPs. This allowed for more detailed human verficiation, i.e. we make sure that the representation of each SERP in the database matches how a human interprets the SERP. This is an important feature, as there is no guarantee that SERPs will keep the same content format or styles, which the software uses to distinguish different types of results. Therefore, it is important that human validation is performed when exploring new queries or after substantial time has passed, even after the software has been extensively validated for other queries.”
+In addition to providing automated processing of key components of the SERP (e.g. the links, their position, and their destination) our software is also designed to save the raw HTML of the SERPs. This allowed for more detailed human verification, i.e. we make sure that the representation of each SERP in the database matches how a human interprets the SERP. This is an important feature, as there is no guarantee that SERPs will keep the same content format or styles, which the software uses to distinguish different types of results. Therefore, it is important that human validation is performed when exploring new queries or after substantial time has passed, even after the software has been extensively validated for other queries.
 
 # Notes for potential readers
 Before doing any scraping, please consider reading through the following resources relating to algorthmic auditing:
@@ -20,7 +23,6 @@ on Internet Platforms" - Christian Sandvig, Kevin Hamilton, Karrie Karahalios. &
 
 https://en.wikipedia.org/wiki/Web_scraping
 
-As mentioned in the paper, you may also want to consider using a headless browser-based scraping software.
 
 # To Run all Analyses
 `python analysis.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --write_long`
@@ -30,9 +32,11 @@ To see counts of our qualitative codes (ugc, corporate, political, journalistic)
 `python qual_code.py --db dbs/population_weighted_40_all.db "dbs/2018-01-18_population_weighted_40_extra.db" --count`
 
 # What's up with importance_df.csv? Why so large?
-`importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form
+`importance_df.csv` has all the "general results" (i.e. not geographical comparisons) in pure long-form.
+
 This means there is there is one row for every SERP we looked at, for every domain we observed, for every metric we looked at
 If you check at `analysis.py` under the `# ANCHOR: MELT` comment, you can see how it's created.
+
 The main metrics of interest are "domain_appears" (true or false), (a fraction), "domain_rank" (int), and "domain_count" (int).
 You can also compute "domain_frac" or "domain_maps" (mean average precisions) by editing analysis.py.
 
@@ -46,13 +50,16 @@ You can also explore the comparisons more freely using some of the code in sb.py
 
 Note that to get results after accounting for qualitative codes you would need to re-run analysis.py with --coded_metrics argument.
 
+Note the code can also be edited to use [McNemar's test](https://en.wikipedia.org/wiki/McNemar%27s_test) which gives very similar results to [Fisher's test](https://en.wikipedia.org/wiki/Fisher%27s_exact_test).
+
 # Warnings relate to running comparisons
-Don't run ALL comparisons for ALL databses - for instance running a high-income vs. low-income test on the urban-rural database.
+Don't run ALL comparisons for ALL databses - for instance running a high-income vs. low-income test using data from the urban-rural database.
 Use collect_comparisons.py to get a manageable summary of all the tests
 
 # Sanity Checking Analysis
-There's a lot of data manipulating going in analysis.py and then plotters.py
-One easy to sanity check some results is to manually inspect the serp_df.csv file that's written in the subdirectories of outputs/
+There's a lot of data manipulating going in analysis.py and then plotters.py.
+
+One easy way to sanity check some results is to manually inspect the serp_df.csv file that's written in the subdirectories of `outputs`/.
 
 For instance, if we want to double check the fact that our "importance_plot" suggets that medical queries appear in about 45% of all first-page results, we can open serp_df.describe().csv in `2018-01-18_population_weighted_40_extra.db__med_sample_first_20/` and verify that indeed, Wikipedia appeared in 360/800 = 0.45 of all pages.
 

@@ -24,6 +24,7 @@ import seaborn as sns
 from sklearn.metrics import average_precision_score
 from scipy.stats import ttest_ind, fisher_exact
 from statsmodels.stats.proportion import proportions_ztest
+from statsmodels.stats.contingency_tables import mcnemar
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pyxdameraulevenshtein import damerau_levenshtein_distance
 
@@ -108,7 +109,19 @@ class Comparison():
             #_, ztest_pval = proportions_ztest()
             try:
                 tab = pd.crosstab(df.variable, df.value)
+                # df = pd.DataFrame({'a': a, 'b': b})
+                # tab = pd.crosstab(df.a, df.b)
+                # if 0 not in tab.columns:
+                #     tab[0] = [0, 0]
+                # if 1 not in tab.columns:
+                #     tab[1] = [0, 0]
+                # bunch = mcnemar(tab)
+                # fisher_pval = bunch.pvalue
+                #print(tab)
                 _, fisher_pval = fisher_exact(tab)
+                
+                
+                
             except Exception as ex:
                 print('ex', ex)
                 fisher_pval = 1
